@@ -14,7 +14,7 @@
         public int siteID { get; set; }
         public byte locked { get; set; }
         public string username { get; set; }
-        public string notes { get; set; }
+        public string notes { get; set; } = null;
 
         //extra properties that are needed - such as site name
         public string siteName { get; set; }
