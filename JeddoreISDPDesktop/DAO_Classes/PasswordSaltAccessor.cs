@@ -21,6 +21,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         /**
         * Gets one passwordsalt string, based on the employeeID.
         *
+        * @param int employeeID
         * @return a passwordsalt string, possibly null if none found based on the username.
         */
         public static string GetOnePasswordSaltString(int employeeID)

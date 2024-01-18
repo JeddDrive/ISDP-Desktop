@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.txtPasswordConfirm = new System.Windows.Forms.TextBox();
+            this.txtPasswordNew = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -41,26 +41,31 @@
             this.picEyeNewShow = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
             this.picBullseye = new System.Windows.Forms.PictureBox();
+            this.picEyeNewHide = new System.Windows.Forms.PictureBox();
+            this.picEyeConfirmHide = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picEyeConfirmShow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEyeNewShow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEyeNewHide)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEyeConfirmHide)).BeginInit();
             this.SuspendLayout();
             // 
-            // txtPassword
+            // txtPasswordConfirm
             // 
-            this.txtPassword.Location = new System.Drawing.Point(307, 262);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(283, 34);
-            this.txtPassword.TabIndex = 1;
+            this.txtPasswordConfirm.Location = new System.Drawing.Point(307, 262);
+            this.txtPasswordConfirm.Name = "txtPasswordConfirm";
+            this.txtPasswordConfirm.PasswordChar = '*';
+            this.txtPasswordConfirm.Size = new System.Drawing.Size(283, 34);
+            this.txtPasswordConfirm.TabIndex = 1;
             // 
-            // txtUsername
+            // txtPasswordNew
             // 
-            this.txtUsername.Location = new System.Drawing.Point(307, 183);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(283, 34);
-            this.txtUsername.TabIndex = 0;
+            this.txtPasswordNew.Location = new System.Drawing.Point(307, 183);
+            this.txtPasswordNew.Name = "txtPasswordNew";
+            this.txtPasswordNew.PasswordChar = '*';
+            this.txtPasswordNew.Size = new System.Drawing.Size(283, 34);
+            this.txtPasswordNew.TabIndex = 0;
             // 
             // label3
             // 
@@ -83,9 +88,10 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(534, 354);
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(518, 354);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(147, 63);
+            this.btnCancel.Size = new System.Drawing.Size(152, 71);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -93,20 +99,21 @@
             // 
             // btnResetPassword
             // 
-            this.btnResetPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnResetPassword.Location = new System.Drawing.Point(136, 354);
+            this.btnResetPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResetPassword.Location = new System.Drawing.Point(125, 354);
             this.btnResetPassword.Name = "btnResetPassword";
-            this.btnResetPassword.Size = new System.Drawing.Size(147, 63);
+            this.btnResetPassword.Size = new System.Drawing.Size(152, 71);
             this.btnResetPassword.TabIndex = 2;
             this.btnResetPassword.Text = "&Reset Password";
             this.btnResetPassword.UseVisualStyleBackColor = true;
+            this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(300, 25);
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(299, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(237, 50);
+            this.label1.Size = new System.Drawing.Size(259, 50);
             this.label1.TabIndex = 12;
             this.label1.Text = "Reset Password";
             // 
@@ -136,6 +143,7 @@
             this.picEyeConfirmShow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picEyeConfirmShow.TabIndex = 19;
             this.picEyeConfirmShow.TabStop = false;
+            this.picEyeConfirmShow.Click += new System.EventHandler(this.picEyeConfirmShow_Click);
             // 
             // picEyeNewShow
             // 
@@ -146,6 +154,7 @@
             this.picEyeNewShow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picEyeNewShow.TabIndex = 18;
             this.picEyeNewShow.TabStop = false;
+            this.picEyeNewShow.Click += new System.EventHandler(this.picEyeNewShow_Click);
             // 
             // picHelp
             // 
@@ -168,6 +177,28 @@
             this.picBullseye.TabIndex = 11;
             this.picBullseye.TabStop = false;
             // 
+            // picEyeNewHide
+            // 
+            this.picEyeNewHide.Image = global::JeddoreISDPDesktop.Properties.Resources.eyeHide;
+            this.picEyeNewHide.Location = new System.Drawing.Point(625, 177);
+            this.picEyeNewHide.Name = "picEyeNewHide";
+            this.picEyeNewHide.Size = new System.Drawing.Size(45, 40);
+            this.picEyeNewHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picEyeNewHide.TabIndex = 20;
+            this.picEyeNewHide.TabStop = false;
+            this.picEyeNewHide.Click += new System.EventHandler(this.picEyeNewHide_Click);
+            // 
+            // picEyeConfirmHide
+            // 
+            this.picEyeConfirmHide.Image = global::JeddoreISDPDesktop.Properties.Resources.eyeHide;
+            this.picEyeConfirmHide.Location = new System.Drawing.Point(625, 256);
+            this.picEyeConfirmHide.Name = "picEyeConfirmHide";
+            this.picEyeConfirmHide.Size = new System.Drawing.Size(45, 40);
+            this.picEyeConfirmHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picEyeConfirmHide.TabIndex = 21;
+            this.picEyeConfirmHide.TabStop = false;
+            this.picEyeConfirmHide.Click += new System.EventHandler(this.picEyeConfirmHide_Click);
+            // 
             // ResetPassword
             // 
             this.AcceptButton = this.btnResetPassword;
@@ -184,19 +215,23 @@
             this.Controls.Add(this.btnResetPassword);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.picBullseye);
-            this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.txtUsername);
+            this.Controls.Add(this.txtPasswordConfirm);
+            this.Controls.Add(this.txtPasswordNew);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.picEyeNewHide);
+            this.Controls.Add(this.picEyeConfirmHide);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ResetPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Bullseye - Reset Password";
+            this.Text = "Bullseye Inventory Management System - Reset Password";
             ((System.ComponentModel.ISupportInitialize)(this.picEyeConfirmShow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEyeNewShow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEyeNewHide)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEyeConfirmHide)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,8 +239,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.TextBox txtPasswordConfirm;
+        private System.Windows.Forms.TextBox txtPasswordNew;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox picHelp;
@@ -217,5 +252,7 @@
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.PictureBox picEyeNewShow;
         private System.Windows.Forms.PictureBox picEyeConfirmShow;
+        private System.Windows.Forms.PictureBox picEyeNewHide;
+        private System.Windows.Forms.PictureBox picEyeConfirmHide;
     }
 }

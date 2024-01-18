@@ -51,18 +51,19 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(347, 29);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(343, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 50);
+            this.label1.Size = new System.Drawing.Size(111, 50);
             this.label1.TabIndex = 1;
             this.label1.Text = "Login";
             // 
             // btnLogin
             // 
+            this.btnLogin.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.Location = new System.Drawing.Point(130, 320);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(147, 63);
+            this.btnLogin.Size = new System.Drawing.Size(161, 63);
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "&Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -71,9 +72,10 @@
             // btnExit
             // 
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Location = new System.Drawing.Point(528, 320);
+            this.btnExit.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Location = new System.Drawing.Point(495, 320);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(147, 63);
+            this.btnExit.Size = new System.Drawing.Size(161, 63);
             this.btnExit.TabIndex = 3;
             this.btnExit.Text = "&Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -192,8 +194,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Bullseye - Login";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Login_FormClosing);
+            this.Text = "Bullseye Inventory Management System - Login";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picEyeShow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();

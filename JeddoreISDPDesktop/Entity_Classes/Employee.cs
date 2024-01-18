@@ -16,8 +16,9 @@
         public string username { get; set; }
         public string notes { get; set; } = null;
 
-        //extra properties that are needed - such as site name
+        //extra properties that are needed - such as site name and permission level
         public string siteName { get; set; }
+        public string permissionLevel { get; set; }
 
         //default constructor - does nothing
         public Employee() { }
@@ -25,7 +26,7 @@
         //custom constructor - everything sent in
         public Employee(int inEmployeeID, string inPassword, string inFirstName, string inLastName,
             string inEmail, byte inActive, int inPositionID, int inSiteID, byte inLocked, string inUsername,
-            string inNotes, string inSiteName)
+            string inNotes, string inSiteName, string inPermissionLevel)
         {
             employeeID = inEmployeeID;
             password = inPassword;
@@ -39,6 +40,7 @@
             username = inUsername;
             notes = inNotes;
             siteName = inSiteName;
+            permissionLevel = inPermissionLevel;
         }
     }
 }

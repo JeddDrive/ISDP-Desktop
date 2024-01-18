@@ -1,9 +1,7 @@
 ﻿using JeddoreISDPDesktop.DAO_Classes;
 using JeddoreISDPDesktop.Entity_Classes;
 using JeddoreISDPDesktop.Helper_Classes;
-using MySql.Data.MySqlClient;
 using System;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace JeddoreISDPDesktop
@@ -16,12 +14,6 @@ namespace JeddoreISDPDesktop
         }
 
         //class level code below
-        //class-level config to the connection string
-        private static string connString = ConfigurationManager.ConnectionStrings["ISDPConnString"].ConnectionString;
-
-        //create a connection
-        MySqlConnection connection = new MySqlConnection(connString);
-
         //int for keeping track of login attempts
         int loginAttempts = 3;
 
@@ -29,30 +21,11 @@ namespace JeddoreISDPDesktop
         {
             //setting the tooltip for the help image
             toolTipHelp.SetToolTip(picHelp, "Click here for help.");
-
-            //open the connection - need try catch, like if db not found
-            try
-            {
-                connection.Open();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Database Connection Not Opened.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                //close the form
-                this.Close();
-            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void Login_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //close the connection
-            connection.Close();
         }
 
         private void picHelp_Click(object sender, EventArgs e)
@@ -75,9 +48,6 @@ namespace JeddoreISDPDesktop
         //this ftn resets the password textbox
         private void ResetFormPassword()
         {
-            //subtract 1 from login attempts
-            loginAttempts--;
-
             //clear out the password textbox
             txtPassword.ResetText();
 
@@ -105,26 +75,66 @@ namespace JeddoreISDPDesktop
                 string passwordSalt = PasswordSaltAccessor.GetOnePasswordSaltString(employee.employeeID);
 
                 //get the hash for the password + salt (salt goes after the raw password)
-                string userHash = PasswordEncryption.GetHash(password + passwordSalt);
+                string userHash = PasswordEncrypter.GetHash(password + passwordSalt);
 
-                //if the hash returned matches the hashed password in the DB
-                if (userHash == employee.password)
+                //if - employee exists but is inactive
+                if (employee.active == 0)
+                {
+                    MessageBox.Show("Invalid username and/or password. Please contact your Administrator admin@bullseye.ca for assistance.", "Invalid Username and/or Password");
+
+                    //call reset form password ftn
+                    ResetFormPassword();
+                }
+
+                //else if - employee exists but is locked
+                else if (employee.locked == 1)
+                {
+                    MessageBox.Show("Your account has been locked because of too many incorrect login attempts. Please contact your Administrator at admin@bullseye.ca for assistance.", "Account Locked");
+
+                    //call reset form password ftn
+                    ResetFormPassword();
+                }
+
+                //else if - the hash returned matches the hashed password in the DB
+                else if (userHash == employee.password)
                 {
                     MessageBox.Show("Password is a match. You are now logged in.", "Successful Login");
                     //MessageBox.Show(userHash + "\n" + employee.password, "Checking Passwords");
                     UpdateEmployeeSaltAndHashedPassword(password, employee);
+
+                    //want to send the employee obj to the dashboard form
+                    Dashboard frmDashboard = new Dashboard(employee);
+
+                    //open the dashboard form (modal), and hide the current login form
+                    //this.Hide();
+                    frmDashboard.ShowDialog();
                 }
 
                 //else - incorrect hash
                 else
                 {
+                    //subtract 1 from login attempts
+                    loginAttempts--;
+
+                    //if login attempts reaches 0, then lock that employee/user
+                    if (loginAttempts == 0)
+                    {
+                        EmployeeAccessor.UpdateEmployeeToLocked(employee.employeeID);
+
+                        MessageBox.Show("Your account has been locked because of too many incorrect login attempts. Please contact your Administrator at admin@bullseye.ca for assistance.", "Account Locked");
+                    }
+
+                    //else - login attempts not yet at 0
+                    else
+                    {
+                        MessageBox.Show("Incorrect Password. You have " + loginAttempts.ToString() + " login attempts remaining.",
+                            "Unsuccessful Login");
+
+                        //MessageBox.Show(userHash + "\n" + employee.password, "Checking Passwords");
+                    }
+
                     //call reset form password ftn
                     ResetFormPassword();
-
-                    MessageBox.Show("Incorrect Password. You have " + loginAttempts.ToString() + " login attempts remaining.",
-                        "Unsuccessful Login");
-
-                    //MessageBox.Show(userHash + "\n" + employee.password, "Checking Passwords");
                 }
 
             }
@@ -148,25 +158,25 @@ namespace JeddoreISDPDesktop
         {
             //now update the password salt for that user, now that they are successfully logged in
             //so that the same salt isn't always used
-            string newSalt = PasswordEncryption.GetSalt();
+            string newSalt = PasswordEncrypter.GetSalt();
 
             bool goodSaltUpdate = PasswordSaltAccessor.UpdatePasswordSalt(newSalt, employee.employeeID);
 
-            if (goodSaltUpdate)
+            /* if (goodSaltUpdate)
             {
                 MessageBox.Show("The salt was updated.");
-            }
+            } */
 
             //now get a new hashed password - based on the password and new salt text
-            string newHash = PasswordEncryption.GetHash(password + newSalt);
+            string newHash = PasswordEncrypter.GetHash(password + newSalt);
 
             //and update the password in the DB to be the new hashed password
             bool goodNewHash = EmployeeAccessor.UpdateEmployeePassword(newHash, employee.employeeID);
 
-            if (goodNewHash)
+            /* if (goodNewHash)
             {
                 MessageBox.Show("The hashed password was updated.");
-            }
+            } */
         }
 
         private void lblForgotPassword_Click(object sender, EventArgs e)
@@ -174,47 +184,33 @@ namespace JeddoreISDPDesktop
             //call ftn for instantiating employee object
             InstantiateEmployee(out string password, out Employee employee);
 
-            //if employee username exists (not null)
-            if (employee != null)
+            //if employee username exists (not null) and employee is NOT locked then
+            if (employee != null && employee.locked == 0)
             {
                 //sending in the employee username into the constructor for this form
-                ResetPassword newResetPasswordForm = new ResetPassword(employee.username);
+                ResetPassword newResetPasswordForm = new ResetPassword(employee.username, employee.employeeID);
 
                 //show the reset password form (modal)
                 newResetPasswordForm.ShowDialog();
             }
 
-            //else - employee username does not exist
+            //else - employee username does not exist, or is locked
             else
             {
-                MessageBox.Show("Password can't be reset for a user that does not exist.", "Unable to Reset Password");
+                MessageBox.Show("Password can't be reset for a user that does not exist or is locked.", "Unable to Reset Password");
             }
         }
 
         private void picEyeHide_Click(object sender, EventArgs e)
         {
-            //hide the raw password chars
-            txtPassword.PasswordChar = char.Parse("*");
-
-            //hide this picturebox and make the other one visible
-            //also send to back and bring other picturebox to the front
-            picEyeHide.Visible = false;
-            picEyeShow.Visible = true;
-            picEyeHide.SendToBack();
-            picEyeShow.BringToFront();
+            //hide password chars ftn
+            PasswordCharacters.HidePasswordChars(txtPassword, picEyeShow, picEyeHide);
         }
 
         private void picEyeShow_Click_1(object sender, EventArgs e)
         {
-            //show the raw password chars
-            txtPassword.PasswordChar = '\0';
-
-            //hide this picturebox and make the other one visible
-            //also send to back and bring other picturebox to the front
-            picEyeShow.Visible = false;
-            picEyeHide.Visible = true;
-            picEyeShow.SendToBack();
-            picEyeHide.BringToFront();
+            //show password chars ftn
+            PasswordCharacters.ShowPasswordChars(txtPassword, picEyeShow, picEyeHide);
         }
     }
 }

@@ -18,8 +18,8 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static MySqlConnection connection = new MySqlConnection(connString);
 
         //SQL statements for the Employee entity
-        private static string selectAllStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') AS Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, s.name from employee e inner join site s on e.siteID = s.siteID";
-        private static string selectOneStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') AS Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, s.name from employee e inner join site s on e.siteID = s.siteID " +
+        private static string selectAllStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') AS Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, s.name, p.permissionLevel from employee e inner join site s on e.siteID = s.siteID inner join posn p on e.positionID = p.positionID";
+        private static string selectOneStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') AS Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, s.name, p.permissionLevel from employee e inner join site s on e.siteID = s.siteID inner join posn p on e.positionID = p.positionID " +
             "where username = @username";
         private static string updateLockedStatement = "update employee set locked = 1 where employeeID = @employeeID";
         private static string updateInactiveStatement = "update employee set active = 0 where employeeID = @employeeID";
@@ -84,7 +84,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
                 //create a datareader and execute the SQL statement against the DB
                 MySqlDataReader reader = cmd.ExecuteReader();
 
-                //run loop thru datareader to get each table name
+                //run loop thru datareader
                 //while - there is another record to read
                 while (reader.Read())
                 {
@@ -101,10 +101,11 @@ namespace JeddoreISDPDesktop.DAO_Classes
                     string username = reader.GetString("username");
                     string notes = reader.GetString("notes");
                     string siteName = reader.GetString("name");
+                    string permissionLevel = reader.GetString("permissionLevel");
 
                     //create an employee object
                     Employee employee = new Employee(employeeID, password, firstName, lastName, email,
-                        active, positionID, siteID, locked, username, notes, siteName);
+                        active, positionID, siteID, locked, username, notes, siteName, permissionLevel);
 
                     //add to the list
                     employeesList.Add(employee);
@@ -169,10 +170,11 @@ namespace JeddoreISDPDesktop.DAO_Classes
                     string username = reader.GetString("username");
                     string notes = reader.GetString("notes") as string;
                     string siteName = reader.GetString("name");
+                    string permissionLevel = reader.GetString("permissionLevel");
 
                     //create an employee object
                     employee = new Employee(employeeID, password, firstName, lastName, email,
-                        active, positionID, siteID, locked, username, notes, siteName);
+                        active, positionID, siteID, locked, username, notes, siteName, permissionLevel);
                 }
 
                 //close reader after if statement

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace JeddoreISDPDesktop.Helper_Classes
 {
-    public static class PasswordEncryption
+    //public statis helper class
+    public static class PasswordEncrypter
     {
         //creates and returns a hashed to be used for storage in the DB
         public static string GetHash(string password)
