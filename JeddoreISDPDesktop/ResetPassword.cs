@@ -1,4 +1,5 @@
 ﻿using JeddoreISDPDesktop.DAO_Classes;
+using JeddoreISDPDesktop.Entity_Classes;
 using JeddoreISDPDesktop.Helper_Classes;
 using System;
 using System.Windows.Forms;
@@ -76,6 +77,15 @@ namespace JeddoreISDPDesktop
                 bool goodNewHash = EmployeeAccessor.UpdateEmployeePassword(newHash, globalEmployeeID);
                 MessageBox.Show("Your password has been successfully reset.", "Password Successfully Reset");
 
+                //call ftn for instantiating employee object
+                InstantiateEmployee(out Employee employee);
+
+                //if employee's madeFirstLogin value is 0, then change it to 1
+                if (employee.madeFirstLogin == 0)
+                {
+                    bool goodUpdate = EmployeeAccessor.UpdateEmployeeMadeFirstLogin(employee.employeeID);
+                }
+
                 //close the form
                 this.Close();
             }
@@ -96,6 +106,22 @@ namespace JeddoreISDPDesktop
 
                 txtPasswordConfirm.Focus();
             }
+        }
+
+        private void ResetPassword_Load(object sender, EventArgs e)
+        {
+            //setting the tooltip for the help image
+            toolTipHelp.SetToolTip(picHelp, "Click here for help.");
+        }
+
+        //instantiate employee object function - based on the username sent in
+        private void InstantiateEmployee(out Employee employee)
+        {
+            //get the typed in username
+            string username = lblUsername.Text;
+
+            //getting one employee based on the username
+            employee = EmployeeAccessor.GetOneEmployee(username);
         }
     }
 }

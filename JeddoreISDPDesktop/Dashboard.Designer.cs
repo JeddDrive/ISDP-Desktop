@@ -28,13 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.tabControlDashboard = new System.Windows.Forms.TabControl();
             this.tabOrders = new System.Windows.Forms.TabPage();
             this.tabInventory = new System.Windows.Forms.TabPage();
+            this.btnEditItem = new System.Windows.Forms.Button();
             this.tabLossReturn = new System.Windows.Forms.TabPage();
             this.tabReports = new System.Windows.Forms.TabPage();
             this.tabAdmin = new System.Windows.Forms.TabPage();
+            this.btnSetUserPermissions = new System.Windows.Forms.Button();
+            this.btnViewUsers = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.picHelp = new System.Windows.Forms.PictureBox();
@@ -42,7 +46,10 @@
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblLocation = new System.Windows.Forms.Label();
             this.picBullseye = new System.Windows.Forms.PictureBox();
+            this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.tabControlDashboard.SuspendLayout();
+            this.tabInventory.SuspendLayout();
+            this.tabAdmin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             this.SuspendLayout();
@@ -62,27 +69,39 @@
             // 
             // tabOrders
             // 
-            this.tabOrders.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabOrders.BackColor = System.Drawing.Color.AliceBlue;
             this.tabOrders.Location = new System.Drawing.Point(4, 37);
             this.tabOrders.Name = "tabOrders";
             this.tabOrders.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOrders.Size = new System.Drawing.Size(950, 488);
+            this.tabOrders.Size = new System.Drawing.Size(950, 437);
             this.tabOrders.TabIndex = 0;
             this.tabOrders.Text = "Orders";
             // 
             // tabInventory
             // 
-            this.tabInventory.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabInventory.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabInventory.Controls.Add(this.btnEditItem);
             this.tabInventory.Location = new System.Drawing.Point(4, 37);
             this.tabInventory.Name = "tabInventory";
             this.tabInventory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInventory.Size = new System.Drawing.Size(950, 488);
+            this.tabInventory.Size = new System.Drawing.Size(950, 437);
             this.tabInventory.TabIndex = 1;
             this.tabInventory.Text = "Inventory";
             // 
+            // btnEditItem
+            // 
+            this.btnEditItem.Enabled = false;
+            this.btnEditItem.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditItem.Location = new System.Drawing.Point(258, 49);
+            this.btnEditItem.Name = "btnEditItem";
+            this.btnEditItem.Size = new System.Drawing.Size(456, 63);
+            this.btnEditItem.TabIndex = 21;
+            this.btnEditItem.Text = "&Edit Item";
+            this.btnEditItem.UseVisualStyleBackColor = true;
+            // 
             // tabLossReturn
             // 
-            this.tabLossReturn.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabLossReturn.BackColor = System.Drawing.Color.AliceBlue;
             this.tabLossReturn.Location = new System.Drawing.Point(4, 37);
             this.tabLossReturn.Name = "tabLossReturn";
             this.tabLossReturn.Size = new System.Drawing.Size(950, 437);
@@ -91,21 +110,46 @@
             // 
             // tabReports
             // 
-            this.tabReports.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabReports.BackColor = System.Drawing.Color.AliceBlue;
             this.tabReports.Location = new System.Drawing.Point(4, 37);
             this.tabReports.Name = "tabReports";
-            this.tabReports.Size = new System.Drawing.Size(950, 488);
+            this.tabReports.Size = new System.Drawing.Size(950, 437);
             this.tabReports.TabIndex = 3;
             this.tabReports.Text = "Reports";
             // 
             // tabAdmin
             // 
-            this.tabAdmin.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabAdmin.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabAdmin.Controls.Add(this.btnSetUserPermissions);
+            this.tabAdmin.Controls.Add(this.btnViewUsers);
             this.tabAdmin.Location = new System.Drawing.Point(4, 37);
             this.tabAdmin.Name = "tabAdmin";
-            this.tabAdmin.Size = new System.Drawing.Size(950, 488);
+            this.tabAdmin.Size = new System.Drawing.Size(950, 437);
             this.tabAdmin.TabIndex = 4;
             this.tabAdmin.Text = "Admin";
+            // 
+            // btnSetUserPermissions
+            // 
+            this.btnSetUserPermissions.Enabled = false;
+            this.btnSetUserPermissions.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSetUserPermissions.Location = new System.Drawing.Point(258, 201);
+            this.btnSetUserPermissions.Name = "btnSetUserPermissions";
+            this.btnSetUserPermissions.Size = new System.Drawing.Size(456, 63);
+            this.btnSetUserPermissions.TabIndex = 24;
+            this.btnSetUserPermissions.Text = "&Set User Permissions";
+            this.btnSetUserPermissions.UseVisualStyleBackColor = true;
+            // 
+            // btnViewUsers
+            // 
+            this.btnViewUsers.Enabled = false;
+            this.btnViewUsers.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewUsers.Location = new System.Drawing.Point(258, 49);
+            this.btnViewUsers.Name = "btnViewUsers";
+            this.btnViewUsers.Size = new System.Drawing.Size(456, 63);
+            this.btnViewUsers.TabIndex = 21;
+            this.btnViewUsers.Text = "&View and Manage Users";
+            this.btnViewUsers.UseVisualStyleBackColor = true;
+            this.btnViewUsers.Click += new System.EventHandler(this.btnViewUsers_Click);
             // 
             // label2
             // 
@@ -140,12 +184,13 @@
             // 
             this.btnLogout.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.Location = new System.Drawing.Point(819, 628);
+            this.btnLogout.Location = new System.Drawing.Point(818, 628);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(147, 63);
             this.btnLogout.TabIndex = 11;
             this.btnLogout.Text = "&Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // lblUsername
             // 
@@ -177,6 +222,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnLogout;
             this.ClientSize = new System.Drawing.Size(982, 703);
             this.Controls.Add(this.picBullseye);
             this.Controls.Add(this.lblLocation);
@@ -194,6 +240,8 @@
             this.Text = "Bullseye Inventory Management System - Dashboard";
             this.Load += new System.EventHandler(this.Dashboard_Load);
             this.tabControlDashboard.ResumeLayout(false);
+            this.tabInventory.ResumeLayout(false);
+            this.tabAdmin.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             this.ResumeLayout(false);
@@ -216,5 +264,9 @@
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblLocation;
         private System.Windows.Forms.PictureBox picBullseye;
+        private System.Windows.Forms.Button btnViewUsers;
+        private System.Windows.Forms.Button btnEditItem;
+        private System.Windows.Forms.Button btnSetUserPermissions;
+        private System.Windows.Forms.ToolTip toolTipHelp;
     }
 }

@@ -13,9 +13,7 @@ namespace JeddoreISDPDesktop
             InitializeComponent();
         }
 
-        //class level code below
-        //int for keeping track of login attempts
-        int loginAttempts = 3;
+        //insert any needed class level code here
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -96,28 +94,56 @@ namespace JeddoreISDPDesktop
                 }
 
                 //else if - the hash returned matches the hashed password in the DB
+                //successful login
                 else if (userHash == employee.password)
                 {
-                    MessageBox.Show("Password is a match. You are now logged in.", "Successful Login");
-                    //MessageBox.Show(userHash + "\n" + employee.password, "Checking Passwords");
-                    UpdateEmployeeSaltAndHashedPassword(password, employee);
+                    //if employee is making their first login, then prompt them to change their password
+                    if (employee.madeFirstLogin == 0)
+                    {
+                        MessageBox.Show("Password is a match, but because this is your first login, please change the default password.", "First Successful Login");
 
-                    //want to send the employee obj to the dashboard form
-                    Dashboard frmDashboard = new Dashboard(employee);
+                        //sending in the employee username and ID into the constructor for this form
+                        ResetPassword newResetPasswordForm = new ResetPassword(employee.username, employee.employeeID);
 
-                    //open the dashboard form (modal), and hide the current login form
-                    //this.Hide();
-                    frmDashboard.ShowDialog();
+                        //show the reset password form (modal)
+                        newResetPasswordForm.ShowDialog();
+                    }
+
+                    //else - not their first login
+                    else
+                    {
+                        MessageBox.Show("Password is a match. You are now logged in.", "Successful Login");
+                        //MessageBox.Show(userHash + "\n" + employee.password, "Checking Passwords");
+                        UpdateEmployeeSaltAndHashedPassword(password, employee);
+
+                        //if employee login attempts is under 3, then update it back to the default (3)
+                        //because of the successful login
+                        if (employee.loginAttempts < 3)
+                        {
+                            bool goodUpdate = EmployeeAccessor.UpdateEmployeeLoginAttemptsToThree(employee.employeeID);
+                        }
+
+                        //want to send the employee obj to the dashboard form
+                        Dashboard frmDashboard = new Dashboard(employee);
+
+                        //open the dashboard form (modal)
+                        frmDashboard.ShowDialog();
+
+                    }
                 }
 
                 //else - incorrect hash
                 else
                 {
                     //subtract 1 from login attempts
-                    loginAttempts--;
+                    bool goodLoginAttemptsUpdate = EmployeeAccessor.UpdateEmployeeLoginAttemptsMinusOne(employee.employeeID);
+
+                    //call ftn for instantiating employee object
+                    //need to get the new updated login attempts number for this employee
+                    InstantiateEmployee(out password, out employee);
 
                     //if login attempts reaches 0, then lock that employee/user
-                    if (loginAttempts == 0)
+                    if (goodLoginAttemptsUpdate && employee.loginAttempts == 0)
                     {
                         EmployeeAccessor.UpdateEmployeeToLocked(employee.employeeID);
 
@@ -125,10 +151,10 @@ namespace JeddoreISDPDesktop
                     }
 
                     //else - login attempts not yet at 0
-                    else
+                    else if (goodLoginAttemptsUpdate && employee.loginAttempts > 0)
                     {
-                        MessageBox.Show("Incorrect Password. You have " + loginAttempts.ToString() + " login attempts remaining.",
-                            "Unsuccessful Login");
+                        MessageBox.Show("Incorrect Password. You have " + (employee.loginAttempts).ToString() + " login attempts remaining.",
+                            "Unsuccessful Login Attempt");
 
                         //MessageBox.Show(userHash + "\n" + employee.password, "Checking Passwords");
                     }
@@ -187,7 +213,7 @@ namespace JeddoreISDPDesktop
             //if employee username exists (not null) and employee is NOT locked then
             if (employee != null && employee.locked == 0)
             {
-                //sending in the employee username into the constructor for this form
+                //sending in the employee username and ID into the constructor for this form
                 ResetPassword newResetPasswordForm = new ResetPassword(employee.username, employee.employeeID);
 
                 //show the reset password form (modal)

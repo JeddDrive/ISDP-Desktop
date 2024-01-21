@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtPasswordConfirm = new System.Windows.Forms.TextBox();
             this.txtPasswordNew = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,6 +44,7 @@
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picEyeNewHide = new System.Windows.Forms.PictureBox();
             this.picEyeConfirmHide = new System.Windows.Forms.PictureBox();
+            this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picEyeConfirmShow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEyeNewShow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
@@ -226,6 +228,7 @@
             this.Name = "ResetPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bullseye Inventory Management System - Reset Password";
+            this.Load += new System.EventHandler(this.ResetPassword_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picEyeConfirmShow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEyeNewShow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
@@ -254,5 +257,6 @@
         private System.Windows.Forms.PictureBox picEyeConfirmShow;
         private System.Windows.Forms.PictureBox picEyeNewHide;
         private System.Windows.Forms.PictureBox picEyeConfirmHide;
+        private System.Windows.Forms.ToolTip toolTipHelp;
     }
 }

@@ -102,6 +102,7 @@
     <Compile Include="DAO_Classes\PasswordSaltAccessor.cs" />
     <Compile Include="DAO_Classes\PosnAccessor.cs" />
     <Compile Include="DAO_Classes\SiteAccessor.cs" />
+    <Compile Include="DAO_Classes\UserPermissionAccessor.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +113,13 @@
     <Compile Include="Entity_Classes\PasswordSalt.cs" />
     <Compile Include="Entity_Classes\Posn.cs" />
     <Compile Include="Entity_Classes\Site.cs" />
+    <Compile Include="UserManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagement.Designer.cs">
+      <DependentUpon>UserManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity_Classes\UserPermission.cs" />
     <Compile Include="Helper_Classes\PasswordCharacters.cs" />
     <Compile Include="Helper_Classes\PasswordEncrypter.cs" />
     <Compile Include="Login.cs">
@@ -130,6 +138,9 @@
     </Compile>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagement.resx">
+      <DependentUpon>UserManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
