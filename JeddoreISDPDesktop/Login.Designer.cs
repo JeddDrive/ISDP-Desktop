@@ -172,7 +172,7 @@
             // 
             // Login
             // 
-            this.AcceptButton = this.btnExit;
+            this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;

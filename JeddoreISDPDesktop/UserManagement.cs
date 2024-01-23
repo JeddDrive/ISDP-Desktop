@@ -103,28 +103,41 @@ namespace JeddoreISDPDesktop.Entity_Classes
 
         private void btnDeleteUser_Click(object sender, EventArgs e)
         {
-            //get the current row
-            DataGridViewRow dgvRow = dgvUsers.CurrentRow;
+            int selectedRowsCount = dgvUsers.SelectedRows.Count;
 
-            //get the cells with the employee ID, username and location
-            string employeeID = dgvRow.Cells[0].Value.ToString();
-            string username = dgvRow.Cells[9].Value.ToString();
-            string location = dgvRow.Cells[13].Value.ToString();
-
-            DialogResult btnValueReturned = MessageBox.Show("Confirm you wish to remove user from system?\n\n" +
-                "User: " + username + "\n" + "Location: " + location, "Confirm User Removal",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            //if - user selects the yes btn
-            if (btnValueReturned == DialogResult.Yes)
+            //if number of selected rows is not one
+            if (selectedRowsCount != 1)
             {
-                //attempt to update that employee to now be inactive
-                bool goodUpdate = EmployeeAccessor.UpdateEmployeeToInactive(int.Parse(employeeID));
+                MessageBox.Show("Must select one row from the data grid in order to remove that selected user.",
+                    "Remove User Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
-                //if successful
-                if (goodUpdate)
+            //else - 1 row is selected
+            else
+            {
+                //get the current row
+                DataGridViewRow dgvRow = dgvUsers.CurrentRow;
+
+                //get the cells with the employee ID, username and location
+                string employeeID = dgvRow.Cells[0].Value.ToString();
+                string username = dgvRow.Cells[9].Value.ToString();
+                string location = dgvRow.Cells[13].Value.ToString();
+
+                DialogResult btnValueReturned = MessageBox.Show("Confirm you wish to remove user from system?\n\n" +
+                    "User: " + username + "\n" + "Location: " + location, "Confirm User Removal",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                //if - user selects the yes btn
+                if (btnValueReturned == DialogResult.Yes)
                 {
-                    MessageBox.Show("User has been removed.", "Successful User Removal");
+                    //attempt to update that employee to now be inactive
+                    bool goodUpdate = EmployeeAccessor.UpdateEmployeeToInactive(int.Parse(employeeID));
+
+                    //if successful
+                    if (goodUpdate)
+                    {
+                        MessageBox.Show("User has been removed from the system.", "Successful User Removal");
+                    }
                 }
             }
         }
@@ -140,18 +153,33 @@ namespace JeddoreISDPDesktop.Entity_Classes
                     "Edit User Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            //else - 1 row is selected
+            //else - 1 employee row is selected
             else
             {
                 //get the current row
                 DataGridViewRow dgvRow = dgvUsers.CurrentRow;
 
-                //get the cell with the employee ID
-                string employeeID = dgvRow.Cells[0].Value.ToString();
+                //get the cell with the selected employee's username
+                string username = dgvRow.Cells[9].Value.ToString();
 
                 //can now get the employee to edit with just the employee ID (primary key)
-                Employee selectedEmployee = EmployeeAccessor.GetOneEmployee(employeeID);
+                Employee selectedEmployee = EmployeeAccessor.GetOneEmployee(username);
+
+                //want to send the employee obj to the add user form - for the employee logged in
+                AddEditUser frmEditUser = new AddEditUser(employee, selectedEmployee);
+
+                //open the add/edit user form (modal)
+                frmEditUser.ShowDialog();
             }
+        }
+
+        private void btnAddUser_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the add user form - for the employee logged in
+            AddEditUser frmAddUser = new AddEditUser(employee);
+
+            //open the add/edit user form (modal)
+            frmAddUser.ShowDialog();
         }
     }
 }

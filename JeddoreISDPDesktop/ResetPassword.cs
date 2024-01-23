@@ -102,7 +102,7 @@ namespace JeddoreISDPDesktop
             else
             {
                 //display the error message
-                MessageBox.Show(errorMessage, "Failed Password Validation");
+                MessageBox.Show(errorMessage, "Password Validation Failure");
 
                 txtPasswordConfirm.Focus();
             }

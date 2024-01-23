@@ -17,6 +17,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         //SQL statements for the PasswordSalt entity
         private static string selectOneStatement = "select passwordSalt from passwordsalt where employeeID = @employeeID";
         private static string updateSaltStatement = "update passwordsalt set passwordSalt = @passwordSalt where employeeID = @employeeID";
+        private static string insertSaltStatement = "insert into `passwordsalt` (`employeeID`, `passwordSalt`) values (@employeeID, @passwordSalt)";
 
         /**
         * Gets one passwordsalt string, based on the employeeID.
@@ -103,6 +104,52 @@ namespace JeddoreISDPDesktop.DAO_Classes
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Updating Password Salt");
+
+                connection.Close();
+            }
+
+            //if rowCount is 1, then non query was good
+            if (rowCount == 1)
+            {
+                goodNonQuery = true;
+            }
+
+            return goodNonQuery;
+        }
+
+        /**
+        * Inserts a new record into the password salt entity.
+        *
+        * @param password salt, employee ID
+        * @return bool - if new record was inserted or not
+        */
+        public static bool InsertPasswordSalt(string passwordSalt, int employeeID)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(insertSaltStatement, connection);
+
+            //two parameters for the query - password and employeeID
+            cmd.Parameters.AddWithValue("@employeeID", employeeID);
+            cmd.Parameters.AddWithValue("@passwordSalt", passwordSalt);
+            //variable for rowCount
+            int rowCount = 0;
+
+            //bool to be returned
+            bool goodNonQuery = false;
+
+            try
+            {
+                connection.Open();
+
+                //execute a non query
+                rowCount = cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Inserting New Password Salt");
 
                 connection.Close();
             }

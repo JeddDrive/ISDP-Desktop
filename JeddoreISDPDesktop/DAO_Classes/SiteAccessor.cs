@@ -17,7 +17,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static MySqlConnection connection = new MySqlConnection(connString);
 
         //SQL statements for the Employee entity
-        private static string selectAllStatement = "select siteID, name, provinceID, address, address2, city, country, postalCode, phone, IFNULL(dayOfWeek, ''), distanceFromWH, IFNULL(notes, '') from site";
+        private static string selectAllStatement = "select siteID, name, provinceID, address, IFNULL(address2, '') as address2, city, country, postalCode, phone, IFNULL(dayOfWeek, '') as dayOfWeek, distanceFromWH, IFNULL(notes, '') as notes from site";
 
         /**
         * Get all of the sites

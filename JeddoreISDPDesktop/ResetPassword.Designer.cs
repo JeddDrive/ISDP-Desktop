@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResetPassword));
             this.txtPasswordConfirm = new System.Windows.Forms.TextBox();
             this.txtPasswordNew = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -224,6 +225,7 @@
             this.Controls.Add(this.picEyeNewHide);
             this.Controls.Add(this.picEyeConfirmHide);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ResetPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

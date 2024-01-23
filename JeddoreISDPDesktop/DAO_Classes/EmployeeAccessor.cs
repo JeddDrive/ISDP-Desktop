@@ -18,18 +18,21 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static MySqlConnection connection = new MySqlConnection(connString);
 
         //SQL statements for the Employee entity
-        private static string selectAllStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') AS Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, loginAttempts, madeFirstLogin, s.name, p.permissionLevel from employee e inner join site s on e.siteID = s.siteID inner join posn p on e.positionID = p.positionID";
-        private static string selectOneStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') AS Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, loginAttempts, madeFirstLogin, s.name, p.permissionLevel from employee e inner join site s on e.siteID = s.siteID inner join posn p on e.positionID = p.positionID " +
+        private static string selectAllStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') as Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, loginAttempts, madeFirstLogin, s.name, p.permissionLevel from employee e inner join site s on e.siteID = s.siteID inner join posn p on e.positionID = p.positionID";
+        private static string selectOneStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') as Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, loginAttempts, madeFirstLogin, s.name, p.permissionLevel from employee e inner join site s on e.siteID = s.siteID inner join posn p on e.positionID = p.positionID " +
             "where username = @username";
-        private static string selectLastEmployeeStatement = "select * from employee order by employeeid DESC LIMIT 1";
+        private static string selectLastEmployeeStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') as Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, loginAttempts, madeFirstLogin, s.name, p.permissionLevel from employee e inner join site s on e.siteID = s.siteID inner join posn p on e.positionID = p.positionID" +
+            " order by employeeid DESC LIMIT 1";
+        private static string selectCountEmployeesWithUsername = "select count(*) from employee where username like @username";
         private static string updateLockedStatement = "update employee set locked = 1 where employeeID = @employeeID";
         private static string updateInactiveStatement = "update employee set active = 0 where employeeID = @employeeID";
         private static string updatePasswordStatement = "update employee set password = @password where employeeID = @employeeID";
         private static string updateLoginAttemptsMinusOneStatement = "update employee set loginAttempts = loginAttempts - 1 where employeeID = @employeeID";
         private static string updateLoginAttemptsToThreeStatement = "update employee set loginAttempts = 3 where employeeID = @employeeID";
         private static string updateMadeFirstLoginStatement = "update employee set madeFirstLogin = 1 where employeeID = @employeeID";
-        private static string insertEmployeeStatement = "insert into employee (`employeeID`, `Password`, `FirstName`, `LastName`, `Email`, `active`, `siteID`, `username`, `locked`, `PositionID`, `loginAttempts`) VALUES "
-            + "(@employeeID, @password, @firstName, @lastName, @email, @active, @siteID, @username, @locked, @positionID)";
+        private static string insertEmployeeStatement = "insert into employee (`Password`, `FirstName`, `LastName`, `Email`, `active`, `siteID`, `username`, `locked`, `PositionID`) VALUES "
+            + "(@password, @firstName, @lastName, @email, @active, @siteID, @username, @locked, @positionID)";
+
         /**
          * Get all of the employees.
          *
@@ -270,6 +273,46 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
             //return the employee
             return employee;
+        }
+
+        /**
+        * Gets the count number of employees matching a wildcard pattern of a particular username.
+        *
+        * @return an int, possibly 0 if none found based on the username wildcard.
+        */
+        public static long GetCountWithTheUsername(string usernameSentIn)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectCountEmployeesWithUsername, connection);
+
+            //int to be returned
+            long rowCount = 0;
+
+            //one parameter for the query - string username
+            cmd.Parameters.AddWithValue("@username", "%" + usernameSentIn);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                rowCount = (long)cmd.ExecuteScalar();
+
+                //close the connection
+                connection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting the Count of Employees With That Username");
+
+                connection.Close();
+
+            }
+
+            //return the rowCount (int)
+            return rowCount;
         }
 
         /**
@@ -560,8 +603,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             //create a command
             MySqlCommand cmd = new MySqlCommand(insertEmployeeStatement, connection);
 
-            //two parameters for the query - password and employeeID
-            cmd.Parameters.AddWithValue("@employeeID", employee.employeeID);
+            //many parameters for this insert query - password and employeeID
             cmd.Parameters.AddWithValue("@password", employee.password);
             cmd.Parameters.AddWithValue("@firstName", employee.firstName);
             cmd.Parameters.AddWithValue("@lastName", employee.lastName);
