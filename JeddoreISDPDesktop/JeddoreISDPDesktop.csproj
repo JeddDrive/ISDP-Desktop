@@ -66,6 +66,7 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.IO.Pipelines, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Pipelines.5.0.2\lib\net461\System.IO.Pipelines.dll</HintPath>
     </Reference>
@@ -105,6 +106,7 @@
       <DependentUpon>AddEditUser.cs</DependentUpon>
     </Compile>
     <Compile Include="DAO_Classes\EmployeeAccessor.cs" />
+    <Compile Include="DAO_Classes\ItemAccessor.cs" />
     <Compile Include="DAO_Classes\PasswordSaltAccessor.cs" />
     <Compile Include="DAO_Classes\PosnAccessor.cs" />
     <Compile Include="DAO_Classes\SiteAccessor.cs" />
@@ -115,10 +117,23 @@
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditItem.Designer.cs">
+      <DependentUpon>EditItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entity_Classes\Employee.cs" />
+    <Compile Include="Entity_Classes\Item.cs" />
     <Compile Include="Entity_Classes\PasswordSalt.cs" />
     <Compile Include="Entity_Classes\Posn.cs" />
     <Compile Include="Entity_Classes\Site.cs" />
+    <Compile Include="ItemManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemManagement.Designer.cs">
+      <DependentUpon>ItemManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,11 +157,23 @@
     <Compile Include="ResetPassword.Designer.cs">
       <DependentUpon>ResetPassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserPermissions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserPermissions.Designer.cs">
+      <DependentUpon>UserPermissions.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddEditUser.resx">
       <DependentUpon>AddEditUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditItem.resx">
+      <DependentUpon>EditItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemManagement.resx">
+      <DependentUpon>ItemManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserManagement.resx">
       <DependentUpon>UserManagement.cs</DependentUpon>
@@ -166,6 +193,9 @@
     </Compile>
     <EmbeddedResource Include="ResetPassword.resx">
       <DependentUpon>ResetPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserPermissions.resx">
+      <DependentUpon>UserPermissions.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

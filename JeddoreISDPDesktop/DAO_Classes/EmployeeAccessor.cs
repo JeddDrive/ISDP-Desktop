@@ -18,7 +18,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static MySqlConnection connection = new MySqlConnection(connString);
 
         //SQL statements for the Employee entity
-        private static string selectAllStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') as Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, loginAttempts, madeFirstLogin, s.name, p.permissionLevel from employee e inner join site s on e.siteID = s.siteID inner join posn p on e.positionID = p.positionID";
+        private static string selectAllStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') as Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, loginAttempts, madeFirstLogin, s.name, p.permissionLevel from employee e inner join site s on e.siteID = s.siteID inner join posn p on e.positionID = p.positionID order by employeeID";
         private static string selectOneStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') as Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, loginAttempts, madeFirstLogin, s.name, p.permissionLevel from employee e inner join site s on e.siteID = s.siteID inner join posn p on e.positionID = p.positionID " +
             "where username = @username";
         private static string selectLastEmployeeStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') as Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, loginAttempts, madeFirstLogin, s.name, p.permissionLevel from employee e inner join site s on e.siteID = s.siteID inner join posn p on e.positionID = p.positionID" +
@@ -30,13 +30,14 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string updateLoginAttemptsMinusOneStatement = "update employee set loginAttempts = loginAttempts - 1 where employeeID = @employeeID";
         private static string updateLoginAttemptsToThreeStatement = "update employee set loginAttempts = 3 where employeeID = @employeeID";
         private static string updateMadeFirstLoginStatement = "update employee set madeFirstLogin = 1 where employeeID = @employeeID";
+        private static string updateEmployeeFieldsStatement = "update employee set username = @username, password = @password, firstName = @firstName, lastName = @lastName, email = @email, active = @active, siteID = @siteID, positionID = @positionID where employeeID = @employeeID";
         private static string insertEmployeeStatement = "insert into employee (`Password`, `FirstName`, `LastName`, `Email`, `active`, `siteID`, `username`, `locked`, `PositionID`) VALUES "
             + "(@password, @firstName, @lastName, @email, @active, @siteID, @username, @locked, @positionID)";
 
         /**
          * Get all of the employees.
          *
-         * @return a DataTable, possibly empty, of Employee objects.
+         * @return a DataTable, possibly empty, of Employees.
          */
         public static DataTable GetAllEmployeesDataTable()
         {
@@ -56,14 +57,12 @@ namespace JeddoreISDPDesktop.DAO_Classes
                 dt.Load(cmd.ExecuteReader());
 
                 connection.Close();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Getting All Employees");
 
                 connection.Close();
-
             }
 
             //return the datatable
@@ -125,14 +124,12 @@ namespace JeddoreISDPDesktop.DAO_Classes
                 reader.Close();
 
                 connection.Close();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Getting All Employees");
 
                 connection.Close();
-
             }
 
             //return the employees list
@@ -195,14 +192,12 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
                 //close the connection
                 connection.Close();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Getting the One Employee");
 
                 connection.Close();
-
             }
 
             //return the employee
@@ -261,7 +256,6 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
                 //close the connection
                 connection.Close();
-
             }
             catch (Exception ex)
             {
@@ -593,6 +587,60 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
+        * Updates an existing employee and most of it's fields.
+        *
+        * @param employee object
+        * @return bool - if employee was updated or not
+        */
+        public static bool UpdateEmployeeFields(Employee employee)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(updateEmployeeFieldsStatement, connection);
+
+            //many parameters for this update query
+            cmd.Parameters.AddWithValue("@username", employee.username);
+            cmd.Parameters.AddWithValue("@password", employee.password);
+            cmd.Parameters.AddWithValue("@firstName", employee.firstName);
+            cmd.Parameters.AddWithValue("@lastName", employee.lastName);
+            cmd.Parameters.AddWithValue("@email", employee.email);
+            cmd.Parameters.AddWithValue("@active", employee.active);
+            cmd.Parameters.AddWithValue("@siteID", employee.siteID);
+            cmd.Parameters.AddWithValue("@positionID", employee.positionID);
+            cmd.Parameters.AddWithValue("@employeeID", employee.employeeID);
+
+            //variable for rowCount
+            int rowCount = 0;
+
+            //bool to be returned
+            bool goodNonQuery = false;
+
+            try
+            {
+                connection.Open();
+
+                //execute a non query
+                rowCount = cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Updating Existing Employee");
+
+                connection.Close();
+            }
+
+            //if rowCount is 1, then non query was good
+            if (rowCount == 1)
+            {
+                goodNonQuery = true;
+            }
+
+            return goodNonQuery;
+        }
+
+        /**
         * Inserts a new employee.
         *
         * @param employee object
@@ -603,7 +651,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             //create a command
             MySqlCommand cmd = new MySqlCommand(insertEmployeeStatement, connection);
 
-            //many parameters for this insert query - password and employeeID
+            //many parameters for this insert query
             cmd.Parameters.AddWithValue("@password", employee.password);
             cmd.Parameters.AddWithValue("@firstName", employee.firstName);
             cmd.Parameters.AddWithValue("@lastName", employee.lastName);

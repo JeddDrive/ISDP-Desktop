@@ -94,11 +94,13 @@ namespace JeddoreISDPDesktop.Entity_Classes
             dgvUsers.Columns["employeeID"].HeaderText = "Employee ID";
             dgvUsers.Columns["siteID"].HeaderText = "Site ID";
             dgvUsers.Columns["username"].HeaderText = "Username";
-            dgvUsers.Columns["name"].HeaderText = "Site Name";
+            dgvUsers.Columns["name"].HeaderText = "Location";
             dgvUsers.Columns["active"].HeaderText = "Active";
             dgvUsers.Columns["locked"].HeaderText = "Locked";
             dgvUsers.Columns["notes"].HeaderText = "Notes";
-            dgvUsers.Columns["permissionLevel"].HeaderText = "Position Name";
+            dgvUsers.Columns["permissionLevel"].HeaderText = "Position";
+
+            dgvUsers.Refresh();
         }
 
         private void btnDeleteUser_Click(object sender, EventArgs e)
@@ -124,7 +126,7 @@ namespace JeddoreISDPDesktop.Entity_Classes
                 string location = dgvRow.Cells[13].Value.ToString();
 
                 DialogResult btnValueReturned = MessageBox.Show("Confirm you wish to remove user from system?\n\n" +
-                    "User: " + username + "\n" + "Location: " + location, "Confirm User Removal",
+                    "User: " + username + "\nLocation: " + location, "Confirm User Removal",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 //if - user selects the yes btn
@@ -149,7 +151,7 @@ namespace JeddoreISDPDesktop.Entity_Classes
             //if number of selected rows is not one
             if (selectedRowsCount != 1)
             {
-                MessageBox.Show("Must select one row from the data grid in order to edit that selected user.",
+                MessageBox.Show("Must select one row from the data grid in order to edit your selected user.",
                     "Edit User Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
@@ -168,6 +170,9 @@ namespace JeddoreISDPDesktop.Entity_Classes
                 //want to send the employee obj to the add user form - for the employee logged in
                 AddEditUser frmEditUser = new AddEditUser(employee, selectedEmployee);
 
+                //update the form's text to be accurate - editing an user
+                frmEditUser.Text = "Bullseye Inventory Management System - Edit User";
+
                 //open the add/edit user form (modal)
                 frmEditUser.ShowDialog();
             }
@@ -177,6 +182,9 @@ namespace JeddoreISDPDesktop.Entity_Classes
         {
             //want to send the employee obj to the add user form - for the employee logged in
             AddEditUser frmAddUser = new AddEditUser(employee);
+
+            //update the form's text to be accurate - adding an user
+            frmAddUser.Text = "Bullseye Inventory Management System - Add User";
 
             //open the add/edit user form (modal)
             frmAddUser.ShowDialog();

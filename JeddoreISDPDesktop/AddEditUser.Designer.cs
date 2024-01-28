@@ -237,6 +237,7 @@
             this.lblEmployeeID.Name = "lblEmployeeID";
             this.lblEmployeeID.Size = new System.Drawing.Size(78, 34);
             this.lblEmployeeID.TabIndex = 43;
+            this.lblEmployeeID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtPassword
             // 

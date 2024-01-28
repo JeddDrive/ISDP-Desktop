@@ -41,17 +41,17 @@
             this.btnViewUsers = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.picHelp = new System.Windows.Forms.PictureBox();
             this.btnLogout = new System.Windows.Forms.Button();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblLocation = new System.Windows.Forms.Label();
-            this.picBullseye = new System.Windows.Forms.PictureBox();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.picBullseye = new System.Windows.Forms.PictureBox();
+            this.picHelp = new System.Windows.Forms.PictureBox();
             this.tabControlDashboard.SuspendLayout();
             this.tabInventory.SuspendLayout();
             this.tabAdmin.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlDashboard
@@ -92,12 +92,13 @@
             // 
             this.btnEditItem.Enabled = false;
             this.btnEditItem.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditItem.Location = new System.Drawing.Point(258, 49);
+            this.btnEditItem.Location = new System.Drawing.Point(258, 102);
             this.btnEditItem.Name = "btnEditItem";
             this.btnEditItem.Size = new System.Drawing.Size(456, 63);
             this.btnEditItem.TabIndex = 21;
             this.btnEditItem.Text = "&Edit Item";
             this.btnEditItem.UseVisualStyleBackColor = true;
+            this.btnEditItem.Click += new System.EventHandler(this.btnEditItem_Click);
             // 
             // tabLossReturn
             // 
@@ -132,18 +133,19 @@
             // 
             this.btnSetUserPermissions.Enabled = false;
             this.btnSetUserPermissions.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSetUserPermissions.Location = new System.Drawing.Point(258, 201);
+            this.btnSetUserPermissions.Location = new System.Drawing.Point(258, 254);
             this.btnSetUserPermissions.Name = "btnSetUserPermissions";
             this.btnSetUserPermissions.Size = new System.Drawing.Size(456, 63);
             this.btnSetUserPermissions.TabIndex = 24;
             this.btnSetUserPermissions.Text = "&Set User Permissions";
             this.btnSetUserPermissions.UseVisualStyleBackColor = true;
+            this.btnSetUserPermissions.Click += new System.EventHandler(this.btnSetUserPermissions_Click);
             // 
             // btnViewUsers
             // 
             this.btnViewUsers.Enabled = false;
             this.btnViewUsers.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewUsers.Location = new System.Drawing.Point(258, 49);
+            this.btnViewUsers.Location = new System.Drawing.Point(258, 102);
             this.btnViewUsers.Name = "btnViewUsers";
             this.btnViewUsers.Size = new System.Drawing.Size(456, 63);
             this.btnViewUsers.TabIndex = 21;
@@ -168,17 +170,6 @@
             this.label1.Size = new System.Drawing.Size(94, 28);
             this.label1.TabIndex = 7;
             this.label1.Text = "Location:";
-            // 
-            // picHelp
-            // 
-            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
-            this.picHelp.Location = new System.Drawing.Point(921, 35);
-            this.picHelp.Name = "picHelp";
-            this.picHelp.Size = new System.Drawing.Size(45, 40);
-            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picHelp.TabIndex = 10;
-            this.picHelp.TabStop = false;
-            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
             // btnLogout
             // 
@@ -218,6 +209,17 @@
             this.picBullseye.TabIndex = 20;
             this.picBullseye.TabStop = false;
             // 
+            // picHelp
+            // 
+            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
+            this.picHelp.Location = new System.Drawing.Point(921, 35);
+            this.picHelp.Name = "picHelp";
+            this.picHelp.Size = new System.Drawing.Size(45, 40);
+            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picHelp.TabIndex = 10;
+            this.picHelp.TabStop = false;
+            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
@@ -242,8 +244,8 @@
             this.tabControlDashboard.ResumeLayout(false);
             this.tabInventory.ResumeLayout(false);
             this.tabAdmin.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

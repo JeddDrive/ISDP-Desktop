@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Windows.Forms;
 
 namespace JeddoreISDPDesktop.DAO_Classes
@@ -17,10 +18,10 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static MySqlConnection connection = new MySqlConnection(connString);
 
         //SQL statements for the Employee entity
-        private static string selectAllEmployeesUserPermissionsStatement = "select * from user_permission";
-        private static string selectOneEmployeeUserPermissionsStatement = "select * from user_permission where employeeID = @employeeID";
-        private static string insertUserPermissionStatement = "INSERT INTO `user_permission` (`employeeID`, `permissionID`) VALUES (@employeeID, @permissionID)";
-        private static string deleteUserPermissionStatement = "DELETE FROM `user_permission` where employeeID = @employeeID and permissionID = @permissionID";
+        private static string selectOneEmployeeUserPermissionsStatement = "select * from user_permission where employeeID = @employeeID and hasPermission = 1";
+        private static string selectOneEmployeeUserPermissionsAllStatement = "select * from user_permission where employeeID = @employeeID";
+        private static string addUserPermissionStatement = "update user_permission set hasPermission = 1 where employeeID = @employeeID and permissionID =  @permissionID";
+        private static string removeUserPermissionStatement = "update user_permission set hasPermission = 0 where employeeID = @employeeID and permissionID =  @permissionID";
 
         /**
         * Gets one user permission object, based on the employeeID sent in.
@@ -72,7 +73,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Getting that Employee's User Permissions");
+                MessageBox.Show(ex.Message, "Error Getting Employee's User Permissions");
 
                 connection.Close();
 
@@ -83,15 +84,53 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Inserts a new user permission record.
+        * Gets one user permission object, based on the employeeID sent in.
         *
-        * @param int employeeID, string permissionID
-        * @return bool - if user permission was inserted or not
+        * @return an Employee, possibly null if none found based on the username.
         */
-        public static bool InsertNewUserPermission(int employeeID, string permissionID)
+        public static DataTable GetOneEmployeeUserPermissionsDataTable(int employeeID)
         {
             //create a command
-            MySqlCommand cmd = new MySqlCommand(insertUserPermissionStatement, connection);
+            MySqlCommand cmd = new MySqlCommand(selectOneEmployeeUserPermissionsAllStatement, connection);
+
+            //create datatable
+            DataTable dt = new DataTable();
+
+            //one parameter for the query - string username
+            cmd.Parameters.AddWithValue("@employeeID", employeeID);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //execute the SQL statement against the DB
+                //load into the DataTable object
+                dt.Load(cmd.ExecuteReader());
+
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting Employee's User Permissions");
+
+                connection.Close();
+            }
+
+            //return the datatable
+            return dt;
+        }
+
+        /**
+        * Adds a permission for a user (is actually an update), by updating the hasPermission field to 1.
+        *
+        * @param int employeeID, string permissionID
+        * @return bool - if user permission was updated or not
+        */
+        public static bool AddUserPermission(int employeeID, string permissionID)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(addUserPermissionStatement, connection);
 
             //two parameters for the query - employeeID and permissionID
             cmd.Parameters.AddWithValue("@employeeID", employeeID);
@@ -115,7 +154,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Inserting User Permission");
+                MessageBox.Show(ex.Message, "Error Adding User Permission");
 
                 connection.Close();
             }
@@ -130,15 +169,15 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Deletes an existing user permission record.
+        * Removes an existing user permission record (is actually an update), by updating the hasPermission field to 0.
         *
         * @param int employeeID, string permissionID
-        * @return bool - if user permission was deleted or not
+        * @return bool - if user permission was updated or not
         */
-        public static bool DeleteNewUserPermission(int employeeID, string permissionID)
+        public static bool RemoveUserPermission(int employeeID, string permissionID)
         {
             //create a command
-            MySqlCommand cmd = new MySqlCommand(deleteUserPermissionStatement, connection);
+            MySqlCommand cmd = new MySqlCommand(removeUserPermissionStatement, connection);
 
             //two parameters for the query - employeeID and permissionID
             cmd.Parameters.AddWithValue("@employeeID", employeeID);
@@ -162,7 +201,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Deleting User Permission");
+                MessageBox.Show(ex.Message, "Error Removing User Permission");
 
                 connection.Close();
             }

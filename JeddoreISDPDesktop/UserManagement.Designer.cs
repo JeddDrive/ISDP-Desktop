@@ -35,8 +35,6 @@
             this.lblUsername = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.picBullseye = new System.Windows.Forms.PictureBox();
-            this.picHelp = new System.Windows.Forms.PictureBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnDeleteUser = new System.Windows.Forms.Button();
             this.btnAddUser = new System.Windows.Forms.Button();
@@ -59,14 +57,16 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
+            this.picBullseye = new System.Windows.Forms.PictureBox();
+            this.picHelp = new System.Windows.Forms.PictureBox();
             this.grpBasic.SuspendLayout();
             this.grpUserManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.grpUsers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
             this.SuspendLayout();
             // 
             // lblLocation
@@ -102,27 +102,6 @@
             this.label2.Size = new System.Drawing.Size(59, 28);
             this.label2.TabIndex = 21;
             this.label2.Text = "User:";
-            // 
-            // picBullseye
-            // 
-            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
-            this.picBullseye.Location = new System.Drawing.Point(2, 1);
-            this.picBullseye.Name = "picBullseye";
-            this.picBullseye.Size = new System.Drawing.Size(140, 110);
-            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBullseye.TabIndex = 26;
-            this.picBullseye.TabStop = false;
-            // 
-            // picHelp
-            // 
-            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
-            this.picHelp.Location = new System.Drawing.Point(922, 34);
-            this.picHelp.Name = "picHelp";
-            this.picHelp.Size = new System.Drawing.Size(45, 40);
-            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picHelp.TabIndex = 23;
-            this.picHelp.TabStop = false;
-            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
             // btnExit
             // 
@@ -215,6 +194,8 @@
             // 
             // dgvUsers
             // 
+            this.dgvUsers.AllowUserToAddRows = false;
+            this.dgvUsers.AllowUserToDeleteRows = false;
             this.dgvUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsers.Location = new System.Drawing.Point(4, 60);
@@ -352,6 +333,27 @@
             this.bindingNavigatorDeleteItem.Text = "Delete";
             this.bindingNavigatorDeleteItem.Visible = false;
             // 
+            // picBullseye
+            // 
+            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
+            this.picBullseye.Location = new System.Drawing.Point(2, 1);
+            this.picBullseye.Name = "picBullseye";
+            this.picBullseye.Size = new System.Drawing.Size(140, 110);
+            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBullseye.TabIndex = 26;
+            this.picBullseye.TabStop = false;
+            // 
+            // picHelp
+            // 
+            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
+            this.picHelp.Location = new System.Drawing.Point(922, 34);
+            this.picHelp.Name = "picHelp";
+            this.picHelp.Size = new System.Drawing.Size(45, 40);
+            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picHelp.TabIndex = 23;
+            this.picHelp.TabStop = false;
+            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
+            // 
             // UserManagement
             // 
             this.AcceptButton = this.btnAddUser;
@@ -376,8 +378,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bullseye Inventory Management System - User Management";
             this.Load += new System.EventHandler(this.UserManagement_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             this.grpBasic.ResumeLayout(false);
             this.grpUserManagement.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
@@ -386,6 +386,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).EndInit();
             this.bindingNavigator.ResumeLayout(false);
             this.bindingNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

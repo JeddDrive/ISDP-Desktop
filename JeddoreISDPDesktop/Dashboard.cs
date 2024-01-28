@@ -31,6 +31,10 @@ namespace JeddoreISDPDesktop
             lblUsername.Text = employee.username;
             lblLocation.Text = employee.siteName;
 
+            //set the default tab control on form load to the admin tab - for now
+            //NOTE: will likely update this in sprint 2 or 3
+            tabControlDashboard.SelectedTab = tabAdmin;
+
             //get the employee's user permissions
             UserPermission employeeUserPermissions = UserPermissionAccessor.GetOneEmployeeUserPermissions(employee.employeeID);
 
@@ -68,6 +72,24 @@ namespace JeddoreISDPDesktop
 
             //open the user management form (modal)
             frmUserManagement.ShowDialog();
+        }
+
+        private void btnSetUserPermissions_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the user permissions form
+            UserPermissions frmUserPermissions = new UserPermissions(employee);
+
+            //open the user management form (modal)
+            frmUserPermissions.ShowDialog();
+        }
+
+        private void btnEditItem_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the item management form
+            ItemManagement frmItemManagement = new ItemManagement(employee);
+
+            //open the item management form (modal)
+            frmItemManagement.ShowDialog();
         }
     }
 }

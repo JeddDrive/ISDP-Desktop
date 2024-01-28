@@ -63,7 +63,6 @@ namespace JeddoreISDPDesktop.DAO_Classes
                 MessageBox.Show(ex.Message, "Error Getting the Password Salt");
 
                 connection.Close();
-
             }
 
             //return the employee
