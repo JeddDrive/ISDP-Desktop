@@ -189,5 +189,11 @@ namespace JeddoreISDPDesktop.Entity_Classes
             //open the add/edit user form (modal)
             frmAddUser.ShowDialog();
         }
+
+        //timer should close this form after 20 minutes
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -71,11 +71,11 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.grpBtnsTwo = new System.Windows.Forms.GroupBox();
             this.btnSet = new System.Windows.Forms.Button();
-            this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.txtSearchUsers = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtSearchPermissions = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
             this.grpUsers.SuspendLayout();
@@ -490,12 +490,6 @@
             this.btnSet.UseVisualStyleBackColor = true;
             this.btnSet.Click += new System.EventHandler(this.btnSet_Click);
             // 
-            // directorySearcher1
-            // 
-            this.directorySearcher1.ClientTimeout = System.TimeSpan.Parse("-00:00:01");
-            this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
-            this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
-            // 
             // txtSearchUsers
             // 
             this.txtSearchUsers.Enabled = false;
@@ -513,7 +507,6 @@
             this.label4.Size = new System.Drawing.Size(77, 28);
             this.label4.TabIndex = 47;
             this.label4.Text = "Search:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -532,6 +525,12 @@
             this.txtSearchPermissions.Size = new System.Drawing.Size(331, 34);
             this.txtSearchPermissions.TabIndex = 1;
             this.txtSearchPermissions.TextChanged += new System.EventHandler(this.txtSearchPermissions_TextChanged);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1200000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // UserPermissions
             // 
@@ -624,10 +623,10 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.GroupBox grpBtnsTwo;
         private System.Windows.Forms.Button btnSet;
-        private System.DirectoryServices.DirectorySearcher directorySearcher1;
         private System.Windows.Forms.TextBox txtSearchUsers;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtSearchPermissions;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEditUser));
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.lblLocation = new System.Windows.Forms.Label();
@@ -56,6 +57,7 @@
             this.picEyeHide = new System.Windows.Forms.PictureBox();
             this.txtUsername2 = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             this.grpBasic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picEyeShow)).BeginInit();
@@ -241,6 +243,7 @@
             // 
             // txtPassword
             // 
+            this.txtPassword.Enabled = false;
             this.txtPassword.Location = new System.Drawing.Point(176, 241);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -270,9 +273,9 @@
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkActive.Location = new System.Drawing.Point(468, 178);
             this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(89, 32);
+            this.chkActive.Size = new System.Drawing.Size(136, 32);
             this.chkActive.TabIndex = 44;
-            this.chkActive.Text = "Active";
+            this.chkActive.Text = "Active User";
             this.chkActive.UseVisualStyleBackColor = true;
             // 
             // picEyeShow
@@ -313,6 +316,12 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(274, 34);
             this.txtEmail.TabIndex = 48;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1200000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // AddEditUser
             // 
@@ -391,5 +400,6 @@
         private System.Windows.Forms.PictureBox picEyeHide;
         private System.Windows.Forms.TextBox txtUsername2;
         private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -16,6 +16,7 @@
         public int supplierID { get; set; }
         public byte active { get; set; }
         public string notes { get; set; }
+        public string imageFileLocation { get; set; }
 
         //default constructor - does nothing
         public Item() { }
@@ -23,7 +24,7 @@
         //custom constructor - everything sent in
         public Item(int inItemID, string inName, string inSku, string inDescription, string inCategory,
             decimal inWeight, int inCaseSize, decimal inCostPrice, decimal inRetailPrice,
-            int inSupplierID, byte inActive, string inNotes)
+            int inSupplierID, byte inActive, string inNotes, string inImageFileLocation)
         {
             itemID = inItemID;
             name = inName;
@@ -37,6 +38,7 @@
             supplierID = inSupplierID;
             active = inActive;
             notes = inNotes;
+            imageFileLocation = inImageFileLocation;
         }
     }
 }

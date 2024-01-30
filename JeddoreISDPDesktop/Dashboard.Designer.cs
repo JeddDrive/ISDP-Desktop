@@ -47,6 +47,7 @@
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControlDashboard.SuspendLayout();
             this.tabInventory.SuspendLayout();
             this.tabAdmin.SuspendLayout();
@@ -220,6 +221,12 @@
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1200000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
@@ -270,5 +277,6 @@
         private System.Windows.Forms.Button btnEditItem;
         private System.Windows.Forms.Button btnSetUserPermissions;
         private System.Windows.Forms.ToolTip toolTipHelp;
+        private System.Windows.Forms.Timer timer1;
     }
 }

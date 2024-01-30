@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditItem));
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.lblLocation = new System.Windows.Forms.Label();
@@ -54,14 +55,20 @@
             this.lblCategory = new System.Windows.Forms.Label();
             this.lblCostPrice = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblRetailPrice = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.lblSupplierID = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtNotes = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnAddImageLink = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.picItemImage = new System.Windows.Forms.PictureBox();
+            this.txtImageFileLocation = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             this.grpBasic.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picItemImage)).BeginInit();
             this.SuspendLayout();
             // 
             // picBullseye
@@ -113,19 +120,19 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(451, 180);
+            this.chkActive.Location = new System.Drawing.Point(591, 184);
             this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(89, 32);
-            this.chkActive.TabIndex = 62;
-            this.chkActive.Text = "Active";
+            this.chkActive.Size = new System.Drawing.Size(137, 32);
+            this.chkActive.TabIndex = 2;
+            this.chkActive.Text = "Active Item";
             this.chkActive.UseVisualStyleBackColor = true;
             // 
             // txtDescription
             // 
             this.txtDescription.Location = new System.Drawing.Point(159, 302);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(274, 34);
-            this.txtDescription.TabIndex = 50;
+            this.txtDescription.Size = new System.Drawing.Size(392, 34);
+            this.txtDescription.TabIndex = 0;
             // 
             // lblItemID
             // 
@@ -202,32 +209,34 @@
             // 
             // grpBasic
             // 
+            this.grpBasic.Controls.Add(this.btnAddImageLink);
             this.grpBasic.Controls.Add(this.btnSave);
             this.grpBasic.Controls.Add(this.btnCancel);
-            this.grpBasic.Location = new System.Drawing.Point(420, 575);
+            this.grpBasic.Location = new System.Drawing.Point(451, 575);
             this.grpBasic.Name = "grpBasic";
-            this.grpBasic.Size = new System.Drawing.Size(200, 191);
+            this.grpBasic.Size = new System.Drawing.Size(319, 191);
             this.grpBasic.TabIndex = 53;
             this.grpBasic.TabStop = false;
             // 
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(29, 33);
+            this.btnSave.Location = new System.Drawing.Point(6, 33);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(147, 63);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(29, 113);
+            this.btnCancel.Location = new System.Drawing.Point(6, 121);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(147, 63);
-            this.btnCancel.TabIndex = 1;
+            this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -248,7 +257,7 @@
             this.lblName.Enabled = false;
             this.lblName.Location = new System.Drawing.Point(159, 184);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(274, 34);
+            this.lblName.Size = new System.Drawing.Size(392, 34);
             this.lblName.TabIndex = 68;
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -301,15 +310,15 @@
             this.label11.TabIndex = 72;
             this.label11.Text = "Cost Price:";
             // 
-            // label10
+            // lblRetailPrice
             // 
-            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label10.Enabled = false;
-            this.label10.Location = new System.Drawing.Point(159, 597);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(133, 34);
-            this.label10.TabIndex = 75;
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblRetailPrice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblRetailPrice.Enabled = false;
+            this.lblRetailPrice.Location = new System.Drawing.Point(159, 597);
+            this.lblRetailPrice.Name = "lblRetailPrice";
+            this.lblRetailPrice.Size = new System.Drawing.Size(133, 34);
+            this.lblRetailPrice.TabIndex = 75;
+            this.lblRetailPrice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label12
             // 
@@ -339,13 +348,13 @@
             this.label14.TabIndex = 76;
             this.label14.Text = "Supplier ID:";
             // 
-            // textBox1
+            // txtNotes
             // 
-            this.textBox1.Location = new System.Drawing.Point(159, 715);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(245, 51);
-            this.textBox1.TabIndex = 78;
+            this.txtNotes.Location = new System.Drawing.Point(159, 715);
+            this.txtNotes.Multiline = true;
+            this.txtNotes.Name = "txtNotes";
+            this.txtNotes.Size = new System.Drawing.Size(274, 51);
+            this.txtNotes.TabIndex = 1;
             // 
             // label13
             // 
@@ -356,18 +365,66 @@
             this.label13.TabIndex = 79;
             this.label13.Text = "Notes:";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1200000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // btnAddImageLink
+            // 
+            this.btnAddImageLink.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
+            this.btnAddImageLink.Location = new System.Drawing.Point(166, 33);
+            this.btnAddImageLink.Name = "btnAddImageLink";
+            this.btnAddImageLink.Size = new System.Drawing.Size(147, 63);
+            this.btnAddImageLink.TabIndex = 1;
+            this.btnAddImageLink.Text = "&Add Image Link";
+            this.btnAddImageLink.UseVisualStyleBackColor = true;
+            this.btnAddImageLink.Click += new System.EventHandler(this.btnAddImageLink_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(357, 423);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(194, 28);
+            this.label10.TabIndex = 80;
+            this.label10.Text = "Image File Location:";
+            // 
+            // picItemImage
+            // 
+            this.picItemImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.picItemImage.Location = new System.Drawing.Point(569, 233);
+            this.picItemImage.Name = "picItemImage";
+            this.picItemImage.Size = new System.Drawing.Size(195, 198);
+            this.picItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picItemImage.TabIndex = 82;
+            this.picItemImage.TabStop = false;
+            // 
+            // txtImageFileLocation
+            // 
+            this.txtImageFileLocation.Enabled = false;
+            this.txtImageFileLocation.Location = new System.Drawing.Point(362, 462);
+            this.txtImageFileLocation.Multiline = true;
+            this.txtImageFileLocation.Name = "txtImageFileLocation";
+            this.txtImageFileLocation.Size = new System.Drawing.Size(402, 93);
+            this.txtImageFileLocation.TabIndex = 83;
+            // 
             // EditItem
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(632, 778);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(782, 778);
+            this.Controls.Add(this.txtImageFileLocation);
+            this.Controls.Add(this.picItemImage);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.txtNotes);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.lblSupplierID);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lblRetailPrice);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.lblCostPrice);
             this.Controls.Add(this.label11);
@@ -402,6 +459,7 @@
             this.Load += new System.EventHandler(this.EditItem_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             this.grpBasic.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picItemImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,11 +492,16 @@
         private System.Windows.Forms.Label lblCategory;
         private System.Windows.Forms.Label lblCostPrice;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblRetailPrice;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblSupplierID;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btnAddImageLink;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.PictureBox picItemImage;
+        private System.Windows.Forms.TextBox txtImageFileLocation;
     }
 }

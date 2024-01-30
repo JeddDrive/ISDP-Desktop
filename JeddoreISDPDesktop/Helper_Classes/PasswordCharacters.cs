@@ -34,6 +34,7 @@ namespace JeddoreISDPDesktop.Helper_Classes
             picShow.BringToFront();
         }
 
+        //method for validating passwords
         public static bool ValidatePassword(string password, out string errorMessage)
         {
             //variables, including a bool to be returned

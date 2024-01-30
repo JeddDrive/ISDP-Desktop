@@ -63,8 +63,11 @@ namespace JeddoreISDPDesktop
             //if employee to be edited is null - so are adding a user
             if (employeeEdit == null)
             {
-                //focus on the top txtbox for adding (password)
-                txtPassword.Focus();
+                //put the default password in the disabled txtbox for password
+                txtPassword.Text = "P@ssw0rd-";
+
+                //focus on the top txtbox for adding (first name)
+                txtFirstName.Focus();
 
                 //get the last employee in the DB
                 //we want to get the employee with the highest current employee ID
@@ -89,6 +92,9 @@ namespace JeddoreISDPDesktop
                 txtUsername2.Enabled = true;
                 txtEmail.Enabled = true;
                 cboLocation.SelectedIndex = employeeEdit.siteID - 1;
+
+                //enable the password txtbox
+                txtPassword.Enabled = true;
 
                 //for now - are putting the hashed password in that textbox
                 //NOTE: may remove this later
@@ -437,6 +443,12 @@ namespace JeddoreISDPDesktop
                     }
                 }
             }
+        }
+
+        //timer should close this form after 20 minutes
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -118,16 +118,22 @@ add column loginAttempts tinyint NOT NULL Default 3;
 -- prompting them to changing the default password if not
 -- using tinyint here too
 alter table `employee`
-add column madeFirstLogin tinyint NOT NULL Default 0; 
+add column madeFirstLogin tinyint(1) NOT NULL Default 0; 
 
 -- alter user_permission table - adding the hasPermission column
 -- to track if each employee has permission for that respective permission
 -- using tinyint here too
 alter table `user_permission`
-add column hasPermission tinyint NOT NULL Default 0; 
+add column hasPermission tinyint(1) NOT NULL Default 0;
+
+-- alter item table - adding the Image file location
+-- to track the file location for an item's image
+alter table `item`
+add column imageFileLocation varchar(200) DEFAULT NULL;
 
 -- alter user_permission table - so that all default users of the system have READUSER access
 -- the admin user (number 1) already has this but the others do not
+-- also are giving EDITITEM access to the warehouse manager, cpatstone
 INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) VALUES
 (2, 'READUSER', 1),
 (1000, 'READUSER', 1),
@@ -143,7 +149,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1010, 'READUSER', 1),
 (1012, 'READUSER', 1),
 (1013, 'READUSER', 1),
-(1014, 'READUSER', 1);
+(1014, 'READUSER', 1),
+(1003, 'EDITITEM', 1);
 
 -- for all records currently in the user_permission table, set hasPermission to 1
 -- since all admin records in this table right now are all permissions that the admin user should have
@@ -274,7 +281,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'VIEWORDERS', 0),
 (1003, 'DELETELOCATION', 0),
 (1003, 'EDITINVENTORY', 0),
-(1003, 'EDITITEM', 0),
 (1003, 'DELIVERY', 0),
 (1003, 'ACCEPTSTOREORDER', 0),
 (1003, 'MODIFYRECORD', 0),

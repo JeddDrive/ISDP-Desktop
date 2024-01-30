@@ -18,9 +18,9 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static MySqlConnection connection = new MySqlConnection(connString);
 
         //SQL statements for the PasswordSalt entity
-        private static string selectAllStatement = "select itemID, name, sku, IFNULL(description, '') AS description, category, weight, caseSize, costPrice, retailPrice, supplierID, active, IFNULL(notes, '') AS notes from item order by itemID";
-        private static string selectOneStatement = "select itemID, name, sku, IFNULL(description, '') AS description, category, weight, caseSize, costPrice, retailPrice, supplierID, active, IFNULL(notes, '') AS notes from item where itemID = @itemID";
-        private static string updateItemStatement = "update item set active = @active, description = @description, notes = @notes where itemID = @itemID";
+        private static string selectAllStatement = "select itemID, name, sku, IFNULL(description, '') AS description, category, weight, caseSize, costPrice, retailPrice, supplierID, active, IFNULL(notes, '') AS notes, IFNULL(imageFileLocation, '') AS imageFileLocation from item order by itemID";
+        private static string selectOneStatement = "select itemID, name, sku, IFNULL(description, '') AS description, category, weight, caseSize, costPrice, retailPrice, supplierID, active, IFNULL(notes, '') AS notes, IFNULL(imageFileLocation, '') AS imageFileLocation from item where itemID = @itemID";
+        private static string updateItemStatement = "update item set active = @active, description = @description, notes = @notes, imageFileLocation = @imageFileLocation where itemID = @itemID";
 
         /**
         * Get all of the items.
@@ -96,10 +96,12 @@ namespace JeddoreISDPDesktop.DAO_Classes
                     int supplierID = reader.GetInt32("supplierID");
                     byte active = reader.GetByte("active");
                     string notes = reader.GetString("notes");
+                    string imageFileLocation = reader.GetString("imageFileLocation");
 
                     //create an item object
                     Item item = new Item(itemID, name, sku, description, category, weight,
-                        caseSize, costPrice, retailPrice, supplierID, active, notes);
+                        caseSize, costPrice, retailPrice, supplierID, active, notes,
+                        imageFileLocation);
 
                     //add to the list
                     itemsList.Add(item);
@@ -161,10 +163,12 @@ namespace JeddoreISDPDesktop.DAO_Classes
                     int supplierID = reader.GetInt32("supplierID");
                     byte active = reader.GetByte("active");
                     string notes = reader.GetString("notes");
+                    string imageFileLocation = reader.GetString("imageFileLocation");
 
                     //create an item object
                     item = new Item(itemID, name, sku, description, category, weight,
-                        caseSize, costPrice, retailPrice, supplierID, active, notes);
+                        caseSize, costPrice, retailPrice, supplierID, active, notes,
+                        imageFileLocation);
                 }
 
                 //close reader after if statement
@@ -200,6 +204,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             cmd.Parameters.AddWithValue("@active", item.active);
             cmd.Parameters.AddWithValue("@description", item.description);
             cmd.Parameters.AddWithValue("@notes", item.notes);
+            cmd.Parameters.AddWithValue("@imageFileLocation", item.imageFileLocation);
             cmd.Parameters.AddWithValue("@itemID", item.itemID);
 
             //variable for rowCount

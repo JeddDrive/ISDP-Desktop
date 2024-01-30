@@ -73,6 +73,7 @@ namespace JeddoreISDPDesktop
             dgvItems.Columns["supplierID"].HeaderText = "Supplier ID";
             dgvItems.Columns["active"].HeaderText = "Active";
             dgvItems.Columns["notes"].HeaderText = "Notes";
+            dgvItems.Columns["imageFileLocation"].HeaderText = "Image Location";
 
             dgvItems.Refresh();
 
@@ -171,6 +172,12 @@ namespace JeddoreISDPDesktop
                 //open the add/edit user form (modal)
                 frmEditItem.ShowDialog();
             }
+        }
+
+        //timer should close this form after 20 minutes
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

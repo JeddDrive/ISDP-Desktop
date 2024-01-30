@@ -59,6 +59,7 @@
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.grpBasic.SuspendLayout();
             this.grpUserManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
@@ -354,6 +355,12 @@
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1200000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // UserManagement
             // 
             this.AcceptButton = this.btnAddUser;
@@ -424,5 +431,6 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
+        private System.Windows.Forms.Timer timer1;
     }
 }

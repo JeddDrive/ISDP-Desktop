@@ -312,9 +312,10 @@ namespace JeddoreISDPDesktop
             }
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        //timer should close this form after 20 minutes
+        private void timer1_Tick(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }
