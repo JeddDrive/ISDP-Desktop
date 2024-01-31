@@ -51,7 +51,8 @@ namespace JeddoreISDPDesktop.Entity_Classes
 
         private void picHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is the user management page. You can read, add, edit, and delete users from here.", "User Management Help");
+            MessageBox.Show("This is the user management page. You can read, add, edit, and delete users from here." +
+                "\n\nClick on the 'refresh' button to load the data grid.", "User Management Help");
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -112,6 +113,9 @@ namespace JeddoreISDPDesktop.Entity_Classes
             {
                 MessageBox.Show("Must select one row from the data grid in order to remove that selected user.",
                     "Remove User Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                //clear all selected rows from the dgv
+                dgvUsers.ClearSelection();
             }
 
             //else - 1 row is selected
@@ -153,6 +157,9 @@ namespace JeddoreISDPDesktop.Entity_Classes
             {
                 MessageBox.Show("Must select one row from the data grid in order to edit your selected user.",
                     "Edit User Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                //clear all selected rows from the dgv
+                dgvUsers.ClearSelection();
             }
 
             //else - 1 employee row is selected

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace JeddoreISDPDesktop.DAO_Classes
 {
-    //DAO static class for Employee
+    //DAO static class for Item
     public static class ItemAccessor
     {
         //private static connection string
@@ -17,7 +17,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         //create a connection
         private static MySqlConnection connection = new MySqlConnection(connString);
 
-        //SQL statements for the PasswordSalt entity
+        //SQL statements for the Item entity
         private static string selectAllStatement = "select itemID, name, sku, IFNULL(description, '') AS description, category, weight, caseSize, costPrice, retailPrice, supplierID, active, IFNULL(notes, '') AS notes, IFNULL(imageFileLocation, '') AS imageFileLocation from item order by itemID";
         private static string selectOneStatement = "select itemID, name, sku, IFNULL(description, '') AS description, category, weight, caseSize, costPrice, retailPrice, supplierID, active, IFNULL(notes, '') AS notes, IFNULL(imageFileLocation, '') AS imageFileLocation from item where itemID = @itemID";
         private static string updateItemStatement = "update item set active = @active, description = @description, notes = @notes, imageFileLocation = @imageFileLocation where itemID = @itemID";

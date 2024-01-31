@@ -17,7 +17,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         //create a connection
         private static MySqlConnection connection = new MySqlConnection(connString);
 
-        //SQL statements for the Employee entity
+        //SQL statements for the UserPermission entity
         private static string selectOneEmployeeUserPermissionsStatement = "select * from user_permission where employeeID = @employeeID and hasPermission = 1";
         private static string selectOneEmployeeUserPermissionsAllStatement = "select * from user_permission where employeeID = @employeeID";
         private static string addUserPermissionStatement = "update user_permission set hasPermission = 1 where employeeID = @employeeID and permissionID =  @permissionID";

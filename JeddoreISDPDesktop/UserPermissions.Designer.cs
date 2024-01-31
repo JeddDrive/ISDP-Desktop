@@ -112,7 +112,7 @@
             // lblLocation
             // 
             this.lblLocation.AutoSize = true;
-            this.lblLocation.Location = new System.Drawing.Point(268, 69);
+            this.lblLocation.Location = new System.Drawing.Point(263, 69);
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(0, 28);
             this.lblLocation.TabIndex = 37;
@@ -160,7 +160,7 @@
             this.grpUsers.Controls.Add(this.dgvUsers);
             this.grpUsers.Location = new System.Drawing.Point(9, 203);
             this.grpUsers.Name = "grpUsers";
-            this.grpUsers.Size = new System.Drawing.Size(598, 351);
+            this.grpUsers.Size = new System.Drawing.Size(614, 351);
             this.grpUsers.TabIndex = 41;
             this.grpUsers.TabStop = false;
             // 
@@ -189,7 +189,7 @@
             this.bindingNavigator1.MovePreviousItem = this.toolStripButton2;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.toolStripTextBox1;
-            this.bindingNavigator1.Size = new System.Drawing.Size(592, 27);
+            this.bindingNavigator1.Size = new System.Drawing.Size(608, 27);
             this.bindingNavigator1.TabIndex = 34;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -292,7 +292,7 @@
             this.dgvUsers.RowHeadersWidth = 51;
             this.dgvUsers.RowTemplate.Height = 24;
             this.dgvUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsers.Size = new System.Drawing.Size(588, 278);
+            this.dgvUsers.Size = new System.Drawing.Size(604, 278);
             this.dgvUsers.TabIndex = 33;
             this.dgvUsers.SelectionChanged += new System.EventHandler(this.dgvUsers_SelectionChanged);
             // 
@@ -300,9 +300,9 @@
             // 
             this.grpUserPermissions.Controls.Add(this.bindingNavigator2);
             this.grpUserPermissions.Controls.Add(this.dgvUserPermissions);
-            this.grpUserPermissions.Location = new System.Drawing.Point(629, 203);
+            this.grpUserPermissions.Location = new System.Drawing.Point(643, 203);
             this.grpUserPermissions.Name = "grpUserPermissions";
-            this.grpUserPermissions.Size = new System.Drawing.Size(441, 351);
+            this.grpUserPermissions.Size = new System.Drawing.Size(427, 351);
             this.grpUserPermissions.TabIndex = 42;
             this.grpUserPermissions.TabStop = false;
             // 
@@ -331,7 +331,7 @@
             this.bindingNavigator2.MovePreviousItem = this.toolStripButton8;
             this.bindingNavigator2.Name = "bindingNavigator2";
             this.bindingNavigator2.PositionItem = this.toolStripTextBox2;
-            this.bindingNavigator2.Size = new System.Drawing.Size(435, 27);
+            this.bindingNavigator2.Size = new System.Drawing.Size(421, 27);
             this.bindingNavigator2.TabIndex = 34;
             this.bindingNavigator2.Text = "bindingNavigator2";
             // 
@@ -434,7 +434,7 @@
             this.dgvUserPermissions.RowHeadersWidth = 51;
             this.dgvUserPermissions.RowTemplate.Height = 24;
             this.dgvUserPermissions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUserPermissions.Size = new System.Drawing.Size(432, 278);
+            this.dgvUserPermissions.Size = new System.Drawing.Size(413, 278);
             this.dgvUserPermissions.TabIndex = 33;
             // 
             // grpBasic
@@ -493,7 +493,7 @@
             // txtSearchUsers
             // 
             this.txtSearchUsers.Enabled = false;
-            this.txtSearchUsers.Location = new System.Drawing.Point(87, 166);
+            this.txtSearchUsers.Location = new System.Drawing.Point(84, 166);
             this.txtSearchUsers.Name = "txtSearchUsers";
             this.txtSearchUsers.Size = new System.Drawing.Size(331, 34);
             this.txtSearchUsers.TabIndex = 0;
@@ -502,7 +502,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 166);
+            this.label4.Location = new System.Drawing.Point(10, 166);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 28);
             this.label4.TabIndex = 47;
@@ -511,7 +511,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(577, 166);
+            this.label5.Location = new System.Drawing.Point(658, 166);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 28);
             this.label5.TabIndex = 49;
@@ -520,7 +520,7 @@
             // txtSearchPermissions
             // 
             this.txtSearchPermissions.Enabled = false;
-            this.txtSearchPermissions.Location = new System.Drawing.Point(660, 163);
+            this.txtSearchPermissions.Location = new System.Drawing.Point(733, 163);
             this.txtSearchPermissions.Name = "txtSearchPermissions";
             this.txtSearchPermissions.Size = new System.Drawing.Size(331, 34);
             this.txtSearchPermissions.TabIndex = 1;

@@ -77,7 +77,7 @@
             // lblLocation
             // 
             this.lblLocation.AutoSize = true;
-            this.lblLocation.Location = new System.Drawing.Point(269, 70);
+            this.lblLocation.Location = new System.Drawing.Point(264, 70);
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(0, 28);
             this.lblLocation.TabIndex = 30;

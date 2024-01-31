@@ -276,7 +276,7 @@
             // lblLocation
             // 
             this.lblLocation.AutoSize = true;
-            this.lblLocation.Location = new System.Drawing.Point(268, 69);
+            this.lblLocation.Location = new System.Drawing.Point(263, 69);
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(0, 28);
             this.lblLocation.TabIndex = 51;
@@ -319,7 +319,7 @@
             // txtSearchItems
             // 
             this.txtSearchItems.Enabled = false;
-            this.txtSearchItems.Location = new System.Drawing.Point(86, 160);
+            this.txtSearchItems.Location = new System.Drawing.Point(85, 160);
             this.txtSearchItems.Name = "txtSearchItems";
             this.txtSearchItems.Size = new System.Drawing.Size(331, 34);
             this.txtSearchItems.TabIndex = 54;

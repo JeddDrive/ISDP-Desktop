@@ -29,7 +29,8 @@ namespace JeddoreISDPDesktop
 
         private void picHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is the user permissions page. You can add and remove individual user permissions from here.", "User Permissions Help");
+            MessageBox.Show("This is the user permissions page. You can add and remove individual user permissions from here." +
+                "\n\nClick on the 'refresh' button to load both data grids.", "User Permissions Help");
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -203,6 +204,9 @@ namespace JeddoreISDPDesktop
             {
                 MessageBox.Show("Must select one row from the data grid in order to add or remove that user permission.",
                     "Multiple Rows Selected Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                //clear all selected rows from the dgv
+                dgvUserPermissions.ClearSelection();
             }
 
             //else - is 1 row selected

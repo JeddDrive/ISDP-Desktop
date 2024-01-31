@@ -46,6 +46,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.grpBasic = new System.Windows.Forms.GroupBox();
+            this.btnAddImageLink = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblSKU = new System.Windows.Forms.Label();
@@ -62,7 +63,6 @@
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnAddImageLink = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.picItemImage = new System.Windows.Forms.PictureBox();
             this.txtImageFileLocation = new System.Windows.Forms.TextBox();
@@ -84,7 +84,7 @@
             // lblLocation
             // 
             this.lblLocation.AutoSize = true;
-            this.lblLocation.Location = new System.Drawing.Point(269, 69);
+            this.lblLocation.Location = new System.Drawing.Point(264, 69);
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(0, 28);
             this.lblLocation.TabIndex = 35;
@@ -217,6 +217,17 @@
             this.grpBasic.Size = new System.Drawing.Size(319, 191);
             this.grpBasic.TabIndex = 53;
             this.grpBasic.TabStop = false;
+            // 
+            // btnAddImageLink
+            // 
+            this.btnAddImageLink.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
+            this.btnAddImageLink.Location = new System.Drawing.Point(166, 33);
+            this.btnAddImageLink.Name = "btnAddImageLink";
+            this.btnAddImageLink.Size = new System.Drawing.Size(147, 63);
+            this.btnAddImageLink.TabIndex = 1;
+            this.btnAddImageLink.Text = "&Add Image Link";
+            this.btnAddImageLink.UseVisualStyleBackColor = true;
+            this.btnAddImageLink.Click += new System.EventHandler(this.btnAddImageLink_Click);
             // 
             // btnSave
             // 
@@ -370,17 +381,6 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 1200000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnAddImageLink
-            // 
-            this.btnAddImageLink.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
-            this.btnAddImageLink.Location = new System.Drawing.Point(166, 33);
-            this.btnAddImageLink.Name = "btnAddImageLink";
-            this.btnAddImageLink.Size = new System.Drawing.Size(147, 63);
-            this.btnAddImageLink.TabIndex = 1;
-            this.btnAddImageLink.Text = "&Add Image Link";
-            this.btnAddImageLink.UseVisualStyleBackColor = true;
-            this.btnAddImageLink.Click += new System.EventHandler(this.btnAddImageLink_Click);
             // 
             // label10
             // 

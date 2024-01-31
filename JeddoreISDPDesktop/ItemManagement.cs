@@ -24,7 +24,8 @@ namespace JeddoreISDPDesktop
 
         private void picHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is the item management page. You can read and edit items from here.", "Item Management Help");
+            MessageBox.Show("This is the item management page. You can read and edit items from here." +
+                "\n\nClick on the 'refresh' button to load the data grid.", "Item Management Help");
         }
 
         private void ItemManagement_Load(object sender, EventArgs e)
@@ -152,6 +153,9 @@ namespace JeddoreISDPDesktop
             {
                 MessageBox.Show("Must select one row from the data grid in order to edit your selected item.",
                     "Edit Item Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                //clear all selected rows from the dgv
+                dgvItems.ClearSelection();
             }
 
             //else - 1 employee row is selected

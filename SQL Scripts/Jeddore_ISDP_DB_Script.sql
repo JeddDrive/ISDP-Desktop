@@ -129,7 +129,7 @@ add column hasPermission tinyint(1) NOT NULL Default 0;
 -- alter item table - adding the Image file location
 -- to track the file location for an item's image
 alter table `item`
-add column imageFileLocation varchar(200) DEFAULT NULL;
+add column imageFileLocation varchar(255) DEFAULT NULL;
 
 -- alter user_permission table - so that all default users of the system have READUSER access
 -- the admin user (number 1) already has this but the others do not
@@ -565,14 +565,14 @@ BEGIN
 	-- inserting the siteIDTo (destination site) then
     IF OLD.status <> new.status and (new.status = "Complete" or new.status = "Delivered") THEN
         INSERT INTO txnaudit(txnID, txnType, status, txnDate, SiteID, deliveryID, notes)
-        VALUES(new.txnID, new.txnType, new.status, NOW(), new.SiteIDTo, new.deliveryID, new.notes);
+        VALUES (new.txnID, new.txnType, new.status, NOW(), new.SiteIDTo, new.deliveryID, new.notes);
 	
 	-- else if - the new status doesn't equal the old status and 
 	-- if the new status is NOT complete or delivered
 	-- inserting the siteIDFrom (starting site) then
     ELSEIF OLD.status <> new.status and (new.status <> "Complete" or new.status <> "Delivered") THEN
         INSERT INTO txnaudit(txnID, txnType, status, txnDate, SiteID, deliveryID, notes)
-        VALUES(new.txnID, new.txnType, new.status, NOW(), new.SiteIDFrom, new.deliveryID, new.notes);
+        VALUES (new.txnID, new.txnType, new.status, NOW(), new.SiteIDFrom, new.deliveryID, new.notes);
 	END IF;
 	
 END$$
@@ -590,7 +590,52 @@ BEGIN
 
 -- insert into the txnaudit table
 INSERT INTO txnaudit(txnID, txnType, status, txnDate, SiteID, deliveryID, notes)
-VALUES(new.txnID, new.txnType, new.status, NOW(), new.SiteIDFrom, new.deliveryID, new.notes);
+VALUES (new.txnID, new.txnType, new.status, NOW(), new.SiteIDFrom, new.deliveryID, new.notes);
+	
+END$$
+
+DELIMITER ;
+
+-- Trigger #3 - when inserting new users/employees into the DB
+-- after INSERTs on the employee table
+DELIMITER $$
+
+CREATE TRIGGER afterEmployeeInsert
+AFTER INSERT
+ON employee FOR EACH ROW
+BEGIN
+
+-- insert into the user_permission table
+-- new user(s) will automatically have the following permissions turned on:
+-- READUSER
+INSERT INTO user_permission(employeeID, permissionID, hasPermission)
+VALUES (new.employeeID, 'ADDUSER', 0),
+(new.employeeID, 'EDITUSER', 0),
+(new.employeeID, 'DELETEUSER', 0),
+(new.employeeID, 'READUSER', 1),
+(new.employeeID, 'SETPERMISSION', 0),
+(new.employeeID, 'MOVEINVENTORY', 0),
+(new.employeeID, 'CREATESTOREORDER', 0),
+(new.employeeID, 'RECEIVESTOREORDER', 0),
+(new.employeeID, 'PREPARESTOREORDER', 0),
+(new.employeeID, 'FULFILSTOREORDER', 0),
+(new.employeeID, 'ADDITEMTOBACKORDER', 0),
+(new.employeeID, 'CREATEBACKORDER', 0),
+(new.employeeID, 'EDITSITE', 0),
+(new.employeeID, 'ADDSITE', 0),
+(new.employeeID, 'VIEWORDERS', 0),
+(new.employeeID, 'DELETELOCATION', 0),
+(new.employeeID, 'EDITINVENTORY', 0),
+(new.employeeID, 'EDITITEM', 0),
+(new.employeeID, 'DELIVERY', 0),
+(new.employeeID, 'ACCEPTSTOREORDER', 0),
+(new.employeeID, 'MODIFYRECORD', 0),
+(new.employeeID, 'CREATELOSS', 0),
+(new.employeeID, 'PROCESSRETURN', 0),
+(new.employeeID, 'ADDNEWPRODUCT', 0),
+(new.employeeID, 'EDITPRODUCT', 0),
+(new.employeeID, 'CREATESUPPLIERORDER', 0),
+(new.employeeID, 'CREATEREPORT', 0);
 	
 END$$
 

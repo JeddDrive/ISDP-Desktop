@@ -139,7 +139,8 @@ namespace JeddoreISDPDesktop.DAO_Classes
         /**
         * Gets one employee, based on the username.
         *
-        * @return an Employee, possibly null if none found based on the username.
+        * @param string username
+        * @return an Employee object, possibly null if none found based on the username.
         */
         public static Employee GetOneEmployee(string usernameSentIn)
         {
@@ -195,7 +196,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Getting the One Employee");
+                MessageBox.Show(ex.Message, "Error Getting That Employee");
 
                 connection.Close();
             }

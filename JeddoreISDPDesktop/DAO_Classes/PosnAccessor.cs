@@ -16,7 +16,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         //create a connection
         private static MySqlConnection connection = new MySqlConnection(connString);
 
-        //SQL statements for the PasswordSalt entity
+        //SQL statements for the Posn entity
         private static string selectAllStatement = "select * from posn";
         private static string selectOneStatement = "select * from posn where positionID = @positionID";
 

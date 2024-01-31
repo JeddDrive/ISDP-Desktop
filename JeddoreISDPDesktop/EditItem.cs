@@ -26,7 +26,7 @@ namespace JeddoreISDPDesktop
             lblUsername.Text = employee.username;
             lblLocation.Text = employee.siteName;
 
-            //display/populate the item labels
+            //display/populate the item labels and textboxes
             lblItemID.Text = item.itemID.ToString();
             lblName.Text = item.name;
             lblSKU.Text = item.sku;
@@ -137,7 +137,7 @@ namespace JeddoreISDPDesktop
 
             var codecs = ImageCodecInfo.GetImageEncoders();
 
-            //want to set a filter - for valid image file extensions ONLY
+            //want to set a filter - for valid image file extensions only
             var codecFilter = "Image Files|";
 
             //foreach loop to get valid image codecs/file extensions
