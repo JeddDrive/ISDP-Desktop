@@ -373,11 +373,13 @@
             this.Controls.Add(this.grpBasic);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ItemManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bullseye Inventory Management System - Item Management";
             this.Load += new System.EventHandler(this.ItemManagement_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ItemManagement_KeyDown);
             this.grpItems.ResumeLayout(false);
             this.grpItems.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).EndInit();

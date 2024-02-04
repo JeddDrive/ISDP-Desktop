@@ -30,7 +30,8 @@ namespace JeddoreISDPDesktop
         private void picHelp_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This is the user permissions page. You can add and remove individual user permissions from here." +
-                "\n\nClick on the 'refresh' button to load both data grids.", "User Permissions Help");
+                "\n\nClick on the 'refresh' button to load both data grids.", "User Permissions Help"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -320,6 +321,17 @@ namespace JeddoreISDPDesktop
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void UserPermissions_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if the F1 key is pressed down
+            if (e.KeyCode == Keys.F1)
+            {
+                MessageBox.Show("This is the user permissions page. You can add and remove individual user permissions from here." +
+                "\n\nClick on the 'refresh' button to load both data grids.", "User Permissions Help"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

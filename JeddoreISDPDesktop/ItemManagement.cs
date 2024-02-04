@@ -25,7 +25,8 @@ namespace JeddoreISDPDesktop
         private void picHelp_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This is the item management page. You can read and edit items from here." +
-                "\n\nClick on the 'refresh' button to load the data grid.", "Item Management Help");
+                "\n\nClick on the 'refresh' button to load the items data grid.", "Item Management Help"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ItemManagement_Load(object sender, EventArgs e)
@@ -182,6 +183,17 @@ namespace JeddoreISDPDesktop
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ItemManagement_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if the F1 key is pressed down
+            if (e.KeyCode == Keys.F1)
+            {
+                MessageBox.Show("This is the item management page. You can read and edit items from here." +
+                "\n\nClick on the 'refresh' button to load the items data grid.", "Item Management Help"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

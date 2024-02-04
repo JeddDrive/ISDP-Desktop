@@ -19,7 +19,8 @@ namespace JeddoreISDPDesktop
         private void picHelp_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Welcome, you are now logged into the Bullseye dashboard. Click on a tab " +
-                "below, and then a button inside one of those tabs to do that specific task.", "Dashboard Help");
+                "below, and then a button inside one of those tabs to do that specific task.", "Dashboard Help"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -96,6 +97,17 @@ namespace JeddoreISDPDesktop
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Dashboard_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if the F1 key is pressed down
+            if (e.KeyCode == Keys.F1)
+            {
+                MessageBox.Show("Welcome, you are now logged into the Bullseye dashboard. Click on a tab " +
+               "below, and then a button inside one of those tabs to do that specific task.", "Dashboard Help"
+               , MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

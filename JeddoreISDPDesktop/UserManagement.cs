@@ -52,7 +52,8 @@ namespace JeddoreISDPDesktop.Entity_Classes
         private void picHelp_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This is the user management page. You can read, add, edit, and delete users from here." +
-                "\n\nClick on the 'refresh' button to load the data grid.", "User Management Help");
+                "\n\nClick on the 'refresh' button to load the users data grid.", "User Management Help"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -102,6 +103,9 @@ namespace JeddoreISDPDesktop.Entity_Classes
             dgvUsers.Columns["permissionLevel"].HeaderText = "Position";
 
             dgvUsers.Refresh();
+
+            //enable the textbox for user search
+            txtSearchUsers.Enabled = true;
         }
 
         private void btnDeleteUser_Click(object sender, EventArgs e)
@@ -201,6 +205,94 @@ namespace JeddoreISDPDesktop.Entity_Classes
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void UserManagement_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if the F1 key is pressed down
+            if (e.KeyCode == Keys.F1)
+            {
+                MessageBox.Show("This is the user management page. You can read, add, edit, and delete users from here." +
+                "\n\nClick on the 'refresh' button to load the users data grid.", "User Management Help"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void txtSearchUsers_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvUsers.DataSource];
+
+                foreach (DataGridViewRow row in dgvUsers.Rows)
+                {
+                    //get the cell values for the following columns
+                    var firstNameCellValue = row.Cells["firstName"].Value;
+                    var lastNameCellValue = row.Cells["lastName"].Value;
+                    var locationCellValue = row.Cells["name"].Value;
+                    var positionCellValue = row.Cells["permissionLevel"].Value;
+                    var employeeIDCellValue = row.Cells["employeeID"].Value;
+                    var usernameCellValue = row.Cells["username"].Value;
+
+                    //if txtbox is empty, then just show all the rows and continue
+                    if (txtSearchUsers.Text.Equals(""))
+                    {
+                        row.Visible = true;
+                        continue;
+                    }
+
+                    //if - first name cell converted to lower case contains the txtbox text
+                    if (firstNameCellValue != null && firstNameCellValue.ToString().ToLower().Contains(txtSearchUsers.Text))
+                    {
+                        row.Visible = true;
+                    }
+
+                    //else if - last name cell converted to lower case contains the txtbox text
+                    else if (lastNameCellValue != null && lastNameCellValue.ToString().ToLower().Contains(txtSearchUsers.Text))
+                    {
+                        row.Visible = true;
+                    }
+
+                    //else if - location name cell converted to lower case contains the txtbox text
+                    else if (locationCellValue != null && locationCellValue.ToString().ToLower().Contains(txtSearchUsers.Text))
+                    {
+                        row.Visible = true;
+                    }
+
+                    //else if - position cell converted to lower case contains the txtbox text
+                    else if (positionCellValue != null && positionCellValue.ToString().ToLower().Contains(txtSearchUsers.Text))
+                    {
+                        row.Visible = true;
+                    }
+
+                    //else if - employee ID cell converted to lower case contains the txtbox text
+                    else if (employeeIDCellValue != null && employeeIDCellValue.ToString().ToLower().Contains(txtSearchUsers.Text))
+                    {
+                        row.Visible = true;
+                    }
+
+                    //else if - username cell converted to lower case contains the txtbox text
+                    else if (usernameCellValue != null && usernameCellValue.ToString().ToLower().Contains(txtSearchUsers.Text))
+                    {
+                        row.Visible = true;
+                    }
+
+
+                    //else - no text contains match in any of the above cells then
+                    else
+                    {
+                        //need to suspend and resume binding before and after row visibilty is false
+                        //or else will get an error
+                        currencyManager1.SuspendBinding();
+                        row.Visible = false;
+                        currencyManager1.ResumeBinding();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

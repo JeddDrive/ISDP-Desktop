@@ -534,8 +534,10 @@
             // 
             // UserPermissions
             // 
+            this.AcceptButton = this.btnRefresh;
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(1082, 753);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtSearchPermissions);
@@ -554,11 +556,13 @@
             this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "UserPermissions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bullseye Inventory Management System - User Permissions";
             this.Load += new System.EventHandler(this.UserPermissions_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserPermissions_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             this.grpUsers.ResumeLayout(false);

@@ -60,6 +60,8 @@
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtSearchUsers = new System.Windows.Forms.TextBox();
             this.grpBasic.SuspendLayout();
             this.grpUserManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
@@ -144,7 +146,7 @@
             // 
             this.grpBasic.Controls.Add(this.btnRefresh);
             this.grpBasic.Controls.Add(this.btnExit);
-            this.grpBasic.Location = new System.Drawing.Point(12, 500);
+            this.grpBasic.Location = new System.Drawing.Point(12, 550);
             this.grpBasic.Name = "grpBasic";
             this.grpBasic.Size = new System.Drawing.Size(200, 191);
             this.grpBasic.TabIndex = 30;
@@ -166,7 +168,7 @@
             this.grpUserManagement.Controls.Add(this.btnEditUser);
             this.grpUserManagement.Controls.Add(this.btnDeleteUser);
             this.grpUserManagement.Controls.Add(this.btnAddUser);
-            this.grpUserManagement.Location = new System.Drawing.Point(608, 500);
+            this.grpUserManagement.Location = new System.Drawing.Point(618, 550);
             this.grpUserManagement.Name = "grpUserManagement";
             this.grpUserManagement.Size = new System.Drawing.Size(359, 191);
             this.grpUserManagement.TabIndex = 31;
@@ -211,7 +213,7 @@
             // 
             this.grpUsers.Controls.Add(this.bindingNavigator);
             this.grpUsers.Controls.Add(this.dgvUsers);
-            this.grpUsers.Location = new System.Drawing.Point(5, 151);
+            this.grpUsers.Location = new System.Drawing.Point(12, 193);
             this.grpUsers.Name = "grpUsers";
             this.grpUsers.Size = new System.Drawing.Size(965, 351);
             this.grpUsers.TabIndex = 35;
@@ -361,13 +363,33 @@
             this.timer1.Interval = 1200000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 161);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 28);
+            this.label4.TabIndex = 49;
+            this.label4.Text = "Search:";
+            // 
+            // txtSearchUsers
+            // 
+            this.txtSearchUsers.Enabled = false;
+            this.txtSearchUsers.Location = new System.Drawing.Point(86, 161);
+            this.txtSearchUsers.Name = "txtSearchUsers";
+            this.txtSearchUsers.Size = new System.Drawing.Size(331, 34);
+            this.txtSearchUsers.TabIndex = 48;
+            this.txtSearchUsers.TextChanged += new System.EventHandler(this.txtSearchUsers_TextChanged);
+            // 
             // UserManagement
             // 
             this.AcceptButton = this.btnAddUser;
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(982, 703);
+            this.ClientSize = new System.Drawing.Size(982, 753);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtSearchUsers);
             this.Controls.Add(this.grpUsers);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.grpUserManagement);
@@ -380,11 +402,13 @@
             this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "UserManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bullseye Inventory Management System - User Management";
             this.Load += new System.EventHandler(this.UserManagement_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserManagement_KeyDown);
             this.grpBasic.ResumeLayout(false);
             this.grpUserManagement.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
@@ -432,5 +456,7 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtSearchUsers;
     }
 }

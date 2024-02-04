@@ -28,7 +28,7 @@ namespace JeddoreISDPDesktop
 
         private void picHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Please enter a new password here, and ensure that that you confirm it before resetting.",
+            MessageBox.Show("Please enter a new password here, and ensure that that you confirm it before resetting it.",
                 "Password Reset Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -122,6 +122,16 @@ namespace JeddoreISDPDesktop
 
             //getting one employee based on the username
             employee = EmployeeAccessor.GetOneEmployee(username);
+        }
+
+        private void ResetPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if the F1 key is pressed down
+            if (e.KeyCode == Keys.F1)
+            {
+                MessageBox.Show("Please enter a new password here, and ensure that that you confirm it before resetting it.",
+               "Password Reset Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

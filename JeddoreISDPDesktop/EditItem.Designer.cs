@@ -46,7 +46,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.grpBasic = new System.Windows.Forms.GroupBox();
-            this.btnAddImageLink = new System.Windows.Forms.Button();
+            this.btnAddImage = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblSKU = new System.Windows.Forms.Label();
@@ -66,9 +66,12 @@
             this.label10 = new System.Windows.Forms.Label();
             this.picItemImage = new System.Windows.Forms.PictureBox();
             this.txtImageFileLocation = new System.Windows.Forms.TextBox();
+            this.picHelp = new System.Windows.Forms.PictureBox();
+            this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             this.grpBasic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picItemImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
             this.SuspendLayout();
             // 
             // picBullseye
@@ -209,7 +212,7 @@
             // 
             // grpBasic
             // 
-            this.grpBasic.Controls.Add(this.btnAddImageLink);
+            this.grpBasic.Controls.Add(this.btnAddImage);
             this.grpBasic.Controls.Add(this.btnSave);
             this.grpBasic.Controls.Add(this.btnCancel);
             this.grpBasic.Location = new System.Drawing.Point(451, 575);
@@ -218,16 +221,16 @@
             this.grpBasic.TabIndex = 53;
             this.grpBasic.TabStop = false;
             // 
-            // btnAddImageLink
+            // btnAddImage
             // 
-            this.btnAddImageLink.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
-            this.btnAddImageLink.Location = new System.Drawing.Point(166, 33);
-            this.btnAddImageLink.Name = "btnAddImageLink";
-            this.btnAddImageLink.Size = new System.Drawing.Size(147, 63);
-            this.btnAddImageLink.TabIndex = 1;
-            this.btnAddImageLink.Text = "&Add Image Link";
-            this.btnAddImageLink.UseVisualStyleBackColor = true;
-            this.btnAddImageLink.Click += new System.EventHandler(this.btnAddImageLink_Click);
+            this.btnAddImage.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
+            this.btnAddImage.Location = new System.Drawing.Point(166, 33);
+            this.btnAddImage.Name = "btnAddImage";
+            this.btnAddImage.Size = new System.Drawing.Size(147, 63);
+            this.btnAddImage.TabIndex = 1;
+            this.btnAddImage.Text = "&Add Item Image";
+            this.btnAddImage.UseVisualStyleBackColor = true;
+            this.btnAddImage.Click += new System.EventHandler(this.btnAddImageLink_Click);
             // 
             // btnSave
             // 
@@ -410,6 +413,17 @@
             this.txtImageFileLocation.Size = new System.Drawing.Size(402, 93);
             this.txtImageFileLocation.TabIndex = 83;
             // 
+            // picHelp
+            // 
+            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
+            this.picHelp.Location = new System.Drawing.Point(725, 16);
+            this.picHelp.Name = "picHelp";
+            this.picHelp.Size = new System.Drawing.Size(45, 40);
+            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picHelp.TabIndex = 84;
+            this.picHelp.TabStop = false;
+            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
+            // 
             // EditItem
             // 
             this.AcceptButton = this.btnSave;
@@ -417,6 +431,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(782, 778);
+            this.Controls.Add(this.picHelp);
             this.Controls.Add(this.txtImageFileLocation);
             this.Controls.Add(this.picItemImage);
             this.Controls.Add(this.label10);
@@ -451,15 +466,18 @@
             this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "EditItem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "";
             this.Text = "Bullseye Inventory Management System - Edit Item";
             this.Load += new System.EventHandler(this.EditItem_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditItem_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             this.grpBasic.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picItemImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -499,9 +517,11 @@
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button btnAddImageLink;
+        private System.Windows.Forms.Button btnAddImage;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox picItemImage;
         private System.Windows.Forms.TextBox txtImageFileLocation;
+        private System.Windows.Forms.PictureBox picHelp;
+        private System.Windows.Forms.ToolTip toolTipHelp;
     }
 }

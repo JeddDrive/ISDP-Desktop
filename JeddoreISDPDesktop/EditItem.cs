@@ -22,6 +22,9 @@ namespace JeddoreISDPDesktop
 
         private void EditItem_Load(object sender, System.EventArgs e)
         {
+            //setting the tooltip for the help image
+            toolTipHelp.SetToolTip(picHelp, "Click here for help.");
+
             //display the employee's username and location in this form
             lblUsername.Text = employee.username;
             lblLocation.Text = employee.siteName;
@@ -159,6 +162,28 @@ namespace JeddoreISDPDesktop
 
                 //display image in the picture box
                 picItemImage.Image = new Bitmap(ofdImage.FileName);
+            }
+        }
+
+        private void picHelp_Click(object sender, System.EventArgs e)
+        {
+            MessageBox.Show("This is the page for item editing. The description, notes, and active " +
+                "fields for an item can be updated here." +
+                "\n\nOptionally, an image can be selected to be associated with an item as well, " +
+                "simply by clicking on the 'Add Item Image' button below and selecting a valid image file.", "Edit Item Help"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void EditItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if the F1 key is pressed down
+            if (e.KeyCode == Keys.F1)
+            {
+                MessageBox.Show("This is the page for item editing. The description, notes, and active " +
+                "fields for an item can be updated here." +
+                "\n\nOptionally, an image can be selected to be associated with an item as well, " +
+                "simply by clicking on the 'Add Item Image' button below and selecting a valid image file.", "Edit Item Help"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

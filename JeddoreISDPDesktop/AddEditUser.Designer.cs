@@ -58,10 +58,13 @@
             this.txtUsername2 = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.picHelp = new System.Windows.Forms.PictureBox();
+            this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             this.grpBasic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picEyeShow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEyeHide)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
             this.SuspendLayout();
             // 
             // picBullseye
@@ -323,6 +326,17 @@
             this.timer1.Interval = 1200000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // picHelp
+            // 
+            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
+            this.picHelp.Location = new System.Drawing.Point(575, 17);
+            this.picHelp.Name = "picHelp";
+            this.picHelp.Size = new System.Drawing.Size(45, 40);
+            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picHelp.TabIndex = 50;
+            this.picHelp.TabStop = false;
+            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
+            // 
             // AddEditUser
             // 
             this.AcceptButton = this.btnSave;
@@ -330,6 +344,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(632, 653);
+            this.Controls.Add(this.picHelp);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtUsername2);
             this.Controls.Add(this.picEyeHide);
@@ -357,15 +372,18 @@
             this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "AddEditUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bullseye Inventory Management System - Add/Edit User";
             this.Load += new System.EventHandler(this.AddEditUser_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddEditUser_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             this.grpBasic.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picEyeShow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEyeHide)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -401,5 +419,7 @@
         private System.Windows.Forms.TextBox txtUsername2;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox picHelp;
+        private System.Windows.Forms.ToolTip toolTipHelp;
     }
 }

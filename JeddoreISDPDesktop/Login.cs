@@ -238,5 +238,15 @@ namespace JeddoreISDPDesktop
             //show password chars ftn
             PasswordCharacters.ShowPasswordChars(txtPassword, picEyeShow, picEyeHide);
         }
+
+        private void Login_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if the F1 key is pressed down
+            if (e.KeyCode == Keys.F1)
+            {
+                MessageBox.Show("Please enter your username and password to login. You can also click on " +
+                "'Forgot Password' in order to reset your password if needed.", "Login Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }

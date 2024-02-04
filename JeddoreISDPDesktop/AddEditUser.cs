@@ -36,6 +36,9 @@ namespace JeddoreISDPDesktop
 
         private void AddEditUser_Load(object sender, EventArgs e)
         {
+            //setting the tooltip for the help image
+            toolTipHelp.SetToolTip(picHelp, "Click here for help.");
+
             //display the employee's username and location in this form
             lblUsername.Text = employee.username;
             lblLocation.Text = employee.siteName;
@@ -449,6 +452,28 @@ namespace JeddoreISDPDesktop
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void picHelp_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This is the page for adding or editing a user. " +
+                "If adding a new user, their username and email will be determined based on " +
+                "their first and last name that are typed in. " +
+                "\n\nAdditionally, please choose a valid position and location for a user based on the choices available.", "Add/Edit User Help"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void AddEditUser_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if the F1 key is pressed down
+            if (e.KeyCode == Keys.F1)
+            {
+                MessageBox.Show("This is the page for adding or editing a user. " +
+                "If adding a new user, their username and email will be determined based on " +
+                "their first and last name that are typed in. " +
+                "\n\nAdditionally, please choose a valid position and location for a user based on the choices available.", "Add/Edit User Help"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
