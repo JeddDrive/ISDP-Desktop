@@ -118,7 +118,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Getting the Position");
+                MessageBox.Show(ex.Message, "Error Getting the one Position");
 
                 connection.Close();
 

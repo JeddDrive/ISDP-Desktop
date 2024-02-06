@@ -88,13 +88,13 @@ namespace JeddoreISDPDesktop.Entity_Classes
             dgvUsers.Columns["password"].Visible = false;
             dgvUsers.Columns["loginAttempts"].Visible = false;
             dgvUsers.Columns["madeFirstLogin"].Visible = false;
+            dgvUsers.Columns["positionID"].Visible = false;
+            dgvUsers.Columns["siteID"].Visible = false;
 
             //change the header text of these columns
             dgvUsers.Columns["firstName"].HeaderText = "First Name";
             dgvUsers.Columns["lastName"].HeaderText = "Last Name";
-            dgvUsers.Columns["positionID"].HeaderText = "Position ID";
             dgvUsers.Columns["employeeID"].HeaderText = "Employee ID";
-            dgvUsers.Columns["siteID"].HeaderText = "Site ID";
             dgvUsers.Columns["username"].HeaderText = "Username";
             dgvUsers.Columns["name"].HeaderText = "Location";
             dgvUsers.Columns["active"].HeaderText = "Active";
@@ -222,6 +222,10 @@ namespace JeddoreISDPDesktop.Entity_Classes
         {
             try
             {
+                //want to clear DGV row selection to prevent DGV errors/program from crashing
+                //each time the text is changed and if the user clicks on a CRUD btn for example
+                dgvUsers.ClearSelection();
+
                 CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvUsers.DataSource];
 
                 foreach (DataGridViewRow row in dgvUsers.Rows)

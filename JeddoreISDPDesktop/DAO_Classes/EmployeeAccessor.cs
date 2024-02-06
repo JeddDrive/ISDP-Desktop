@@ -23,6 +23,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             "where username = @username";
         private static string selectLastEmployeeStatement = "select e.employeeID, e.Password, e.FirstName, e.LastName, IFNULL(e.Email, '') as Email, e.active, e.PositionID, e.siteID, e.locked, e.username, IFNULL(e.notes, '') as notes, loginAttempts, madeFirstLogin, s.name, p.permissionLevel from employee e inner join site s on e.siteID = s.siteID inner join posn p on e.positionID = p.positionID" +
             " order by employeeid DESC LIMIT 1";
+        private static string selectCountEmployeesWithUsernameAndNotEmployeeID = "select count(*) from employee where username like @username and employeeID != @employeeID";
         private static string selectCountEmployeesWithUsername = "select count(*) from employee where username like @username";
         private static string updateLockedStatement = "update employee set locked = 1 where employeeID = @employeeID";
         private static string updateInactiveStatement = "update employee set active = 0 where employeeID = @employeeID";
@@ -30,7 +31,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string updateLoginAttemptsMinusOneStatement = "update employee set loginAttempts = loginAttempts - 1 where employeeID = @employeeID";
         private static string updateLoginAttemptsToThreeStatement = "update employee set loginAttempts = 3 where employeeID = @employeeID";
         private static string updateMadeFirstLoginStatement = "update employee set madeFirstLogin = 1 where employeeID = @employeeID";
-        private static string updateEmployeeFieldsStatement = "update employee set username = @username, password = @password, firstName = @firstName, lastName = @lastName, email = @email, active = @active, siteID = @siteID, positionID = @positionID where employeeID = @employeeID";
+        private static string updateEmployeeFieldsStatement = "update employee set username = @username, password = @password, firstName = @firstName, lastName = @lastName, email = @email, active = @active, siteID = @siteID, locked = @locked, positionID = @positionID where employeeID = @employeeID";
         private static string insertEmployeeStatement = "insert into employee (`Password`, `FirstName`, `LastName`, `Email`, `active`, `siteID`, `username`, `locked`, `PositionID`) VALUES "
             + "(@password, @firstName, @lastName, @email, @active, @siteID, @username, @locked, @positionID)";
 
@@ -196,7 +197,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Getting That Employee");
+                MessageBox.Show(ex.Message, "Error Getting the one Employee");
 
                 connection.Close();
             }
@@ -270,6 +271,48 @@ namespace JeddoreISDPDesktop.DAO_Classes
             return employee;
         }
 
+
+        /**
+        * Gets the count number of employees matching a wildcard pattern of a particular username.
+        *
+        * @return an int, possibly 0 if none found based on the username wildcard.
+        */
+        public static long GetCountWithTheUsernameAndEmployeeID(string usernameSentIn, int employeeID)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectCountEmployeesWithUsernameAndNotEmployeeID, connection);
+
+            //int to be returned
+            long rowCount = 0;
+
+            //one parameter for the query - string username
+            cmd.Parameters.AddWithValue("@username", "%" + usernameSentIn);
+            cmd.Parameters.AddWithValue("@employeeID", employeeID);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                rowCount = (long)cmd.ExecuteScalar();
+
+                //close the connection
+                connection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting the Count of Employees With That Username and Employee ID");
+
+                connection.Close();
+
+            }
+
+            //return the rowCount (int)
+            return rowCount;
+        }
+
         /**
         * Gets the count number of employees matching a wildcard pattern of a particular username.
         *
@@ -284,7 +327,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             long rowCount = 0;
 
             //one parameter for the query - string username
-            cmd.Parameters.AddWithValue("@username", "%" + usernameSentIn);
+            cmd.Parameters.AddWithValue("@username", "%" + usernameSentIn + "%");
 
             //create a datareader and execute
             try
@@ -607,6 +650,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             cmd.Parameters.AddWithValue("@active", employee.active);
             cmd.Parameters.AddWithValue("@siteID", employee.siteID);
             cmd.Parameters.AddWithValue("@positionID", employee.positionID);
+            cmd.Parameters.AddWithValue("@locked", employee.locked);
             cmd.Parameters.AddWithValue("@employeeID", employee.employeeID);
 
             //variable for rowCount

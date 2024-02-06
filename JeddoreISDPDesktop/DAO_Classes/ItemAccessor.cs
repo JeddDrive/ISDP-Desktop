@@ -179,7 +179,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Getting the One Item");
+                MessageBox.Show(ex.Message, "Error Getting the one Item");
 
                 connection.Close();
 

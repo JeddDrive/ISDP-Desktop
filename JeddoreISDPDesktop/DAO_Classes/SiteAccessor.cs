@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Windows.Forms;
 
 namespace JeddoreISDPDesktop.DAO_Classes
@@ -22,6 +23,41 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string updateSiteStatement = "update site set name = @name, provinceID = @provinceID, address = @address, address2 = @address2, city = @city, country = @country, postalCode = @postalCode, phone = @phone, dayOfWeek = @dayOfWeek, distanceFromWH = @distanceFromWH, notes = @notes where siteID = @siteID";
         private static string insertSiteStatement = "insert into site (`siteID`, `name`, `provinceID`, `address`, `address2`, `city`, `country`, `postalCode`, `phone`, `dayOfWeek`, `distanceFromWH`, `notes`) VALUES "
             + "(@siteID, @name, @provinceID, @address, @address2, @city, @country, @postalCode, @phone, @dayOfWeek, @distanceFromWH, @notes)";
+
+        /**
+        * Get all of the sites.
+        *
+        * @return a DataTable, possibly empty, of Sites.
+        */
+        public static DataTable GetAllSitesDataTable()
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectAllStatement, connection);
+
+            //create datatable
+            DataTable dt = new DataTable();
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //execute the SQL statement against the DB
+                //load into the DataTable object
+                dt.Load(cmd.ExecuteReader());
+
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting All Sites");
+
+                connection.Close();
+            }
+
+            //return the datatable
+            return dt;
+        }
 
         /**
         * Get all of the sites.
@@ -62,7 +98,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
                     int distanceFromWH = reader.GetInt32("distanceFromWH");
                     string notes = reader.GetString("notes");
 
-                    //create an employee object
+                    //create a site object
                     Site site = new Site(siteID, name, provinceID, address, address2, city, country,
                         postalCode, phone, dayOfWeek, distanceFromWH, notes);
 
@@ -78,7 +114,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Getting All Employees");
+                MessageBox.Show(ex.Message, "Error Getting All Sites");
 
                 connection.Close();
 
@@ -145,7 +181,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Getting That Site");
+                MessageBox.Show(ex.Message, "Error Getting the one Site");
 
                 connection.Close();
 

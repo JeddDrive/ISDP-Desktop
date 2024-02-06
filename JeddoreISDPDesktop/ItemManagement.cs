@@ -62,11 +62,14 @@ namespace JeddoreISDPDesktop
             //set the binding source of the binding nav to the binding source created
             bindingNavigator.BindingSource = bindingSource;
 
+            //hiding the description - for performance
+            dgvItems.Columns["description"].Visible = false;
+
             //change the header text of these columns
             dgvItems.Columns["itemID"].HeaderText = "Item ID";
             dgvItems.Columns["name"].HeaderText = "Name";
             dgvItems.Columns["sku"].HeaderText = "SKU";
-            dgvItems.Columns["description"].HeaderText = "Description";
+            //dgvItems.Columns["description"].HeaderText = "Description";
             dgvItems.Columns["category"].HeaderText = "Category";
             dgvItems.Columns["weight"].HeaderText = "Weight";
             dgvItems.Columns["caseSize"].HeaderText = "Case Size";
@@ -87,13 +90,16 @@ namespace JeddoreISDPDesktop
         {
             try
             {
+                //want to clear DGV row selection to prevent DGV errors/program from crashing
+                //each time the text is changed and if the user clicks on a CRUD btn for example
+                dgvItems.ClearSelection();
+
                 CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvItems.DataSource];
 
                 foreach (DataGridViewRow row in dgvItems.Rows)
                 {
                     //get the cell values for the following columns
                     var nameCellValue = row.Cells["name"].Value;
-                    var descriptionCellValue = row.Cells["description"].Value;
                     var categoryCellValue = row.Cells["category"].Value;
                     var itemIDCellValue = row.Cells["itemID"].Value;
 
@@ -106,12 +112,6 @@ namespace JeddoreISDPDesktop
 
                     //if - name cell converted to lower case contains the txtbox text
                     if (nameCellValue != null && nameCellValue.ToString().ToLower().Contains(txtSearchItems.Text))
-                    {
-                        row.Visible = true;
-                    }
-
-                    //else if - description cell converted to lower case contains the txtbox text
-                    else if (descriptionCellValue != null && descriptionCellValue.ToString().ToLower().Contains(txtSearchItems.Text))
                     {
                         row.Visible = true;
                     }

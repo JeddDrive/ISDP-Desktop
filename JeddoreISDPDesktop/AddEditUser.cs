@@ -3,6 +3,7 @@ using JeddoreISDPDesktop.Entity_Classes;
 using JeddoreISDPDesktop.Helper_Classes;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace JeddoreISDPDesktop
@@ -119,9 +120,15 @@ namespace JeddoreISDPDesktop
                 }
 
                 //if employee is not active, uncheck the checkbox
-                if (employee.active == 0)
+                if (employeeEdit.active == 0)
                 {
                     chkActive.Checked = false;
+                }
+
+                //if employee is locked, then check that checkbox
+                if (employeeEdit.locked == 1)
+                {
+                    chkLocked.Checked = true;
                 }
             }
         }
@@ -184,11 +191,12 @@ namespace JeddoreISDPDesktop
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            //byte var for active and locked
+            byte active = 0, locked = 0;
+
             //if employeeEdit is null, meaning are doing an ADD
             if (employeeEdit == null)
             {
-                //byte var for active
-                byte active = 0;
 
                 //if either cbo is blank
                 if (cboPosition.SelectedIndex < 0 || cboLocation.SelectedIndex < 0)
@@ -209,6 +217,12 @@ namespace JeddoreISDPDesktop
                 if (chkActive.Checked)
                 {
                     active = 1;
+                }
+
+                //if checkbox is checked, then locked should be 1
+                if (chkLocked.Checked)
+                {
+                    locked = 1;
                 }
 
                 //if first name is empty
@@ -235,8 +249,25 @@ namespace JeddoreISDPDesktop
                     return;
                 }
 
-                //checking the count of existing users with the username generated
-                long userCountWithUsername = EmployeeAccessor.GetCountWithTheUsername(username);
+                long userCountWithUsername = 0;
+
+                //if the username contains any numbers in it
+                //for example for 01 or 02, etc.
+                if (Regex.IsMatch(username, @"\d"))
+                {
+                    //cut off the last two characters of the username (ex. 01)
+                    string usernameWithoutLastTwoChars = username.TrimEnd().Substring(0, username.Length - 2);
+
+                    //checking the count of existing users with the username generated
+                    userCountWithUsername = EmployeeAccessor.GetCountWithTheUsername(usernameWithoutLastTwoChars);
+                }
+
+                //else - username doesn't contain numbers in it
+                else
+                {
+                    //checking the count of existing users with the username generated
+                    userCountWithUsername = EmployeeAccessor.GetCountWithTheUsername(username);
+                }
 
                 //if that ftn returned greater than 0, then must assign a number to the username and email
                 //ex. adding a 01 to the end if a 1 was returned
@@ -284,7 +315,7 @@ namespace JeddoreISDPDesktop
                         //create an employee obj to be sent to the accessor class
                         Employee emp = new Employee(int.Parse(lblEmployeeID.Text), newHash,
                             txtFirstName.Text, txtLastName.Text, email, active, positionID, siteID,
-                            0, username, null, null, null, 3, 0);
+                            locked, username, null, null, null, 3, 0);
 
                         //attempt to insert the employee
                         bool goodInsert = EmployeeAccessor.InsertNewEmployee(emp);
@@ -306,8 +337,6 @@ namespace JeddoreISDPDesktop
             //else - are doing an EDIT
             else
             {
-                //byte var for active
-                byte active = 0;
 
                 //if either cbo is blank
                 if (cboPosition.SelectedIndex < 0 || cboLocation.SelectedIndex < 0)
@@ -328,6 +357,12 @@ namespace JeddoreISDPDesktop
                 if (chkActive.Checked)
                 {
                     active = 1;
+                }
+
+                //if checkbox is checked, then locked should be 1
+                if (chkLocked.Checked)
+                {
+                    locked = 1;
                 }
 
                 //if first name is empty
@@ -355,7 +390,7 @@ namespace JeddoreISDPDesktop
                 }
 
                 //checking the count of existing users with the username generated
-                long userCountWithUsername = EmployeeAccessor.GetCountWithTheUsername(username);
+                long userCountWithUsername = EmployeeAccessor.GetCountWithTheUsernameAndEmployeeID(username, employeeEdit.employeeID);
 
                 //if that ftn returned greater than 0, then must assign a number to the username and email
                 //ex. adding a 01 to the end if a 1 was returned
@@ -405,7 +440,7 @@ namespace JeddoreISDPDesktop
                         //create an employee obj to be sent to the accessor class
                         Employee emp = new Employee(int.Parse(lblEmployeeID.Text), newHash,
                             txtFirstName.Text, txtLastName.Text, email, active, positionID, siteID,
-                            0, username, null, null, null, 3, 0);
+                            locked, username, null, null, null, 3, 0);
 
                         //attempt to insert the employee
                         bool goodEmployeeUpdate = EmployeeAccessor.UpdateEmployeeFields(emp);
@@ -430,7 +465,7 @@ namespace JeddoreISDPDesktop
                         //create an employee obj to be sent to the accessor class
                         Employee emp = new Employee(int.Parse(lblEmployeeID.Text), txtPassword.Text,
                             txtFirstName.Text, txtLastName.Text, email, active, positionID, siteID,
-                            0, username, null, null, null, 3, 0);
+                            locked, username, null, null, null, 3, 0);
 
                         //attempt to insert the employee
                         bool goodEmployeeUpdate = EmployeeAccessor.UpdateEmployeeFields(emp);

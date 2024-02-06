@@ -60,6 +60,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.picHelp = new System.Windows.Forms.PictureBox();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.chkLocked = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             this.grpBasic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picEyeShow)).BeginInit();
@@ -337,6 +338,16 @@
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
+            // chkLocked
+            // 
+            this.chkLocked.AutoSize = true;
+            this.chkLocked.Location = new System.Drawing.Point(468, 125);
+            this.chkLocked.Name = "chkLocked";
+            this.chkLocked.Size = new System.Drawing.Size(146, 32);
+            this.chkLocked.TabIndex = 51;
+            this.chkLocked.Text = "Locked User";
+            this.chkLocked.UseVisualStyleBackColor = true;
+            // 
             // AddEditUser
             // 
             this.AcceptButton = this.btnSave;
@@ -344,6 +355,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(632, 653);
+            this.Controls.Add(this.chkLocked);
             this.Controls.Add(this.picHelp);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtUsername2);
@@ -421,5 +433,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox picHelp;
         private System.Windows.Forms.ToolTip toolTipHelp;
+        private System.Windows.Forms.CheckBox chkLocked;
     }
 }

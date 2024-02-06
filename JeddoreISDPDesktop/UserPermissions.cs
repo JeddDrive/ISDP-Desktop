@@ -92,6 +92,11 @@ namespace JeddoreISDPDesktop
         {
             try
             {
+                //want to clear DGV row selection to prevent DGV errors/program from crashing
+                //each time the text is changed and if the user clicks on a CRUD btn for example
+                dgvUsers.ClearSelection();
+                dgvUserPermissions.ClearSelection();
+
                 CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvUsers.DataSource];
 
                 foreach (DataGridViewRow row in dgvUsers.Rows)
@@ -263,7 +268,7 @@ namespace JeddoreISDPDesktop
                         //if successful
                         if (goodUpdate)
                         {
-                            MessageBox.Show("User permission has been added from the system.", "Successful User Permission Addition");
+                            MessageBox.Show("User permission has been added to the system.", "Successful User Permission Addition");
 
                             dgvUserPermissions.Refresh();
                         }
@@ -280,6 +285,11 @@ namespace JeddoreISDPDesktop
         {
             try
             {
+                //want to clear DGV row selection to prevent DGV errors/program from crashing
+                //each time the text is changed and if the user clicks on a CRUD btn for example
+                dgvUsers.ClearSelection();
+                dgvUserPermissions.ClearSelection();
+
                 CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvUserPermissions.DataSource];
 
                 foreach (DataGridViewRow row in dgvUserPermissions.Rows)

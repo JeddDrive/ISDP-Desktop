@@ -75,6 +75,14 @@ namespace JeddoreISDPDesktop
                 //get the hash for the password + salt (salt goes after the raw password)
                 string userHash = PasswordEncrypter.GetHash(password + passwordSalt);
 
+                //if employee is locked but has 0 login attempts
+                //meaning that they were previously locked but are no longer locked
+                //then want to update their login attempts back to 3
+                if (employee.locked == 0 && employee.loginAttempts == 0)
+                {
+                    bool goodUpdate = EmployeeAccessor.UpdateEmployeeLoginAttemptsToThree(employee.employeeID);
+                }
+
                 //if - employee exists but is inactive
                 if (employee.active == 0)
                 {
