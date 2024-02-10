@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEditUser));
-            this.picBullseye = new System.Windows.Forms.PictureBox();
             this.lblLocation = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,30 +52,21 @@
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.chkActive = new System.Windows.Forms.CheckBox();
-            this.picEyeShow = new System.Windows.Forms.PictureBox();
-            this.picEyeHide = new System.Windows.Forms.PictureBox();
             this.txtUsername2 = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.picHelp = new System.Windows.Forms.PictureBox();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.chkLocked = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
+            this.picHelp = new System.Windows.Forms.PictureBox();
+            this.picEyeHide = new System.Windows.Forms.PictureBox();
+            this.picEyeShow = new System.Windows.Forms.PictureBox();
+            this.picBullseye = new System.Windows.Forms.PictureBox();
             this.grpBasic.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picEyeShow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picEyeHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEyeHide)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEyeShow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             this.SuspendLayout();
-            // 
-            // picBullseye
-            // 
-            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
-            this.picBullseye.Location = new System.Drawing.Point(1, 1);
-            this.picBullseye.Name = "picBullseye";
-            this.picBullseye.Size = new System.Drawing.Size(140, 110);
-            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBullseye.TabIndex = 31;
-            this.picBullseye.TabStop = false;
             // 
             // lblLocation
             // 
@@ -121,6 +111,7 @@
             this.grpBasic.Size = new System.Drawing.Size(200, 191);
             this.grpBasic.TabIndex = 32;
             this.grpBasic.TabStop = false;
+            this.grpBasic.Enter += new System.EventHandler(this.grpBasic_Enter);
             // 
             // btnSave
             // 
@@ -282,29 +273,6 @@
             this.chkActive.Text = "Active User";
             this.chkActive.UseVisualStyleBackColor = true;
             // 
-            // picEyeShow
-            // 
-            this.picEyeShow.Image = global::JeddoreISDPDesktop.Properties.Resources.eyeDisplay;
-            this.picEyeShow.Location = new System.Drawing.Point(468, 235);
-            this.picEyeShow.Name = "picEyeShow";
-            this.picEyeShow.Size = new System.Drawing.Size(45, 40);
-            this.picEyeShow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picEyeShow.TabIndex = 45;
-            this.picEyeShow.TabStop = false;
-            this.picEyeShow.Click += new System.EventHandler(this.picEyeShow_Click);
-            // 
-            // picEyeHide
-            // 
-            this.picEyeHide.Image = global::JeddoreISDPDesktop.Properties.Resources.eyeHide;
-            this.picEyeHide.Location = new System.Drawing.Point(468, 235);
-            this.picEyeHide.Name = "picEyeHide";
-            this.picEyeHide.Size = new System.Drawing.Size(45, 40);
-            this.picEyeHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picEyeHide.TabIndex = 46;
-            this.picEyeHide.TabStop = false;
-            this.picEyeHide.Visible = false;
-            this.picEyeHide.Click += new System.EventHandler(this.picEyeHide_Click);
-            // 
             // txtUsername2
             // 
             this.txtUsername2.Enabled = false;
@@ -327,6 +295,16 @@
             this.timer1.Interval = 1200000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // chkLocked
+            // 
+            this.chkLocked.AutoSize = true;
+            this.chkLocked.Location = new System.Drawing.Point(468, 125);
+            this.chkLocked.Name = "chkLocked";
+            this.chkLocked.Size = new System.Drawing.Size(146, 32);
+            this.chkLocked.TabIndex = 51;
+            this.chkLocked.Text = "Locked User";
+            this.chkLocked.UseVisualStyleBackColor = true;
+            // 
             // picHelp
             // 
             this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
@@ -338,15 +316,38 @@
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
-            // chkLocked
+            // picEyeHide
             // 
-            this.chkLocked.AutoSize = true;
-            this.chkLocked.Location = new System.Drawing.Point(468, 125);
-            this.chkLocked.Name = "chkLocked";
-            this.chkLocked.Size = new System.Drawing.Size(146, 32);
-            this.chkLocked.TabIndex = 51;
-            this.chkLocked.Text = "Locked User";
-            this.chkLocked.UseVisualStyleBackColor = true;
+            this.picEyeHide.Image = global::JeddoreISDPDesktop.Properties.Resources.eyeHide;
+            this.picEyeHide.Location = new System.Drawing.Point(468, 235);
+            this.picEyeHide.Name = "picEyeHide";
+            this.picEyeHide.Size = new System.Drawing.Size(45, 40);
+            this.picEyeHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picEyeHide.TabIndex = 46;
+            this.picEyeHide.TabStop = false;
+            this.picEyeHide.Visible = false;
+            this.picEyeHide.Click += new System.EventHandler(this.picEyeHide_Click);
+            // 
+            // picEyeShow
+            // 
+            this.picEyeShow.Image = global::JeddoreISDPDesktop.Properties.Resources.eyeDisplay;
+            this.picEyeShow.Location = new System.Drawing.Point(468, 235);
+            this.picEyeShow.Name = "picEyeShow";
+            this.picEyeShow.Size = new System.Drawing.Size(45, 40);
+            this.picEyeShow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picEyeShow.TabIndex = 45;
+            this.picEyeShow.TabStop = false;
+            this.picEyeShow.Click += new System.EventHandler(this.picEyeShow_Click);
+            // 
+            // picBullseye
+            // 
+            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
+            this.picBullseye.Location = new System.Drawing.Point(1, 1);
+            this.picBullseye.Name = "picBullseye";
+            this.picBullseye.Size = new System.Drawing.Size(140, 110);
+            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBullseye.TabIndex = 31;
+            this.picBullseye.TabStop = false;
             // 
             // AddEditUser
             // 
@@ -391,11 +392,11 @@
             this.Text = "Bullseye Inventory Management System - Add/Edit User";
             this.Load += new System.EventHandler(this.AddEditUser_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddEditUser_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             this.grpBasic.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picEyeShow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picEyeHide)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEyeHide)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEyeShow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

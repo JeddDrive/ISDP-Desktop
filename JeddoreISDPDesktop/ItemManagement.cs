@@ -64,6 +64,7 @@ namespace JeddoreISDPDesktop
 
             //hiding the description - for performance
             dgvItems.Columns["description"].Visible = false;
+            dgvItems.Columns["notes"].Visible = false;
 
             //change the header text of these columns
             dgvItems.Columns["itemID"].HeaderText = "Item ID";
@@ -77,7 +78,7 @@ namespace JeddoreISDPDesktop
             dgvItems.Columns["retailPrice"].HeaderText = "Retail Price";
             dgvItems.Columns["supplierID"].HeaderText = "Supplier ID";
             dgvItems.Columns["active"].HeaderText = "Active";
-            dgvItems.Columns["notes"].HeaderText = "Notes";
+            //dgvItems.Columns["notes"].HeaderText = "Notes";
             dgvItems.Columns["imageFileLocation"].HeaderText = "Image Location";
 
             dgvItems.Refresh();

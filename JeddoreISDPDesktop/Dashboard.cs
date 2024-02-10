@@ -58,6 +58,13 @@ namespace JeddoreISDPDesktop
             {
                 btnEditItem.Enabled = true;
             }
+
+
+            //check the list for VIEWSITE
+            if (employeeUserPermissions.permissionIDList.Contains("VIEWSITE"))
+            {
+                btnViewSites.Enabled = true;
+            }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -96,6 +103,13 @@ namespace JeddoreISDPDesktop
         //timer should close this form after 20 minutes
         private void timer1_Tick(object sender, EventArgs e)
         {
+            TimeSpan idleTime = TimeSpan.FromSeconds(2);
+
+            if (idleTime >= TimeSpan.FromSeconds(2))
+            {
+                this.Close();
+            }
+
             this.Close();
         }
 
@@ -108,6 +122,15 @@ namespace JeddoreISDPDesktop
                "below, and then a button inside one of those tabs to do that specific task.", "Dashboard Help"
                , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void btnViewSites_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the site management form
+            SiteManagement frmSiteManagement = new SiteManagement(employee);
+
+            //open the site management form (modal)
+            frmSiteManagement.ShowDialog();
         }
     }
 }

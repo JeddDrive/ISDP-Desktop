@@ -37,6 +37,7 @@
             this.tabLossReturn = new System.Windows.Forms.TabPage();
             this.tabReports = new System.Windows.Forms.TabPage();
             this.tabAdmin = new System.Windows.Forms.TabPage();
+            this.btnViewSites = new System.Windows.Forms.Button();
             this.btnSetUserPermissions = new System.Windows.Forms.Button();
             this.btnViewUsers = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -122,6 +123,7 @@
             // tabAdmin
             // 
             this.tabAdmin.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabAdmin.Controls.Add(this.btnViewSites);
             this.tabAdmin.Controls.Add(this.btnSetUserPermissions);
             this.tabAdmin.Controls.Add(this.btnViewUsers);
             this.tabAdmin.Location = new System.Drawing.Point(4, 37);
@@ -130,11 +132,23 @@
             this.tabAdmin.TabIndex = 4;
             this.tabAdmin.Text = "Admin";
             // 
+            // btnViewSites
+            // 
+            this.btnViewSites.Enabled = false;
+            this.btnViewSites.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewSites.Location = new System.Drawing.Point(253, 321);
+            this.btnViewSites.Name = "btnViewSites";
+            this.btnViewSites.Size = new System.Drawing.Size(456, 63);
+            this.btnViewSites.TabIndex = 25;
+            this.btnViewSites.Text = "&View and Manage Sites";
+            this.btnViewSites.UseVisualStyleBackColor = true;
+            this.btnViewSites.Click += new System.EventHandler(this.btnViewSites_Click);
+            // 
             // btnSetUserPermissions
             // 
             this.btnSetUserPermissions.Enabled = false;
             this.btnSetUserPermissions.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSetUserPermissions.Location = new System.Drawing.Point(258, 254);
+            this.btnSetUserPermissions.Location = new System.Drawing.Point(253, 170);
             this.btnSetUserPermissions.Name = "btnSetUserPermissions";
             this.btnSetUserPermissions.Size = new System.Drawing.Size(456, 63);
             this.btnSetUserPermissions.TabIndex = 24;
@@ -146,11 +160,11 @@
             // 
             this.btnViewUsers.Enabled = false;
             this.btnViewUsers.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewUsers.Location = new System.Drawing.Point(258, 102);
+            this.btnViewUsers.Location = new System.Drawing.Point(253, 25);
             this.btnViewUsers.Name = "btnViewUsers";
             this.btnViewUsers.Size = new System.Drawing.Size(456, 63);
             this.btnViewUsers.TabIndex = 21;
-            this.btnViewUsers.Text = "&View and Manage Users";
+            this.btnViewUsers.Text = "View and Manage &Users";
             this.btnViewUsers.UseVisualStyleBackColor = true;
             this.btnViewUsers.Click += new System.EventHandler(this.btnViewUsers_Click);
             // 
@@ -280,5 +294,6 @@
         private System.Windows.Forms.Button btnSetUserPermissions;
         private System.Windows.Forms.ToolTip toolTipHelp;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btnViewSites;
     }
 }

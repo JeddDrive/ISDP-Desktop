@@ -89,3 +89,5 @@ C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProj
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.UserPermissions.resources
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.ItemManagement.resources
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.EditItem.resources
+C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.SiteManagement.resources
+C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.AddEditSite.resources

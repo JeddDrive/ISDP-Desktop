@@ -18,11 +18,13 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static MySqlConnection connection = new MySqlConnection(connString);
 
         //SQL statements for the Site entity
-        private static string selectAllStatement = "select siteID, name, provinceID, address, IFNULL(address2, '') as address2, city, country, postalCode, phone, IFNULL(dayOfWeek, '') as dayOfWeek, distanceFromWH, IFNULL(notes, '') as notes from site";
-        private static string selectOneStatement = "select siteID, name, provinceID, address, IFNULL(address2, '') as address2, city, country, postalCode, phone, IFNULL(dayOfWeek, '') as dayOfWeek, distanceFromWH, IFNULL(notes, '') as notes from site where siteID = @siteID";
-        private static string updateSiteStatement = "update site set name = @name, provinceID = @provinceID, address = @address, address2 = @address2, city = @city, country = @country, postalCode = @postalCode, phone = @phone, dayOfWeek = @dayOfWeek, distanceFromWH = @distanceFromWH, notes = @notes where siteID = @siteID";
-        private static string insertSiteStatement = "insert into site (`siteID`, `name`, `provinceID`, `address`, `address2`, `city`, `country`, `postalCode`, `phone`, `dayOfWeek`, `distanceFromWH`, `notes`) VALUES "
-            + "(@siteID, @name, @provinceID, @address, @address2, @city, @country, @postalCode, @phone, @dayOfWeek, @distanceFromWH, @notes)";
+        private static string selectAllStatement = "select siteID, name, provinceID, address, IFNULL(address2, '') as address2, city, country, postalCode, phone, IFNULL(dayOfWeek, '') as dayOfWeek, distanceFromWH, IFNULL(notes, '') as notes, active from site";
+        private static string selectOneStatement = "select siteID, name, provinceID, address, IFNULL(address2, '') as address2, city, country, postalCode, phone, IFNULL(dayOfWeek, '') as dayOfWeek, distanceFromWH, IFNULL(notes, '') as notes, active from site where siteID = @siteID";
+        private static string selectLastSiteStatement = "select siteID, name, provinceID, address, IFNULL(address2, '') as address2, city, country, postalCode, phone, IFNULL(dayOfWeek, '') as dayOfWeek, distanceFromWH, IFNULL(notes, '') as notes, active from site" +
+            " order by siteID DESC LIMIT 1";
+        private static string updateSiteStatement = "update site set name = @name, provinceID = @provinceID, address = @address, address2 = @address2, city = @city, country = @country, postalCode = @postalCode, phone = @phone, dayOfWeek = @dayOfWeek, distanceFromWH = @distanceFromWH, notes = @notes, active = @active where siteID = @siteID";
+        private static string insertSiteStatement = "insert into site (`siteID`, `name`, `provinceID`, `address`, `address2`, `city`, `country`, `postalCode`, `phone`, `dayOfWeek`, `distanceFromWH`, `notes`, `active`) VALUES "
+            + "(@siteID, @name, @provinceID, @address, @address2, @city, @country, @postalCode, @phone, @dayOfWeek, @distanceFromWH, @notes, @active)";
 
         /**
         * Get all of the sites.
@@ -97,10 +99,11 @@ namespace JeddoreISDPDesktop.DAO_Classes
                     string dayOfWeek = reader.GetString("dayOfWeek");
                     int distanceFromWH = reader.GetInt32("distanceFromWH");
                     string notes = reader.GetString("notes");
+                    byte active = reader.GetByte("active");
 
                     //create a site object
                     Site site = new Site(siteID, name, provinceID, address, address2, city, country,
-                        postalCode, phone, dayOfWeek, distanceFromWH, notes);
+                        postalCode, phone, dayOfWeek, distanceFromWH, notes, active);
 
                     //add to the list
                     sitesList.Add(site);
@@ -166,10 +169,75 @@ namespace JeddoreISDPDesktop.DAO_Classes
                     string dayOfWeek = reader.GetString("dayOfWeek");
                     int distanceFromWH = reader.GetInt32("distanceFromWH");
                     string notes = reader.GetString("notes");
+                    byte active = reader.GetByte("active");
 
                     //assign to site object
                     site = new Site(siteID, name, provinceID, address, address2, city, country,
-                        postalCode, phone, dayOfWeek, distanceFromWH, notes);
+                        postalCode, phone, dayOfWeek, distanceFromWH, notes, active);
+
+                }
+
+                //close reader after while loop
+                reader.Close();
+
+                connection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting the one Site");
+
+                connection.Close();
+
+            }
+
+            //return the site
+            return site;
+        }
+
+        /**
+        * Gets the last site in the DB, AKA the one with the highest site ID.
+        *
+        * @return an Employee, possibly null if none found based.
+        */
+        public static Site GetLastSite()
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectLastSiteStatement, connection);
+
+            //site to be returned
+            Site site = null;
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                //run loop thru datareader
+                //while - there is another record to read
+                while (reader.Read())
+                {
+                    //get the values from the columns
+                    int siteID = reader.GetInt32("siteID");
+                    string name = reader.GetString("name");
+                    string provinceID = reader.GetString("provinceID");
+                    string address = reader.GetString("address");
+                    string address2 = reader.GetString("address2");
+                    string city = reader.GetString("city");
+                    string country = reader.GetString("country");
+                    string postalCode = reader.GetString("postalCode");
+                    string phone = reader.GetString("phone");
+                    string dayOfWeek = reader.GetString("dayOfWeek");
+                    int distanceFromWH = reader.GetInt32("distanceFromWH");
+                    string notes = reader.GetString("notes");
+                    byte active = reader.GetByte("active");
+
+                    //assign to site object
+                    site = new Site(siteID, name, provinceID, address, address2, city, country,
+                        postalCode, phone, dayOfWeek, distanceFromWH, notes, active);
 
                 }
 
@@ -214,6 +282,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             cmd.Parameters.AddWithValue("@dayOfWeek", site.dayOfWeek);
             cmd.Parameters.AddWithValue("@distanceFromWH", site.distanceFromWH);
             cmd.Parameters.AddWithValue("@notes", site.notes);
+            cmd.Parameters.AddWithValue("@active", site.active);
             cmd.Parameters.AddWithValue("@siteID", site.siteID);
 
             //variable for rowCount

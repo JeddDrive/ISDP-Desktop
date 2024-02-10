@@ -121,7 +121,7 @@ namespace JeddoreISDPDesktop
                     else
                     {
                         MessageBox.Show("Password is a match. You are now logged in.", "Successful Login");
-                        //MessageBox.Show(userHash + "\n" + employee.password, "Checking Passwords");
+
                         UpdateEmployeeSaltAndHashedPassword(password, employee);
 
                         //if employee login attempts is under 3, then update it back to the default (3)
@@ -196,21 +196,12 @@ namespace JeddoreISDPDesktop
 
             bool goodSaltUpdate = PasswordSaltAccessor.UpdatePasswordSalt(newSalt, employee.employeeID);
 
-            /* if (goodSaltUpdate)
-            {
-                MessageBox.Show("The salt was updated.");
-            } */
-
             //now get a new hashed password - based on the password and new salt text
             string newHash = PasswordEncrypter.GetHash(password + newSalt);
 
             //and update the password in the DB to be the new hashed password
             bool goodNewHash = EmployeeAccessor.UpdateEmployeePassword(newHash, employee.employeeID);
 
-            /* if (goodNewHash)
-            {
-                MessageBox.Show("The hashed password was updated.");
-            } */
         }
 
         private void lblForgotPassword_Click(object sender, EventArgs e)
@@ -254,6 +245,16 @@ namespace JeddoreISDPDesktop
             {
                 MessageBox.Show("Please enter your username and password to login. You can also click on " +
                 "'Forgot Password' in order to reset your password if needed.", "Login Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void Login_Activated(object sender, EventArgs e)
+        {
+            txtPassword.Text = "";
+
+            if (!txtUsername.Text.Equals(""))
+            {
+                txtPassword.Focus();
             }
         }
     }

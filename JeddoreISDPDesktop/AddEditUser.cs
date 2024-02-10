@@ -197,7 +197,6 @@ namespace JeddoreISDPDesktop
             //if employeeEdit is null, meaning are doing an ADD
             if (employeeEdit == null)
             {
-
                 //if either cbo is blank
                 if (cboPosition.SelectedIndex < 0 || cboLocation.SelectedIndex < 0)
                 {
@@ -509,6 +508,11 @@ namespace JeddoreISDPDesktop
                 "\n\nAdditionally, please choose a valid position and location for a user based on the choices available.", "Add/Edit User Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void grpBasic_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -271,7 +271,6 @@ namespace JeddoreISDPDesktop.DAO_Classes
             return employee;
         }
 
-
         /**
         * Gets the count number of employees matching a wildcard pattern of a particular username.
         *

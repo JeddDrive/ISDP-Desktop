@@ -16,6 +16,7 @@
         public string dayOfWeek { get; set; } = null;
         public int distanceFromWH { get; set; }
         public string notes { get; set; } = null;
+        public byte active { get; set; }
 
         //default constructor - does nothing
         public Site() { }
@@ -23,7 +24,7 @@
         //custom constructor - everything sent in
         public Site(int inSiteID, string inName, string inProvinceID, string inAddress, string inAddress2,
             string inCity, string inCountry, string inPostalCode, string inPhone, string inDayOfWeek,
-            int inDistanceFromWH, string inNotes)
+            int inDistanceFromWH, string inNotes, byte inActive)
         {
             siteID = inSiteID;
             name = inName;
@@ -37,6 +38,7 @@
             dayOfWeek = inDayOfWeek;
             distanceFromWH = inDistanceFromWH;
             notes = inNotes;
+            active = inActive;
         }
     }
 }

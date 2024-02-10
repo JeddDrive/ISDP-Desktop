@@ -99,6 +99,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEditSite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditSite.Designer.cs">
+      <DependentUpon>AddEditSite.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEditUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +112,7 @@
       <DependentUpon>AddEditUser.cs</DependentUpon>
     </Compile>
     <Compile Include="DAO_Classes\EmployeeAccessor.cs" />
+    <Compile Include="DAO_Classes\InventoryAccessor.cs" />
     <Compile Include="DAO_Classes\ItemAccessor.cs" />
     <Compile Include="DAO_Classes\PasswordSaltAccessor.cs" />
     <Compile Include="DAO_Classes\PosnAccessor.cs" />
@@ -124,6 +131,7 @@
       <DependentUpon>EditItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity_Classes\Employee.cs" />
+    <Compile Include="Entity_Classes\Inventory.cs" />
     <Compile Include="Entity_Classes\Item.cs" />
     <Compile Include="Entity_Classes\PasswordSalt.cs" />
     <Compile Include="Entity_Classes\Posn.cs" />
@@ -133,6 +141,12 @@
     </Compile>
     <Compile Include="ItemManagement.Designer.cs">
       <DependentUpon>ItemManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SiteManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SiteManagement.Designer.cs">
+      <DependentUpon>SiteManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="UserManagement.cs">
       <SubType>Form</SubType>
@@ -163,6 +177,9 @@
     <Compile Include="UserPermissions.Designer.cs">
       <DependentUpon>UserPermissions.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddEditSite.resx">
+      <DependentUpon>AddEditSite.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddEditUser.resx">
       <DependentUpon>AddEditUser.cs</DependentUpon>
     </EmbeddedResource>
@@ -174,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ItemManagement.resx">
       <DependentUpon>ItemManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SiteManagement.resx">
+      <DependentUpon>SiteManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserManagement.resx">
       <DependentUpon>UserManagement.cs</DependentUpon>
