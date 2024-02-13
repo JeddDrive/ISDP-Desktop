@@ -131,6 +131,16 @@ add column hasPermission tinyint(1) NOT NULL Default 0;
 alter table `item`
 add column imageFileLocation varchar(255) DEFAULT NULL;
 
+-- alter site table - adding an active field
+-- to track if a site is active or not, default value will be 1
+alter table `site`
+add column active tinyint(1) NOT NULL Default 1;
+
+-- insert into the permission table these additional permissions:
+-- example: VIEWSITE
+INSERT INTO `permission` (`permissionID`) VALUES
+('VIEWSITE');
+
 -- alter user_permission table - so that all default users of the system have READUSER access
 -- the admin user (number 1) already has this but the others do not
 -- also are giving EDITITEM access to the warehouse manager, cpatstone
@@ -150,6 +160,21 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1012, 'READUSER', 1),
 (1013, 'READUSER', 1),
 (1014, 'READUSER', 1),
+(2, 'VIEWSITE', 1),
+(1000, 'VIEWSITE', 1),
+(1001, 'VIEWSITE', 1),
+(1002, 'VIEWSITE', 1),
+(1003, 'VIEWSITE', 1),
+(1004, 'VIEWSITE', 1),
+(1005, 'VIEWSITE', 1),
+(1006, 'VIEWSITE', 1),
+(1007, 'VIEWSITE', 1),
+(1008, 'VIEWSITE', 1),
+(1009, 'VIEWSITE', 1),
+(1010, 'VIEWSITE', 1),
+(1012, 'VIEWSITE', 1),
+(1013, 'VIEWSITE', 1),
+(1014, 'VIEWSITE', 1),
 (1003, 'EDITITEM', 1);
 
 -- for all records currently in the user_permission table, set hasPermission to 1
@@ -161,6 +186,7 @@ where hasPermission = 0;
 -- now need to insert permissions in user_permission for users besides the admin
 -- NOTE: don't need READUSER since it's already been done above
 INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) VALUES
+(1, 'VIEWSITE', 1),
 (2, 'ADDUSER', 0),
 (2, 'EDITUSER', 0),
 (2, 'DELETEUSER', 0),
@@ -254,7 +280,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1002, 'ADDSITE', 0),
 (1002, 'VIEWORDERS', 0),
 (1002, 'DELETELOCATION', 0),
-(1002, 'EDITINVENTORY', 0),
+(1002, 'EDITINVENTORY', 1),
 (1002, 'EDITITEM', 0),
 (1002, 'DELIVERY', 0),
 (1002, 'ACCEPTSTOREORDER', 0),
@@ -280,7 +306,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'ADDSITE', 0),
 (1003, 'VIEWORDERS', 0),
 (1003, 'DELETELOCATION', 0),
-(1003, 'EDITINVENTORY', 0),
+(1003, 'EDITINVENTORY', 1),
 (1003, 'DELIVERY', 0),
 (1003, 'ACCEPTSTOREORDER', 0),
 (1003, 'MODIFYRECORD', 0),
@@ -331,7 +357,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1005, 'ADDSITE', 0),
 (1005, 'VIEWORDERS', 0),
 (1005, 'DELETELOCATION', 0),
-(1005, 'EDITINVENTORY', 0),
+(1005, 'EDITINVENTORY', 1),
 (1005, 'EDITITEM', 0),
 (1005, 'DELIVERY', 0),
 (1005, 'ACCEPTSTOREORDER', 0),
@@ -357,7 +383,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1006, 'ADDSITE', 0),
 (1006, 'VIEWORDERS', 0),
 (1006, 'DELETELOCATION', 0),
-(1006, 'EDITINVENTORY', 0),
+(1006, 'EDITINVENTORY', 1),
 (1006, 'EDITITEM', 0),
 (1006, 'DELIVERY', 0),
 (1006, 'ACCEPTSTOREORDER', 0),
@@ -383,7 +409,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1007, 'ADDSITE', 0),
 (1007, 'VIEWORDERS', 0),
 (1007, 'DELETELOCATION', 0),
-(1007, 'EDITINVENTORY', 0),
+(1007, 'EDITINVENTORY', 1),
 (1007, 'EDITITEM', 0),
 (1007, 'DELIVERY', 0),
 (1007, 'ACCEPTSTOREORDER', 0),
@@ -409,7 +435,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1008, 'ADDSITE', 0),
 (1008, 'VIEWORDERS', 0),
 (1008, 'DELETELOCATION', 0),
-(1008, 'EDITINVENTORY', 0),
+(1008, 'EDITINVENTORY', 1),
 (1008, 'EDITITEM', 0),
 (1008, 'DELIVERY', 0),
 (1008, 'ACCEPTSTOREORDER', 0),
@@ -435,7 +461,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1009, 'ADDSITE', 0),
 (1009, 'VIEWORDERS', 0),
 (1009, 'DELETELOCATION', 0),
-(1009, 'EDITINVENTORY', 0),
+(1009, 'EDITINVENTORY', 1),
 (1009, 'EDITITEM', 0),
 (1009, 'DELIVERY', 0),
 (1009, 'ACCEPTSTOREORDER', 0),
@@ -461,7 +487,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1010, 'ADDSITE', 0),
 (1010, 'VIEWORDERS', 0),
 (1010, 'DELETELOCATION', 0),
-(1010, 'EDITINVENTORY', 0),
+(1010, 'EDITINVENTORY', 1),
 (1010, 'EDITITEM', 0),
 (1010, 'DELIVERY', 0),
 (1010, 'ACCEPTSTOREORDER', 0),
@@ -607,7 +633,7 @@ BEGIN
 
 -- insert into the user_permission table
 -- new user(s) will automatically have the following permissions turned on:
--- READUSER
+-- READUSER, VIEWSITE
 INSERT INTO user_permission(employeeID, permissionID, hasPermission)
 VALUES (new.employeeID, 'ADDUSER', 0),
 (new.employeeID, 'EDITUSER', 0),
@@ -635,8 +661,120 @@ VALUES (new.employeeID, 'ADDUSER', 0),
 (new.employeeID, 'ADDNEWPRODUCT', 0),
 (new.employeeID, 'EDITPRODUCT', 0),
 (new.employeeID, 'CREATESUPPLIERORDER', 0),
-(new.employeeID, 'CREATEREPORT', 0);
+(new.employeeID, 'CREATEREPORT', 0), 
+(new.employeeID, 'VIEWSITE', 1);
 	
 END$$
 
 DELIMITER ;
+
+-- stored procedure #1
+DELIMITER $$
+
+CREATE PROCEDURE insertLowInventoryIntoStoreOrder(
+IN inSiteID int,
+IN inTxnID int
+)
+BEGIN
+
+-- declare variables here before the cursor
+-- need variables for each field in the SELECT statement below
+declare itemIDVar int;
+declare caseSizeVar int;
+declare quantityVar int;
+declare reorderThresholdVar int;
+declare optimumThresholdVar int;
+declare neededQuantityVar int DEFAULT 0;
+declare neededCasesVar int DEFAULT 0;
+declare quantityAvailableVar int DEFAULT 0;
+
+-- need a flag variable, to let us know we're done with the cursor and can safely exit
+declare done int DEFAULT 0;
+
+-- declare the CURSOR
+declare inventoryCursor cursor for
+select iv.itemID, i.caseSize, iv.quantity, iv.reorderThreshold, iv.optimumThreshold
+from inventory iv
+inner join item i on iv.itemID = i.itemID
+where iv.siteID = inSiteID and iv.quantity <= iv.reorderThreshold;
+
+-- need the handler for when at the end of the cursor
+declare continue handler for not found
+set done = 1;
+
+-- open the cursor
+open inventoryCursor;
+
+-- loop thru the cursor
+mainLoop: loop
+
+-- fetch the cursor in the loop
+fetch inventoryCursor into itemIDVar, caseSizeVar, quantityVar, reorderThresholdVar, optimumThresholdVar;
+
+-- if we hit the end of the cursor then leave the loop
+if done = 1 then
+leave mainLoop;
+end if;
+
+-- reset value of neededCasesVar to 0 at start of loop
+set neededCasesVar = 0;
+
+-- calculate the amount/quantity that is needed
+set neededQuantityVar = optimumThresholdVar - reorderThresholdVar;
+
+-- get the quantity available for an item in inventory in the warehouse (site ID of 2)
+select quantity
+into quantityAvailableVar
+from inventory
+where siteID = 2 and itemID = itemIDVar;
+
+-- inner while loop
+-- while the needed amount of cases is under the optimum threshold AND the 
+-- needed amount of cases is equal to or above the quantity available in the warehouse then
+WHILE neededCasesVar < optimumThresholdVar DO
+set neededCasesVar = neededCasesVar + caseSizeVar;
+END WHILE;
+
+-- insert needed item record into the txnitems table
+INSERT INTO `txnitems` (`txnID`, `ItemID`, `quantity`,`notes`) 
+VALUES (inTxnID, itemIDVar, neededCasesVar, '');
+
+-- update the inventory table - for the item at the warehouse (siteID of 2)
+-- NOTE: may have to come back and update this later if not working properly
+update inventory
+set quantity = quantityAvailableVar - neededCasesVar
+where siteID = 2 and itemID = itemIDVar;
+
+-- end the main loop for the cursor
+end loop;
+
+-- close the cursor
+close inventoryCursor;
+
+END $$
+
+DELIMITER ;
+
+-- Trigger #4 - for automatically inserting items into a transaction
+-- after INSERTs on the txn table
+DELIMITER $$
+
+CREATE TRIGGER afterTxnInsert2
+AFTER INSERT
+ON txn FOR EACH ROW
+BEGIN
+
+-- if the transaction type is a store order then
+IF new.txnType = 'Store Order' THEN
+-- call the stored procedure from this trigger
+CALL insertLowInventoryIntoStoreOrder(new.siteIDTo, new.txnID);
+
+END IF;
+	
+END$$
+
+DELIMITER ;
+
+-- test insert record for the procedure and trigger above
+-- INSERT INTO `txn` (`txnID`, `siteIDTo`, `siteIdFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`, `deliveryID`,`notes`) VALUES 
+-- ('300', '6', '2', 'New', NOW(), 'Store Order', '111222333776', NOW(), '0', NULL, '');

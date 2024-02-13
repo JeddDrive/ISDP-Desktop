@@ -255,6 +255,14 @@ namespace JeddoreISDPDesktop
                 return;
             }
 
+            //if notes text characters are over 255
+            if (txtNotes.TextLength > 255)
+            {
+                MessageBox.Show("Maximum number of text characters for notes is 255.", "Notes Error");
+                txtNotes.Focus();
+                return;
+            }
+
             //if siteEdit is null, so are doing an ADD
             //are also checking for valid phone number and postal code
             if (siteEdit == null)

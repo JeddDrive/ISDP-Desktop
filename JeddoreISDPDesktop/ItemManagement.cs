@@ -44,7 +44,7 @@ namespace JeddoreISDPDesktop
             //create a new bindingsource
             BindingSource bindingSource = new BindingSource();
 
-            //create datatable - getting all employees, returned as a datatable
+            //create datatable - getting all items, returned as a datatable
             DataTable dt = ItemAccessor.GetAllItemsDataTable();
 
             //set the binding source's datasource to the datatable
@@ -62,7 +62,7 @@ namespace JeddoreISDPDesktop
             //set the binding source of the binding nav to the binding source created
             bindingNavigator.BindingSource = bindingSource;
 
-            //hiding the description - for performance
+            //hiding the description and notes columns - for performance
             dgvItems.Columns["description"].Visible = false;
             dgvItems.Columns["notes"].Visible = false;
 
@@ -160,7 +160,7 @@ namespace JeddoreISDPDesktop
                 dgvItems.ClearSelection();
             }
 
-            //else - 1 employee row is selected
+            //else - 1 item row is selected
             else
             {
                 //get the current row
@@ -169,10 +169,11 @@ namespace JeddoreISDPDesktop
                 //get the cell with the selected item's itemID
                 int itemID = int.Parse(dgvRow.Cells[0].Value.ToString());
 
-                //can now get the employee to edit with just the employee ID (primary key)
+                //can now get the item to edit with just the item ID (primary key)
                 Item selectedItem = ItemAccessor.GetOneItem(itemID);
 
                 //want to send the employee obj to the add user form - for the employee logged in
+                //and send in the selected item
                 EditItem frmEditItem = new EditItem(employee, selectedItem);
 
                 //open the add/edit user form (modal)

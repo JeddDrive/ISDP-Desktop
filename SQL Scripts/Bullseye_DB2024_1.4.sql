@@ -1,7 +1,12 @@
 -- Bullseye DB SQL Script 2024
--- version 1.3
--- January 12, 2024
+-- version 1.4
+-- February 13, 2024
 -- Chris London
+
+-- ********************************************
+-- Changes
+-- ********************************************
+-- 1.4 Added "Emergency Order" to the txntype table 
 
 -- ********************************************
 -- ****       Create Database         ****
@@ -340,7 +345,8 @@ INSERT INTO `txntype` (`txnType`) VALUES
 ('Sale'),
 ('Store Order'),
 ('Supplier Order'),
-('Correction');
+('Correction'),
+('Emergency');
 
 --
 -- Insert data for table `txnstatus`

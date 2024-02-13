@@ -274,7 +274,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         /**
         * Gets the count number of employees matching a wildcard pattern of a particular username.
         *
-        * @return an int, possibly 0 if none found based on the username wildcard.
+        * @return a long, possibly 0 if none found based on the username wildcard.
         */
         public static long GetCountWithTheUsernameAndEmployeeID(string usernameSentIn, int employeeID)
         {
@@ -315,7 +315,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         /**
         * Gets the count number of employees matching a wildcard pattern of a particular username.
         *
-        * @return an int, possibly 0 if none found based on the username wildcard.
+        * @return a long, possibly 0 if none found based on the username wildcard.
         */
         public static long GetCountWithTheUsername(string usernameSentIn)
         {

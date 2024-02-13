@@ -59,11 +59,16 @@ namespace JeddoreISDPDesktop
                 btnEditItem.Enabled = true;
             }
 
-
             //check the list for VIEWSITE
             if (employeeUserPermissions.permissionIDList.Contains("VIEWSITE"))
             {
                 btnViewSites.Enabled = true;
+            }
+
+            //check the list for EDITINVENTORY
+            if (employeeUserPermissions.permissionIDList.Contains("EDITINVENTORY"))
+            {
+                btnEditInventory.Enabled = true;
             }
         }
 
@@ -131,6 +136,15 @@ namespace JeddoreISDPDesktop
 
             //open the site management form (modal)
             frmSiteManagement.ShowDialog();
+        }
+
+        private void btnEditInventory_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the inventory management form
+            InventoryManagement frmInventoryManagement = new InventoryManagement(employee);
+
+            //open the inventory management form (modal)
+            frmInventoryManagement.ShowDialog();
         }
     }
 }

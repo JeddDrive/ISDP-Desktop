@@ -49,6 +49,7 @@
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnEditInventory = new System.Windows.Forms.Button();
             this.tabControlDashboard.SuspendLayout();
             this.tabInventory.SuspendLayout();
             this.tabAdmin.SuspendLayout();
@@ -82,6 +83,7 @@
             // tabInventory
             // 
             this.tabInventory.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabInventory.Controls.Add(this.btnEditInventory);
             this.tabInventory.Controls.Add(this.btnEditItem);
             this.tabInventory.Location = new System.Drawing.Point(4, 37);
             this.tabInventory.Name = "tabInventory";
@@ -94,7 +96,7 @@
             // 
             this.btnEditItem.Enabled = false;
             this.btnEditItem.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditItem.Location = new System.Drawing.Point(258, 102);
+            this.btnEditItem.Location = new System.Drawing.Point(258, 81);
             this.btnEditItem.Name = "btnEditItem";
             this.btnEditItem.Size = new System.Drawing.Size(456, 63);
             this.btnEditItem.TabIndex = 21;
@@ -241,6 +243,18 @@
             this.timer1.Interval = 1200000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnEditInventory
+            // 
+            this.btnEditInventory.Enabled = false;
+            this.btnEditInventory.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditInventory.Location = new System.Drawing.Point(258, 285);
+            this.btnEditInventory.Name = "btnEditInventory";
+            this.btnEditInventory.Size = new System.Drawing.Size(456, 63);
+            this.btnEditInventory.TabIndex = 22;
+            this.btnEditInventory.Text = "&Edit Inventory";
+            this.btnEditInventory.UseVisualStyleBackColor = true;
+            this.btnEditInventory.Click += new System.EventHandler(this.btnEditInventory_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
@@ -295,5 +309,6 @@
         private System.Windows.Forms.ToolTip toolTipHelp;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnViewSites;
+        private System.Windows.Forms.Button btnEditInventory;
     }
 }

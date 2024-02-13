@@ -18,9 +18,9 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
         //SQL statements for the Employee entity
         private static string selectAllBySiteIDStatement = "select iv.itemID, it.name, it.description, iv.siteID, iv.quantity, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
-            "from inventory iv inner join item it on iv.itemID = it.itemID where siteID = @siteID";
+            " from inventory iv inner join item it on iv.itemID = it.itemID where iv.siteID = @siteID";
         private static string selectOneStatement = "select iv.itemID, it.name, it.description, iv.siteID, iv.quantity, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
-            "from inventory iv inner join item it on iv.itemID = it.itemID where siteID = @siteID and iv.itemID = @itemID";
+            " from inventory iv inner join item it on iv.itemID = it.itemID where siteID = @siteID and iv.itemID = @itemID";
         private static string updateReorderThresholdStatement = "update inventory set reorderThreshold = @reorderThreshold, notes = @notes where itemID = @itemID and siteID = @siteID";
 
         /**
@@ -37,7 +37,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             //create datatable
             DataTable dt = new DataTable();
 
-            //one parameter for the query - string username
+            //one parameter for the query - int siteID
             cmd.Parameters.AddWithValue("@siteID", siteID);
 
             //create a datareader and execute
@@ -137,7 +137,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             MySqlCommand cmd = new MySqlCommand(updateReorderThresholdStatement, connection);
 
             //4 parameters for this update query
-            cmd.Parameters.AddWithValue("@reorderThresold", inventory.reorderThreshold);
+            cmd.Parameters.AddWithValue("@reorderThreshold", inventory.reorderThreshold);
             cmd.Parameters.AddWithValue("@notes", inventory.notes);
             cmd.Parameters.AddWithValue("@itemID", inventory.itemID);
             cmd.Parameters.AddWithValue("@siteID", inventory.siteID);

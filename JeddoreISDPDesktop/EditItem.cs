@@ -88,6 +88,14 @@ namespace JeddoreISDPDesktop
                 return;
             }
 
+            //if notes text characters are over 255
+            if (txtNotes.TextLength > 255)
+            {
+                MessageBox.Show("Maximum number of text characters for notes is 255.", "Notes Error");
+                txtNotes.Focus();
+                return;
+            }
+
             //if active chkbox is checked, set active to 1
             if (chkActive.Checked)
             {

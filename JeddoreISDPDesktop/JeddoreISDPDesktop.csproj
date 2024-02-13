@@ -117,12 +117,20 @@
     <Compile Include="DAO_Classes\PasswordSaltAccessor.cs" />
     <Compile Include="DAO_Classes\PosnAccessor.cs" />
     <Compile Include="DAO_Classes\SiteAccessor.cs" />
+    <Compile Include="DAO_Classes\TxnAccessor.cs" />
+    <Compile Include="DAO_Classes\TxnStatusAccessor.cs" />
     <Compile Include="DAO_Classes\UserPermissionAccessor.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditInventory.Designer.cs">
+      <DependentUpon>EditInventory.cs</DependentUpon>
     </Compile>
     <Compile Include="EditItem.cs">
       <SubType>Form</SubType>
@@ -136,6 +144,14 @@
     <Compile Include="Entity_Classes\PasswordSalt.cs" />
     <Compile Include="Entity_Classes\Posn.cs" />
     <Compile Include="Entity_Classes\Site.cs" />
+    <Compile Include="Entity_Classes\Txn.cs" />
+    <Compile Include="Entity_Classes\TxnStatus.cs" />
+    <Compile Include="InventoryManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InventoryManagement.Designer.cs">
+      <DependentUpon>InventoryManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="ItemManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,8 +202,14 @@
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditInventory.resx">
+      <DependentUpon>EditInventory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditItem.resx">
       <DependentUpon>EditItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InventoryManagement.resx">
+      <DependentUpon>InventoryManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ItemManagement.resx">
       <DependentUpon>ItemManagement.cs</DependentUpon>
