@@ -116,6 +116,7 @@
     <Compile Include="DAO_Classes\ItemAccessor.cs" />
     <Compile Include="DAO_Classes\PasswordSaltAccessor.cs" />
     <Compile Include="DAO_Classes\PosnAccessor.cs" />
+    <Compile Include="DAO_Classes\ProvinceAccessor.cs" />
     <Compile Include="DAO_Classes\SiteAccessor.cs" />
     <Compile Include="DAO_Classes\TxnAccessor.cs" />
     <Compile Include="DAO_Classes\TxnStatusAccessor.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Entity_Classes\Item.cs" />
     <Compile Include="Entity_Classes\PasswordSalt.cs" />
     <Compile Include="Entity_Classes\Posn.cs" />
+    <Compile Include="Entity_Classes\Province.cs" />
     <Compile Include="Entity_Classes\Site.cs" />
     <Compile Include="Entity_Classes\Txn.cs" />
     <Compile Include="Entity_Classes\TxnStatus.cs" />
@@ -193,6 +195,12 @@
     <Compile Include="UserPermissions.Designer.cs">
       <DependentUpon>UserPermissions.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewOrders.Designer.cs">
+      <DependentUpon>ViewOrders.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddEditSite.resx">
       <DependentUpon>AddEditSite.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +246,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserPermissions.resx">
       <DependentUpon>UserPermissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewOrders.resx">
+      <DependentUpon>ViewOrders.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

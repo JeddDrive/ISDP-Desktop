@@ -30,15 +30,13 @@ namespace JeddoreISDPDesktop
 
         private void AddEditSite_Load(object sender, EventArgs e)
         {
-            //list of province IDs
-            List<string> provincesList = new List<string>() { "AB", "BC", "MB", "NB", "NL", "NS",
-            "ON", "PE", "QC", "SK", "NT", "YT", "NU"};
+            //list of provinces from the province accessor
+            List<Province> provincesList = ProvinceAccessor.GetAllProvincesList();
 
-            //list of countries
-            List<string> countriesList = new List<string>() { "Canada" };
+            //countries hashset - for unique countries only (string)
+            HashSet<string> countriesHashSet = new HashSet<string>();
 
             //list of delivery days
-            //list of countries
             List<string> deliveryDaysList = new List<string>() { "SUNDAY", "MONDAY", "TUESDAY",
             "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"};
 
@@ -50,19 +48,23 @@ namespace JeddoreISDPDesktop
             lblLocation.Text = employee.siteName;
 
             //foreach loop thru provincesList
-            foreach (var province in provincesList)
+            foreach (Province province in provincesList)
             {
-                cboProvinces.Items.Add(province);
+                //add each province ID to the provinces combobox
+                cboProvinces.Items.Add(province.provinceID);
+
+                //add each country to the countries hash set - unique strings only
+                countriesHashSet.Add(province.countryCode);
             }
 
-            //foreach loop thru countriesList
-            foreach (var country in countriesList)
+            //foreach loop thru countriesHashSet
+            foreach (string country in countriesHashSet)
             {
                 cboCountries.Items.Add(country);
             }
 
             //foreach loop thru deliveryDaysList
-            foreach (var day in deliveryDaysList)
+            foreach (string day in deliveryDaysList)
             {
                 cboDeliveryDays.Items.Add(day);
             }

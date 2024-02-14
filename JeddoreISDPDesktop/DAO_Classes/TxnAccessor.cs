@@ -18,28 +18,31 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static MySqlConnection connection = new MySqlConnection(connString);
 
         //SQL statements for the Txn entity
-        //selectAllStatement - are not selecting any txns by default that are COMPLETE (closed), CANCELLED, or REJECTED
-        private static string selectAllStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
-            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.Status NOT IN ('Complete', 'Cancelled', 'Rejected')";
-        private static string selectAllBySiteStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
-            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.Status NOT IN ('Complete', 'Cancelled', 'Rejected') and (t.siteIDTo = @destinationSite or t.siteIDFrom = @originSite)";
-        private static string selectAllByStatusStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
-            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status";
-        private static string selectAllByStatusAndSiteStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
-    "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and (t.siteIDTo = @destinationSite or t.siteIDFrom = @originSite)";
-        private static string selectOneStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
-            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnID = @txnID";
+        //selectAllOrdersStatement - are not selecting any txns by default that are COMPLETE (closed), CANCELLED, or REJECTED
+        //and txns have to be either a STORE ORDER or an EMERGENCY order
+        private static string selectAllOrdersStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
+            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.Status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Store Order', 'Emergency')";
+        private static string selectAllOrdersBySiteStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
+            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.Status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Store Order', 'Emergency') and (t.siteIDTo = @destinationSite or t.siteIDFrom = @originSite)";
+        private static string selectAllOrdersByStatusStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
+            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and txnType IN ('Store Order', 'Emergency')";
+        private static string selectAllOrdersByStatusAndSiteStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
+    "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and txnType IN ('Store Order', 'Emergency') and (t.siteIDTo = @destinationSite or t.siteIDFrom = @originSite)";
+        private static string selectOneOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
+            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnID = @txnID and txnType IN ('Store Order', 'Emergency')";
         private static string selectCountActiveOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Store Order', 'Emergency')";
+        private static string insertTxnStatement = " INSERT INTO `txn` (`siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`, `deliveryID`,`notes`) VALUES " +
+            "(@siteIDTo, @siteIDFrom, @status, @shipDate, @txnType, @barCode, @createdDate, @emergencyDelivery, @deliveryID, @notes)";
 
         /**
-        * Get all of the txns (except for ones that are closed/cancelled/rejected/etc.).
+        * Get all of the orders (except for ones that are closed/cancelled/rejected/etc.).
         *
         * @return a DataTable, possibly empty, of Txns.
         */
-        public static DataTable GetAllTxnsDataTable()
+        public static DataTable GetAllOrdersDataTable()
         {
             //create a command
-            MySqlCommand cmd = new MySqlCommand(selectAllStatement, connection);
+            MySqlCommand cmd = new MySqlCommand(selectAllOrdersStatement, connection);
 
             //create datatable
             DataTable dt = new DataTable();
@@ -67,14 +70,14 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Get all of the txns for a particular site location.
+        * Get all of the orders for a particular site location.
         *
         * @return a DataTable, possibly empty, of Txns.
         */
-        public static DataTable GetAllTxnsBySiteDataTable(int inSiteID)
+        public static DataTable GetAllOrdersBySiteDataTable(int inSiteID)
         {
             //create a command
-            MySqlCommand cmd = new MySqlCommand(selectAllBySiteStatement, connection);
+            MySqlCommand cmd = new MySqlCommand(selectAllOrdersBySiteStatement, connection);
 
             //create datatable
             DataTable dt = new DataTable();
@@ -106,14 +109,14 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Get all of the txns for a particular txn status.
+        * Get all of the orders for a particular txn status.
         *
         * @return a DataTable, possibly empty, of Txns.
         */
-        public static DataTable GetAllTxnsByStatusDataTable(string status)
+        public static DataTable GetAllOrdersByStatusDataTable(string status)
         {
             //create a command
-            MySqlCommand cmd = new MySqlCommand(selectAllByStatusStatement, connection);
+            MySqlCommand cmd = new MySqlCommand(selectAllOrdersByStatusStatement, connection);
 
             //create datatable
             DataTable dt = new DataTable();
@@ -144,14 +147,14 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Get all of the txns for a particular txn status AND site.
+        * Get all of the orders for a particular txn status AND site.
         *
         * @return a DataTable, possibly empty, of Txns.
         */
-        public static DataTable GetAllTxnsByStatusAndSiteDataTable(string status, int inSiteID)
+        public static DataTable GetAllOrdersByStatusAndSiteDataTable(string status, int inSiteID)
         {
             //create a command
-            MySqlCommand cmd = new MySqlCommand(selectAllByStatusAndSiteStatement, connection);
+            MySqlCommand cmd = new MySqlCommand(selectAllOrdersByStatusAndSiteStatement, connection);
 
             //create datatable
             DataTable dt = new DataTable();
@@ -184,14 +187,14 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Gets all transactions.
+        * Gets all orders.
         *
         * @return a list of Txn objects.
         */
-        public static List<Txn> GetAllTxnsList()
+        public static List<Txn> GetAllOrdersList()
         {
             //create a command
-            MySqlCommand cmd = new MySqlCommand(selectAllStatement, connection);
+            MySqlCommand cmd = new MySqlCommand(selectAllOrdersStatement, connection);
 
             //list of txns to be returned
             List<Txn> txnsList = new List<Txn>();
@@ -248,15 +251,15 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Gets one txn, based on the txnID.
+        * Gets one order, based on the txnID.
         *
         * @param int txnID
         * @return a Txn object, possibly null if none found based on the txnID.
         */
-        public static Txn GetOneTxn(int inTxnID)
+        public static Txn GetOneOrder(int inTxnID)
         {
             //create a command
-            MySqlCommand cmd = new MySqlCommand(selectOneStatement, connection);
+            MySqlCommand cmd = new MySqlCommand(selectOneOrderStatement, connection);
 
             //txn to be returned
             Txn txn = null;
@@ -351,6 +354,61 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
             //return the rowCount (int)
             return rowCount;
+        }
+
+        /**
+        * Inserts a new txn.
+        *
+        * @param txn object
+        * @return bool - if txn was inserted or not
+        */
+        public static bool InsertNewTxn(Txn txn)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(insertTxnStatement, connection);
+
+            //many parameters for this insert query
+            cmd.Parameters.AddWithValue("@siteIDTo", txn.siteIDTo);
+            cmd.Parameters.AddWithValue("@siteIDFrom", txn.siteIDFrom);
+            cmd.Parameters.AddWithValue("@status", txn.status);
+            cmd.Parameters.AddWithValue("@shipDate", txn.shipDate);
+            cmd.Parameters.AddWithValue("@txnType", txn.txnType);
+            cmd.Parameters.AddWithValue("@barCode", txn.barCode);
+            cmd.Parameters.AddWithValue("@createdDate", txn.createdDate);
+            cmd.Parameters.AddWithValue("@emergencyDelivery", txn.emergencyDelivery);
+            cmd.Parameters.AddWithValue("@deliveryID", txn.deliveryID);
+            cmd.Parameters.AddWithValue("@notes", txn.notes);
+
+            //variable for rowCount
+            int rowCount = 0;
+
+            //bool to be returned
+            bool goodNonQuery = false;
+
+            try
+            {
+                connection.Open();
+
+                //execute a non query
+                rowCount = cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Inserting Transaction");
+
+                connection.Close();
+            }
+
+            //if rowCount is 1, then non query was good
+            if (rowCount == 1)
+            {
+                goodNonQuery = true;
+            }
+
+            return goodNonQuery;
         }
     }
 }

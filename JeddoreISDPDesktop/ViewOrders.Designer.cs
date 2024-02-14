@@ -1,6 +1,6 @@
 ﻿namespace JeddoreISDPDesktop
 {
-    partial class SiteManagement
+    partial class ViewOrders
     {
         /// <summary>
         /// Required designer variable.
@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SiteManagement));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewOrders));
             this.label4 = new System.Windows.Forms.Label();
-            this.txtSearchSites = new System.Windows.Forms.TextBox();
+            this.txtSearchOrders = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.picBullseye = new System.Windows.Forms.PictureBox();
             this.lblLocation = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
+            this.picHelp = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.grpSites = new System.Windows.Forms.GroupBox();
+            this.grpOrders = new System.Windows.Forms.GroupBox();
             this.bindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -52,23 +52,21 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.dgvSites = new System.Windows.Forms.DataGridView();
+            this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.grpBasic = new System.Windows.Forms.GroupBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnAddSite = new System.Windows.Forms.Button();
-            this.btnEditSite = new System.Windows.Forms.Button();
-            this.picBullseye = new System.Windows.Forms.PictureBox();
-            this.picHelp = new System.Windows.Forms.PictureBox();
-            this.grpSites.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
-            this.bindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSites)).BeginInit();
-            this.grpBasic.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.cboOrderTypes = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
+            this.grpOrders.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
+            this.bindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
+            this.grpBasic.SuspendLayout();
             this.SuspendLayout();
             // 
             // label4
@@ -77,26 +75,36 @@
             this.label4.Location = new System.Drawing.Point(10, 159);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 28);
-            this.label4.TabIndex = 58;
+            this.label4.TabIndex = 67;
             this.label4.Text = "Search:";
             // 
-            // txtSearchSites
+            // txtSearchOrders
             // 
-            this.txtSearchSites.Enabled = false;
-            this.txtSearchSites.Location = new System.Drawing.Point(84, 159);
-            this.txtSearchSites.Name = "txtSearchSites";
-            this.txtSearchSites.Size = new System.Drawing.Size(331, 34);
-            this.txtSearchSites.TabIndex = 0;
-            this.txtSearchSites.TextChanged += new System.EventHandler(this.txtSearchUsers_TextChanged);
+            this.txtSearchOrders.Enabled = false;
+            this.txtSearchOrders.Location = new System.Drawing.Point(84, 159);
+            this.txtSearchOrders.Name = "txtSearchOrders";
+            this.txtSearchOrders.Size = new System.Drawing.Size(331, 34);
+            this.txtSearchOrders.TabIndex = 59;
+            this.txtSearchOrders.TextChanged += new System.EventHandler(this.txtSearchOrders_TextChanged);
             // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(362, 106);
+            this.label3.Location = new System.Drawing.Point(405, 106);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(309, 50);
-            this.label3.TabIndex = 56;
-            this.label3.Text = "Site Management";
+            this.label3.Size = new System.Drawing.Size(214, 50);
+            this.label3.TabIndex = 66;
+            this.label3.Text = "View Orders";
+            // 
+            // picBullseye
+            // 
+            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
+            this.picBullseye.Location = new System.Drawing.Point(0, -1);
+            this.picBullseye.Name = "picBullseye";
+            this.picBullseye.Size = new System.Drawing.Size(140, 110);
+            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBullseye.TabIndex = 65;
+            this.picBullseye.TabStop = false;
             // 
             // lblLocation
             // 
@@ -104,7 +112,7 @@
             this.lblLocation.Location = new System.Drawing.Point(263, 68);
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(0, 28);
-            this.lblLocation.TabIndex = 54;
+            this.lblLocation.TabIndex = 64;
             // 
             // lblUsername
             // 
@@ -112,7 +120,18 @@
             this.lblUsername.Location = new System.Drawing.Point(263, 15);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(0, 28);
-            this.lblUsername.TabIndex = 53;
+            this.lblUsername.TabIndex = 63;
+            // 
+            // picHelp
+            // 
+            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
+            this.picHelp.Location = new System.Drawing.Point(920, 32);
+            this.picHelp.Name = "picHelp";
+            this.picHelp.Size = new System.Drawing.Size(45, 40);
+            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picHelp.TabIndex = 62;
+            this.picHelp.TabStop = false;
+            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
             // label1
             // 
@@ -120,7 +139,7 @@
             this.label1.Location = new System.Drawing.Point(183, 68);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 28);
-            this.label1.TabIndex = 51;
+            this.label1.TabIndex = 61;
             this.label1.Text = "Location:";
             // 
             // label2
@@ -129,24 +148,18 @@
             this.label2.Location = new System.Drawing.Point(213, 15);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 28);
-            this.label2.TabIndex = 50;
+            this.label2.TabIndex = 60;
             this.label2.Text = "User:";
             // 
-            // timer1
+            // grpOrders
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1200000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // grpSites
-            // 
-            this.grpSites.Controls.Add(this.bindingNavigator);
-            this.grpSites.Controls.Add(this.dgvSites);
-            this.grpSites.Location = new System.Drawing.Point(12, 199);
-            this.grpSites.Name = "grpSites";
-            this.grpSites.Size = new System.Drawing.Size(965, 351);
-            this.grpSites.TabIndex = 61;
-            this.grpSites.TabStop = false;
+            this.grpOrders.Controls.Add(this.bindingNavigator);
+            this.grpOrders.Controls.Add(this.dgvOrders);
+            this.grpOrders.Location = new System.Drawing.Point(9, 197);
+            this.grpOrders.Name = "grpOrders";
+            this.grpOrders.Size = new System.Drawing.Size(965, 351);
+            this.grpOrders.TabIndex = 69;
+            this.grpOrders.TabStop = false;
             // 
             // bindingNavigator
             // 
@@ -265,28 +278,28 @@
             this.bindingNavigatorDeleteItem.Text = "Delete";
             this.bindingNavigatorDeleteItem.Visible = false;
             // 
-            // dgvSites
+            // dgvOrders
             // 
-            this.dgvSites.AllowUserToAddRows = false;
-            this.dgvSites.AllowUserToDeleteRows = false;
-            this.dgvSites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvSites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSites.Location = new System.Drawing.Point(4, 60);
-            this.dgvSites.Name = "dgvSites";
-            this.dgvSites.RowHeadersWidth = 51;
-            this.dgvSites.RowTemplate.Height = 24;
-            this.dgvSites.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSites.Size = new System.Drawing.Size(955, 278);
-            this.dgvSites.TabIndex = 33;
+            this.dgvOrders.AllowUserToAddRows = false;
+            this.dgvOrders.AllowUserToDeleteRows = false;
+            this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrders.Location = new System.Drawing.Point(4, 60);
+            this.dgvOrders.Name = "dgvOrders";
+            this.dgvOrders.RowHeadersWidth = 51;
+            this.dgvOrders.RowTemplate.Height = 24;
+            this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvOrders.Size = new System.Drawing.Size(955, 278);
+            this.dgvOrders.TabIndex = 33;
             // 
             // grpBasic
             // 
             this.grpBasic.Controls.Add(this.btnRefresh);
             this.grpBasic.Controls.Add(this.btnExit);
-            this.grpBasic.Location = new System.Drawing.Point(12, 556);
+            this.grpBasic.Location = new System.Drawing.Point(9, 554);
             this.grpBasic.Name = "grpBasic";
             this.grpBasic.Size = new System.Drawing.Size(200, 191);
-            this.grpBasic.TabIndex = 59;
+            this.grpBasic.TabIndex = 68;
             this.grpBasic.TabStop = false;
             // 
             // btnRefresh
@@ -312,73 +325,44 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // groupBox1
+            // cboOrderTypes
             // 
-            this.groupBox1.Controls.Add(this.btnAddSite);
-            this.groupBox1.Controls.Add(this.btnEditSite);
-            this.groupBox1.Location = new System.Drawing.Point(770, 556);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 191);
-            this.groupBox1.TabIndex = 60;
-            this.groupBox1.TabStop = false;
+            this.cboOrderTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboOrderTypes.FormattingEnabled = true;
+            this.cboOrderTypes.Location = new System.Drawing.Point(771, 157);
+            this.cboOrderTypes.Name = "cboOrderTypes";
+            this.cboOrderTypes.Size = new System.Drawing.Size(203, 36);
+            this.cboOrderTypes.TabIndex = 70;
+            this.cboOrderTypes.SelectedIndexChanged += new System.EventHandler(this.cboOrderTypes_SelectedIndexChanged);
             // 
-            // btnAddSite
+            // label5
             // 
-            this.btnAddSite.Enabled = false;
-            this.btnAddSite.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddSite.Location = new System.Drawing.Point(29, 33);
-            this.btnAddSite.Name = "btnAddSite";
-            this.btnAddSite.Size = new System.Drawing.Size(147, 63);
-            this.btnAddSite.TabIndex = 0;
-            this.btnAddSite.Text = "&Add Site";
-            this.btnAddSite.UseVisualStyleBackColor = true;
-            this.btnAddSite.Click += new System.EventHandler(this.btnAddSite_Click);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(647, 159);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(118, 28);
+            this.label5.TabIndex = 71;
+            this.label5.Text = "Order Type:";
             // 
-            // btnEditSite
+            // timer1
             // 
-            this.btnEditSite.Enabled = false;
-            this.btnEditSite.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditSite.Location = new System.Drawing.Point(29, 113);
-            this.btnEditSite.Name = "btnEditSite";
-            this.btnEditSite.Size = new System.Drawing.Size(147, 63);
-            this.btnEditSite.TabIndex = 1;
-            this.btnEditSite.Text = "E&dit Site";
-            this.btnEditSite.UseVisualStyleBackColor = true;
-            this.btnEditSite.Click += new System.EventHandler(this.btnEditSite_Click);
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1200000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // picBullseye
-            // 
-            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
-            this.picBullseye.Location = new System.Drawing.Point(0, -1);
-            this.picBullseye.Name = "picBullseye";
-            this.picBullseye.Size = new System.Drawing.Size(140, 110);
-            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBullseye.TabIndex = 55;
-            this.picBullseye.TabStop = false;
-            // 
-            // picHelp
-            // 
-            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
-            this.picHelp.Location = new System.Drawing.Point(920, 32);
-            this.picHelp.Name = "picHelp";
-            this.picHelp.Size = new System.Drawing.Size(45, 40);
-            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picHelp.TabIndex = 52;
-            this.picHelp.TabStop = false;
-            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
-            // 
-            // SiteManagement
+            // ViewOrders
             // 
             this.AcceptButton = this.btnRefresh;
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(982, 753);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.grpSites);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.cboOrderTypes);
+            this.Controls.Add(this.grpOrders);
             this.Controls.Add(this.grpBasic);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtSearchSites);
+            this.Controls.Add(this.txtSearchOrders);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.picBullseye);
             this.Controls.Add(this.lblLocation);
@@ -390,21 +374,20 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "SiteManagement";
+            this.Name = "ViewOrders";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Bullseye Inventory Management System - Site Management";
-            this.Load += new System.EventHandler(this.SiteManagement_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SiteManagement_KeyDown);
-            this.grpSites.ResumeLayout(false);
-            this.grpSites.PerformLayout();
+            this.Text = "Bullseye Inventory Management System - View Orders";
+            this.Load += new System.EventHandler(this.ViewOrders_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ViewOrders_KeyDown);
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
+            this.grpOrders.ResumeLayout(false);
+            this.grpOrders.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).EndInit();
             this.bindingNavigator.ResumeLayout(false);
             this.bindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSites)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
             this.grpBasic.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -413,7 +396,7 @@
         #endregion
 
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtSearchSites;
+        private System.Windows.Forms.TextBox txtSearchOrders;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox picBullseye;
         private System.Windows.Forms.Label lblLocation;
@@ -421,9 +404,7 @@
         private System.Windows.Forms.PictureBox picHelp;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.ToolTip toolTipHelp;
-        private System.Windows.Forms.GroupBox grpSites;
+        private System.Windows.Forms.GroupBox grpOrders;
         private System.Windows.Forms.BindingNavigator bindingNavigator;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
@@ -436,12 +417,13 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
-        private System.Windows.Forms.DataGridView dgvSites;
+        private System.Windows.Forms.DataGridView dgvOrders;
         private System.Windows.Forms.GroupBox grpBasic;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnAddSite;
-        private System.Windows.Forms.Button btnEditSite;
+        private System.Windows.Forms.ComboBox cboOrderTypes;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolTip toolTipHelp;
     }
 }

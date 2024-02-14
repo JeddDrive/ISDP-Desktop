@@ -70,6 +70,12 @@ namespace JeddoreISDPDesktop
             {
                 btnEditInventory.Enabled = true;
             }
+
+            //check the lsit for VIEWORDERS
+            if (employeeUserPermissions.permissionIDList.Contains("VIEWORDERS"))
+            {
+                btnViewOrders.Enabled = true;
+            }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -145,6 +151,15 @@ namespace JeddoreISDPDesktop
 
             //open the inventory management form (modal)
             frmInventoryManagement.ShowDialog();
+        }
+
+        private void btnViewOrders_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the view orders form
+            ViewOrders frmViewOrders = new ViewOrders(employee);
+
+            //open the inventory management form (modal)
+            frmViewOrders.ShowDialog();
         }
     }
 }

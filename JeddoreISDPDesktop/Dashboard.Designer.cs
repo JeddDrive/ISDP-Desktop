@@ -33,6 +33,7 @@
             this.tabControlDashboard = new System.Windows.Forms.TabControl();
             this.tabOrders = new System.Windows.Forms.TabPage();
             this.tabInventory = new System.Windows.Forms.TabPage();
+            this.btnEditInventory = new System.Windows.Forms.Button();
             this.btnEditItem = new System.Windows.Forms.Button();
             this.tabLossReturn = new System.Windows.Forms.TabPage();
             this.tabReports = new System.Windows.Forms.TabPage();
@@ -49,8 +50,9 @@
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnEditInventory = new System.Windows.Forms.Button();
+            this.btnViewOrders = new System.Windows.Forms.Button();
             this.tabControlDashboard.SuspendLayout();
+            this.tabOrders.SuspendLayout();
             this.tabInventory.SuspendLayout();
             this.tabAdmin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
@@ -73,6 +75,7 @@
             // tabOrders
             // 
             this.tabOrders.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabOrders.Controls.Add(this.btnViewOrders);
             this.tabOrders.Location = new System.Drawing.Point(4, 37);
             this.tabOrders.Name = "tabOrders";
             this.tabOrders.Padding = new System.Windows.Forms.Padding(3);
@@ -91,6 +94,18 @@
             this.tabInventory.Size = new System.Drawing.Size(950, 437);
             this.tabInventory.TabIndex = 1;
             this.tabInventory.Text = "Inventory";
+            // 
+            // btnEditInventory
+            // 
+            this.btnEditInventory.Enabled = false;
+            this.btnEditInventory.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditInventory.Location = new System.Drawing.Point(258, 285);
+            this.btnEditInventory.Name = "btnEditInventory";
+            this.btnEditInventory.Size = new System.Drawing.Size(456, 63);
+            this.btnEditInventory.TabIndex = 22;
+            this.btnEditInventory.Text = "&Edit Inventory";
+            this.btnEditInventory.UseVisualStyleBackColor = true;
+            this.btnEditInventory.Click += new System.EventHandler(this.btnEditInventory_Click);
             // 
             // btnEditItem
             // 
@@ -243,17 +258,17 @@
             this.timer1.Interval = 1200000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnEditInventory
+            // btnViewOrders
             // 
-            this.btnEditInventory.Enabled = false;
-            this.btnEditInventory.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditInventory.Location = new System.Drawing.Point(258, 285);
-            this.btnEditInventory.Name = "btnEditInventory";
-            this.btnEditInventory.Size = new System.Drawing.Size(456, 63);
-            this.btnEditInventory.TabIndex = 22;
-            this.btnEditInventory.Text = "&Edit Inventory";
-            this.btnEditInventory.UseVisualStyleBackColor = true;
-            this.btnEditInventory.Click += new System.EventHandler(this.btnEditInventory_Click);
+            this.btnViewOrders.Enabled = false;
+            this.btnViewOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewOrders.Location = new System.Drawing.Point(258, 81);
+            this.btnViewOrders.Name = "btnViewOrders";
+            this.btnViewOrders.Size = new System.Drawing.Size(456, 63);
+            this.btnViewOrders.TabIndex = 22;
+            this.btnViewOrders.Text = "&View Orders";
+            this.btnViewOrders.UseVisualStyleBackColor = true;
+            this.btnViewOrders.Click += new System.EventHandler(this.btnViewOrders_Click);
             // 
             // Dashboard
             // 
@@ -279,6 +294,7 @@
             this.Load += new System.EventHandler(this.Dashboard_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Dashboard_KeyDown);
             this.tabControlDashboard.ResumeLayout(false);
+            this.tabOrders.ResumeLayout(false);
             this.tabInventory.ResumeLayout(false);
             this.tabAdmin.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
@@ -310,5 +326,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnViewSites;
         private System.Windows.Forms.Button btnEditInventory;
+        private System.Windows.Forms.Button btnViewOrders;
     }
 }

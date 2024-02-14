@@ -79,7 +79,6 @@ C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProj
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.Properties.Resources.resources
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.csproj.GenerateResource.cache
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.csproj.CoreCompileInputs.cache
-C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.csproj.CopyComplete
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.exe
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.pdb
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.ResetPassword.resources
@@ -93,3 +92,5 @@ C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProj
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.AddEditSite.resources
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.InventoryManagement.resources
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.EditInventory.resources
+C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.ViewOrders.resources
+C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreI.42A167D1.Up2Date
