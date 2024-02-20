@@ -308,7 +308,8 @@ INSERT INTO `site` (`siteID`, `name`, `provinceID`, `address`, `address2`, `city
 (7, 'Dieppe Retail', 'NB', '477 Paul Street', NULL, 'Dieppe', 'Canada', 'E1A4X5', 5066966232, 'TUESDAY', 157, NULL),
 (8, 'Oromocto Retail', 'NB', '273 Restigouche Road', NULL, 'Oromocto', 'Canada', 'E2V2H1', 5066966233, 'WEDNESDAY', 96, NULL),
 (9, 'Fredericton Retail', 'NB', '1381 Regent Street', 'Unit Y200A', 'Fredericton', 'Canada', 'E3C1A2', 5066966234, 'WEDNESDAY', 116, NULL),
-(10, 'Miramichi Retail', 'NB', '2441 King George Highway', NULL, 'Miramichi', 'Canada', 'E1V6W2', 5066966235, 'THURSDAY', 270, NULL);
+(10, 'Miramichi Retail', 'NB', '2441 King George Highway', NULL, 'Miramichi', 'Canada', 'E1V6W2', 5066966235, 'THURSDAY', 270, NULL),
+(11, 'Warehouse Bay', 'NB', '438 Grandview Avenue', NULL, 'Saint John', 'Canada', 'E2J4M9', 5066966228, 'SATURDAY', 0, NULL);
 
 --
 -- Insert data for table `employee`

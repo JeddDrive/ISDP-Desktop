@@ -119,6 +119,7 @@
     <Compile Include="DAO_Classes\ProvinceAccessor.cs" />
     <Compile Include="DAO_Classes\SiteAccessor.cs" />
     <Compile Include="DAO_Classes\TxnAccessor.cs" />
+    <Compile Include="DAO_Classes\TxnItemsAccessor.cs" />
     <Compile Include="DAO_Classes\TxnStatusAccessor.cs" />
     <Compile Include="DAO_Classes\UserPermissionAccessor.cs" />
     <Compile Include="Dashboard.cs">
@@ -147,7 +148,9 @@
     <Compile Include="Entity_Classes\Province.cs" />
     <Compile Include="Entity_Classes\Site.cs" />
     <Compile Include="Entity_Classes\Txn.cs" />
+    <Compile Include="Entity_Classes\TxnItems.cs" />
     <Compile Include="Entity_Classes\TxnStatus.cs" />
+    <Compile Include="Helper_Classes\DayOfWeekCalculator.cs" />
     <Compile Include="InventoryManagement.cs">
       <SubType>Form</SubType>
     </Compile>

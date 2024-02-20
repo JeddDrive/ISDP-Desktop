@@ -175,7 +175,16 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1012, 'VIEWSITE', 1),
 (1013, 'VIEWSITE', 1),
 (1014, 'VIEWSITE', 1),
-(1003, 'EDITITEM', 1);
+(1003, 'EDITITEM', 1),
+-- adding VIEWORDERS for all store and warehouse manager(s)
+(1002, 'VIEWORDERS', 1),
+(1003, 'VIEWORDERS', 1),
+(1005, 'VIEWORDERS', 1),
+(1006, 'VIEWORDERS', 1),
+(1007, 'VIEWORDERS', 1),
+(1008, 'VIEWORDERS', 1),
+(1009, 'VIEWORDERS', 1),
+(1010, 'VIEWORDERS', 1);
 
 -- for all records currently in the user_permission table, set hasPermission to 1
 -- since all admin records in this table right now are all permissions that the admin user should have
@@ -278,7 +287,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1002, 'CREATEBACKORDER', 0),
 (1002, 'EDITSITE', 0),
 (1002, 'ADDSITE', 0),
-(1002, 'VIEWORDERS', 0),
 (1002, 'DELETELOCATION', 0),
 (1002, 'EDITINVENTORY', 1),
 (1002, 'EDITITEM', 0),
@@ -304,7 +312,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'CREATEBACKORDER', 0),
 (1003, 'EDITSITE', 0),
 (1003, 'ADDSITE', 0),
-(1003, 'VIEWORDERS', 0),
 (1003, 'DELETELOCATION', 0),
 (1003, 'EDITINVENTORY', 1),
 (1003, 'DELIVERY', 0),
@@ -355,7 +362,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1005, 'CREATEBACKORDER', 0),
 (1005, 'EDITSITE', 0),
 (1005, 'ADDSITE', 0),
-(1005, 'VIEWORDERS', 0),
 (1005, 'DELETELOCATION', 0),
 (1005, 'EDITINVENTORY', 1),
 (1005, 'EDITITEM', 0),
@@ -381,7 +387,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1006, 'CREATEBACKORDER', 0),
 (1006, 'EDITSITE', 0),
 (1006, 'ADDSITE', 0),
-(1006, 'VIEWORDERS', 0),
 (1006, 'DELETELOCATION', 0),
 (1006, 'EDITINVENTORY', 1),
 (1006, 'EDITITEM', 0),
@@ -407,7 +412,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1007, 'CREATEBACKORDER', 0),
 (1007, 'EDITSITE', 0),
 (1007, 'ADDSITE', 0),
-(1007, 'VIEWORDERS', 0),
 (1007, 'DELETELOCATION', 0),
 (1007, 'EDITINVENTORY', 1),
 (1007, 'EDITITEM', 0),
@@ -433,7 +437,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1008, 'CREATEBACKORDER', 0),
 (1008, 'EDITSITE', 0),
 (1008, 'ADDSITE', 0),
-(1008, 'VIEWORDERS', 0),
 (1008, 'DELETELOCATION', 0),
 (1008, 'EDITINVENTORY', 1),
 (1008, 'EDITITEM', 0),
@@ -459,7 +462,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1009, 'CREATEBACKORDER', 0),
 (1009, 'EDITSITE', 0),
 (1009, 'ADDSITE', 0),
-(1009, 'VIEWORDERS', 0),
 (1009, 'DELETELOCATION', 0),
 (1009, 'EDITINVENTORY', 1),
 (1009, 'EDITITEM', 0),
@@ -485,7 +487,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1010, 'CREATEBACKORDER', 0),
 (1010, 'EDITSITE', 0),
 (1010, 'ADDSITE', 0),
-(1010, 'VIEWORDERS', 0),
 (1010, 'DELETELOCATION', 0),
 (1010, 'EDITINVENTORY', 1),
 (1010, 'EDITITEM', 0),
@@ -684,7 +685,7 @@ declare caseSizeVar int;
 declare quantityVar int;
 declare reorderThresholdVar int;
 declare optimumThresholdVar int;
-declare neededQuantityVar int DEFAULT 0;
+declare quantityNeededVar int DEFAULT 0;
 declare neededCasesVar int DEFAULT 0;
 declare quantityAvailableVar int DEFAULT 0;
 
@@ -720,7 +721,7 @@ end if;
 set neededCasesVar = 0;
 
 -- calculate the amount/quantity that is needed
-set neededQuantityVar = optimumThresholdVar - reorderThresholdVar;
+set quantityNeededVar = optimumThresholdVar - quantityVar;
 
 -- get the quantity available for an item in inventory in the warehouse (site ID of 2)
 select quantity
@@ -729,11 +730,13 @@ from inventory
 where siteID = 2 and itemID = itemIDVar;
 
 -- inner while loop
--- while the needed amount of cases is under the optimum threshold AND the 
--- needed amount of cases is equal to or above the quantity available in the warehouse then
-WHILE neededCasesVar < optimumThresholdVar DO
+-- while the needed amount of cases is under the optimum threshold
+WHILE neededCasesVar < quantityNeededVar DO
 set neededCasesVar = neededCasesVar + caseSizeVar;
 END WHILE;
+
+IF quantityAvailableVar >= caseSizeVar and quantityAvailableVar < neededCasesVar then
+set neededCasesVar = caseSizeVar;
 
 -- insert needed item record into the txnitems table
 INSERT INTO `txnitems` (`txnID`, `ItemID`, `quantity`,`notes`) 
@@ -744,6 +747,21 @@ VALUES (inTxnID, itemIDVar, neededCasesVar, '');
 update inventory
 set quantity = quantityAvailableVar - neededCasesVar
 where siteID = 2 and itemID = itemIDVar;
+
+-- NOTE: make changes to this IF statement
+ELSEIF quantityAvailableVar >= neededCasesVar THEN
+
+-- insert needed item record into the txnitems table
+INSERT INTO `txnitems` (`txnID`, `ItemID`, `quantity`,`notes`) 
+VALUES (inTxnID, itemIDVar, neededCasesVar, '');
+
+-- update the inventory table - for the item at the warehouse (siteID of 2)
+-- NOTE: may have to come back and update this later if not working properly
+update inventory
+set quantity = quantityAvailableVar - neededCasesVar
+where siteID = 2 and itemID = itemIDVar;
+
+END IF;
 
 -- end the main loop for the cursor
 end loop;
@@ -776,5 +794,116 @@ END$$
 DELIMITER ;
 
 -- test insert record for the procedure and trigger above
--- INSERT INTO `txn` (`txnID`, `siteIDTo`, `siteIdFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`, `deliveryID`,`notes`) VALUES 
+-- INSERT INTO `txn` (`txnID`, `siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`, `deliveryID`,`notes`) VALUES 
 -- ('300', '6', '2', 'New', NOW(), 'Store Order', '111222333776', NOW(), '0', NULL, '');
+
+-- stored procedure #2
+DELIMITER $$
+
+CREATE PROCEDURE insertInventoryBackIntoWarehouse(
+IN inQuantity int,
+IN inItemID int
+)
+BEGIN
+
+-- NOTE: shouldn't need a cursor for this stored procedure
+-- declare variables here before the select statement below
+-- need variables for each field in the SELECT statement below
+declare itemIDVar int;
+declare quantityVar int;
+
+-- getting the current quantity of the item in the warehouse
+-- warehouse site ID is 2
+select itemID, quantity
+into itemIDVar, quantityVar
+from inventory
+where siteID = 2 and itemID = inItemID;
+
+-- update the inventory table - for the one specific item at the warehouse (siteID: 2)
+-- NOTE: may have to come back and update this later if not working properly
+update inventory
+set quantity = quantityVar + inQuantity
+where siteID = 2 and itemID = inItemID;
+
+END $$
+
+DELIMITER ;
+
+-- stored procedure #3
+DELIMITER $$
+
+CREATE PROCEDURE updateWarehouseInventory(
+IN inQuantityOld int,
+IN inQuantityNew int,
+IN inItemID int
+)
+BEGIN
+
+-- NOTE: shouldn't need a cursor for this stored procedure
+-- declare variables here before the select statement below
+-- need variables for each field in the SELECT statement below
+declare itemIDVar int;
+declare quantityVar int;
+
+-- getting the current quantity of the item in the warehouse
+-- warehouse site ID is 2
+select itemID, quantity
+into itemIDVar, quantityVar
+from inventory
+where siteID = 2 and itemID = inItemID;
+
+-- if - quantity INCREASE for item in the txn then
+IF inQuantityNew > inQuantityOld THEN
+
+-- update the inventory table - for the one specific item at the warehouse (siteID: 2)
+update inventory
+set quantity = quantityVar - (inQuantityNew - inQuantityOld)
+where siteID = 2 and itemID = inItemID;
+
+-- else if - quantity DECREASE for item in the txn then
+ELSEIF inQuantityNew < inQuantityOld THEN
+
+-- update the inventory table - for the one specific item at the warehouse (siteID: 2)
+update inventory
+set quantity = quantityVar + (inQuantityOld - inQuantityNew)
+where siteID = 2 and itemID = inItemID;
+
+END IF;
+
+END $$
+
+DELIMITER ;
+
+-- Trigger #5 - for automatically adding quantity for an item back to the warehouse inventory
+-- after DELETEs on the txnitems table
+DELIMITER $$
+
+CREATE TRIGGER afterTxnItemsDelete
+AFTER DELETE
+ON txnitems FOR EACH ROW
+BEGIN
+
+-- call the stored procedure from this trigger
+-- are inserting the deleted item quantity from a txn back into the warehouse inventory
+CALL insertInventoryBackIntoWarehouse(old.quantity, old.itemID);
+	
+END$$
+
+DELIMITER ;
+
+-- Trigger #6 - for automatically adding OR removing quantity for an item back to the warehouse inventory
+-- after UPDATEs on the txnitems table
+DELIMITER $$
+
+CREATE TRIGGER afterTxnItemsUpdate
+AFTER UPDATE
+ON txnitems FOR EACH ROW
+BEGIN
+
+-- call the stored procedure from this trigger
+-- are inserting the deleted item quantity from a txn back into the warehouse inventory
+CALL updateWarehouseInventory(old.quantity, new.quantity, old.itemID);
+	
+END$$
+
+DELIMITER ;

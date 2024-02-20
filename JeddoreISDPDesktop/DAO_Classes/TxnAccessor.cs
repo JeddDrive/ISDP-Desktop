@@ -31,8 +31,10 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string selectOneOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnID = @txnID and txnType IN ('Store Order', 'Emergency')";
         private static string selectCountActiveOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Store Order', 'Emergency')";
-        private static string insertTxnStatement = " INSERT INTO `txn` (`siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`, `deliveryID`,`notes`) VALUES " +
+        private static string selectCountActiveBackOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Back Order')";
+        private static string insertTxnStatement = " insert into `txn` (`siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`, `deliveryID`,`notes`) VALUES " +
             "(@siteIDTo, @siteIDFrom, @status, @shipDate, @txnType, @barCode, @createdDate, @emergencyDelivery, @deliveryID, @notes)";
+        private static string updateTxnShipDateStatement = "update txn set shipDate = @shipDate where txnID = @txnID";
 
         /**
         * Get all of the orders (except for ones that are closed/cancelled/rejected/etc.).
@@ -352,7 +354,48 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
             }
 
-            //return the rowCount (int)
+            //return the rowCount (long)
+            return rowCount;
+        }
+
+        /**
+        * Gets the count (number) of active backorders for a particular site.
+        *
+        * @return a long, possibly 0 if none found based on siteIDTo.
+        */
+        public static long GetCountOfActiveBackOrdersForSite(int siteIDTo)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectCountActiveBackOrdersForSiteStatement, connection);
+
+            //int to be returned
+            long rowCount = 0;
+
+            //one parameter for the query - string username
+            cmd.Parameters.AddWithValue("@siteIDTo", siteIDTo);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                //casting to a long here to prevent exception(s)
+                rowCount = (long)cmd.ExecuteScalar();
+
+                //close the connection
+                connection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting the Count of Active Back Orders for that Site");
+
+                connection.Close();
+
+            }
+
+            //return the rowCount (long)
             return rowCount;
         }
 
@@ -398,6 +441,53 @@ namespace JeddoreISDPDesktop.DAO_Classes
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Inserting Transaction");
+
+                connection.Close();
+            }
+
+            //if rowCount is 1, then non query was good
+            if (rowCount == 1)
+            {
+                goodNonQuery = true;
+            }
+
+            return goodNonQuery;
+        }
+
+        /**
+        * Updates a Txn's ship date.
+        *
+        * @param Txn object
+        * @return bool - if the txn was updated or not
+        */
+        public static bool UpdateTxnItem(Txn txn)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(updateTxnShipDateStatement, connection);
+
+            //2 parameters for this update query
+            cmd.Parameters.AddWithValue("@shipDate", txn.shipDate);
+            cmd.Parameters.AddWithValue("@txnID", txn.txnID);
+
+            //variable for rowCount
+            int rowCount = 0;
+
+            //bool to be returned
+            bool goodNonQuery = false;
+
+            try
+            {
+                connection.Open();
+
+                //execute a non query
+                rowCount = cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Updating Transaction Ship Date");
 
                 connection.Close();
             }
