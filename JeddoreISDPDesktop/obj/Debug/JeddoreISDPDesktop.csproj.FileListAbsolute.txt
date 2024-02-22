@@ -94,3 +94,4 @@ C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProj
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.EditInventory.resources
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.ViewOrders.resources
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreI.42A167D1.Up2Date
+C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.CreateNewOrder.resources

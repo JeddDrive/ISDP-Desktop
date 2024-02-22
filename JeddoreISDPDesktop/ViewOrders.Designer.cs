@@ -84,7 +84,7 @@
             this.txtSearchOrders.Location = new System.Drawing.Point(84, 159);
             this.txtSearchOrders.Name = "txtSearchOrders";
             this.txtSearchOrders.Size = new System.Drawing.Size(331, 34);
-            this.txtSearchOrders.TabIndex = 59;
+            this.txtSearchOrders.TabIndex = 0;
             this.txtSearchOrders.TextChanged += new System.EventHandler(this.txtSearchOrders_TextChanged);
             // 
             // label3
@@ -332,7 +332,7 @@
             this.cboOrderTypes.Location = new System.Drawing.Point(771, 157);
             this.cboOrderTypes.Name = "cboOrderTypes";
             this.cboOrderTypes.Size = new System.Drawing.Size(203, 36);
-            this.cboOrderTypes.TabIndex = 70;
+            this.cboOrderTypes.TabIndex = 1;
             this.cboOrderTypes.SelectedIndexChanged += new System.EventHandler(this.cboOrderTypes_SelectedIndexChanged);
             // 
             // label5

@@ -28,12 +28,15 @@ namespace JeddoreISDPDesktop.DAO_Classes
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and txnType IN ('Store Order', 'Emergency')";
         private static string selectAllOrdersByStatusAndSiteStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
     "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and txnType IN ('Store Order', 'Emergency') and (t.siteIDTo = @destinationSite or t.siteIDFrom = @originSite)";
-        private static string selectOneOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
+        //getting the last/most recent txn record, mostly for the barcode
+        private static string selectLastTxnStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t " +
+            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID order by t.txnID DESC LIMIT 1";
+        private static string selectOneOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t " +
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnID = @txnID and txnType IN ('Store Order', 'Emergency')";
-        private static string selectCountActiveOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Store Order', 'Emergency')";
-        private static string selectCountActiveBackOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Back Order')";
-        private static string insertTxnStatement = " insert into `txn` (`siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`, `deliveryID`,`notes`) VALUES " +
-            "(@siteIDTo, @siteIDFrom, @status, @shipDate, @txnType, @barCode, @createdDate, @emergencyDelivery, @deliveryID, @notes)";
+        private static string selectCountActiveOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status IN ('NEW') and txnType IN ('Store Order', 'Emergency')";
+        private static string selectCountActiveBackOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Back Order')";
+        private static string insertTxnStatement = " insert into `txn` (`siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`) VALUES " +
+            "(@siteIDTo, @siteIDFrom, @status, @shipDate, @txnType, @barCode, @createdDate, @emergencyDelivery)";
         private static string updateTxnShipDateStatement = "update txn set shipDate = @shipDate where txnID = @txnID";
 
         /**
@@ -253,6 +256,67 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
+         * Gets the last/most recent transaction.
+         *
+         * @return a Txn object.
+         */
+        public static Txn GetLastTxn()
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectLastTxnStatement, connection);
+
+            //txn to be returned
+            Txn txn = null;
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                //if - there is a record to read
+                if (reader.Read())
+                {
+                    //get the values from the columns
+                    int txnID = reader.GetInt32("txnID");
+                    string originSite = reader.GetString("originSite");
+                    string destinationSite = reader.GetString("destinationSite");
+                    int siteIDTo = reader.GetInt32("siteIDTo");
+                    int siteIDFrom = reader.GetInt32("siteIDFrom");
+                    string status = reader.GetString("status");
+                    DateTime shipDate = reader.GetDateTime("shipDate");
+                    string txnType = reader.GetString("txnType");
+                    string barCode = reader.GetString("barCode");
+                    DateTime createdDate = reader.GetDateTime("createdDate");
+                    //int deliveryID = reader.GetInt32("deliveryID");
+                    //byte emergencyDelivery = reader.GetByte("emergencyDelivery");
+                    //string notes = reader.GetString("notes");
+
+                    //create a txn object
+                    txn = new Txn(txnID, originSite, destinationSite, siteIDTo, siteIDFrom, status,
+                        shipDate, txnType, barCode, createdDate);
+                }
+
+                //close reader after if statement
+                reader.Close();
+
+                //close the connection
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting the Last Transaction");
+
+                connection.Close();
+            }
+
+            //return the txn
+            return txn;
+        }
+
+        /**
         * Gets one order, based on the txnID.
         *
         * @param int txnID
@@ -291,13 +355,13 @@ namespace JeddoreISDPDesktop.DAO_Classes
                     string txnType = reader.GetString("txnType");
                     string barCode = reader.GetString("barCode");
                     DateTime createdDate = reader.GetDateTime("createdDate");
-                    int deliveryID = reader.GetInt32("deliveryID");
-                    byte emergencyDelivery = reader.GetByte("emergencyDelivery");
-                    string notes = reader.GetString("notes");
+                    //int deliveryID = reader.GetInt32("deliveryID");
+                    //byte emergencyDelivery = reader.GetByte("emergencyDelivery");
+                    //string notes = reader.GetString("notes");
 
                     //create a txn object
                     txn = new Txn(txnID, originSite, destinationSite, siteIDTo, siteIDFrom, status,
-                        shipDate, txnType, barCode, createdDate, deliveryID, emergencyDelivery, notes);
+                        shipDate, txnType, barCode, createdDate);
                 }
 
                 //close reader after if statement
@@ -313,12 +377,12 @@ namespace JeddoreISDPDesktop.DAO_Classes
                 connection.Close();
             }
 
-            //return the employee
+            //return the txn
             return txn;
         }
 
         /**
-        * Gets the count (number) of active store/emergency orders for a particular site.
+        * Gets the count (number) of active NEW store/emergency orders for a particular site.
         *
         * @return a long, possibly 0 if none found based on siteIDTo.
         */
@@ -419,8 +483,8 @@ namespace JeddoreISDPDesktop.DAO_Classes
             cmd.Parameters.AddWithValue("@barCode", txn.barCode);
             cmd.Parameters.AddWithValue("@createdDate", txn.createdDate);
             cmd.Parameters.AddWithValue("@emergencyDelivery", txn.emergencyDelivery);
-            cmd.Parameters.AddWithValue("@deliveryID", txn.deliveryID);
-            cmd.Parameters.AddWithValue("@notes", txn.notes);
+            //cmd.Parameters.AddWithValue("@deliveryID", txn.deliveryID);
+            //cmd.Parameters.AddWithValue("@notes", txn.notes);
 
             //variable for rowCount
             int rowCount = 0;

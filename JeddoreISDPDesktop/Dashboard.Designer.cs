@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.tabControlDashboard = new System.Windows.Forms.TabControl();
             this.tabOrders = new System.Windows.Forms.TabPage();
+            this.btnViewOrders = new System.Windows.Forms.Button();
             this.tabInventory = new System.Windows.Forms.TabPage();
             this.btnEditInventory = new System.Windows.Forms.Button();
             this.btnEditItem = new System.Windows.Forms.Button();
@@ -47,10 +48,10 @@
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblLocation = new System.Windows.Forms.Label();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnCreateOrder = new System.Windows.Forms.Button();
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnViewOrders = new System.Windows.Forms.Button();
             this.tabControlDashboard.SuspendLayout();
             this.tabOrders.SuspendLayout();
             this.tabInventory.SuspendLayout();
@@ -75,6 +76,7 @@
             // tabOrders
             // 
             this.tabOrders.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabOrders.Controls.Add(this.btnCreateOrder);
             this.tabOrders.Controls.Add(this.btnViewOrders);
             this.tabOrders.Location = new System.Drawing.Point(4, 37);
             this.tabOrders.Name = "tabOrders";
@@ -82,6 +84,18 @@
             this.tabOrders.Size = new System.Drawing.Size(950, 437);
             this.tabOrders.TabIndex = 0;
             this.tabOrders.Text = "Orders";
+            // 
+            // btnViewOrders
+            // 
+            this.btnViewOrders.Enabled = false;
+            this.btnViewOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewOrders.Location = new System.Drawing.Point(258, 81);
+            this.btnViewOrders.Name = "btnViewOrders";
+            this.btnViewOrders.Size = new System.Drawing.Size(456, 63);
+            this.btnViewOrders.TabIndex = 22;
+            this.btnViewOrders.Text = "&View Orders";
+            this.btnViewOrders.UseVisualStyleBackColor = true;
+            this.btnViewOrders.Click += new System.EventHandler(this.btnViewOrders_Click);
             // 
             // tabInventory
             // 
@@ -231,6 +245,24 @@
             this.lblLocation.Size = new System.Drawing.Size(0, 28);
             this.lblLocation.TabIndex = 19;
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1200000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // btnCreateOrder
+            // 
+            this.btnCreateOrder.Enabled = false;
+            this.btnCreateOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateOrder.Location = new System.Drawing.Point(258, 229);
+            this.btnCreateOrder.Name = "btnCreateOrder";
+            this.btnCreateOrder.Size = new System.Drawing.Size(456, 63);
+            this.btnCreateOrder.TabIndex = 23;
+            this.btnCreateOrder.Text = "&Create New Order";
+            this.btnCreateOrder.UseVisualStyleBackColor = true;
+            this.btnCreateOrder.Click += new System.EventHandler(this.btnCreateOrder_Click);
+            // 
             // picBullseye
             // 
             this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
@@ -251,24 +283,6 @@
             this.picHelp.TabIndex = 10;
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1200000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnViewOrders
-            // 
-            this.btnViewOrders.Enabled = false;
-            this.btnViewOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewOrders.Location = new System.Drawing.Point(258, 81);
-            this.btnViewOrders.Name = "btnViewOrders";
-            this.btnViewOrders.Size = new System.Drawing.Size(456, 63);
-            this.btnViewOrders.TabIndex = 22;
-            this.btnViewOrders.Text = "&View Orders";
-            this.btnViewOrders.UseVisualStyleBackColor = true;
-            this.btnViewOrders.Click += new System.EventHandler(this.btnViewOrders_Click);
             // 
             // Dashboard
             // 
@@ -327,5 +341,6 @@
         private System.Windows.Forms.Button btnViewSites;
         private System.Windows.Forms.Button btnEditInventory;
         private System.Windows.Forms.Button btnViewOrders;
+        private System.Windows.Forms.Button btnCreateOrder;
     }
 }

@@ -71,10 +71,16 @@ namespace JeddoreISDPDesktop
                 btnEditInventory.Enabled = true;
             }
 
-            //check the lsit for VIEWORDERS
+            //check the list for VIEWORDERS
             if (employeeUserPermissions.permissionIDList.Contains("VIEWORDERS"))
             {
                 btnViewOrders.Enabled = true;
+            }
+
+            //check the list for CREATESTOREORDER
+            if (employeeUserPermissions.permissionIDList.Contains("CREATESTOREORDER"))
+            {
+                btnCreateOrder.Enabled = true;
             }
         }
 
@@ -158,8 +164,30 @@ namespace JeddoreISDPDesktop
             //want to send the employee obj to the view orders form
             ViewOrders frmViewOrders = new ViewOrders(employee);
 
-            //open the inventory management form (modal)
+            //open the view orders form (modal)
             frmViewOrders.ShowDialog();
+        }
+
+        private void btnCreateOrder_Click(object sender, EventArgs e)
+        {
+            //checking the number of active/open orders for the manager's site
+            long numActiveOrders = TxnAccessor.GetCountOfActiveOrdersForSite(employee.siteID);
+
+            //if number of active orders is 0 then, take the user to the create new order form
+            if (numActiveOrders == 0)
+            {
+                //want to send the employee obj to the create new order form
+                CreateNewOrder frmCreateOrder = new CreateNewOrder(employee);
+
+                //open the create new order form (modal)
+                frmCreateOrder.ShowDialog();
+            }
+
+            //else - one active order likely already exists
+            else
+            {
+                MessageBox.Show("Active Order for this week already exists for your site.", "Active Order Exists");
+            }
         }
     }
 }

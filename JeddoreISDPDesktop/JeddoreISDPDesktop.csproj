@@ -111,6 +111,12 @@
     <Compile Include="AddEditUser.Designer.cs">
       <DependentUpon>AddEditUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateNewOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateNewOrder.Designer.cs">
+      <DependentUpon>CreateNewOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAO_Classes\EmployeeAccessor.cs" />
     <Compile Include="DAO_Classes\InventoryAccessor.cs" />
     <Compile Include="DAO_Classes\ItemAccessor.cs" />
@@ -209,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditUser.resx">
       <DependentUpon>AddEditUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateNewOrder.resx">
+      <DependentUpon>CreateNewOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
