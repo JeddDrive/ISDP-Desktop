@@ -99,6 +99,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEditOrderItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditOrderItem.Designer.cs">
+      <DependentUpon>AddEditOrderItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEditSite.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +151,12 @@
     </Compile>
     <Compile Include="EditItem.Designer.cs">
       <DependentUpon>EditItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditOrder.Designer.cs">
+      <DependentUpon>EditOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity_Classes\Employee.cs" />
     <Compile Include="Entity_Classes\Inventory.cs" />
@@ -210,6 +222,9 @@
     <Compile Include="ViewOrders.Designer.cs">
       <DependentUpon>ViewOrders.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddEditOrderItem.resx">
+      <DependentUpon>AddEditOrderItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddEditSite.resx">
       <DependentUpon>AddEditSite.cs</DependentUpon>
     </EmbeddedResource>
@@ -227,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditItem.resx">
       <DependentUpon>EditItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditOrder.resx">
+      <DependentUpon>EditOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InventoryManagement.resx">
       <DependentUpon>InventoryManagement.cs</DependentUpon>

@@ -328,6 +328,7 @@
             // cboOrderTypes
             // 
             this.cboOrderTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboOrderTypes.Enabled = false;
             this.cboOrderTypes.FormattingEnabled = true;
             this.cboOrderTypes.Location = new System.Drawing.Point(771, 157);
             this.cboOrderTypes.Name = "cboOrderTypes";

@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.tabControlDashboard = new System.Windows.Forms.TabControl();
             this.tabOrders = new System.Windows.Forms.TabPage();
+            this.btnCreateOrder = new System.Windows.Forms.Button();
             this.btnViewOrders = new System.Windows.Forms.Button();
             this.tabInventory = new System.Windows.Forms.TabPage();
             this.btnEditInventory = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@
             this.lblLocation = new System.Windows.Forms.Label();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnCreateOrder = new System.Windows.Forms.Button();
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
             this.tabControlDashboard.SuspendLayout();
@@ -84,6 +84,18 @@
             this.tabOrders.Size = new System.Drawing.Size(950, 437);
             this.tabOrders.TabIndex = 0;
             this.tabOrders.Text = "Orders";
+            // 
+            // btnCreateOrder
+            // 
+            this.btnCreateOrder.Enabled = false;
+            this.btnCreateOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateOrder.Location = new System.Drawing.Point(258, 229);
+            this.btnCreateOrder.Name = "btnCreateOrder";
+            this.btnCreateOrder.Size = new System.Drawing.Size(456, 63);
+            this.btnCreateOrder.TabIndex = 23;
+            this.btnCreateOrder.Text = "&Create/Edit New Order";
+            this.btnCreateOrder.UseVisualStyleBackColor = true;
+            this.btnCreateOrder.Click += new System.EventHandler(this.btnCreateOrder_Click);
             // 
             // btnViewOrders
             // 
@@ -250,18 +262,6 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 1200000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnCreateOrder
-            // 
-            this.btnCreateOrder.Enabled = false;
-            this.btnCreateOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateOrder.Location = new System.Drawing.Point(258, 229);
-            this.btnCreateOrder.Name = "btnCreateOrder";
-            this.btnCreateOrder.Size = new System.Drawing.Size(456, 63);
-            this.btnCreateOrder.TabIndex = 23;
-            this.btnCreateOrder.Text = "&Create New Order";
-            this.btnCreateOrder.UseVisualStyleBackColor = true;
-            this.btnCreateOrder.Click += new System.EventHandler(this.btnCreateOrder_Click);
             // 
             // picBullseye
             // 

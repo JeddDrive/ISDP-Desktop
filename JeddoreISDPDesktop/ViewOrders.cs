@@ -76,6 +76,9 @@ namespace JeddoreISDPDesktop
 
             //enable the textbox for user search
             txtSearchOrders.Enabled = true;
+
+            //enable the combobox
+            cboOrderTypes.Enabled = true;
         }
 
         //Show Default Orders - to display default orders meaning ones that are active and not complete, cancelled, etc.

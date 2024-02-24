@@ -104,7 +104,7 @@ namespace JeddoreISDPDesktop
                     //get the cell values for the following columns
                     var firstNameCellValue = row.Cells["firstName"].Value;
                     var lastNameCellValue = row.Cells["lastName"].Value;
-                    var locationCellValue = row.Cells["name"].Value;
+                    var locationCellValue = row.Cells["location"].Value;
                     var positionCellValue = row.Cells["permissionLevel"].Value;
                     var employeeIDCellValue = row.Cells["employeeID"].Value;
 
@@ -139,8 +139,8 @@ namespace JeddoreISDPDesktop
                         row.Visible = true;
                     }
 
-                    //else if - employee ID cell converted to lower case contains the txtbox text
-                    else if (employeeIDCellValue != null && employeeIDCellValue.ToString().ToLower().Contains(txtSearchUsers.Text))
+                    //else if - employee ID cell contains the txtbox text
+                    else if (employeeIDCellValue != null && employeeIDCellValue.ToString().Contains(txtSearchUsers.Text))
                     {
                         row.Visible = true;
                     }

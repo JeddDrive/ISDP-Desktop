@@ -299,7 +299,7 @@ namespace JeddoreISDPDesktop
                 else
                 {
                     DialogResult btnValueReturned = MessageBox.Show("New user's username: " + username +
-                        "\nNew User's email: " + email + "\n\nFinalize User Creation?", "Confirm New User Creation",
+                        "\nNew user's email: " + email + "\n\nFinalize User Creation?", "Confirm New User Creation",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     //if - user selects the yes btn
@@ -423,7 +423,7 @@ namespace JeddoreISDPDesktop
                 else
                 {
                     DialogResult btnValueReturned = MessageBox.Show("Edited user's username: " + username +
-                        "\nEdited User's email: " + email + "\n\nFinalize User Modification?", "Confirm Existing User Modification",
+                        "\nEdited user's email: " + email + "\n\nFinalize User Modification?", "Confirm Existing User Modification",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     //if - user selects the yes btn and the user's password has been edited then
@@ -508,11 +508,6 @@ namespace JeddoreISDPDesktop
                 "\n\nAdditionally, please choose a valid position and location for a user based on the choices available.", "Add/Edit User Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-        }
-
-        private void grpBasic_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }

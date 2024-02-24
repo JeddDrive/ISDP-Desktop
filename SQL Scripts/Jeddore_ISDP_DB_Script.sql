@@ -184,7 +184,16 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1007, 'VIEWORDERS', 1),
 (1008, 'VIEWORDERS', 1),
 (1009, 'VIEWORDERS', 1),
-(1010, 'VIEWORDERS', 1);
+(1010, 'VIEWORDERS', 1),
+-- adding CREATESTOREORDER for all store and warehouse manager(s)
+(1002, 'CREATESTOREORDER', 1),
+(1003, 'CREATESTOREORDER', 1),
+(1005, 'CREATESTOREORDER', 1),
+(1006, 'CREATESTOREORDER', 1),
+(1007, 'CREATESTOREORDER', 1),
+(1008, 'CREATESTOREORDER', 1),
+(1009, 'CREATESTOREORDER', 1),
+(1010, 'CREATESTOREORDER', 1);
 
 -- for all records currently in the user_permission table, set hasPermission to 1
 -- since all admin records in this table right now are all permissions that the admin user should have
@@ -279,7 +288,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1002, 'DELETEUSER', 0),
 (1002, 'SETPERMISSION', 0),
 (1002, 'MOVEINVENTORY', 0),
-(1002, 'CREATESTOREORDER', 0),
 (1002, 'RECEIVESTOREORDER', 0),
 (1002, 'PREPARESTOREORDER', 0),
 (1002, 'FULFILSTOREORDER', 0),
@@ -304,7 +312,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'DELETEUSER', 0),
 (1003, 'SETPERMISSION', 0),
 (1003, 'MOVEINVENTORY', 0),
-(1003, 'CREATESTOREORDER', 0),
 (1003, 'RECEIVESTOREORDER', 0),
 (1003, 'PREPARESTOREORDER', 0),
 (1003, 'FULFILSTOREORDER', 0),
@@ -354,7 +361,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1005, 'DELETEUSER', 0),
 (1005, 'SETPERMISSION', 0),
 (1005, 'MOVEINVENTORY', 0),
-(1005, 'CREATESTOREORDER', 0),
 (1005, 'RECEIVESTOREORDER', 0),
 (1005, 'PREPARESTOREORDER', 0),
 (1005, 'FULFILSTOREORDER', 0),
@@ -379,7 +385,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1006, 'DELETEUSER', 0),
 (1006, 'SETPERMISSION', 0),
 (1006, 'MOVEINVENTORY', 0),
-(1006, 'CREATESTOREORDER', 0),
 (1006, 'RECEIVESTOREORDER', 0),
 (1006, 'PREPARESTOREORDER', 0),
 (1006, 'FULFILSTOREORDER', 0),
@@ -404,7 +409,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1007, 'DELETEUSER', 0),
 (1007, 'SETPERMISSION', 0),
 (1007, 'MOVEINVENTORY', 0),
-(1007, 'CREATESTOREORDER', 0),
 (1007, 'RECEIVESTOREORDER', 0),
 (1007, 'PREPARESTOREORDER', 0),
 (1007, 'FULFILSTOREORDER', 0),
@@ -429,7 +433,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1008, 'DELETEUSER', 0),
 (1008, 'SETPERMISSION', 0),
 (1008, 'MOVEINVENTORY', 0),
-(1008, 'CREATESTOREORDER', 0),
 (1008, 'RECEIVESTOREORDER', 0),
 (1008, 'PREPARESTOREORDER', 0),
 (1008, 'FULFILSTOREORDER', 0),
@@ -454,7 +457,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1009, 'DELETEUSER', 0),
 (1009, 'SETPERMISSION', 0),
 (1009, 'MOVEINVENTORY', 0),
-(1009, 'CREATESTOREORDER', 0),
 (1009, 'RECEIVESTOREORDER', 0),
 (1009, 'PREPARESTOREORDER', 0),
 (1009, 'FULFILSTOREORDER', 0),
@@ -479,7 +481,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1010, 'DELETEUSER', 0),
 (1010, 'SETPERMISSION', 0),
 (1010, 'MOVEINVENTORY', 0),
-(1010, 'CREATESTOREORDER', 0),
 (1010, 'RECEIVESTOREORDER', 0),
 (1010, 'PREPARESTOREORDER', 0),
 (1010, 'FULFILSTOREORDER', 0),
@@ -874,6 +875,38 @@ END $$
 
 DELIMITER ;
 
+-- stored procedure #4
+DELIMITER $$
+
+CREATE PROCEDURE removeInventoryFromWarehouse(
+IN inQuantity int,
+IN inItemID int
+)
+BEGIN
+
+-- NOTE: shouldn't need a cursor for this stored procedure
+-- declare variables here before the select statement below
+-- need variables for each field in the SELECT statement below
+declare itemIDVar int;
+declare quantityVar int;
+
+-- getting the current quantity of the item in the warehouse
+-- warehouse site ID is 2
+select itemID, quantity
+into itemIDVar, quantityVar
+from inventory
+where siteID = 2 and itemID = inItemID;
+
+-- update the inventory table - for the one specific item at the warehouse (siteID: 2)
+-- NOTE: may have to come back and update this later if not working properly
+update inventory
+set quantity = quantityVar - inQuantity
+where siteID = 2 and itemID = inItemID;
+
+END $$
+
+DELIMITER ;
+
 -- Trigger #5 - for automatically adding quantity for an item back to the warehouse inventory
 -- after DELETEs on the txnitems table
 DELIMITER $$
@@ -903,6 +936,23 @@ BEGIN
 -- call the stored procedure from this trigger
 -- are inserting the deleted item quantity from a txn back into the warehouse inventory
 CALL updateWarehouseInventory(old.quantity, new.quantity, old.itemID);
+	
+END$$
+
+DELIMITER ;
+
+-- Trigger #7 - for automatically removing quantity for an item back from the warehouse inventory
+-- after INSERTs on the txnitems table
+DELIMITER $$
+
+CREATE TRIGGER afterTxnItemsInsert
+AFTER INSERT
+ON txnitems FOR EACH ROW
+BEGIN
+
+-- call the stored procedure from this trigger
+-- are removing the item quantity now in this txn from the warehouse inventory
+CALL removeInventoryFromWarehouse(new.quantity, new.itemID);
 	
 END$$
 

@@ -120,13 +120,6 @@ namespace JeddoreISDPDesktop
         //timer should close this form after 20 minutes
         private void timer1_Tick(object sender, EventArgs e)
         {
-            TimeSpan idleTime = TimeSpan.FromSeconds(2);
-
-            if (idleTime >= TimeSpan.FromSeconds(2))
-            {
-                this.Close();
-            }
-
             this.Close();
         }
 
@@ -186,7 +179,12 @@ namespace JeddoreISDPDesktop
             //else - one active order likely already exists
             else
             {
-                MessageBox.Show("Active Order for this week already exists for your site.", "Active Order Exists");
+                //then display the edit order form for the manager/user
+                //sending in the employee obj
+                EditOrder frmEditOrder = new EditOrder(employee);
+
+                //open the edit order form (modal)
+                frmEditOrder.ShowDialog();
             }
         }
     }

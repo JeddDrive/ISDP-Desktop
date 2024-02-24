@@ -28,7 +28,8 @@ namespace JeddoreISDPDesktop
 
         private void picHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Please enter a new password here, and ensure that that you confirm it before resetting it.",
+            MessageBox.Show("Please enter a new password here, and ensure that that you confirm it before resetting it." +
+                "\n\nPasswords Requirements: At least 1 upper case letter, 1 number, 1 special character, and at least 8 characters long.",
                 "Password Reset Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -129,8 +130,9 @@ namespace JeddoreISDPDesktop
             //if the F1 key is pressed down
             if (e.KeyCode == Keys.F1)
             {
-                MessageBox.Show("Please enter a new password here, and ensure that that you confirm it before resetting it.",
-               "Password Reset Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Please enter a new password here, and ensure that that you confirm it before resetting it." +
+                    "\n\nPasswords Requirements: At least 1 upper case letter, 1 number, 1 special character, and at least 8 characters long.",
+                    "Password Reset Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

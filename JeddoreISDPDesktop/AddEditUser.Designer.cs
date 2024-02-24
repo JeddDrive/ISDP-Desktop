@@ -111,7 +111,6 @@
             this.grpBasic.Size = new System.Drawing.Size(200, 191);
             this.grpBasic.TabIndex = 32;
             this.grpBasic.TabStop = false;
-            this.grpBasic.Enter += new System.EventHandler(this.grpBasic_Enter);
             // 
             // btnSave
             // 

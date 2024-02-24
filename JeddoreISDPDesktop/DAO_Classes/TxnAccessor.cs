@@ -33,11 +33,14 @@ namespace JeddoreISDPDesktop.DAO_Classes
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID order by t.txnID DESC LIMIT 1";
         private static string selectOneOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t " +
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnID = @txnID and txnType IN ('Store Order', 'Emergency')";
+        private static string selectSiteNewOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status = 'New' and txnType IN ('Store Order', 'Emergency') and t.siteIDTo = @siteID LIMIT 1";
+        private static string selectSiteNewBackOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status = 'New' and txnType IN ('Back Order') and t.siteIDTo = @siteID LIMIT 1";
         private static string selectCountActiveOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status IN ('NEW') and txnType IN ('Store Order', 'Emergency')";
         private static string selectCountActiveBackOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Back Order')";
         private static string insertTxnStatement = " insert into `txn` (`siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`) VALUES " +
             "(@siteIDTo, @siteIDFrom, @status, @shipDate, @txnType, @barCode, @createdDate, @emergencyDelivery)";
         private static string updateTxnShipDateStatement = "update txn set shipDate = @shipDate where txnID = @txnID";
+        private static string updateTxnStatusStatement = "update txn set status = @status where txnID = @txnID";
 
         /**
         * Get all of the orders (except for ones that are closed/cancelled/rejected/etc.).
@@ -372,7 +375,137 @@ namespace JeddoreISDPDesktop.DAO_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Getting the one Transaction");
+                MessageBox.Show(ex.Message, "Error Getting the One Transaction");
+
+                connection.Close();
+            }
+
+            //return the txn
+            return txn;
+        }
+
+        /**
+        * Gets one store OR emergency order with the status of 'New', based on the siteID. (The current order for a store)
+        *
+        * @param int siteID
+        * @return a Txn object, possibly null if none found based on the siteID.
+        */
+        public static Txn GetOneNewOrder(int inSiteID)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectSiteNewOrderStatement, connection);
+
+            //txn to be returned
+            Txn txn = null;
+
+            //one parameter for the query - int txnID
+            cmd.Parameters.AddWithValue("@siteID", inSiteID);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                //if - there is a record to read
+                if (reader.Read())
+                {
+                    //get the values from the columns
+                    int txnID = reader.GetInt32("txnID");
+                    string originSite = reader.GetString("originSite");
+                    string destinationSite = reader.GetString("destinationSite");
+                    int siteIDTo = reader.GetInt32("siteIDTo");
+                    int siteIDFrom = reader.GetInt32("siteIDFrom");
+                    string status = reader.GetString("status");
+                    DateTime shipDate = reader.GetDateTime("shipDate");
+                    string txnType = reader.GetString("txnType");
+                    string barCode = reader.GetString("barCode");
+                    DateTime createdDate = reader.GetDateTime("createdDate");
+                    //int deliveryID = reader.GetInt32("deliveryID");
+                    //byte emergencyDelivery = reader.GetByte("emergencyDelivery");
+                    //string notes = reader.GetString("notes");
+
+                    //create a txn object
+                    txn = new Txn(txnID, originSite, destinationSite, siteIDTo, siteIDFrom, status,
+                        shipDate, txnType, barCode, createdDate);
+                }
+
+                //close reader after if statement
+                reader.Close();
+
+                //close the connection
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting the One Store/Emergency Order");
+
+                connection.Close();
+            }
+
+            //return the txn
+            return txn;
+        }
+
+        /**
+        * Gets one back order with the status of 'New', based on the siteID. (The current back order for a store)
+        *
+        * @param int siteID
+        * @return a Txn object, possibly null if none found based on the siteID.
+        */
+        public static Txn GetOneNewBackOrder(int inSiteID)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectSiteNewBackOrderStatement, connection);
+
+            //txn to be returned
+            Txn txn = null;
+
+            //one parameter for the query - int txnID
+            cmd.Parameters.AddWithValue("@siteID", inSiteID);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                //if - there is a record to read
+                if (reader.Read())
+                {
+                    //get the values from the columns
+                    int txnID = reader.GetInt32("txnID");
+                    string originSite = reader.GetString("originSite");
+                    string destinationSite = reader.GetString("destinationSite");
+                    int siteIDTo = reader.GetInt32("siteIDTo");
+                    int siteIDFrom = reader.GetInt32("siteIDFrom");
+                    string status = reader.GetString("status");
+                    DateTime shipDate = reader.GetDateTime("shipDate");
+                    string txnType = reader.GetString("txnType");
+                    string barCode = reader.GetString("barCode");
+                    DateTime createdDate = reader.GetDateTime("createdDate");
+                    //int deliveryID = reader.GetInt32("deliveryID");
+                    //byte emergencyDelivery = reader.GetByte("emergencyDelivery");
+                    //string notes = reader.GetString("notes");
+
+                    //create a txn object
+                    txn = new Txn(txnID, originSite, destinationSite, siteIDTo, siteIDFrom, status,
+                        shipDate, txnType, barCode, createdDate);
+                }
+
+                //close reader after if statement
+                reader.Close();
+
+                //close the connection
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting the One Back Order");
 
                 connection.Close();
             }
@@ -524,7 +657,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         * @param Txn object
         * @return bool - if the txn was updated or not
         */
-        public static bool UpdateTxnItem(Txn txn)
+        public static bool UpdateTxnShipDate(Txn txn)
         {
             //create a command
             MySqlCommand cmd = new MySqlCommand(updateTxnShipDateStatement, connection);
@@ -552,6 +685,53 @@ namespace JeddoreISDPDesktop.DAO_Classes
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Updating Transaction Ship Date");
+
+                connection.Close();
+            }
+
+            //if rowCount is 1, then non query was good
+            if (rowCount == 1)
+            {
+                goodNonQuery = true;
+            }
+
+            return goodNonQuery;
+        }
+
+        /**
+        * Updates a Txn's ship date.
+        *
+        * @param Txn object
+        * @return bool - if the txn was updated or not
+        */
+        public static bool UpdateTxnStatus(string status, Txn txn)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(updateTxnStatusStatement, connection);
+
+            //2 parameters for this update query
+            cmd.Parameters.AddWithValue("@status", status);
+            cmd.Parameters.AddWithValue("@txnID", txn.txnID);
+
+            //variable for rowCount
+            int rowCount = 0;
+
+            //bool to be returned
+            bool goodNonQuery = false;
+
+            try
+            {
+                connection.Open();
+
+                //execute a non query
+                rowCount = cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Updating Transaction Status");
 
                 connection.Close();
             }

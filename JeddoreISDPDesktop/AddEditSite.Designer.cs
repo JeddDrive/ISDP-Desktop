@@ -34,8 +34,6 @@
             this.lblUsername = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.picHelp = new System.Windows.Forms.PictureBox();
-            this.picBullseye = new System.Windows.Forms.PictureBox();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblSiteID = new System.Windows.Forms.Label();
@@ -64,10 +62,12 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.grpBasic = new System.Windows.Forms.GroupBox();
             this.chkActive = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
+            this.picHelp = new System.Windows.Forms.PictureBox();
+            this.picBullseye = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudDistance)).BeginInit();
             this.grpBasic.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             this.SuspendLayout();
             // 
             // lblLocation
@@ -103,27 +103,6 @@
             this.label2.Size = new System.Drawing.Size(59, 28);
             this.label2.TabIndex = 51;
             this.label2.Text = "User:";
-            // 
-            // picHelp
-            // 
-            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
-            this.picHelp.Location = new System.Drawing.Point(575, 16);
-            this.picHelp.Name = "picHelp";
-            this.picHelp.Size = new System.Drawing.Size(45, 40);
-            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picHelp.TabIndex = 56;
-            this.picHelp.TabStop = false;
-            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
-            // 
-            // picBullseye
-            // 
-            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
-            this.picBullseye.Location = new System.Drawing.Point(0, 0);
-            this.picBullseye.Name = "picBullseye";
-            this.picBullseye.Size = new System.Drawing.Size(140, 110);
-            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBullseye.TabIndex = 55;
-            this.picBullseye.TabStop = false;
             // 
             // timer1
             // 
@@ -373,6 +352,27 @@
             this.chkActive.Text = "Active Site";
             this.chkActive.UseVisualStyleBackColor = true;
             // 
+            // picHelp
+            // 
+            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
+            this.picHelp.Location = new System.Drawing.Point(575, 16);
+            this.picHelp.Name = "picHelp";
+            this.picHelp.Size = new System.Drawing.Size(45, 40);
+            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picHelp.TabIndex = 56;
+            this.picHelp.TabStop = false;
+            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
+            // 
+            // picBullseye
+            // 
+            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
+            this.picBullseye.Location = new System.Drawing.Point(0, 0);
+            this.picBullseye.Name = "picBullseye";
+            this.picBullseye.Size = new System.Drawing.Size(140, 110);
+            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBullseye.TabIndex = 55;
+            this.picBullseye.TabStop = false;
+            // 
             // AddEditSite
             // 
             this.AcceptButton = this.btnSave;
@@ -419,10 +419,10 @@
             this.Text = "Bullseye Inventory Management System - Add/Edit Site";
             this.Load += new System.EventHandler(this.AddEditSite_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddEditSite_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDistance)).EndInit();
             this.grpBasic.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

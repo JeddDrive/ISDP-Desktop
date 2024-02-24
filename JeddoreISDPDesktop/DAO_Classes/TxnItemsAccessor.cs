@@ -21,6 +21,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string selectAllItemsByTxnIDStatement = "select ti.txnID, ti.itemID, i.name, IFNULL(i.description, '') as description, ti.quantity, i.caseSize, i.weight, IFNULL(ti.notes, '') as notes from txnitems ti inner join item i on ti.itemID = i.itemID where ti.txnID = @txnID";
         private static string selectOneByTxnIDAndItemIDStatement = "select ti.txnID, ti.itemID, i.name, IFNULL(i.description, '') as description, ti.quantity, i.caseSize, i.weight, IFNULL(ti.notes, '') as notes from txnitems ti inner join item i on ti.itemID = i.itemID where ti.txnID = @txnID and ti.itemID = @itemID";
         private static string selectCountItemsInTxnStatement = "select count(*) from txnitems where txnID = @txnID";
+        private static string selectCountSpecificIteminTxnStatement = "select count(*) from txnitems where txnID = @txnID and itemID = @itemID";
         private static string updateTxnItemQuantityAndNotesStatement = "update txnitems set quantity = @quantity, notes = @notes where txnID = @txnID and itemID = @itemID";
         private static string insertTxnItemStatement = " insert into `txnitems` (`txnID`, `itemID`, `quantity`, `notes`) VALUES " +
             "(@txnID, @itemID, @quantity, @notes)";
@@ -69,9 +70,9 @@ namespace JeddoreISDPDesktop.DAO_Classes
         * Get all of the txnitems for a specific txn, returned in a list.
         *
         * @param int inTxnID
-        * @return a List, possibly empty, of Employee objects.
+        * @return a List, possibly empty, of TxnItems objects.
         */
-        public static List<TxnItems> GetAllEmployeesList(int inTxnID)
+        public static List<TxnItems> GetAllTxnItemsList(int inTxnID)
         {
             //create a command
             MySqlCommand cmd = new MySqlCommand(selectAllItemsByTxnIDStatement, connection);
@@ -195,7 +196,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         *
         * @return a long, possibly 0 if none found based on txnID
         */
-        public static long GetCountOfActiveBackOrdersForSite(int txnID)
+        public static long GetCountOfItemsInTxn(int txnID)
         {
             //create a command
             MySqlCommand cmd = new MySqlCommand(selectCountItemsInTxnStatement, connection);
@@ -205,6 +206,48 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
             //one parameter for the query - int txnID
             cmd.Parameters.AddWithValue("@txnID", txnID);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                //casting to a long here to prevent exception(s)
+                rowCount = (long)cmd.ExecuteScalar();
+
+                //close the connection
+                connection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting the Count of Items in Transaction");
+
+                connection.Close();
+
+            }
+
+            //return the rowCount (long)
+            return rowCount;
+        }
+
+        /**
+        * Gets the count (number) of a specific item in a txn.
+        *
+        * @return a long, possibly 0 if none found based on txnID. 1 or 0 should be returned.
+        */
+        public static long GetCountOfSpecificItemInTxn(int txnID, int itemID)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectCountSpecificIteminTxnStatement, connection);
+
+            //int to be returned
+            long rowCount = 0;
+
+            //two parameters for the query - txnID and itemID
+            cmd.Parameters.AddWithValue("@txnID", txnID);
+            cmd.Parameters.AddWithValue("@itemID", itemID);
 
             //create a datareader and execute
             try
