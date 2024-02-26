@@ -189,8 +189,11 @@ namespace JeddoreISDPDesktop
                 //else - are 5 items or less
                 else
                 {
+                    //update the status property of this new order
+                    newOrder.status = "Submitted";
+
                     //change the order's status from New to Submitted
-                    bool success = TxnAccessor.UpdateTxnStatus("Submitted", newOrder);
+                    bool success = TxnAccessor.UpdateTxnStatus(newOrder);
 
                     //if success, display success message and close the form
                     if (success)
@@ -205,8 +208,11 @@ namespace JeddoreISDPDesktop
             //else - order is a store order, which have no item limit
             else
             {
+                //update the status property of this new order
+                newOrder.status = "Submitted";
+
                 //change the order's status from New to Submitted
-                bool success = TxnAccessor.UpdateTxnStatus("Submitted", newOrder);
+                bool success = TxnAccessor.UpdateTxnStatus(newOrder);
 
                 //if success, display success message and close the form
                 if (success)
@@ -444,7 +450,43 @@ namespace JeddoreISDPDesktop
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            int selectedRowsCount = dgvOrder.SelectedRows.Count;
 
+            //if number of selected rows is not one
+            if (selectedRowsCount != 1)
+            {
+                MessageBox.Show("Must select one row from the data grid for your order items in order to update that's item's quantity in the order.",
+                    "Inventory Item Update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                //clear all selected rows from the dgv
+                dgvOrder.ClearSelection();
+            }
+
+            //else - 1 order item row is selected
+            else
+            {
+                //get the current row
+                DataGridViewRow dgvRow = dgvOrder.CurrentRow;
+
+                //get the cell with the selected item's itemID in the order DGV
+                int itemID = int.Parse(dgvRow.Cells[1].Value.ToString());
+
+                //also get the cell with the selected item's current quantity in the order DGV
+                int quantity = int.Parse(dgvRow.Cells[4].Value.ToString());
+
+                //get an item object based on the itemID
+                Item selectedItem = ItemAccessor.GetOneItem(itemID);
+
+                //get an inventory object based on the itemID and site ID for the warehouse (2)
+                Inventory warehouseInventoryItem = InventoryAccessor.GetOneInventoryItem(2, itemID);
+
+                //want to send the 3 objs to the add/edit order item form
+                AddEditOrderItem frmAddEditOrderItem = new AddEditOrderItem(employee, selectedItem,
+                    warehouseInventoryItem, quantity);
+
+                //open the add/edit user form (modal)
+                frmAddEditOrderItem.ShowDialog();
+            }
         }
     }
 }

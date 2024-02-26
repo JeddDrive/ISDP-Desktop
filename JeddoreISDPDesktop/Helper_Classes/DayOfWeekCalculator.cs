@@ -32,7 +32,8 @@ namespace JeddoreISDPDesktop.Helper_Classes
 
             //getting the next ship date
             //gets the number of days from today (based on the offset)
-            DateTime nextShipDate = now.AddDays(offset);
+            //are adding 7 to the offset here in order to get the ship date for the week after the current one
+            DateTime nextShipDate = now.AddDays(offset + 7);
 
             //return the next ship date
             return nextShipDate;

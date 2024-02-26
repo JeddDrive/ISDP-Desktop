@@ -704,13 +704,13 @@ namespace JeddoreISDPDesktop.DAO_Classes
         * @param Txn object
         * @return bool - if the txn was updated or not
         */
-        public static bool UpdateTxnStatus(string status, Txn txn)
+        public static bool UpdateTxnStatus(Txn txn)
         {
             //create a command
             MySqlCommand cmd = new MySqlCommand(updateTxnStatusStatement, connection);
 
             //2 parameters for this update query
-            cmd.Parameters.AddWithValue("@status", status);
+            cmd.Parameters.AddWithValue("@status", txn.status);
             cmd.Parameters.AddWithValue("@txnID", txn.txnID);
 
             //variable for rowCount

@@ -259,9 +259,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(63, 313);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(203, 28);
+            this.label5.Size = new System.Drawing.Size(182, 28);
             this.label5.TabIndex = 94;
-            this.label5.Text = "Warehouse Quantity:";
+            this.label5.Text = "Available Quantity:";
             // 
             // lblWarehouseQuantity
             // 

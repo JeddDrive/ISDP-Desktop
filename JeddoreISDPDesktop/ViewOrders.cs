@@ -89,14 +89,14 @@ namespace JeddoreISDPDesktop
 
             DataTable dt = null;
 
-            //if the employee logged in has admin privileges, then show all orders regardless of site
-            if (employee.positionID == 99999999)
+            //if the employee logged in has admin or warehouse manager privileges, then show all orders regardless of site
+            if (employee.positionID == 99999999 || employee.positionID == 4)
             {
                 //create datatable - getting all orders regardless of site, returned as a datatable
                 dt = TxnAccessor.GetAllOrdersDataTable();
             }
 
-            //else - employee logged in is not an admin (Ex. store or warehouse manager) then
+            //else - employee logged in is not an admin (Ex. store manager) then
             else
             {
                 //create datatable - getting all orders by employee's site, returned as a datatable
@@ -147,14 +147,14 @@ namespace JeddoreISDPDesktop
 
             DataTable dt = null;
 
-            //if the employee logged in has admin privileges, then show all orders regardless of site
-            if (employee.positionID == 99999999)
+            //if the employee logged in has admin OR warehouse manager privileges, then show all orders regardless of site
+            if (employee.positionID == 99999999 || employee.positionID == 4)
             {
                 //create datatable - getting all orders by status regardless of site, returned as a datatable
                 dt = TxnAccessor.GetAllOrdersByStatusDataTable(cboOrderTypes.Text);
             }
 
-            //else - employee logged in is not an admin (Ex. store or warehouse manager) then
+            //else - employee logged in is not an admin or warehouse manager (ex. store manager) then
             else
             {
                 //create datatable - getting all orders by employee's site AND status, returned as a datatable
@@ -276,6 +276,61 @@ namespace JeddoreISDPDesktop
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnReceive_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = dgvOrders.SelectedRows.Count;
+
+            //if number of selected rows is not one
+            if (selectedRowsCount != 1)
+            {
+                MessageBox.Show("Must select one row from the data grid in order to receive that specific order.",
+                    "Receive Order Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                //clear all selected rows from the dgv
+                dgvOrders.ClearSelection();
+            }
+
+            //else - 1 order item row is selected
+            else
+            {
+                //get the current row
+                DataGridViewRow dgvRow = dgvOrders.CurrentRow;
+
+                //get the cell with the selected row's txnID in the orders DGV
+                int txnID = int.Parse(dgvRow.Cells[0].Value.ToString());
+
+                //get the transaction
+                Txn theTxn = TxnAccessor.GetOneOrder(txnID);
+
+                //if the status of the txn is NOT submitted then
+                if (theTxn.status != "Submitted")
+                {
+                    MessageBox.Show("The status of your selected order is: " + theTxn.status + "." +
+                        "\n\nOnly orders with the status of 'Submitted' can be received by the warehouse for order assembly.",
+                        "Unsuccessful Receival", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    dgvOrders.ClearSelection();
+                }
+
+                //else - the status is new then
+                else
+                {
+                    //update the txn's status to assembling
+                    theTxn.status = "Assembling";
+
+                    //send the txn obj to the accessor
+                    bool success = TxnAccessor.UpdateTxnStatus(theTxn);
+
+                    //if success
+                    if (success)
+                    {
+                        MessageBox.Show("Order for " + theTxn.destinationSite + " has been successfully received for assembly. It's status has been updated to " + theTxn.status + ".",
+                            "Successful Receival");
+                    }
+                }
             }
         }
     }

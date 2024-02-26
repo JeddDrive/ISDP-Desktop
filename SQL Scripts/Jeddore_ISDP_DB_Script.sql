@@ -889,6 +889,7 @@ BEGIN
 -- need variables for each field in the SELECT statement below
 declare itemIDVar int;
 declare quantityVar int;
+declare quantityVar2 int;
 
 -- getting the current quantity of the item in the warehouse
 -- warehouse site ID is 2
@@ -898,10 +899,27 @@ from inventory
 where siteID = 2 and itemID = inItemID;
 
 -- update the inventory table - for the one specific item at the warehouse (siteID: 2)
--- NOTE: may have to come back and update this later if not working properly
 update inventory
 set quantity = quantityVar - inQuantity
 where siteID = 2 and itemID = inItemID;
+
+-- getting the current quantity of the item in the warehouse (again)
+-- warehouse site ID is 2
+select itemID, quantity
+into itemIDVar, quantityVar2
+from inventory
+where siteID = 2 and itemID = inItemID;
+
+-- if the updated quantity is less than 0, then set it to 0
+-- NOTE: may try and find an alternative fix for this later
+IF quantityVar2 < 0 THEN
+
+-- then update the quantity for the item in the warehouse to be 0
+update inventory
+set quantity = 0
+where siteID = 2 and itemID = inItemID;
+
+END IF;
 
 END $$
 

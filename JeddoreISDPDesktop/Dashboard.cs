@@ -32,9 +32,9 @@ namespace JeddoreISDPDesktop
             lblUsername.Text = employee.username;
             lblLocation.Text = employee.siteName;
 
-            //set the default tab control on form load to the admin tab - for now
-            //NOTE: will likely update this in sprint 2 or 3
-            tabControlDashboard.SelectedTab = tabAdmin;
+            //set the default tab control on form load to the orders tab, for now
+            //NOTE: may update this again in sprint 3
+            tabControlDashboard.SelectedTab = tabOrders;
 
             //get the employee's user permissions
             UserPermission employeeUserPermissions = UserPermissionAccessor.GetOneEmployeeUserPermissions(employee.employeeID);

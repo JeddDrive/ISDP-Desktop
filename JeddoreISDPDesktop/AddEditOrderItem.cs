@@ -16,6 +16,10 @@ namespace JeddoreISDPDesktop
         //global variable for the txn/order object
         Txn newOrder = new Txn();
 
+        //global variable for quantity sent in from other form
+        int quantity = 0;
+
+        //constructor #1 - called when inserting item into order
         public AddEditOrderItem(Employee employeeLoggedIn, Item itemSelected, Inventory inventoryItemSelected)
         {
             InitializeComponent();
@@ -25,6 +29,21 @@ namespace JeddoreISDPDesktop
 
             //get current store OR emergency order for a store that is NEW, based on the employee's siteID
             newOrder = TxnAccessor.GetOneNewOrder(employee.siteID);
+        }
+
+        //constructor #2 - called when updating item quantity
+        public AddEditOrderItem(Employee employeeLoggedIn, Item itemSelected, Inventory inventoryItemSelected, int currentQuantity)
+        {
+            InitializeComponent();
+            employee = employeeLoggedIn;
+            item = itemSelected;
+            inventoryItem = inventoryItemSelected;
+
+            //get current store OR emergency order for a store that is NEW, based on the employee's siteID
+            newOrder = TxnAccessor.GetOneNewOrder(employee.siteID);
+
+            //get the current quantity from the other form
+            quantity = currentQuantity;
         }
 
         private void AddEditOrderItem_Load(object sender, EventArgs e)
@@ -48,6 +67,14 @@ namespace JeddoreISDPDesktop
             lblCategory.Text = item.category;
             lblCaseSize.Text = item.caseSize.ToString();
             lblWarehouseQuantity.Text = inventoryItem.quantity.ToString();
+
+            //if quantity is not 0, meaning that an item quantity is being updated and NOT inserted then
+            if (quantity != 0)
+            {
+                //put the current item quantity from the order into the nud as it's value
+                nudOrderQuantity.Value = quantity;
+                lblWarehouseQuantity.Text = (inventoryItem.quantity + quantity).ToString();
+            }
         }
 
         private void picHelp_Click(object sender, EventArgs e)
@@ -85,105 +112,153 @@ namespace JeddoreISDPDesktop
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //if nud quantity exceeds the quantity in the warehouse
-            if (int.Parse(nudOrderQuantity.Value.ToString()) > int.Parse(lblWarehouseQuantity.Text))
+            //if - are doing an item insert
+            //this global quantity variable should be 0 if doing an insert
+            if (quantity == 0)
             {
-                DialogResult btnValueReturned = MessageBox.Show("Quantity selected of this item to be added to your order exceeds the quantity available in the warehouse." +
-                    "\n\nDo you wish to add the quantity requested but not currently available to your store's backorder?" +
-                    "\n\nIf a backorder doesn't currently exist for your store, then a new one will be created.",
-                    "Quantity in Order More than Warehouse Quantity", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                //if - user selects the yes btn
-                if (btnValueReturned == DialogResult.Yes)
+                //if nud quantity exceeds the quantity in the warehouse
+                if (int.Parse(nudOrderQuantity.Value.ToString()) > int.Parse(lblWarehouseQuantity.Text))
                 {
-                    //check if backorder currently exists for the employee's site (should be a 0 or 1 returned)
-                    long numBackOrders = TxnAccessor.GetCountOfActiveBackOrdersForSite(employee.siteID);
+                    DialogResult btnValueReturned = MessageBox.Show("Quantity selected of this item to be added to your order exceeds the quantity available in the warehouse." +
+                        "\n\nDo you wish to add the quantity requested but not currently available to your store's backorder?" +
+                        "\n\nIf a backorder doesn't currently exist for your store, then a new one will be created.",
+                        "Quantity in Order More than Warehouse Quantity", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
 
-                    //txn object - for the most recent txn (mostly just want the last barcode)
-                    Txn mostRecentTxn = TxnAccessor.GetLastTxn();
-
-                    //converting the barcode to an int
-                    long mostRecentBarcode = long.Parse(mostRecentTxn.barCode);
-
-                    //new barcode will be most recent barcode plus 1
-                    string newBarcode = (mostRecentBarcode + 1).ToString();
-
-                    //byte var for emergency delivery
-                    //back order shouldn't be considered an emergency delivery
-                    byte emergencyDelivery = 0;
-
-                    //get the employee's site
-                    Site site = SiteAccessor.GetOneSite(employee.siteID);
-
-                    DayOfWeek shipDayOfWeek = DayOfWeek.Saturday;
-
-                    //switch - for the site's day of week order property
-                    switch (site.dayOfWeek)
+                    //if - user selects the yes btn
+                    if (btnValueReturned == DialogResult.Yes)
                     {
-                        case "SUNDAY":
-                            shipDayOfWeek = DayOfWeek.Sunday;
-                            break;
-                        case "MONDAY":
-                            shipDayOfWeek = DayOfWeek.Monday;
-                            break;
-                        case "TUESDAY":
-                            shipDayOfWeek = DayOfWeek.Tuesday;
-                            break;
-                        case "WEDNESDAY":
-                            shipDayOfWeek = DayOfWeek.Wednesday;
-                            break;
-                        case "THURSDAY":
-                            shipDayOfWeek = DayOfWeek.Thursday;
-                            break;
-                        case "FRIDAY":
-                            shipDayOfWeek = DayOfWeek.Friday;
-                            break;
-                        case "SATURDAY":
-                            shipDayOfWeek = DayOfWeek.Saturday;
-                            break;
-                    }
+                        //check if backorder currently exists for the employee's site (should be a 0 or 1 returned)
+                        long numBackOrders = TxnAccessor.GetCountOfActiveBackOrdersForSite(employee.siteID);
 
-                    //get the next ship date for the employee's site
-                    DateTime shipDate = DayOfWeekCalculator.getNextShipDate(shipDayOfWeek);
+                        //txn object - for the most recent txn (mostly just want the last barcode)
+                        Txn mostRecentTxn = TxnAccessor.GetLastTxn();
 
-                    //if backorder doesn't exist, then create one (txn) and add this txnitem to it
-                    if (numBackOrders == 0)
-                    {
-                        //create new txn object
-                        Txn newTxn = new Txn(mostRecentTxn.txnID + 1, employee.siteID, 2, "New",
-                            shipDate, "Back Order", newBarcode, DateTime.Now, emergencyDelivery);
+                        //converting the barcode to an int
+                        long mostRecentBarcode = long.Parse(mostRecentTxn.barCode);
 
-                        //insert the back order txn
-                        bool success1 = TxnAccessor.InsertNewTxn(newTxn);
+                        //new barcode will be most recent barcode plus 1
+                        string newBarcode = (mostRecentBarcode + 1).ToString();
 
-                        //calculate the quantity to be added to the backorder
-                        int backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString()) - int.Parse(lblWarehouseQuantity.Text);
+                        //byte var for emergency delivery
+                        //back order shouldn't be considered an emergency delivery
+                        byte emergencyDelivery = 0;
 
-                        int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
+                        //get the employee's site
+                        Site site = SiteAccessor.GetOneSite(employee.siteID);
 
-                        //if the quantity available in the warehouse for the store/emergency order is above 0 then
-                        if (int.Parse(lblWarehouseQuantity.Text) > 0)
+                        DayOfWeek shipDayOfWeek = DayOfWeek.Saturday;
+
+                        //switch - for the site's day of week order property
+                        switch (site.dayOfWeek)
                         {
-                            //create txnitem object - to be added to the store/emergency order
-                            TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
-                                    int.Parse(lblWarehouseQuantity.Text), txtNotes.Text);
-
-                            //then can add this txn item to the store/emergency order txn
-                            bool success2 = TxnItemsAccessor.InsertNewTxnItem(txnItemForOrder);
-
-                            //update the backorder quantity
-                            //backOrderQuantity -= quantityAvailableForOrder;
+                            case "SUNDAY":
+                                shipDayOfWeek = DayOfWeek.Sunday;
+                                break;
+                            case "MONDAY":
+                                shipDayOfWeek = DayOfWeek.Monday;
+                                break;
+                            case "TUESDAY":
+                                shipDayOfWeek = DayOfWeek.Tuesday;
+                                break;
+                            case "WEDNESDAY":
+                                shipDayOfWeek = DayOfWeek.Wednesday;
+                                break;
+                            case "THURSDAY":
+                                shipDayOfWeek = DayOfWeek.Thursday;
+                                break;
+                            case "FRIDAY":
+                                shipDayOfWeek = DayOfWeek.Friday;
+                                break;
+                            case "SATURDAY":
+                                shipDayOfWeek = DayOfWeek.Saturday;
+                                break;
                         }
 
-                        //if success
-                        if (success1)
+                        //get the next ship date for the employee's site
+                        DateTime shipDate = DayOfWeekCalculator.getNextShipDate(shipDayOfWeek);
+
+                        //if backorder doesn't exist, then create one (txn) and add this txnitem to it
+                        if (numBackOrders == 0)
                         {
-                            //now get the newly created backorder for the site
-                            Txn theNewBackOrder = TxnAccessor.GetOneNewBackOrder(employee.siteID);
+                            //create new txn object
+                            Txn newTxn = new Txn(mostRecentTxn.txnID + 1, employee.siteID, 2, "New",
+                                shipDate, "Back Order", newBarcode, DateTime.Now, emergencyDelivery);
+
+                            //insert the back order txn
+                            bool success1 = TxnAccessor.InsertNewTxn(newTxn);
+
+                            //calculate the quantity to be added to the backorder
+                            int backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString()) - int.Parse(lblWarehouseQuantity.Text);
+
+                            int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
+
+                            //if the quantity available in the warehouse for the store/emergency order is above 0 then
+                            if (int.Parse(lblWarehouseQuantity.Text) > 0)
+                            {
+                                //create txnitem object - to be added to the store/emergency order
+                                TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
+                                        int.Parse(lblWarehouseQuantity.Text), txtNotes.Text);
+
+                                //then can add this txn item to the store/emergency order txn
+                                bool success2 = TxnItemsAccessor.InsertNewTxnItem(txnItemForOrder);
+
+                                //update the backorder quantity
+                                //backOrderQuantity -= quantityAvailableForOrder;
+                            }
+
+                            //if success
+                            if (success1)
+                            {
+                                //now get the newly created backorder for the site
+                                Txn theNewBackOrder = TxnAccessor.GetOneNewBackOrder(employee.siteID);
+
+                                //create txnitem object - to be added to the backorder
+                                TxnItems txnItemForBackOrder = new TxnItems(theNewBackOrder.txnID, item.itemID,
+                                        backOrderQuantity, txtNotes.Text);
+
+                                //insert this txnitem into the newly created backorder now
+                                bool success3 = TxnItemsAccessor.InsertNewTxnItem(txnItemForBackOrder);
+
+                                if (success3)
+                                {
+                                    MessageBox.Show("Unavailable item quantity of " + backOrderQuantity + " added to current backorder for " + site.name + "." +
+                                    "\n\nEstimated Shipping Date for backorder: " + shipDate, "Item Successfully Added to Backorder");
+
+                                    //close this form
+                                    this.Close();
+                                }
+                            }
+                        }
+
+                        //else - backorder already exists
+                        else
+                        {
+                            //now get the already created backorder for the site
+                            Txn theBackOrder = TxnAccessor.GetOneNewBackOrder(employee.siteID);
+
+                            //calculate the quantity to be added to the backorder
+                            int backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString()) - int.Parse(lblWarehouseQuantity.Text);
+
+                            //calculate the quantity available for the store/emergency order
+                            int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
+
+                            //if the quantity available in the warehouse for the store/emergency order is above 0 then
+                            if (int.Parse(lblWarehouseQuantity.Text) > 0)
+                            {
+                                //create txnitem object - to be added to the store/emergency order
+                                TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
+                                        int.Parse(lblWarehouseQuantity.Text), txtNotes.Text);
+
+                                //then can add this txn item to the store/emergency order txn
+                                bool success2 = TxnItemsAccessor.InsertNewTxnItem(txnItemForOrder);
+
+                                //update the backorder quantity
+                                //backOrderQuantity -= quantityAvailableForOrder;
+                            }
 
                             //create txnitem object - to be added to the backorder
-                            TxnItems txnItemForBackOrder = new TxnItems(theNewBackOrder.txnID, item.itemID,
+                            TxnItems txnItemForBackOrder = new TxnItems(theBackOrder.txnID, item.itemID,
                                     backOrderQuantity, txtNotes.Text);
 
                             //insert this txnitem into the newly created backorder now
@@ -191,76 +266,239 @@ namespace JeddoreISDPDesktop
 
                             if (success3)
                             {
-                                MessageBox.Show("Back Order for site " + site.name + " successfully created and non-available item quantity also added to new backorder." +
-                                "\n\nEstimated Shipping Date: " + shipDate, "Back Order Created and Item Added");
+                                MessageBox.Show("Unavailable item quantity of " + backOrderQuantity + " added to current backorder for " + site.name + "." +
+                                "\n\nEstimated Shipping Date for backorder: " + shipDate, "Item Successfully Added to Backorder");
 
                                 //close this form
                                 this.Close();
                             }
                         }
                     }
+                }
 
-                    //else - backorder already exists
-                    else if (numBackOrders == 1)
+                //else - nud quantity does NOT exceed warehouse quantity
+                else
+                {
+                    //create txnitem object - to be added to the store/emergency order
+                    TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
+                            int.Parse(nudOrderQuantity.Value.ToString()), txtNotes.Text);
+
+                    //then can add this txn item to the store/emergency order txn
+                    bool success = TxnItemsAccessor.InsertNewTxnItem(txnItemForOrder);
+
+                    //if success
+                    if (success)
                     {
-                        //now get the already created backorder for the site
-                        Txn theBackOrder = TxnAccessor.GetOneNewBackOrder(employee.siteID);
+                        MessageBox.Show("Requested inventory item quantity added to your order.", "Inventory Item Addition Successful");
 
-                        //calculate the quantity to be added to the backorder
-                        int backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString()) - int.Parse(lblWarehouseQuantity.Text);
-
-                        //calculate the quantity available for the store/emergency order
-                        int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
-
-                        //if the quantity available in the warehouse for the store/emergency order is above 0 then
-                        if (int.Parse(lblWarehouseQuantity.Text) > 0)
-                        {
-                            //create txnitem object - to be added to the store/emergency order
-                            TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
-                                    int.Parse(lblWarehouseQuantity.Text), txtNotes.Text);
-
-                            //then can add this txn item to the store/emergency order txn
-                            bool success2 = TxnItemsAccessor.InsertNewTxnItem(txnItemForOrder);
-
-                            //update the backorder quantity
-                            //backOrderQuantity -= quantityAvailableForOrder;
-                        }
-
-                        //create txnitem object - to be added to the backorder
-                        TxnItems txnItemForBackOrder = new TxnItems(theBackOrder.txnID, item.itemID,
-                                backOrderQuantity, txtNotes.Text);
-
-                        //insert this txnitem into the newly created backorder now
-                        bool success3 = TxnItemsAccessor.InsertNewTxnItem(txnItemForBackOrder);
-
-                        if (success3)
-                        {
-                            MessageBox.Show("Back Order for site " + site.name + " successfully created and non-available item quantity also added to new backorder." +
-                            "\n\nEstimated Shipping Date: " + shipDate, "Back Order Created and Item Added");
-
-                            //close this form
-                            this.Close();
-                        }
+                        this.Close();
                     }
                 }
             }
 
-            //else - nud quantity does NOT exceed warehouse quantity
+            //else - are doing a quantity update
             else
             {
-                //create txnitem object - to be added to the store/emergency order
-                TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
-                        int.Parse(nudOrderQuantity.Value.ToString()), txtNotes.Text);
-
-                //then can add this txn item to the store/emergency order txn
-                bool success = TxnItemsAccessor.InsertNewTxnItem(txnItemForOrder);
-
-                //if success
-                if (success)
+                //if no change in quantity in the nud, then can simply close this form
+                if (nudOrderQuantity.Value == quantity)
                 {
-                    MessageBox.Show("Requested inventory item quantity added to your order.", "Inventory Item Addition Successful");
+                    MessageBox.Show("No update made to quantity for item already in order.", "No Update Made");
 
                     this.Close();
+                }
+
+                //else if - the quantity in the order has been decreased
+                else if (nudOrderQuantity.Value < quantity)
+                {
+                    //create a txnitems obj to send to the accessor for an update
+                    TxnItems updatedItem = new TxnItems(newOrder.txnID, item.itemID,
+                        int.Parse(nudOrderQuantity.Value.ToString()), txtNotes.Text);
+
+                    //update the quantity and notes of the item
+                    bool success = TxnItemsAccessor.UpdateTxnItem(updatedItem);
+
+                    //if success, then display msg and close the form
+                    if (success)
+                    {
+                        MessageBox.Show("Quantity of item in order has been decreased to " +
+                            nudOrderQuantity.Value.ToString() + ".", "Successful Quantity Update");
+
+                        this.Close();
+                    }
+                }
+
+                //else if - the quantity in the order has been increased and it's over the amount available (in the warehouse + amount already in the order)
+                else if (nudOrderQuantity.Value > quantity && int.Parse(nudOrderQuantity.Value.ToString()) > int.Parse(lblWarehouseQuantity.Text))
+                {
+                    DialogResult btnValueReturned = MessageBox.Show("Quantity selected of this item to be added to your order exceeds the quantity available in the warehouse." +
+                    "\n\nDo you wish to add the quantity requested but not currently available to your store's backorder?" +
+                    "\n\nIf a backorder doesn't currently exist for your store, then a new one will be created.",
+                    "Quantity in Order More than Warehouse Quantity", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                    //if - user selects the yes btn
+                    if (btnValueReturned == DialogResult.Yes)
+                    {
+                        //check if backorder currently exists for the employee's site (should be a 0 or 1 returned)
+                        long numBackOrders = TxnAccessor.GetCountOfActiveBackOrdersForSite(employee.siteID);
+
+                        //txn object - for the most recent txn (mostly just want the last barcode)
+                        Txn mostRecentTxn = TxnAccessor.GetLastTxn();
+
+                        //converting the barcode to an int
+                        long mostRecentBarcode = long.Parse(mostRecentTxn.barCode);
+
+                        //new barcode will be most recent barcode plus 1
+                        string newBarcode = (mostRecentBarcode + 1).ToString();
+
+                        //byte var for emergency delivery
+                        //back order shouldn't be considered an emergency delivery
+                        byte emergencyDelivery = 0;
+
+                        //get the employee's site
+                        Site site = SiteAccessor.GetOneSite(employee.siteID);
+
+                        DayOfWeek shipDayOfWeek = DayOfWeek.Saturday;
+
+                        //switch - for the site's day of week order property
+                        switch (site.dayOfWeek)
+                        {
+                            case "SUNDAY":
+                                shipDayOfWeek = DayOfWeek.Sunday;
+                                break;
+                            case "MONDAY":
+                                shipDayOfWeek = DayOfWeek.Monday;
+                                break;
+                            case "TUESDAY":
+                                shipDayOfWeek = DayOfWeek.Tuesday;
+                                break;
+                            case "WEDNESDAY":
+                                shipDayOfWeek = DayOfWeek.Wednesday;
+                                break;
+                            case "THURSDAY":
+                                shipDayOfWeek = DayOfWeek.Thursday;
+                                break;
+                            case "FRIDAY":
+                                shipDayOfWeek = DayOfWeek.Friday;
+                                break;
+                            case "SATURDAY":
+                                shipDayOfWeek = DayOfWeek.Saturday;
+                                break;
+                        }
+
+                        //get the next ship date for the employee's site
+                        DateTime shipDate = DayOfWeekCalculator.getNextShipDate(shipDayOfWeek);
+
+                        //if backorder doesn't exist, then create one (txn) and add this txnitem to it
+                        if (numBackOrders == 0)
+                        {
+                            //create new txn object
+                            Txn newTxn = new Txn(mostRecentTxn.txnID + 1, employee.siteID, 2, "New",
+                                shipDate, "Back Order", newBarcode, DateTime.Now, emergencyDelivery);
+
+                            //insert the back order txn
+                            bool success1 = TxnAccessor.InsertNewTxn(newTxn);
+
+                            //calculate the quantity to be added to the backorder
+                            int backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString()) - int.Parse(lblWarehouseQuantity.Text);
+
+                            int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
+
+                            //if the quantity available in the warehouse for the store/emergency order is above 0 then
+                            if (int.Parse(lblWarehouseQuantity.Text) > 0)
+                            {
+                                //create txnitem object - to be added to the store/emergency order
+                                TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
+                                        int.Parse(lblWarehouseQuantity.Text), txtNotes.Text);
+                            }
+
+                            //if success
+                            if (success1)
+                            {
+                                //now get the newly created backorder for the site
+                                Txn theNewBackOrder = TxnAccessor.GetOneNewBackOrder(employee.siteID);
+
+                                //create txnitem object - to be added to the backorder
+                                TxnItems txnItemForBackOrder = new TxnItems(theNewBackOrder.txnID, item.itemID,
+                                        backOrderQuantity, txtNotes.Text);
+
+                                //insert this txnitem into the newly created backorder now
+                                bool success3 = TxnItemsAccessor.InsertNewTxnItem(txnItemForBackOrder);
+
+                                if (success3)
+                                {
+                                    MessageBox.Show("Unavailable item quantity of " + backOrderQuantity + " added to current backorder for " + site.name + "." +
+                                    "\n\nEstimated Shipping Date for backorder: " + shipDate, "Item Successfully Added to Backorder");
+
+                                    //close this form
+                                    this.Close();
+                                }
+                            }
+                        }
+
+                        //else - backorder already exists
+                        else
+                        {
+                            //now get the already created backorder for the site
+                            Txn theBackOrder = TxnAccessor.GetOneNewBackOrder(employee.siteID);
+
+                            //calculate the quantity to be added to the backorder
+                            int backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString()) - int.Parse(lblWarehouseQuantity.Text);
+
+                            //calculate the quantity available for the store/emergency order
+                            int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
+
+                            //if the quantity available in the warehouse for the store/emergency order is above 0 then
+                            if (int.Parse(lblWarehouseQuantity.Text) > 0)
+                            {
+                                //create txnitem object - to be added to the store/emergency order
+                                TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
+                                        int.Parse(lblWarehouseQuantity.Text), txtNotes.Text);
+
+                                //then can add this txn item to the store/emergency order txn
+                                bool success2 = TxnItemsAccessor.InsertNewTxnItem(txnItemForOrder);
+
+                                //update the backorder quantity
+                                //backOrderQuantity -= quantityAvailableForOrder;
+                            }
+
+                            //create txnitem object - to be added to the backorder
+                            TxnItems txnItemForBackOrder = new TxnItems(theBackOrder.txnID, item.itemID,
+                                    backOrderQuantity, txtNotes.Text);
+
+                            //insert this txnitem into the newly created backorder now
+                            bool success3 = TxnItemsAccessor.InsertNewTxnItem(txnItemForBackOrder);
+
+                            if (success3)
+                            {
+                                MessageBox.Show("Unavailable item quantity of " + backOrderQuantity + " added to current backorder for " + site.name + "." +
+                                "\n\nEstimated Shipping Date for backorder: " + shipDate, "Item Successfully Added to Backorder");
+
+                                //close this form
+                                this.Close();
+                            }
+                        }
+                    }
+                }
+
+                //else if - quantity in the order has been increased and is equal to or under the amount available in the warehouse
+                else if (nudOrderQuantity.Value > quantity && int.Parse(nudOrderQuantity.Value.ToString()) <= int.Parse(lblWarehouseQuantity.Text))
+                {
+                    //create a txnitems obj to send to the accessor for an update
+                    TxnItems updatedItem = new TxnItems(newOrder.txnID, item.itemID,
+                        int.Parse(nudOrderQuantity.Value.ToString()), txtNotes.Text);
+
+                    //update the quantity and notes of the item
+                    bool success = TxnItemsAccessor.UpdateTxnItem(updatedItem);
+
+                    //if success, then display msg and close the form
+                    if (success)
+                    {
+                        MessageBox.Show("Quantity of item in order has been increased to " +
+                            nudOrderQuantity.Value.ToString() + ".", "Successful Quantity Update");
+
+                        this.Close();
+                    }
                 }
             }
         }
