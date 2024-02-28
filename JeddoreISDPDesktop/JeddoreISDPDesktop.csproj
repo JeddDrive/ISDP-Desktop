@@ -140,6 +140,12 @@
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditBackOrderItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditBackOrderItem.Designer.cs">
+      <DependentUpon>EditBackOrderItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +186,12 @@
     </Compile>
     <Compile Include="ItemManagement.Designer.cs">
       <DependentUpon>ItemManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrderItemsManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderItemsManagement.Designer.cs">
+      <DependentUpon>OrderItemsManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="SiteManagement.cs">
       <SubType>Form</SubType>
@@ -237,6 +249,9 @@
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditBackOrderItem.resx">
+      <DependentUpon>EditBackOrderItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditInventory.resx">
       <DependentUpon>EditInventory.cs</DependentUpon>
     </EmbeddedResource>
@@ -251,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ItemManagement.resx">
       <DependentUpon>ItemManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrderItemsManagement.resx">
+      <DependentUpon>OrderItemsManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SiteManagement.resx">
       <DependentUpon>SiteManagement.cs</DependentUpon>

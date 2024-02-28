@@ -38,6 +38,21 @@ namespace JeddoreISDPDesktop
             {
                 cboOrderTypes.Items.Add(txnStatus.statusName);
             }
+
+            //get the employee's user permissions
+            UserPermission employeeUserPermissions = UserPermissionAccessor.GetOneEmployeeUserPermissions(employee.employeeID);
+
+            //check the list for RECEIVESTOREORDER
+            if (employeeUserPermissions.permissionIDList.Contains("RECEIVESTOREORDER"))
+            {
+                btnReceive.Enabled = true;
+            }
+
+            //check the list for REJECTORDER
+            if (employeeUserPermissions.permissionIDList.Contains("REJECTORDER"))
+            {
+                btnReject.Enabled = true;
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -221,11 +236,16 @@ namespace JeddoreISDPDesktop
                 //each time the text is changed and if the user clicks on a CRUD btn for example
                 dgvOrders.ClearSelection();
 
+                //converting the search text to all lower case
+                string theSearchText = txtSearchOrders.Text.ToLower();
+
                 CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvOrders.DataSource];
 
                 foreach (DataGridViewRow row in dgvOrders.Rows)
                 {
                     //get the cell values for the following columns
+                    var originSiteCellValue = row.Cells["originSite"].Value;
+                    var destinationSiteCellValue = row.Cells["destinationSite"].Value;
                     var statusCellValue = row.Cells["status"].Value;
                     var txnTypeCellValue = row.Cells["txnType"].Value;
                     var createdDateCellValue = row.Cells["createdDate"].Value;
@@ -238,8 +258,20 @@ namespace JeddoreISDPDesktop
                         continue;
                     }
 
+                    //else if - origin site cell converted to string contains the txtbox text
+                    else if (originSiteCellValue != null && originSiteCellValue.ToString().ToLower().Contains(theSearchText))
+                    {
+                        row.Visible = true;
+                    }
+
+                    //else if - destination site cell converted to string contains the txtbox text
+                    else if (destinationSiteCellValue != null && destinationSiteCellValue.ToString().ToLower().Contains(theSearchText))
+                    {
+                        row.Visible = true;
+                    }
+
                     //if - status cell converted to string contains the txtbox text
-                    else if (statusCellValue != null && statusCellValue.ToString().ToLower().Contains(txtSearchOrders.Text))
+                    else if (statusCellValue != null && statusCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
@@ -251,13 +283,13 @@ namespace JeddoreISDPDesktop
                     } */
 
                     //else if - created date cell converted to lower case contains the txtbox text
-                    else if (createdDateCellValue != null && createdDateCellValue.ToString().ToLower().Contains(txtSearchOrders.Text))
+                    else if (createdDateCellValue != null && createdDateCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - shipped date cell converted to lower case contains the txtbox text
-                    else if (shippedDateCellValue != null && shippedDateCellValue.ToString().ToLower().Contains(txtSearchOrders.Text))
+                    else if (shippedDateCellValue != null && shippedDateCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
@@ -287,7 +319,7 @@ namespace JeddoreISDPDesktop
             if (selectedRowsCount != 1)
             {
                 MessageBox.Show("Must select one row from the data grid in order to receive that specific order.",
-                    "Receive Order Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "Order Receival Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 //clear all selected rows from the dgv
                 dgvOrders.ClearSelection();
@@ -328,7 +360,62 @@ namespace JeddoreISDPDesktop
                     if (success)
                     {
                         MessageBox.Show("Order for " + theTxn.destinationSite + " has been successfully received for assembly. It's status has been updated to " + theTxn.status + ".",
-                            "Successful Receival");
+                            "Order Received");
+                    }
+                }
+            }
+        }
+
+        private void btnReject_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = dgvOrders.SelectedRows.Count;
+
+            //if number of selected rows is not one
+            if (selectedRowsCount != 1)
+            {
+                MessageBox.Show("Must select one row from the data grid in order to reject that specific order.",
+                    "Order Rejection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                //clear all selected rows from the dgv
+                dgvOrders.ClearSelection();
+            }
+
+            //else - 1 order item row is selected
+            else
+            {
+                //get the current row
+                DataGridViewRow dgvRow = dgvOrders.CurrentRow;
+
+                //get the cell with the selected row's txnID in the orders DGV
+                int txnID = int.Parse(dgvRow.Cells[0].Value.ToString());
+
+                //get the transaction
+                Txn theTxn = TxnAccessor.GetOneOrder(txnID);
+
+                //if the status of the txn is submitted, rejected, or cancelled then
+                if (theTxn.status == "Submitted" || theTxn.status == "Rejected" || theTxn.status == "Cancelled")
+                {
+                    MessageBox.Show("The status of your selected order is: " + theTxn.status + "." +
+                        "\n\nOnly active orders which are not already submitted, rejected, or cancelled can be rejected.",
+                        "Unsuccessful Rejection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    dgvOrders.ClearSelection();
+                }
+
+                //else - the status is new then
+                else
+                {
+                    //update the txn's status to rejected
+                    theTxn.status = "Rejected";
+
+                    //send the txn obj to the accessor
+                    bool success = TxnAccessor.UpdateTxnStatus(theTxn);
+
+                    //if success
+                    if (success)
+                    {
+                        MessageBox.Show("Order for " + theTxn.destinationSite + " has been successfully rejected.",
+                            "Order Recjected");
                     }
                 }
             }

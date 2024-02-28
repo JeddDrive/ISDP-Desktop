@@ -108,6 +108,9 @@ namespace JeddoreISDPDesktop
                 //each time the text is changed and if the user clicks on a CRUD btn for example
                 dgvInventory.ClearSelection();
 
+                //converting the search text to all lower case
+                string theSearchText = txtSearchInventory.Text.ToLower();
+
                 CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvInventory.DataSource];
 
                 foreach (DataGridViewRow row in dgvInventory.Rows)
@@ -124,13 +127,13 @@ namespace JeddoreISDPDesktop
                     }
 
                     //if - name cell converted to lower case contains the txtbox text
-                    if (nameCellValue != null && nameCellValue.ToString().ToLower().Contains(txtSearchInventory.Text))
+                    if (nameCellValue != null && nameCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - item ID cell converted to lower case contains the txtbox text
-                    else if (itemIDCellValue != null && itemIDCellValue.ToString().ToLower().Contains(txtSearchInventory.Text))
+                    else if (itemIDCellValue != null && itemIDCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }

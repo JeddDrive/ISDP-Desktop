@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEditOrderItem));
             this.lblItemID = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.picHelp = new System.Windows.Forms.PictureBox();
-            this.picBullseye = new System.Windows.Forms.PictureBox();
             this.lblLocation = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -55,10 +53,16 @@
             this.lblWarehouseQuantity = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
+            this.lblOrderQty = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lblWarehouseQty = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.picHelp = new System.Windows.Forms.PictureBox();
+            this.picBullseye = new System.Windows.Forms.PictureBox();
             this.grpBasic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudOrderQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             this.SuspendLayout();
             // 
             // lblItemID
@@ -79,27 +83,6 @@
             this.label3.Size = new System.Drawing.Size(85, 28);
             this.label3.TabIndex = 65;
             this.label3.Text = "Item ID:";
-            // 
-            // picHelp
-            // 
-            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
-            this.picHelp.Location = new System.Drawing.Point(575, 16);
-            this.picHelp.Name = "picHelp";
-            this.picHelp.Size = new System.Drawing.Size(45, 40);
-            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picHelp.TabIndex = 64;
-            this.picHelp.TabStop = false;
-            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
-            // 
-            // picBullseye
-            // 
-            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
-            this.picBullseye.Location = new System.Drawing.Point(0, 0);
-            this.picBullseye.Name = "picBullseye";
-            this.picBullseye.Size = new System.Drawing.Size(140, 110);
-            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBullseye.TabIndex = 63;
-            this.picBullseye.TabStop = false;
             // 
             // lblLocation
             // 
@@ -233,7 +216,7 @@
             // 
             // nudOrderQuantity
             // 
-            this.nudOrderQuantity.Location = new System.Drawing.Point(218, 370);
+            this.nudOrderQuantity.Location = new System.Drawing.Point(210, 366);
             this.nudOrderQuantity.Maximum = new decimal(new int[] {
             300,
             0,
@@ -242,32 +225,32 @@
             this.nudOrderQuantity.Name = "nudOrderQuantity";
             this.nudOrderQuantity.ReadOnly = true;
             this.nudOrderQuantity.Size = new System.Drawing.Size(92, 34);
-            this.nudOrderQuantity.TabIndex = 91;
+            this.nudOrderQuantity.TabIndex = 0;
             this.nudOrderQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(63, 370);
+            this.label12.Location = new System.Drawing.Point(12, 372);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(153, 28);
+            this.label12.Size = new System.Drawing.Size(200, 28);
             this.label12.TabIndex = 92;
-            this.label12.Text = "Order Quantity:";
+            this.label12.Text = "New Order Quantity:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(63, 313);
+            this.label5.Location = new System.Drawing.Point(12, 316);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(182, 28);
+            this.label5.Size = new System.Drawing.Size(231, 28);
             this.label5.TabIndex = 94;
-            this.label5.Text = "Available Quantity:";
+            this.label5.Text = "Total Available Quantity:";
             // 
             // lblWarehouseQuantity
             // 
             this.lblWarehouseQuantity.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblWarehouseQuantity.Enabled = false;
-            this.lblWarehouseQuantity.Location = new System.Drawing.Point(251, 313);
+            this.lblWarehouseQuantity.Location = new System.Drawing.Point(229, 313);
             this.lblWarehouseQuantity.Name = "lblWarehouseQuantity";
             this.lblWarehouseQuantity.Size = new System.Drawing.Size(73, 34);
             this.lblWarehouseQuantity.TabIndex = 95;
@@ -279,7 +262,7 @@
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(236, 162);
-            this.txtNotes.TabIndex = 82;
+            this.txtNotes.TabIndex = 1;
             // 
             // label13
             // 
@@ -290,6 +273,65 @@
             this.label13.TabIndex = 83;
             this.label13.Text = "Notes:";
             // 
+            // lblOrderQty
+            // 
+            this.lblOrderQty.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblOrderQty.Enabled = false;
+            this.lblOrderQty.Location = new System.Drawing.Point(530, 369);
+            this.lblOrderQty.Name = "lblOrderQty";
+            this.lblOrderQty.Size = new System.Drawing.Size(73, 34);
+            this.lblOrderQty.TabIndex = 97;
+            this.lblOrderQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(308, 372);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(227, 28);
+            this.label9.TabIndex = 96;
+            this.label9.Text = "Current Order Quantity:";
+            // 
+            // lblWarehouseQty
+            // 
+            this.lblWarehouseQty.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblWarehouseQty.Enabled = false;
+            this.lblWarehouseQty.Location = new System.Drawing.Point(530, 315);
+            this.lblWarehouseQty.Name = "lblWarehouseQty";
+            this.lblWarehouseQty.Size = new System.Drawing.Size(73, 34);
+            this.lblWarehouseQty.TabIndex = 99;
+            this.lblWarehouseQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(332, 316);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(203, 28);
+            this.label11.TabIndex = 98;
+            this.label11.Text = "Warehouse Quantity:";
+            // 
+            // picHelp
+            // 
+            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
+            this.picHelp.Location = new System.Drawing.Point(575, 16);
+            this.picHelp.Name = "picHelp";
+            this.picHelp.Size = new System.Drawing.Size(45, 40);
+            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picHelp.TabIndex = 64;
+            this.picHelp.TabStop = false;
+            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
+            // 
+            // picBullseye
+            // 
+            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
+            this.picBullseye.Location = new System.Drawing.Point(0, 0);
+            this.picBullseye.Name = "picBullseye";
+            this.picBullseye.Size = new System.Drawing.Size(140, 110);
+            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBullseye.TabIndex = 63;
+            this.picBullseye.TabStop = false;
+            // 
             // AddEditOrderItem
             // 
             this.AcceptButton = this.btnSave;
@@ -297,6 +339,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(632, 603);
+            this.Controls.Add(this.lblWarehouseQty);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.lblOrderQty);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.txtNotes);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.lblWarehouseQuantity);
@@ -327,10 +373,10 @@
             this.Text = "Bullseye Inventory Management System - Add/Edit Order Item ";
             this.Load += new System.EventHandler(this.AddEditOrderItem_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddEditOrderItem_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             this.grpBasic.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudOrderQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,5 +409,9 @@
         private System.Windows.Forms.Label lblWarehouseQuantity;
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblOrderQty;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblWarehouseQty;
+        private System.Windows.Forms.Label label11;
     }
 }

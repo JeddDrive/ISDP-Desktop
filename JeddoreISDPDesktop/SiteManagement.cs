@@ -162,6 +162,9 @@ namespace JeddoreISDPDesktop
                 //each time the text is changed and if the user clicks on a CRUD btn for example
                 dgvSites.ClearSelection();
 
+                //converting the search text to all lower case
+                string theSearchText = txtSearchSites.Text.ToLower();
+
                 CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvSites.DataSource];
 
                 foreach (DataGridViewRow row in dgvSites.Rows)
@@ -180,25 +183,25 @@ namespace JeddoreISDPDesktop
                     }
 
                     //if - site ID converted to string contains the txtbox text
-                    if (siteIDCellValue != null && siteIDCellValue.ToString().Contains(txtSearchSites.Text))
+                    if (siteIDCellValue != null && siteIDCellValue.ToString().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - name cell converted to lower case contains the txtbox text
-                    else if (nameCellValue != null && nameCellValue.ToString().ToLower().Contains(txtSearchSites.Text))
+                    else if (nameCellValue != null && nameCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - city cell...
-                    else if (cityCellValue != null && cityCellValue.ToString().ToLower().Contains(txtSearchSites.Text))
+                    else if (cityCellValue != null && cityCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - address cell...
-                    else if (addressCellValue != null && addressCellValue.ToString().ToLower().Contains(txtSearchSites.Text))
+                    else if (addressCellValue != null && addressCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }

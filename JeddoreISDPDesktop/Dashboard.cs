@@ -82,6 +82,12 @@ namespace JeddoreISDPDesktop
             {
                 btnCreateOrder.Enabled = true;
             }
+
+            //check the list for PREPARESTOREORDER
+            if (employeeUserPermissions.permissionIDList.Contains("PREPARESTOREORDER"))
+            {
+                btnManageOrderItems.Enabled = true;
+            }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -186,6 +192,15 @@ namespace JeddoreISDPDesktop
                 //open the edit order form (modal)
                 frmEditOrder.ShowDialog();
             }
+        }
+
+        private void btnManageOrderItems_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the order items management form
+            OrderItemsManagement frmOrderItemsMgmt = new OrderItemsManagement(employee);
+
+            //open the order items management form (modal)
+            frmOrderItemsMgmt.ShowDialog();
         }
     }
 }

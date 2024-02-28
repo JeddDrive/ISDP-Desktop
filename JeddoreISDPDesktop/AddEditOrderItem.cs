@@ -19,6 +19,9 @@ namespace JeddoreISDPDesktop
         //global variable for quantity sent in from other form
         int quantity = 0;
 
+        //global variable for the site to/destination site
+        int employeeSite = 0;
+
         //constructor #1 - called when inserting item into order
         public AddEditOrderItem(Employee employeeLoggedIn, Item itemSelected, Inventory inventoryItemSelected)
         {
@@ -27,8 +30,10 @@ namespace JeddoreISDPDesktop
             item = itemSelected;
             inventoryItem = inventoryItemSelected;
 
-            //get current store OR emergency order for a store that is NEW, based on the employee's siteID
-            newOrder = TxnAccessor.GetOneNewOrder(employee.siteID);
+            employeeSite = employee.siteID;
+
+            //get current store OR emergency order for a store that is new, based on the employee's siteID
+            newOrder = TxnAccessor.GetOneNewOrder(employeeSite);
         }
 
         //constructor #2 - called when updating item quantity
@@ -39,8 +44,27 @@ namespace JeddoreISDPDesktop
             item = itemSelected;
             inventoryItem = inventoryItemSelected;
 
-            //get current store OR emergency order for a store that is NEW, based on the employee's siteID
-            newOrder = TxnAccessor.GetOneNewOrder(employee.siteID);
+            employeeSite = employee.siteID;
+
+            //get current store OR emergency order for a store that is new, based on the employee's siteID
+            newOrder = TxnAccessor.GetOneNewOrder(employeeSite);
+
+            //get the current quantity from the other form
+            quantity = currentQuantity;
+        }
+
+        //constructor #3 - called from the order items management form
+        public AddEditOrderItem(Employee employeeLoggedIn, Item itemSelected, Inventory inventoryItemSelected, int currentQuantity, int siteIDTo)
+        {
+            InitializeComponent();
+            employee = employeeLoggedIn;
+            item = itemSelected;
+            inventoryItem = inventoryItemSelected;
+
+            employeeSite = siteIDTo;
+
+            //get current store OR emergency order for a store that is new, based on the siteIDTo sent in (destination site)
+            newOrder = TxnAccessor.GetOneNewOrder(siteIDTo);
 
             //get the current quantity from the other form
             quantity = currentQuantity;
@@ -67,6 +91,8 @@ namespace JeddoreISDPDesktop
             lblCategory.Text = item.category;
             lblCaseSize.Text = item.caseSize.ToString();
             lblWarehouseQuantity.Text = inventoryItem.quantity.ToString();
+            lblWarehouseQty.Text = inventoryItem.quantity.ToString();
+            lblOrderQty.Text = quantity.ToString();
 
             //if quantity is not 0, meaning that an item quantity is being updated and NOT inserted then
             if (quantity != 0)
@@ -129,7 +155,7 @@ namespace JeddoreISDPDesktop
                     if (btnValueReturned == DialogResult.Yes)
                     {
                         //check if backorder currently exists for the employee's site (should be a 0 or 1 returned)
-                        long numBackOrders = TxnAccessor.GetCountOfActiveBackOrdersForSite(employee.siteID);
+                        long numBackOrders = TxnAccessor.GetCountOfActiveBackOrdersForSite(employeeSite);
 
                         //txn object - for the most recent txn (mostly just want the last barcode)
                         Txn mostRecentTxn = TxnAccessor.GetLastTxn();
@@ -145,7 +171,7 @@ namespace JeddoreISDPDesktop
                         byte emergencyDelivery = 0;
 
                         //get the employee's site
-                        Site site = SiteAccessor.GetOneSite(employee.siteID);
+                        Site site = SiteAccessor.GetOneSite(employeeSite);
 
                         DayOfWeek shipDayOfWeek = DayOfWeek.Saturday;
 
@@ -182,7 +208,7 @@ namespace JeddoreISDPDesktop
                         if (numBackOrders == 0)
                         {
                             //create new txn object
-                            Txn newTxn = new Txn(mostRecentTxn.txnID + 1, employee.siteID, 2, "New",
+                            Txn newTxn = new Txn(mostRecentTxn.txnID + 1, employeeSite, 2, "New",
                                 shipDate, "Back Order", newBarcode, DateTime.Now, emergencyDelivery);
 
                             //insert the back order txn
@@ -194,7 +220,7 @@ namespace JeddoreISDPDesktop
                             int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
 
                             //if the quantity available in the warehouse for the store/emergency order is above 0 then
-                            if (int.Parse(lblWarehouseQuantity.Text) > 0)
+                            if (int.Parse(lblWarehouseQuantity.Text) > 0 && nudOrderQuantity.Value <= int.Parse(lblCaseSize.Text))
                             {
                                 //create txnitem object - to be added to the store/emergency order
                                 TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
@@ -207,11 +233,19 @@ namespace JeddoreISDPDesktop
                                 //backOrderQuantity -= quantityAvailableForOrder;
                             }
 
+                            else
+                            {
+                                MessageBox.Show("Insufficient quantity available in warehouse to add any quantity of item to current store order.", "Insufficient Quantity");
+
+                                //and backorder quantity should be updated to be this - the full requested amount in the nud
+                                backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString());
+                            }
+
                             //if success
                             if (success1)
                             {
                                 //now get the newly created backorder for the site
-                                Txn theNewBackOrder = TxnAccessor.GetOneNewBackOrder(employee.siteID);
+                                Txn theNewBackOrder = TxnAccessor.GetOneNewBackOrder(employeeSite);
 
                                 //create txnitem object - to be added to the backorder
                                 TxnItems txnItemForBackOrder = new TxnItems(theNewBackOrder.txnID, item.itemID,
@@ -235,7 +269,7 @@ namespace JeddoreISDPDesktop
                         else
                         {
                             //now get the already created backorder for the site
-                            Txn theBackOrder = TxnAccessor.GetOneNewBackOrder(employee.siteID);
+                            Txn theBackOrder = TxnAccessor.GetOneNewBackOrder(employeeSite);
 
                             //calculate the quantity to be added to the backorder
                             int backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString()) - int.Parse(lblWarehouseQuantity.Text);
@@ -244,7 +278,7 @@ namespace JeddoreISDPDesktop
                             int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
 
                             //if the quantity available in the warehouse for the store/emergency order is above 0 then
-                            if (int.Parse(lblWarehouseQuantity.Text) > 0)
+                            if (int.Parse(lblWarehouseQuantity.Text) > 0 && nudOrderQuantity.Value <= int.Parse(lblCaseSize.Text))
                             {
                                 //create txnitem object - to be added to the store/emergency order
                                 TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
@@ -256,6 +290,15 @@ namespace JeddoreISDPDesktop
                                 //update the backorder quantity
                                 //backOrderQuantity -= quantityAvailableForOrder;
                             }
+
+                            else
+                            {
+                                MessageBox.Show("Insufficient quantity available in warehouse to add any quantity of item to current store order.", "Insufficient Quantity");
+
+                                //and backorder quantity should be updated to be this - the full requested amount in the nud
+                                backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString());
+                            }
+
 
                             //create txnitem object - to be added to the backorder
                             TxnItems txnItemForBackOrder = new TxnItems(theBackOrder.txnID, item.itemID,
@@ -302,6 +345,7 @@ namespace JeddoreISDPDesktop
                 //if no change in quantity in the nud, then can simply close this form
                 if (nudOrderQuantity.Value == quantity)
                 {
+                    //then display msg and close the form
                     MessageBox.Show("No update made to quantity for item already in order.", "No Update Made");
 
                     this.Close();
@@ -340,7 +384,7 @@ namespace JeddoreISDPDesktop
                     if (btnValueReturned == DialogResult.Yes)
                     {
                         //check if backorder currently exists for the employee's site (should be a 0 or 1 returned)
-                        long numBackOrders = TxnAccessor.GetCountOfActiveBackOrdersForSite(employee.siteID);
+                        long numBackOrders = TxnAccessor.GetCountOfActiveBackOrdersForSite(employeeSite);
 
                         //txn object - for the most recent txn (mostly just want the last barcode)
                         Txn mostRecentTxn = TxnAccessor.GetLastTxn();
@@ -356,7 +400,7 @@ namespace JeddoreISDPDesktop
                         byte emergencyDelivery = 0;
 
                         //get the employee's site
-                        Site site = SiteAccessor.GetOneSite(employee.siteID);
+                        Site site = SiteAccessor.GetOneSite(employeeSite);
 
                         DayOfWeek shipDayOfWeek = DayOfWeek.Saturday;
 
@@ -393,30 +437,41 @@ namespace JeddoreISDPDesktop
                         if (numBackOrders == 0)
                         {
                             //create new txn object
-                            Txn newTxn = new Txn(mostRecentTxn.txnID + 1, employee.siteID, 2, "New",
+                            Txn newTxn = new Txn(mostRecentTxn.txnID + 1, employeeSite, 2, "New",
                                 shipDate, "Back Order", newBarcode, DateTime.Now, emergencyDelivery);
 
                             //insert the back order txn
                             bool success1 = TxnAccessor.InsertNewTxn(newTxn);
 
                             //calculate the quantity to be added to the backorder
-                            int backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString()) - int.Parse(lblWarehouseQuantity.Text);
+                            int backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString()) - quantity;
 
                             int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
 
                             //if the quantity available in the warehouse for the store/emergency order is above 0 then
-                            if (int.Parse(lblWarehouseQuantity.Text) > 0)
+                            if (int.Parse(lblWarehouseQuantity.Text) > 0 && nudOrderQuantity.Value <= int.Parse(lblCaseSize.Text))
                             {
                                 //create txnitem object - to be added to the store/emergency order
                                 TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
                                         int.Parse(lblWarehouseQuantity.Text), txtNotes.Text);
+
+                                //then can add this txn item to the store/emergency order txn
+                                bool success2 = TxnItemsAccessor.UpdateTxnItem(txnItemForOrder);
                             }
+
+                            /* else
+                            {
+                                MessageBox.Show("Insufficient quantity available in warehouse to add any quantity of item to current store order.", "Insufficient Quantity");
+
+                                //and backorder quantity should be updated to be this - the full requested amount in the nud
+                                backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString());
+                            } */
 
                             //if success
                             if (success1)
                             {
                                 //now get the newly created backorder for the site
-                                Txn theNewBackOrder = TxnAccessor.GetOneNewBackOrder(employee.siteID);
+                                Txn theNewBackOrder = TxnAccessor.GetOneNewBackOrder(employeeSite);
 
                                 //create txnitem object - to be added to the backorder
                                 TxnItems txnItemForBackOrder = new TxnItems(theNewBackOrder.txnID, item.itemID,
@@ -440,27 +495,32 @@ namespace JeddoreISDPDesktop
                         else
                         {
                             //now get the already created backorder for the site
-                            Txn theBackOrder = TxnAccessor.GetOneNewBackOrder(employee.siteID);
+                            Txn theBackOrder = TxnAccessor.GetOneNewBackOrder(employeeSite);
 
                             //calculate the quantity to be added to the backorder
-                            int backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString()) - int.Parse(lblWarehouseQuantity.Text);
+                            int backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString()) - quantity;
 
                             //calculate the quantity available for the store/emergency order
                             int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
 
                             //if the quantity available in the warehouse for the store/emergency order is above 0 then
-                            if (int.Parse(lblWarehouseQuantity.Text) > 0)
+                            if (int.Parse(lblWarehouseQuantity.Text) > 0 && nudOrderQuantity.Value <= int.Parse(lblCaseSize.Text))
                             {
                                 //create txnitem object - to be added to the store/emergency order
                                 TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
                                         int.Parse(lblWarehouseQuantity.Text), txtNotes.Text);
 
                                 //then can add this txn item to the store/emergency order txn
-                                bool success2 = TxnItemsAccessor.InsertNewTxnItem(txnItemForOrder);
-
-                                //update the backorder quantity
-                                //backOrderQuantity -= quantityAvailableForOrder;
+                                bool success2 = TxnItemsAccessor.UpdateTxnItem(txnItemForOrder);
                             }
+
+                            /* else
+                            {
+                                MessageBox.Show("Insufficient quantity available in warehouse to add any quantity of item to current store order.", "Insufficient Quantity");
+
+                                //and backorder quantity should be updated to be this - the full requested amount in the nud
+                                backOrderQuantity = int.Parse(nudOrderQuantity.Value.ToString());
+                            } */
 
                             //create txnitem object - to be added to the backorder
                             TxnItems txnItemForBackOrder = new TxnItems(theBackOrder.txnID, item.itemID,

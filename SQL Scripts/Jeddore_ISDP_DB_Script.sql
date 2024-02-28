@@ -141,6 +141,10 @@ add column active tinyint(1) NOT NULL Default 1;
 INSERT INTO `permission` (`permissionID`) VALUES
 ('VIEWSITE');
 
+-- REJECTORDER
+INSERT INTO `permission` (`permissionID`) VALUES
+('REJECTORDER');
+
 -- alter user_permission table - so that all default users of the system have READUSER access
 -- the admin user (number 1) already has this but the others do not
 -- also are giving EDITITEM access to the warehouse manager, cpatstone
@@ -193,7 +197,13 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1007, 'CREATESTOREORDER', 1),
 (1008, 'CREATESTOREORDER', 1),
 (1009, 'CREATESTOREORDER', 1),
-(1010, 'CREATESTOREORDER', 1);
+(1010, 'CREATESTOREORDER', 1),
+-- adding PREPARESTOREORDER and RECEIVESTOREORDER for the warehouse manager
+(1003, 'PREPARESTOREORDER', 1),
+(1003, 'RECEIVESTOREORDER', 1),
+-- adding REJECTORDER for the admin and warehouse manager
+(1, 'REJECTORDER', 1),
+(1003, 'REJECTORDER', 1);
 
 -- for all records currently in the user_permission table, set hasPermission to 1
 -- since all admin records in this table right now are all permissions that the admin user should have
@@ -231,6 +241,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (2, 'EDITPRODUCT', 0),
 (2, 'CREATESUPPLIERORDER', 0),
 (2, 'CREATEREPORT', 0),
+(2, 'REJECTORDER', 0),
 (1000, 'ADDUSER', 0),
 (1000, 'EDITUSER', 0),
 (1000, 'DELETEUSER', 0),
@@ -257,6 +268,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1000, 'EDITPRODUCT', 0),
 (1000, 'CREATESUPPLIERORDER', 0),
 (1000, 'CREATEREPORT', 0),
+(1000, 'REJECTORDER', 0),
 (1001, 'ADDUSER', 0),
 (1001, 'EDITUSER', 0),
 (1001, 'DELETEUSER', 0),
@@ -283,6 +295,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1001, 'EDITPRODUCT', 0),
 (1001, 'CREATESUPPLIERORDER', 0),
 (1001, 'CREATEREPORT', 0),
+(1001, 'REJECTORDER', 0),
 (1002, 'ADDUSER', 0),
 (1002, 'EDITUSER', 0),
 (1002, 'DELETEUSER', 0),
@@ -307,13 +320,12 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1002, 'EDITPRODUCT', 0),
 (1002, 'CREATESUPPLIERORDER', 0),
 (1002, 'CREATEREPORT', 0),
+(1002, 'REJECTORDER', 0),
 (1003, 'ADDUSER', 0),
 (1003, 'EDITUSER', 0),
 (1003, 'DELETEUSER', 0),
 (1003, 'SETPERMISSION', 0),
 (1003, 'MOVEINVENTORY', 0),
-(1003, 'RECEIVESTOREORDER', 0),
-(1003, 'PREPARESTOREORDER', 0),
 (1003, 'FULFILSTOREORDER', 0),
 (1003, 'ADDITEMTOBACKORDER', 0),
 (1003, 'CREATEBACKORDER', 0),
@@ -356,6 +368,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1004, 'EDITPRODUCT', 0),
 (1004, 'CREATESUPPLIERORDER', 0),
 (1004, 'CREATEREPORT', 0),
+(1004, 'REJECTORDER', 0),
 (1005, 'ADDUSER', 0),
 (1005, 'EDITUSER', 0),
 (1005, 'DELETEUSER', 0),
@@ -380,6 +393,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1005, 'EDITPRODUCT', 0),
 (1005, 'CREATESUPPLIERORDER', 0),
 (1005, 'CREATEREPORT', 0),
+(1005, 'REJECTORDER', 0),
 (1006, 'ADDUSER', 0),
 (1006, 'EDITUSER', 0),
 (1006, 'DELETEUSER', 0),
@@ -404,6 +418,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1006, 'EDITPRODUCT', 0),
 (1006, 'CREATESUPPLIERORDER', 0),
 (1006, 'CREATEREPORT', 0),
+(1006, 'REJECTORDER', 0),
 (1007, 'ADDUSER', 0),
 (1007, 'EDITUSER', 0),
 (1007, 'DELETEUSER', 0),
@@ -428,6 +443,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1007, 'EDITPRODUCT', 0),
 (1007, 'CREATESUPPLIERORDER', 0),
 (1007, 'CREATEREPORT', 0),
+(1007, 'REJECTORDER', 0),
 (1008, 'ADDUSER', 0),
 (1008, 'EDITUSER', 0),
 (1008, 'DELETEUSER', 0),
@@ -452,6 +468,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1008, 'EDITPRODUCT', 0),
 (1008, 'CREATESUPPLIERORDER', 0),
 (1008, 'CREATEREPORT', 0),
+(1008, 'REJECTORDER', 0),
 (1009, 'ADDUSER', 0),
 (1009, 'EDITUSER', 0),
 (1009, 'DELETEUSER', 0),
@@ -476,6 +493,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1009, 'EDITPRODUCT', 0),
 (1009, 'CREATESUPPLIERORDER', 0),
 (1009, 'CREATEREPORT', 0),
+(1009, 'REJECTORDER', 0),
 (1010, 'ADDUSER', 0),
 (1010, 'EDITUSER', 0),
 (1010, 'DELETEUSER', 0),
@@ -500,6 +518,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1010, 'EDITPRODUCT', 0),
 (1010, 'CREATESUPPLIERORDER', 0),
 (1010, 'CREATEREPORT', 0),
+(1010, 'REJECTORDER', 0),
 (1012, 'ADDUSER', 0),
 (1012, 'EDITUSER', 0),
 (1012, 'DELETEUSER', 0),
@@ -526,6 +545,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1012, 'EDITPRODUCT', 0),
 (1012, 'CREATESUPPLIERORDER', 0),
 (1012, 'CREATEREPORT', 0),
+(1012, 'REJECTORDER', 0),
 (1013, 'ADDUSER', 0),
 (1013, 'EDITUSER', 0),
 (1013, 'DELETEUSER', 0),
@@ -552,6 +572,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1013, 'EDITPRODUCT', 0),
 (1013, 'CREATESUPPLIERORDER', 0),
 (1013, 'CREATEREPORT', 0),
+(1013, 'REJECTORDER', 0),
 (1014, 'ADDUSER', 0),
 (1014, 'EDITUSER', 0),
 (1014, 'DELETEUSER', 0),
@@ -577,7 +598,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1014, 'ADDNEWPRODUCT', 0),
 (1014, 'EDITPRODUCT', 0),
 (1014, 'CREATESUPPLIERORDER', 0),
-(1014, 'CREATEREPORT', 0);
+(1014, 'CREATEREPORT', 0),
+(1014, 'REJECTORDER', 0);
 
 -- Trigger #1 - for transaction audit activity
 -- after UPDATEs on the txn table
@@ -664,7 +686,8 @@ VALUES (new.employeeID, 'ADDUSER', 0),
 (new.employeeID, 'EDITPRODUCT', 0),
 (new.employeeID, 'CREATESUPPLIERORDER', 0),
 (new.employeeID, 'CREATEREPORT', 0), 
-(new.employeeID, 'VIEWSITE', 1);
+(new.employeeID, 'VIEWSITE', 1),
+(new.employeeID, 'REJECTORDER', 1);
 	
 END$$
 
@@ -934,9 +957,19 @@ AFTER DELETE
 ON txnitems FOR EACH ROW
 BEGIN
 
+declare txnTypeVar varchar(20);
+
+select txnType
+into txnTypeVar
+from txn
+where txnID = old.txnID;
+
+IF txnTypeVar IN ('Store Order', 'Emergency') THEN
 -- call the stored procedure from this trigger
 -- are inserting the deleted item quantity from a txn back into the warehouse inventory
 CALL insertInventoryBackIntoWarehouse(old.quantity, old.itemID);
+
+END IF;
 	
 END$$
 
@@ -951,9 +984,19 @@ AFTER UPDATE
 ON txnitems FOR EACH ROW
 BEGIN
 
+declare txnTypeVar varchar(20);
+
+select txnType
+into txnTypeVar
+from txn
+where txnID = old.txnID;
+
+IF txnTypeVar IN ('Store Order', 'Emergency') THEN
 -- call the stored procedure from this trigger
 -- are inserting the deleted item quantity from a txn back into the warehouse inventory
 CALL updateWarehouseInventory(old.quantity, new.quantity, old.itemID);
+
+END IF;
 	
 END$$
 
@@ -968,10 +1011,30 @@ AFTER INSERT
 ON txnitems FOR EACH ROW
 BEGIN
 
+declare txnTypeVar varchar(20);
+
+select txnType
+into txnTypeVar
+from txn
+where txnID = new.txnID;
+
+IF txnTypeVar IN ('Store Order', 'Emergency') THEN
 -- call the stored procedure from this trigger
 -- are removing the item quantity now in this txn from the warehouse inventory
 CALL removeInventoryFromWarehouse(new.quantity, new.itemID);
-	
+
+END IF;
+
 END$$
 
 DELIMITER ;
+
+-- closing any active orders in the DB that are from before the 1st day of 2024
+-- doing this because running into a potential issue where there may be active orders still open from
+-- 2018 or 2019 for a particular site (ex. Saint John Retail - site 4)
+-- which can prevent a store manager from creating a needed new order for their site
+/* update txn
+set status = 'Complete'
+where shipDate <  '2024-01-01 00:00:00'
+and status IN ('New', 'Submitted', 'Assembling', 'Assembled', 'In Transit', 'In progress', 'Delivered');
+*/

@@ -121,7 +121,7 @@ namespace JeddoreISDPDesktop
             //create a new bindingsource
             BindingSource bindingSource2 = new BindingSource();
 
-            //create datatable - getting all txnitems, returned as a datatable
+            //create datatable - getting all inventory from the warehouse, returned as a datatable
             DataTable dt2 = InventoryAccessor.GetAllInventoryBySiteDataTable(2);
 
             //set the binding source's datasource to the datatable
@@ -233,6 +233,9 @@ namespace JeddoreISDPDesktop
                 dgvOrder.ClearSelection();
                 dgvInventory.ClearSelection();
 
+                //converting the search text to all lower case
+                string theSearchText = txtSearchOrder.Text.ToLower();
+
                 CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvOrder.DataSource];
 
                 foreach (DataGridViewRow row in dgvOrder.Rows)
@@ -250,19 +253,19 @@ namespace JeddoreISDPDesktop
                     }
 
                     //if - first name cell converted to lower case contains the txtbox text
-                    if (nameCellValue != null && nameCellValue.ToString().ToLower().Contains(txtSearchOrder.Text))
+                    if (nameCellValue != null && nameCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - last name cell converted to lower case contains the txtbox text
-                    else if (descriptionCellValue != null && descriptionCellValue.ToString().ToLower().Contains(txtSearchOrder.Text))
+                    else if (descriptionCellValue != null && descriptionCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - item ID cell contains the txtbox text
-                    else if (itemIDCellValue != null && itemIDCellValue.ToString().Contains(txtSearchOrder.Text))
+                    else if (itemIDCellValue != null && itemIDCellValue.ToString().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
@@ -293,6 +296,9 @@ namespace JeddoreISDPDesktop
                 dgvOrder.ClearSelection();
                 dgvInventory.ClearSelection();
 
+                //converting the search text to all lower case
+                string theSearchText = txtSearchInventory.Text.ToLower();
+
                 CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvInventory.DataSource];
 
                 foreach (DataGridViewRow row in dgvInventory.Rows)
@@ -310,19 +316,19 @@ namespace JeddoreISDPDesktop
                     }
 
                     //if - first name cell converted to lower case contains the txtbox text
-                    if (nameCellValue != null && nameCellValue.ToString().ToLower().Contains(txtSearchInventory.Text))
+                    if (nameCellValue != null && nameCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - last name cell converted to lower case contains the txtbox text
-                    else if (descriptionCellValue != null && descriptionCellValue.ToString().ToLower().Contains(txtSearchInventory.Text))
+                    else if (descriptionCellValue != null && descriptionCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - item ID cell contains the txtbox text
-                    else if (itemIDCellValue != null && itemIDCellValue.ToString().Contains(txtSearchInventory.Text))
+                    else if (itemIDCellValue != null && itemIDCellValue.ToString().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
@@ -455,8 +461,8 @@ namespace JeddoreISDPDesktop
             //if number of selected rows is not one
             if (selectedRowsCount != 1)
             {
-                MessageBox.Show("Must select one row from the data grid for your order items in order to update that's item's quantity in the order.",
-                    "Inventory Item Update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Must select one row from the order items data grid in order to update that's item's quantity in the order.",
+                    "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 //clear all selected rows from the dgv
                 dgvOrder.ClearSelection();

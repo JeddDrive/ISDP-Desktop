@@ -50,6 +50,7 @@
             this.lblLocation = new System.Windows.Forms.Label();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnManageOrderItems = new System.Windows.Forms.Button();
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
             this.tabControlDashboard.SuspendLayout();
@@ -76,6 +77,7 @@
             // tabOrders
             // 
             this.tabOrders.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabOrders.Controls.Add(this.btnManageOrderItems);
             this.tabOrders.Controls.Add(this.btnCreateOrder);
             this.tabOrders.Controls.Add(this.btnViewOrders);
             this.tabOrders.Location = new System.Drawing.Point(4, 37);
@@ -89,7 +91,7 @@
             // 
             this.btnCreateOrder.Enabled = false;
             this.btnCreateOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateOrder.Location = new System.Drawing.Point(258, 229);
+            this.btnCreateOrder.Location = new System.Drawing.Point(258, 188);
             this.btnCreateOrder.Name = "btnCreateOrder";
             this.btnCreateOrder.Size = new System.Drawing.Size(456, 63);
             this.btnCreateOrder.TabIndex = 23;
@@ -101,7 +103,7 @@
             // 
             this.btnViewOrders.Enabled = false;
             this.btnViewOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewOrders.Location = new System.Drawing.Point(258, 81);
+            this.btnViewOrders.Location = new System.Drawing.Point(258, 34);
             this.btnViewOrders.Name = "btnViewOrders";
             this.btnViewOrders.Size = new System.Drawing.Size(456, 63);
             this.btnViewOrders.TabIndex = 22;
@@ -125,7 +127,7 @@
             // 
             this.btnEditInventory.Enabled = false;
             this.btnEditInventory.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditInventory.Location = new System.Drawing.Point(258, 285);
+            this.btnEditInventory.Location = new System.Drawing.Point(258, 237);
             this.btnEditInventory.Name = "btnEditInventory";
             this.btnEditInventory.Size = new System.Drawing.Size(456, 63);
             this.btnEditInventory.TabIndex = 22;
@@ -263,6 +265,18 @@
             this.timer1.Interval = 1200000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnManageOrderItems
+            // 
+            this.btnManageOrderItems.Enabled = false;
+            this.btnManageOrderItems.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManageOrderItems.Location = new System.Drawing.Point(258, 337);
+            this.btnManageOrderItems.Name = "btnManageOrderItems";
+            this.btnManageOrderItems.Size = new System.Drawing.Size(456, 63);
+            this.btnManageOrderItems.TabIndex = 24;
+            this.btnManageOrderItems.Text = "&Manage Store/Back Order Items";
+            this.btnManageOrderItems.UseVisualStyleBackColor = true;
+            this.btnManageOrderItems.Click += new System.EventHandler(this.btnManageOrderItems_Click);
+            // 
             // picBullseye
             // 
             this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
@@ -342,5 +356,6 @@
         private System.Windows.Forms.Button btnEditInventory;
         private System.Windows.Forms.Button btnViewOrders;
         private System.Windows.Forms.Button btnCreateOrder;
+        private System.Windows.Forms.Button btnManageOrderItems;
     }
 }

@@ -21,22 +21,26 @@ namespace JeddoreISDPDesktop.DAO_Classes
         //selectAllOrdersStatement - are not selecting any txns by default that are COMPLETE (closed), CANCELLED, or REJECTED
         //and txns have to be either a STORE ORDER or an EMERGENCY order
         private static string selectAllOrdersStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
-            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.Status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Store Order', 'Emergency')";
+            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.Status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Store Order', 'Emergency', 'Back Order')";
         private static string selectAllOrdersBySiteStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
-            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.Status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Store Order', 'Emergency') and (t.siteIDTo = @destinationSite or t.siteIDFrom = @originSite)";
+            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.Status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Store Order', 'Emergency', 'Back Order') and (t.siteIDTo = @destinationSite or t.siteIDFrom = @originSite)";
         private static string selectAllOrdersByStatusStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
-            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and txnType IN ('Store Order', 'Emergency')";
+            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and txnType IN ('Store Order', 'Emergency', 'Back Order')";
         private static string selectAllOrdersByStatusAndSiteStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
-    "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and txnType IN ('Store Order', 'Emergency') and (t.siteIDTo = @destinationSite or t.siteIDFrom = @originSite)";
+    "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and txnType IN ('Store Order', 'Emergency', 'Back Order') and (t.siteIDTo = @destinationSite or t.siteIDFrom = @originSite)";
         //getting the last/most recent txn record, mostly for the barcode
         private static string selectLastTxnStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t " +
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID order by t.txnID DESC LIMIT 1";
         private static string selectOneOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t " +
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnID = @txnID and txnType IN ('Store Order', 'Emergency')";
-        private static string selectSiteNewOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status = 'New' and txnType IN ('Store Order', 'Emergency') and t.siteIDTo = @siteID LIMIT 1";
-        private static string selectSiteNewBackOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status = 'New' and txnType IN ('Back Order') and t.siteIDTo = @siteID LIMIT 1";
-        private static string selectCountActiveOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status IN ('NEW') and txnType IN ('Store Order', 'Emergency')";
-        private static string selectCountActiveBackOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Back Order')";
+        private static string selectOneBackOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t " +
+            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnID = @txnID and txnType = 'Back Order'";
+        //despite the name, these next 2 statements will get a site's new, submitted, or assembling store/back order
+        //NOTE: may change this later
+        private static string selectSiteNewOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status IN ('New', 'Submitted', 'Assembling') and txnType IN ('Store Order', 'Emergency') and t.siteIDTo = @siteID LIMIT 1";
+        private static string selectSiteNewBackOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status IN ('New', 'Submitted', 'Assembling') and txnType IN ('Back Order') and t.siteIDTo = @siteID LIMIT 1";
+        private static string selectCountActiveOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Store Order', 'Emergency')";
+        private static string selectCountActiveBackOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Back Order')";
         private static string insertTxnStatement = " insert into `txn` (`siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`) VALUES " +
             "(@siteIDTo, @siteIDFrom, @status, @shipDate, @txnType, @barCode, @createdDate, @emergencyDelivery)";
         private static string updateTxnShipDateStatement = "update txn set shipDate = @shipDate where txnID = @txnID";
@@ -375,7 +379,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Getting the One Transaction");
+                MessageBox.Show(ex.Message, "Error Getting the One Order");
 
                 connection.Close();
             }
@@ -385,7 +389,69 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Gets one store OR emergency order with the status of 'New', based on the siteID. (The current order for a store)
+        * Gets one back order, based on the txnID.
+        *
+        * @param int txnID
+        * @return a Txn object, possibly null if none found based on the txnID.
+        */
+        public static Txn GetOneBackOrder(int inTxnID)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectOneBackOrderStatement, connection);
+
+            //txn to be returned
+            Txn txn = null;
+
+            //one parameter for the query - int txnID
+            cmd.Parameters.AddWithValue("@txnID", inTxnID);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                //if - there is a record to read
+                if (reader.Read())
+                {
+                    //get the values from the columns
+                    int txnID = reader.GetInt32("txnID");
+                    string originSite = reader.GetString("originSite");
+                    string destinationSite = reader.GetString("destinationSite");
+                    int siteIDTo = reader.GetInt32("siteIDTo");
+                    int siteIDFrom = reader.GetInt32("siteIDFrom");
+                    string status = reader.GetString("status");
+                    DateTime shipDate = reader.GetDateTime("shipDate");
+                    string txnType = reader.GetString("txnType");
+                    string barCode = reader.GetString("barCode");
+                    DateTime createdDate = reader.GetDateTime("createdDate");
+
+                    //create a txn object
+                    txn = new Txn(txnID, originSite, destinationSite, siteIDTo, siteIDFrom, status,
+                        shipDate, txnType, barCode, createdDate);
+                }
+
+                //close reader after if statement
+                reader.Close();
+
+                //close the connection
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting the One Back Order");
+
+                connection.Close();
+            }
+
+            //return the txn
+            return txn;
+        }
+
+        /**
+        * Gets one store OR emergency order with the status of 'New', 'Submitted', or 'Assembling', based on the siteID. (The current order for a store)
         *
         * @param int siteID
         * @return a Txn object, possibly null if none found based on the siteID.
@@ -450,7 +516,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Gets one back order with the status of 'New', based on the siteID. (The current back order for a store)
+        * Gets one back order with the status of 'New', 'Submitted', or 'Assembling', based on the siteID. (The current back order for a store)
         *
         * @param int siteID
         * @return a Txn object, possibly null if none found based on the siteID.

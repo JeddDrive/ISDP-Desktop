@@ -226,6 +226,9 @@ namespace JeddoreISDPDesktop.Entity_Classes
                 //each time the text is changed and if the user clicks on a CRUD btn for example
                 dgvUsers.ClearSelection();
 
+                //converting the search text to all lower case
+                string theSearchText = txtSearchUsers.Text.ToLower();
+
                 CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvUsers.DataSource];
 
                 foreach (DataGridViewRow row in dgvUsers.Rows)
@@ -246,37 +249,37 @@ namespace JeddoreISDPDesktop.Entity_Classes
                     }
 
                     //if - first name cell converted to lower case contains the txtbox text
-                    if (firstNameCellValue != null && firstNameCellValue.ToString().ToLower().Contains(txtSearchUsers.Text))
+                    if (firstNameCellValue != null && firstNameCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - last name cell converted to lower case contains the txtbox text
-                    else if (lastNameCellValue != null && lastNameCellValue.ToString().ToLower().Contains(txtSearchUsers.Text))
+                    else if (lastNameCellValue != null && lastNameCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - location name cell converted to lower case contains the txtbox text
-                    else if (locationCellValue != null && locationCellValue.ToString().ToLower().Contains(txtSearchUsers.Text))
+                    else if (locationCellValue != null && locationCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - position cell converted to lower case contains the txtbox text
-                    else if (positionCellValue != null && positionCellValue.ToString().ToLower().Contains(txtSearchUsers.Text))
+                    else if (positionCellValue != null && positionCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - employee ID cell converted to lower case contains the txtbox text
-                    else if (employeeIDCellValue != null && employeeIDCellValue.ToString().ToLower().Contains(txtSearchUsers.Text))
+                    else if (employeeIDCellValue != null && employeeIDCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
 
                     //else if - username cell converted to lower case contains the txtbox text
-                    else if (usernameCellValue != null && usernameCellValue.ToString().ToLower().Contains(txtSearchUsers.Text))
+                    else if (usernameCellValue != null && usernameCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }

@@ -33,10 +33,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtSearchOrders = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.picBullseye = new System.Windows.Forms.PictureBox();
             this.lblLocation = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
-            this.picHelp = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.grpOrders = new System.Windows.Forms.GroupBox();
@@ -62,14 +60,17 @@
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnReceive = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
+            this.picBullseye = new System.Windows.Forms.PictureBox();
+            this.picHelp = new System.Windows.Forms.PictureBox();
+            this.btnReject = new System.Windows.Forms.Button();
             this.grpOrders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.grpBasic.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
             this.SuspendLayout();
             // 
             // label4
@@ -99,16 +100,6 @@
             this.label3.TabIndex = 66;
             this.label3.Text = "View Orders";
             // 
-            // picBullseye
-            // 
-            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
-            this.picBullseye.Location = new System.Drawing.Point(0, -1);
-            this.picBullseye.Name = "picBullseye";
-            this.picBullseye.Size = new System.Drawing.Size(140, 110);
-            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBullseye.TabIndex = 65;
-            this.picBullseye.TabStop = false;
-            // 
             // lblLocation
             // 
             this.lblLocation.AutoSize = true;
@@ -124,17 +115,6 @@
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(0, 28);
             this.lblUsername.TabIndex = 63;
-            // 
-            // picHelp
-            // 
-            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
-            this.picHelp.Location = new System.Drawing.Point(920, 32);
-            this.picHelp.Name = "picHelp";
-            this.picHelp.Size = new System.Drawing.Size(45, 40);
-            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picHelp.TabIndex = 62;
-            this.picHelp.TabStop = false;
-            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
             // label1
             // 
@@ -356,6 +336,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnReject);
             this.groupBox1.Controls.Add(this.btnReceive);
             this.groupBox1.Location = new System.Drawing.Point(774, 554);
             this.groupBox1.Name = "groupBox1";
@@ -365,6 +346,7 @@
             // 
             // btnReceive
             // 
+            this.btnReceive.Enabled = false;
             this.btnReceive.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnReceive.Location = new System.Drawing.Point(29, 33);
             this.btnReceive.Name = "btnReceive";
@@ -373,6 +355,39 @@
             this.btnReceive.Text = "&Receive Order";
             this.btnReceive.UseVisualStyleBackColor = true;
             this.btnReceive.Click += new System.EventHandler(this.btnReceive_Click);
+            // 
+            // picBullseye
+            // 
+            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
+            this.picBullseye.Location = new System.Drawing.Point(0, -1);
+            this.picBullseye.Name = "picBullseye";
+            this.picBullseye.Size = new System.Drawing.Size(140, 110);
+            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBullseye.TabIndex = 65;
+            this.picBullseye.TabStop = false;
+            // 
+            // picHelp
+            // 
+            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
+            this.picHelp.Location = new System.Drawing.Point(920, 32);
+            this.picHelp.Name = "picHelp";
+            this.picHelp.Size = new System.Drawing.Size(45, 40);
+            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picHelp.TabIndex = 62;
+            this.picHelp.TabStop = false;
+            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
+            // 
+            // btnReject
+            // 
+            this.btnReject.Enabled = false;
+            this.btnReject.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnReject.Location = new System.Drawing.Point(29, 113);
+            this.btnReject.Name = "btnReject";
+            this.btnReject.Size = new System.Drawing.Size(147, 63);
+            this.btnReject.TabIndex = 1;
+            this.btnReject.Text = "&Reject Order";
+            this.btnReject.UseVisualStyleBackColor = true;
+            this.btnReject.Click += new System.EventHandler(this.btnReject_Click);
             // 
             // ViewOrders
             // 
@@ -404,8 +419,6 @@
             this.Text = "Bullseye Inventory Management System - View Orders";
             this.Load += new System.EventHandler(this.ViewOrders_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ViewOrders_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             this.grpOrders.ResumeLayout(false);
             this.grpOrders.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).EndInit();
@@ -414,6 +427,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
             this.grpBasic.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -453,5 +468,6 @@
         private System.Windows.Forms.ToolTip toolTipHelp;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnReceive;
+        private System.Windows.Forms.Button btnReject;
     }
 }

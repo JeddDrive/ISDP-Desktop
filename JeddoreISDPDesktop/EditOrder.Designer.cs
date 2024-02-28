@@ -61,6 +61,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvOrder = new System.Windows.Forms.DataGridView();
             this.grpBtnsTwo = new System.Windows.Forms.GroupBox();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -80,7 +81,6 @@
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.grpBasic.SuspendLayout();
             this.grpInventory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator2)).BeginInit();
@@ -98,7 +98,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(659, 166);
+            this.label5.Location = new System.Drawing.Point(646, 166);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 28);
             this.label5.TabIndex = 60;
@@ -107,7 +107,7 @@
             // txtSearchInventory
             // 
             this.txtSearchInventory.Enabled = false;
-            this.txtSearchInventory.Location = new System.Drawing.Point(734, 163);
+            this.txtSearchInventory.Location = new System.Drawing.Point(721, 163);
             this.txtSearchInventory.Name = "txtSearchInventory";
             this.txtSearchInventory.Size = new System.Drawing.Size(331, 34);
             this.txtSearchInventory.TabIndex = 1;
@@ -134,7 +134,7 @@
             // lblMain
             // 
             this.lblMain.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMain.Location = new System.Drawing.Point(380, 98);
+            this.lblMain.Location = new System.Drawing.Point(409, 97);
             this.lblMain.Name = "lblMain";
             this.lblMain.Size = new System.Drawing.Size(374, 50);
             this.lblMain.TabIndex = 58;
@@ -219,7 +219,7 @@
             this.grpInventory.Controls.Add(this.dgvInventory);
             this.grpInventory.Location = new System.Drawing.Point(646, 206);
             this.grpInventory.Name = "grpInventory";
-            this.grpInventory.Size = new System.Drawing.Size(427, 351);
+            this.grpInventory.Size = new System.Drawing.Size(524, 351);
             this.grpInventory.TabIndex = 62;
             this.grpInventory.TabStop = false;
             this.grpInventory.Text = "Warehouse Inventory";
@@ -249,7 +249,7 @@
             this.bindingNavigator2.MovePreviousItem = this.toolStripButton8;
             this.bindingNavigator2.Name = "bindingNavigator2";
             this.bindingNavigator2.PositionItem = this.toolStripTextBox2;
-            this.bindingNavigator2.Size = new System.Drawing.Size(421, 27);
+            this.bindingNavigator2.Size = new System.Drawing.Size(518, 27);
             this.bindingNavigator2.TabIndex = 34;
             this.bindingNavigator2.Text = "bindingNavigator2";
             // 
@@ -296,7 +296,7 @@
             this.dgvInventory.RowHeadersWidth = 51;
             this.dgvInventory.RowTemplate.Height = 24;
             this.dgvInventory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvInventory.Size = new System.Drawing.Size(413, 278);
+            this.dgvInventory.Size = new System.Drawing.Size(514, 278);
             this.dgvInventory.TabIndex = 33;
             // 
             // grpOrder
@@ -391,11 +391,22 @@
             this.grpBtnsTwo.Controls.Add(this.btnSubmit);
             this.grpBtnsTwo.Controls.Add(this.btnRemove);
             this.grpBtnsTwo.Controls.Add(this.btnAdd);
-            this.grpBtnsTwo.Location = new System.Drawing.Point(734, 553);
+            this.grpBtnsTwo.Location = new System.Drawing.Point(831, 556);
             this.grpBtnsTwo.Name = "grpBtnsTwo";
             this.grpBtnsTwo.Size = new System.Drawing.Size(339, 188);
             this.grpBtnsTwo.TabIndex = 46;
             this.grpBtnsTwo.TabStop = false;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
+            this.btnUpdate.Location = new System.Drawing.Point(6, 113);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(147, 63);
+            this.btnUpdate.TabIndex = 2;
+            this.btnUpdate.Text = "&Update Quantity";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnSubmit
             // 
@@ -572,7 +583,7 @@
             // picHelp
             // 
             this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
-            this.picHelp.Location = new System.Drawing.Point(1026, 31);
+            this.picHelp.Location = new System.Drawing.Point(1119, 16);
             this.picHelp.Name = "picHelp";
             this.picHelp.Size = new System.Drawing.Size(45, 40);
             this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -580,24 +591,13 @@
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
-            this.btnUpdate.Location = new System.Drawing.Point(6, 113);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(147, 63);
-            this.btnUpdate.TabIndex = 2;
-            this.btnUpdate.Text = "&Update Quantity";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
             // EditOrder
             // 
             this.AcceptButton = this.btnRefresh;
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(1082, 753);
+            this.ClientSize = new System.Drawing.Size(1182, 753);
             this.Controls.Add(this.lblOrderID);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.grpBtnsTwo);
