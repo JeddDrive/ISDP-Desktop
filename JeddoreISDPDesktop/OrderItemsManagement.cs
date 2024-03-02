@@ -372,7 +372,7 @@ namespace JeddoreISDPDesktop
             if (selectedRowsCount != 1)
             {
                 MessageBox.Show("Must select one row from the order items data grid in order to update that's item's quantity in the order.",
-                    "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //clear all selected rows from the dgv
                 dgvOrderItems.ClearSelection();
@@ -455,7 +455,7 @@ namespace JeddoreISDPDesktop
             if (selectedRowsCount != 1)
             {
                 MessageBox.Show("Must select one row from the orders data grid in order to manually update that order's ship date.",
-                    "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //clear all selected rows from the dgv
                 dgvOrders.ClearSelection();

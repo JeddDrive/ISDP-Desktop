@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.tabControlDashboard = new System.Windows.Forms.TabControl();
             this.tabOrders = new System.Windows.Forms.TabPage();
+            this.btnFulfillOrder = new System.Windows.Forms.Button();
+            this.btnManageOrderItems = new System.Windows.Forms.Button();
             this.btnCreateOrder = new System.Windows.Forms.Button();
             this.btnViewOrders = new System.Windows.Forms.Button();
             this.tabInventory = new System.Windows.Forms.TabPage();
@@ -50,7 +52,6 @@
             this.lblLocation = new System.Windows.Forms.Label();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnManageOrderItems = new System.Windows.Forms.Button();
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
             this.tabControlDashboard.SuspendLayout();
@@ -77,6 +78,7 @@
             // tabOrders
             // 
             this.tabOrders.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabOrders.Controls.Add(this.btnFulfillOrder);
             this.tabOrders.Controls.Add(this.btnManageOrderItems);
             this.tabOrders.Controls.Add(this.btnCreateOrder);
             this.tabOrders.Controls.Add(this.btnViewOrders);
@@ -87,15 +89,39 @@
             this.tabOrders.TabIndex = 0;
             this.tabOrders.Text = "Orders";
             // 
+            // btnFulfillOrder
+            // 
+            this.btnFulfillOrder.Enabled = false;
+            this.btnFulfillOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFulfillOrder.Location = new System.Drawing.Point(525, 245);
+            this.btnFulfillOrder.Name = "btnFulfillOrder";
+            this.btnFulfillOrder.Size = new System.Drawing.Size(384, 63);
+            this.btnFulfillOrder.TabIndex = 25;
+            this.btnFulfillOrder.Text = "&Fulfill Store Order";
+            this.btnFulfillOrder.UseVisualStyleBackColor = true;
+            this.btnFulfillOrder.Click += new System.EventHandler(this.btnFulfillOrder_Click);
+            // 
+            // btnManageOrderItems
+            // 
+            this.btnManageOrderItems.Enabled = false;
+            this.btnManageOrderItems.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManageOrderItems.Location = new System.Drawing.Point(525, 67);
+            this.btnManageOrderItems.Name = "btnManageOrderItems";
+            this.btnManageOrderItems.Size = new System.Drawing.Size(384, 63);
+            this.btnManageOrderItems.TabIndex = 24;
+            this.btnManageOrderItems.Text = "&Manage Order Items (Warehouse)";
+            this.btnManageOrderItems.UseVisualStyleBackColor = true;
+            this.btnManageOrderItems.Click += new System.EventHandler(this.btnManageOrderItems_Click);
+            // 
             // btnCreateOrder
             // 
             this.btnCreateOrder.Enabled = false;
             this.btnCreateOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateOrder.Location = new System.Drawing.Point(258, 188);
+            this.btnCreateOrder.Location = new System.Drawing.Point(40, 67);
             this.btnCreateOrder.Name = "btnCreateOrder";
-            this.btnCreateOrder.Size = new System.Drawing.Size(456, 63);
+            this.btnCreateOrder.Size = new System.Drawing.Size(384, 63);
             this.btnCreateOrder.TabIndex = 23;
-            this.btnCreateOrder.Text = "&Create/Edit New Order";
+            this.btnCreateOrder.Text = "&Create/Edit New Order (Store)";
             this.btnCreateOrder.UseVisualStyleBackColor = true;
             this.btnCreateOrder.Click += new System.EventHandler(this.btnCreateOrder_Click);
             // 
@@ -103,9 +129,9 @@
             // 
             this.btnViewOrders.Enabled = false;
             this.btnViewOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewOrders.Location = new System.Drawing.Point(258, 34);
+            this.btnViewOrders.Location = new System.Drawing.Point(40, 245);
             this.btnViewOrders.Name = "btnViewOrders";
-            this.btnViewOrders.Size = new System.Drawing.Size(456, 63);
+            this.btnViewOrders.Size = new System.Drawing.Size(384, 63);
             this.btnViewOrders.TabIndex = 22;
             this.btnViewOrders.Text = "&View Orders";
             this.btnViewOrders.UseVisualStyleBackColor = true;
@@ -265,18 +291,6 @@
             this.timer1.Interval = 1200000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnManageOrderItems
-            // 
-            this.btnManageOrderItems.Enabled = false;
-            this.btnManageOrderItems.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManageOrderItems.Location = new System.Drawing.Point(258, 337);
-            this.btnManageOrderItems.Name = "btnManageOrderItems";
-            this.btnManageOrderItems.Size = new System.Drawing.Size(456, 63);
-            this.btnManageOrderItems.TabIndex = 24;
-            this.btnManageOrderItems.Text = "&Manage Store/Back Order Items";
-            this.btnManageOrderItems.UseVisualStyleBackColor = true;
-            this.btnManageOrderItems.Click += new System.EventHandler(this.btnManageOrderItems_Click);
-            // 
             // picBullseye
             // 
             this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
@@ -357,5 +371,6 @@
         private System.Windows.Forms.Button btnViewOrders;
         private System.Windows.Forms.Button btnCreateOrder;
         private System.Windows.Forms.Button btnManageOrderItems;
+        private System.Windows.Forms.Button btnFulfillOrder;
     }
 }

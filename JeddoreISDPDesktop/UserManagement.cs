@@ -116,7 +116,7 @@ namespace JeddoreISDPDesktop.Entity_Classes
             if (selectedRowsCount != 1)
             {
                 MessageBox.Show("Must select one row from the data grid in order to remove that selected user.",
-                    "Remove User Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "Remove User Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //clear all selected rows from the dgv
                 dgvUsers.ClearSelection();

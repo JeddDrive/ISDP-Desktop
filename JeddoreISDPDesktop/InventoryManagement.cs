@@ -163,7 +163,7 @@ namespace JeddoreISDPDesktop
             if (selectedRowsCount != 1)
             {
                 MessageBox.Show("Must select one row from the data grid in order to edit your selected inventory item.",
-                    "Edit Inventory Item Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "Edit Inventory Item Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //clear all selected rows from the dgv
                 dgvInventory.ClearSelection();

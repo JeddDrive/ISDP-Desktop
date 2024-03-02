@@ -88,6 +88,13 @@ namespace JeddoreISDPDesktop
             {
                 btnManageOrderItems.Enabled = true;
             }
+
+            //check the list for FULFILSTOREORDER
+            //check the list for PREPARESTOREORDER
+            if (employeeUserPermissions.permissionIDList.Contains("FULFILSTOREORDER"))
+            {
+                btnFulfillOrder.Enabled = true;
+            }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -201,6 +208,15 @@ namespace JeddoreISDPDesktop
 
             //open the order items management form (modal)
             frmOrderItemsMgmt.ShowDialog();
+        }
+
+        private void btnFulfillOrder_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the fulfill orders form
+            FulfillOrders frmFulfillOrders = new FulfillOrders(employee);
+
+            //open the fulfill orders form (modal)
+            frmFulfillOrders.ShowDialog();
         }
     }
 }

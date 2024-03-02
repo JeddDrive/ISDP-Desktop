@@ -176,17 +176,19 @@ namespace JeddoreISDPDesktop
                 //get the count of items
                 long numTxnItems = TxnItemsAccessor.GetCountOfItemsInTxn(newOrder.txnID);
 
-                if (numTxnItems > 5)
+                if (numTxnItems > 5 || numTxnItems < 1)
                 {
-                    MessageBox.Show("A limit of 5 items exist for emergency orders." +
+                    MessageBox.Show("Emerency Orders must contain between 1 and 5 items." +
                         "You have " + numTxnItems.ToString() + " items. Please review your emergency order items.", "Emergency Order Not Submitted",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     //focus on txtbox
                     txtSearchOrder.Focus();
+
+                    return;
                 }
 
-                //else - are 5 items or less
+                //else - are between 1 and 5 items then
                 else
                 {
                     //update the status property of this new order
@@ -208,6 +210,21 @@ namespace JeddoreISDPDesktop
             //else - order is a store order, which have no item limit
             else
             {
+                //get the count of items
+                long numTxnItems = TxnItemsAccessor.GetCountOfItemsInTxn(newOrder.txnID);
+
+                if (numTxnItems < 1)
+                {
+                    MessageBox.Show("Store orders must contain at least one one item." +
+                        "You have " + numTxnItems.ToString() + " items. Please review your store order items.", "Store Order Not Submitted",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    //focus on txtbox
+                    txtSearchOrder.Focus();
+
+                    return;
+                }
+
                 //update the status property of this new order
                 newOrder.status = "Submitted";
 

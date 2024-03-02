@@ -99,3 +99,5 @@ C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProj
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.AddEditOrderItem.resources
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.OrderItemsManagement.resources
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.EditBackOrderItem.resources
+C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.ViewOrderItems.resources
+C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.FulfillOrders.resources

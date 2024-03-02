@@ -28,6 +28,8 @@ namespace JeddoreISDPDesktop.DAO_Classes
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and txnType IN ('Store Order', 'Emergency', 'Back Order')";
         private static string selectAllOrdersByStatusAndSiteStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
     "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and txnType IN ('Store Order', 'Emergency', 'Back Order') and (t.siteIDTo = @destinationSite or t.siteIDFrom = @originSite)";
+        private static string selectAllOrdersByStatusAndSiteFromOnlyStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
+"inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and txnType IN ('Store Order', 'Emergency', 'Back Order') and t.siteIDFrom = @originSite";
         //getting the last/most recent txn record, mostly for the barcode
         private static string selectLastTxnStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t " +
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID order by t.txnID DESC LIMIT 1";
@@ -174,6 +176,45 @@ namespace JeddoreISDPDesktop.DAO_Classes
             //three parameters for the query - status and siteID (twice)
             cmd.Parameters.AddWithValue("@status", status);
             cmd.Parameters.AddWithValue("@destinationSite", inSiteID);
+            cmd.Parameters.AddWithValue("@originSite", inSiteID);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //execute the SQL statement against the DB
+                //load into the DataTable object
+                dt.Load(cmd.ExecuteReader());
+
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting Transactions by Status and Site");
+
+                connection.Close();
+            }
+
+            //return the datatable
+            return dt;
+        }
+
+        /**
+        * Get all of the orders for a particular txn status AND site (origin/from site only).
+        *
+        * @return a DataTable, possibly empty, of Txns.
+        */
+        public static DataTable GetAllOrdersByStatusAndSiteFromDataTable(string status, int inSiteID)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectAllOrdersByStatusAndSiteFromOnlyStatement, connection);
+
+            //create datatable
+            DataTable dt = new DataTable();
+
+            //three parameters for the query - status and siteID (twice)
+            cmd.Parameters.AddWithValue("@status", status);
             cmd.Parameters.AddWithValue("@originSite", inSiteID);
 
             //create a datareader and execute

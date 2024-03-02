@@ -53,6 +53,12 @@ namespace JeddoreISDPDesktop
             {
                 btnReject.Enabled = true;
             }
+
+            //check the list for ACCEPTSTOREORDER
+            if (employeeUserPermissions.permissionIDList.Contains("ACCEPTSTOREORDER"))
+            {
+                btnAccept.Enabled = true;
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -94,6 +100,9 @@ namespace JeddoreISDPDesktop
 
             //enable the combobox
             cboOrderTypes.Enabled = true;
+
+            //enable the btn for view order items
+            btnViewItems.Enabled = true;
         }
 
         //Show Default Orders - to display default orders meaning ones that are active and not complete, cancelled, etc.
@@ -319,7 +328,7 @@ namespace JeddoreISDPDesktop
             if (selectedRowsCount != 1)
             {
                 MessageBox.Show("Must select one row from the data grid in order to receive that specific order.",
-                    "Order Receival Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "Order Receival Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //clear all selected rows from the dgv
                 dgvOrders.ClearSelection();
@@ -374,7 +383,7 @@ namespace JeddoreISDPDesktop
             if (selectedRowsCount != 1)
             {
                 MessageBox.Show("Must select one row from the data grid in order to reject that specific order.",
-                    "Order Rejection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "Order Rejection Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //clear all selected rows from the dgv
                 dgvOrders.ClearSelection();
@@ -417,6 +426,97 @@ namespace JeddoreISDPDesktop
                         MessageBox.Show("Order for " + theTxn.destinationSite + " has been successfully rejected.",
                             "Order Recjected");
                     }
+                }
+            }
+        }
+
+        private void btnViewItems_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = dgvOrders.SelectedRows.Count;
+
+            //if number of selected rows is not one
+            if (selectedRowsCount != 1)
+            {
+                MessageBox.Show("Must select one row from the data grid in order to reject that specific order.",
+                    "Order Rejection Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //clear all selected rows from the dgv
+                dgvOrders.ClearSelection();
+            }
+
+            //else - 1 order item row is selected
+            else
+            {
+                //get the current row
+                DataGridViewRow dgvRow = dgvOrders.CurrentRow;
+
+                //get the cell with the selected row's txnID in the orders DGV
+                int txnID = int.Parse(dgvRow.Cells[0].Value.ToString());
+
+                //get the transaction
+                Txn theTxn = TxnAccessor.GetOneOrder(txnID);
+
+                //ope the view order items form, sending in the employee and txn objects
+                ViewOrderItems frmViewOrderItems = new ViewOrderItems(employee, txnID);
+
+                //open the view order items form (modal)
+                frmViewOrderItems.ShowDialog();
+
+            }
+        }
+
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = dgvOrders.SelectedRows.Count;
+
+            //if number of selected rows is not one
+            if (selectedRowsCount != 1)
+            {
+                MessageBox.Show("Must select one row from the data grid in order to accept that specific order for your store and accepted into it's inventory.",
+                    "Order Acceptance Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //clear all selected rows from the dgv
+                dgvOrders.ClearSelection();
+            }
+
+            //else - 1 order item row is selected
+            else
+            {
+                //get the current row
+                DataGridViewRow dgvRow = dgvOrders.CurrentRow;
+
+                //get the cell with the selected row's txnID in the orders DGV
+                int txnID = int.Parse(dgvRow.Cells[0].Value.ToString());
+
+                //get the transaction
+                Txn theTxn = TxnAccessor.GetOneOrder(txnID);
+
+                //if the status of the txn is delivered or In progress then
+                if (theTxn.status == "Delivered" || theTxn.status == "In progress")
+                {
+                    //update the txn's status to Complete
+                    theTxn.status = "Complete";
+
+                    //send the txn obj to the accessor
+                    bool success = TxnAccessor.UpdateTxnStatus(theTxn);
+
+                    //if success
+                    if (success)
+                    {
+                        MessageBox.Show("Order for " + theTxn.destinationSite + " has been successfully completed and is no longer active. It's status has been updated to " + theTxn.status + "." +
+                            "\n\nYour store's inventory should now be updated with the items and their quantities that were present in that order.",
+                            "Order Accepted and Completed");
+                    }
+                }
+
+                //else - the status is NOT either Delivered or In progress then
+                else
+                {
+                    MessageBox.Show("The status of your selected order is: " + theTxn.status + "." +
+                    "\n\nOnly orders with the status of 'Delivered' or 'In progress' can be accepted by your store and accepted into your inventory.",
+                    "Unsuccessful Acceptance", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    dgvOrders.ClearSelection();
                 }
             }
         }
