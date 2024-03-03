@@ -55,16 +55,16 @@
             this.grpBasic.Controls.Add(this.btnCancel);
             this.grpBasic.Location = new System.Drawing.Point(188, 310);
             this.grpBasic.Name = "grpBasic";
-            this.grpBasic.Size = new System.Drawing.Size(421, 131);
+            this.grpBasic.Size = new System.Drawing.Size(421, 118);
             this.grpBasic.TabIndex = 83;
             this.grpBasic.TabStop = false;
             // 
             // btnCreate
             // 
             this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreate.Location = new System.Drawing.Point(256, 33);
+            this.btnCreate.Location = new System.Drawing.Point(18, 33);
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(147, 63);
+            this.btnCreate.Size = new System.Drawing.Size(168, 63);
             this.btnCreate.TabIndex = 0;
             this.btnCreate.Text = "&Create";
             this.btnCreate.UseVisualStyleBackColor = true;
@@ -74,9 +74,9 @@
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(18, 33);
+            this.btnCancel.Location = new System.Drawing.Point(236, 33);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(147, 63);
+            this.btnCancel.Size = new System.Drawing.Size(168, 63);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;

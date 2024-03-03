@@ -75,9 +75,9 @@
             this.txtSearchOrders = new System.Windows.Forms.TextBox();
             this.lblMain = new System.Windows.Forms.Label();
             this.grpUpdateRemove = new System.Windows.Forms.GroupBox();
+            this.btnUpdateShipDate = new System.Windows.Forms.Button();
             this.btnUpdateQuantity = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
-            this.btnUpdateShipDate = new System.Windows.Forms.Button();
             this.dtpShipDate = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.dtpShipDateTime = new System.Windows.Forms.DateTimePicker();
@@ -225,7 +225,7 @@
             this.bindingNavigator2.MovePreviousItem = this.toolStripButton8;
             this.bindingNavigator2.Name = "bindingNavigator2";
             this.bindingNavigator2.PositionItem = this.toolStripTextBox2;
-            this.bindingNavigator2.Size = new System.Drawing.Size(518, 31);
+            this.bindingNavigator2.Size = new System.Drawing.Size(518, 27);
             this.bindingNavigator2.TabIndex = 34;
             this.bindingNavigator2.Text = "bindingNavigator2";
             // 
@@ -242,7 +242,7 @@
             this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
             this.toolStripButton7.Name = "toolStripButton7";
             this.toolStripButton7.RightToLeftAutoMirrorImage = true;
-            this.toolStripButton7.Size = new System.Drawing.Size(29, 28);
+            this.toolStripButton7.Size = new System.Drawing.Size(29, 24);
             this.toolStripButton7.Text = "Move first";
             // 
             // toolStripButton8
@@ -367,7 +367,7 @@
             this.bindingNavigator1.MovePreviousItem = this.toolStripButton2;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.toolStripTextBox1;
-            this.bindingNavigator1.Size = new System.Drawing.Size(608, 31);
+            this.bindingNavigator1.Size = new System.Drawing.Size(608, 27);
             this.bindingNavigator1.TabIndex = 34;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -530,6 +530,17 @@
             this.grpUpdateRemove.TabIndex = 81;
             this.grpUpdateRemove.TabStop = false;
             // 
+            // btnUpdateShipDate
+            // 
+            this.btnUpdateShipDate.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
+            this.btnUpdateShipDate.Location = new System.Drawing.Point(178, 33);
+            this.btnUpdateShipDate.Name = "btnUpdateShipDate";
+            this.btnUpdateShipDate.Size = new System.Drawing.Size(147, 63);
+            this.btnUpdateShipDate.TabIndex = 2;
+            this.btnUpdateShipDate.Text = "&Update Ship Date";
+            this.btnUpdateShipDate.UseVisualStyleBackColor = true;
+            this.btnUpdateShipDate.Click += new System.EventHandler(this.btnUpdateShipDate_Click);
+            // 
             // btnUpdateQuantity
             // 
             this.btnUpdateQuantity.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
@@ -544,24 +555,13 @@
             // btnRemove
             // 
             this.btnRemove.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.btnRemove.Location = new System.Drawing.Point(16, 113);
+            this.btnRemove.Location = new System.Drawing.Point(101, 113);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(147, 63);
             this.btnRemove.TabIndex = 1;
             this.btnRemove.Text = "&Remove Item";
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-            // 
-            // btnUpdateShipDate
-            // 
-            this.btnUpdateShipDate.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
-            this.btnUpdateShipDate.Location = new System.Drawing.Point(178, 33);
-            this.btnUpdateShipDate.Name = "btnUpdateShipDate";
-            this.btnUpdateShipDate.Size = new System.Drawing.Size(147, 63);
-            this.btnUpdateShipDate.TabIndex = 2;
-            this.btnUpdateShipDate.Text = "&Update Ship Date";
-            this.btnUpdateShipDate.UseVisualStyleBackColor = true;
-            this.btnUpdateShipDate.Click += new System.EventHandler(this.btnUpdateShipDate_Click);
             // 
             // dtpShipDate
             // 
@@ -573,7 +573,7 @@
             this.dtpShipDate.Name = "dtpShipDate";
             this.dtpShipDate.Size = new System.Drawing.Size(329, 34);
             this.dtpShipDate.TabIndex = 82;
-            this.dtpShipDate.Value = new System.DateTime(2024, 2, 28, 17, 24, 0, 0);
+            this.dtpShipDate.Value = new System.DateTime(2024, 3, 2, 17, 27, 12, 0);
             // 
             // label3
             // 

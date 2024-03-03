@@ -38,10 +38,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabOrders = new System.Windows.Forms.TabPage();
-            this.tabOrderItems = new System.Windows.Forms.TabPage();
-            this.grpBasic = new System.Windows.Forms.GroupBox();
-            this.btnRefreshOrders = new System.Windows.Forms.Button();
-            this.btnExitOrders = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnSelectOrder = new System.Windows.Forms.Button();
             this.grpOrders = new System.Windows.Forms.GroupBox();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -58,8 +56,19 @@
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.txtSearchOrders = new System.Windows.Forms.TextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.grpBasic = new System.Windows.Forms.GroupBox();
+            this.btnRefreshOrders = new System.Windows.Forms.Button();
+            this.btnExitOrders = new System.Windows.Forms.Button();
+            this.tabOrderItems = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnOrderFulfilled = new System.Windows.Forms.Button();
+            this.btnAddItem = new System.Windows.Forms.Button();
+            this.btnRemoveItem = new System.Windows.Forms.Button();
+            this.lstFulfilledItems = new System.Windows.Forms.ListBox();
+            this.grpMain2 = new System.Windows.Forms.GroupBox();
+            this.btnRefreshOrderItems = new System.Windows.Forms.Button();
+            this.btnExitOrderItems = new System.Windows.Forms.Button();
             this.grpOrderItems = new System.Windows.Forms.GroupBox();
             this.bindingNavigator2 = new System.Windows.Forms.BindingNavigator(this.components);
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -76,34 +85,25 @@
             this.dgvOrderItems = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.txtSearchOrderItems = new System.Windows.Forms.TextBox();
-            this.grpMain2 = new System.Windows.Forms.GroupBox();
-            this.btnRefreshOrderItems = new System.Windows.Forms.Button();
-            this.btnExitOrderItems = new System.Windows.Forms.Button();
-            this.lstFulfilledItems = new System.Windows.Forms.ListBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnAddItem = new System.Windows.Forms.Button();
-            this.btnRemoveItem = new System.Windows.Forms.Button();
-            this.btnOrderFulfilled = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnSelectOrder = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
             this.tabControlMain.SuspendLayout();
             this.tabOrders.SuspendLayout();
-            this.tabOrderItems.SuspendLayout();
-            this.grpBasic.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.grpOrders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
+            this.grpBasic.SuspendLayout();
+            this.tabOrderItems.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.grpMain2.SuspendLayout();
             this.grpOrderItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator2)).BeginInit();
             this.bindingNavigator2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderItems)).BeginInit();
-            this.grpMain2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // picBullseye
@@ -187,55 +187,25 @@
             this.tabOrders.Text = "Orders in Assembly";
             this.tabOrders.Click += new System.EventHandler(this.tabOrders_Click);
             // 
-            // tabOrderItems
+            // groupBox2
             // 
-            this.tabOrderItems.BackColor = System.Drawing.Color.AliceBlue;
-            this.tabOrderItems.Controls.Add(this.label5);
-            this.tabOrderItems.Controls.Add(this.groupBox1);
-            this.tabOrderItems.Controls.Add(this.lstFulfilledItems);
-            this.tabOrderItems.Controls.Add(this.grpMain2);
-            this.tabOrderItems.Controls.Add(this.grpOrderItems);
-            this.tabOrderItems.Controls.Add(this.label3);
-            this.tabOrderItems.Controls.Add(this.txtSearchOrderItems);
-            this.tabOrderItems.Location = new System.Drawing.Point(4, 37);
-            this.tabOrderItems.Name = "tabOrderItems";
-            this.tabOrderItems.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOrderItems.Size = new System.Drawing.Size(1050, 572);
-            this.tabOrderItems.TabIndex = 1;
-            this.tabOrderItems.Text = "Fulfill Order Items";
+            this.groupBox2.Controls.Add(this.btnSelectOrder);
+            this.groupBox2.Location = new System.Drawing.Point(653, 449);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(388, 117);
+            this.groupBox2.TabIndex = 70;
+            this.groupBox2.TabStop = false;
             // 
-            // grpBasic
+            // btnSelectOrder
             // 
-            this.grpBasic.Controls.Add(this.btnRefreshOrders);
-            this.grpBasic.Controls.Add(this.btnExitOrders);
-            this.grpBasic.Location = new System.Drawing.Point(8, 449);
-            this.grpBasic.Name = "grpBasic";
-            this.grpBasic.Size = new System.Drawing.Size(388, 117);
-            this.grpBasic.TabIndex = 69;
-            this.grpBasic.TabStop = false;
-            // 
-            // btnRefreshOrders
-            // 
-            this.btnRefreshOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefreshOrders.Location = new System.Drawing.Point(29, 33);
-            this.btnRefreshOrders.Name = "btnRefreshOrders";
-            this.btnRefreshOrders.Size = new System.Drawing.Size(147, 63);
-            this.btnRefreshOrders.TabIndex = 0;
-            this.btnRefreshOrders.Text = "&Refresh";
-            this.btnRefreshOrders.UseVisualStyleBackColor = true;
-            this.btnRefreshOrders.Click += new System.EventHandler(this.btnRefreshOrders_Click);
-            // 
-            // btnExitOrders
-            // 
-            this.btnExitOrders.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExitOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExitOrders.Location = new System.Drawing.Point(216, 33);
-            this.btnExitOrders.Name = "btnExitOrders";
-            this.btnExitOrders.Size = new System.Drawing.Size(147, 63);
-            this.btnExitOrders.TabIndex = 1;
-            this.btnExitOrders.Text = "&Exit";
-            this.btnExitOrders.UseVisualStyleBackColor = true;
-            this.btnExitOrders.Click += new System.EventHandler(this.btnExitOrders_Click);
+            this.btnSelectOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelectOrder.Location = new System.Drawing.Point(17, 33);
+            this.btnSelectOrder.Name = "btnSelectOrder";
+            this.btnSelectOrder.Size = new System.Drawing.Size(353, 63);
+            this.btnSelectOrder.TabIndex = 0;
+            this.btnSelectOrder.Text = "&Select Order for Fulfillment";
+            this.btnSelectOrder.UseVisualStyleBackColor = true;
+            this.btnSelectOrder.Click += new System.EventHandler(this.btnSelectOrder_Click);
             // 
             // grpOrders
             // 
@@ -393,14 +363,159 @@
             this.txtSearchOrders.Location = new System.Drawing.Point(80, 26);
             this.txtSearchOrders.Name = "txtSearchOrders";
             this.txtSearchOrders.Size = new System.Drawing.Size(331, 34);
-            this.txtSearchOrders.TabIndex = 70;
+            this.txtSearchOrders.TabIndex = 0;
             this.txtSearchOrders.TextChanged += new System.EventHandler(this.txtSearchOrders_TextChanged);
             // 
-            // timer1
+            // grpBasic
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1200000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.grpBasic.Controls.Add(this.btnRefreshOrders);
+            this.grpBasic.Controls.Add(this.btnExitOrders);
+            this.grpBasic.Location = new System.Drawing.Point(8, 449);
+            this.grpBasic.Name = "grpBasic";
+            this.grpBasic.Size = new System.Drawing.Size(388, 117);
+            this.grpBasic.TabIndex = 69;
+            this.grpBasic.TabStop = false;
+            // 
+            // btnRefreshOrders
+            // 
+            this.btnRefreshOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefreshOrders.Location = new System.Drawing.Point(29, 33);
+            this.btnRefreshOrders.Name = "btnRefreshOrders";
+            this.btnRefreshOrders.Size = new System.Drawing.Size(147, 63);
+            this.btnRefreshOrders.TabIndex = 0;
+            this.btnRefreshOrders.Text = "&Refresh";
+            this.btnRefreshOrders.UseVisualStyleBackColor = true;
+            this.btnRefreshOrders.Click += new System.EventHandler(this.btnRefreshOrders_Click);
+            // 
+            // btnExitOrders
+            // 
+            this.btnExitOrders.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnExitOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExitOrders.Location = new System.Drawing.Point(216, 33);
+            this.btnExitOrders.Name = "btnExitOrders";
+            this.btnExitOrders.Size = new System.Drawing.Size(147, 63);
+            this.btnExitOrders.TabIndex = 1;
+            this.btnExitOrders.Text = "&Exit";
+            this.btnExitOrders.UseVisualStyleBackColor = true;
+            this.btnExitOrders.Click += new System.EventHandler(this.btnExitOrders_Click);
+            // 
+            // tabOrderItems
+            // 
+            this.tabOrderItems.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabOrderItems.Controls.Add(this.label5);
+            this.tabOrderItems.Controls.Add(this.groupBox1);
+            this.tabOrderItems.Controls.Add(this.lstFulfilledItems);
+            this.tabOrderItems.Controls.Add(this.grpMain2);
+            this.tabOrderItems.Controls.Add(this.grpOrderItems);
+            this.tabOrderItems.Controls.Add(this.label3);
+            this.tabOrderItems.Controls.Add(this.txtSearchOrderItems);
+            this.tabOrderItems.Location = new System.Drawing.Point(4, 37);
+            this.tabOrderItems.Name = "tabOrderItems";
+            this.tabOrderItems.Padding = new System.Windows.Forms.Padding(3);
+            this.tabOrderItems.Size = new System.Drawing.Size(1050, 572);
+            this.tabOrderItems.TabIndex = 1;
+            this.tabOrderItems.Text = "Fulfill Order Items";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(674, 11);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(146, 28);
+            this.label5.TabIndex = 82;
+            this.label5.Text = "Fulfilled Items:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnOrderFulfilled);
+            this.groupBox1.Controls.Add(this.btnAddItem);
+            this.groupBox1.Controls.Add(this.btnRemoveItem);
+            this.groupBox1.Location = new System.Drawing.Point(503, 449);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(544, 117);
+            this.groupBox1.TabIndex = 81;
+            this.groupBox1.TabStop = false;
+            // 
+            // btnOrderFulfilled
+            // 
+            this.btnOrderFulfilled.Enabled = false;
+            this.btnOrderFulfilled.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
+            this.btnOrderFulfilled.Location = new System.Drawing.Point(381, 34);
+            this.btnOrderFulfilled.Name = "btnOrderFulfilled";
+            this.btnOrderFulfilled.Size = new System.Drawing.Size(147, 63);
+            this.btnOrderFulfilled.TabIndex = 2;
+            this.btnOrderFulfilled.Text = "&Order Fulfilled";
+            this.btnOrderFulfilled.UseVisualStyleBackColor = true;
+            this.btnOrderFulfilled.Click += new System.EventHandler(this.btnOrderFulfilled_Click);
+            // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Enabled = false;
+            this.btnAddItem.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddItem.Location = new System.Drawing.Point(19, 33);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(147, 63);
+            this.btnAddItem.TabIndex = 0;
+            this.btnAddItem.Text = "&Add Item";
+            this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            // 
+            // btnRemoveItem
+            // 
+            this.btnRemoveItem.Enabled = false;
+            this.btnRemoveItem.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnRemoveItem.Location = new System.Drawing.Point(201, 33);
+            this.btnRemoveItem.Name = "btnRemoveItem";
+            this.btnRemoveItem.Size = new System.Drawing.Size(147, 63);
+            this.btnRemoveItem.TabIndex = 1;
+            this.btnRemoveItem.Text = "&Remove Item";
+            this.btnRemoveItem.UseVisualStyleBackColor = true;
+            this.btnRemoveItem.Click += new System.EventHandler(this.btnRemoveItem_Click);
+            // 
+            // lstFulfilledItems
+            // 
+            this.lstFulfilledItems.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
+            this.lstFulfilledItems.FormattingEnabled = true;
+            this.lstFulfilledItems.ItemHeight = 25;
+            this.lstFulfilledItems.Location = new System.Drawing.Point(679, 51);
+            this.lstFulfilledItems.Name = "lstFulfilledItems";
+            this.lstFulfilledItems.Size = new System.Drawing.Size(360, 379);
+            this.lstFulfilledItems.TabIndex = 81;
+            // 
+            // grpMain2
+            // 
+            this.grpMain2.Controls.Add(this.btnRefreshOrderItems);
+            this.grpMain2.Controls.Add(this.btnExitOrderItems);
+            this.grpMain2.Location = new System.Drawing.Point(6, 449);
+            this.grpMain2.Name = "grpMain2";
+            this.grpMain2.Size = new System.Drawing.Size(397, 117);
+            this.grpMain2.TabIndex = 80;
+            this.grpMain2.TabStop = false;
+            // 
+            // btnRefreshOrderItems
+            // 
+            this.btnRefreshOrderItems.Enabled = false;
+            this.btnRefreshOrderItems.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefreshOrderItems.Location = new System.Drawing.Point(29, 33);
+            this.btnRefreshOrderItems.Name = "btnRefreshOrderItems";
+            this.btnRefreshOrderItems.Size = new System.Drawing.Size(147, 63);
+            this.btnRefreshOrderItems.TabIndex = 0;
+            this.btnRefreshOrderItems.Text = "&Refresh";
+            this.btnRefreshOrderItems.UseVisualStyleBackColor = true;
+            this.btnRefreshOrderItems.Click += new System.EventHandler(this.btnRefreshOrderItems_Click);
+            // 
+            // btnExitOrderItems
+            // 
+            this.btnExitOrderItems.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnExitOrderItems.Enabled = false;
+            this.btnExitOrderItems.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExitOrderItems.Location = new System.Drawing.Point(216, 33);
+            this.btnExitOrderItems.Name = "btnExitOrderItems";
+            this.btnExitOrderItems.Size = new System.Drawing.Size(147, 63);
+            this.btnExitOrderItems.TabIndex = 1;
+            this.btnExitOrderItems.Text = "&Exit";
+            this.btnExitOrderItems.UseVisualStyleBackColor = true;
+            this.btnExitOrderItems.Click += new System.EventHandler(this.btnExitOrderItems_Click);
             // 
             // grpOrderItems
             // 
@@ -437,7 +552,7 @@
             this.bindingNavigator2.MovePreviousItem = this.toolStripButton2;
             this.bindingNavigator2.Name = "bindingNavigator2";
             this.bindingNavigator2.PositionItem = this.toolStripTextBox1;
-            this.bindingNavigator2.Size = new System.Drawing.Size(657, 27);
+            this.bindingNavigator2.Size = new System.Drawing.Size(657, 31);
             this.bindingNavigator2.TabIndex = 34;
             this.bindingNavigator2.Text = "bindingNavigator";
             // 
@@ -560,125 +675,11 @@
             this.txtSearchOrderItems.Size = new System.Drawing.Size(331, 34);
             this.txtSearchOrderItems.TabIndex = 77;
             // 
-            // grpMain2
+            // timer1
             // 
-            this.grpMain2.Controls.Add(this.btnRefreshOrderItems);
-            this.grpMain2.Controls.Add(this.btnExitOrderItems);
-            this.grpMain2.Location = new System.Drawing.Point(6, 449);
-            this.grpMain2.Name = "grpMain2";
-            this.grpMain2.Size = new System.Drawing.Size(397, 117);
-            this.grpMain2.TabIndex = 80;
-            this.grpMain2.TabStop = false;
-            // 
-            // btnRefreshOrderItems
-            // 
-            this.btnRefreshOrderItems.Enabled = false;
-            this.btnRefreshOrderItems.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefreshOrderItems.Location = new System.Drawing.Point(29, 33);
-            this.btnRefreshOrderItems.Name = "btnRefreshOrderItems";
-            this.btnRefreshOrderItems.Size = new System.Drawing.Size(147, 63);
-            this.btnRefreshOrderItems.TabIndex = 0;
-            this.btnRefreshOrderItems.Text = "&Refresh";
-            this.btnRefreshOrderItems.UseVisualStyleBackColor = true;
-            this.btnRefreshOrderItems.Click += new System.EventHandler(this.btnRefreshOrderItems_Click);
-            // 
-            // btnExitOrderItems
-            // 
-            this.btnExitOrderItems.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExitOrderItems.Enabled = false;
-            this.btnExitOrderItems.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExitOrderItems.Location = new System.Drawing.Point(216, 33);
-            this.btnExitOrderItems.Name = "btnExitOrderItems";
-            this.btnExitOrderItems.Size = new System.Drawing.Size(147, 63);
-            this.btnExitOrderItems.TabIndex = 1;
-            this.btnExitOrderItems.Text = "&Exit";
-            this.btnExitOrderItems.UseVisualStyleBackColor = true;
-            this.btnExitOrderItems.Click += new System.EventHandler(this.btnExitOrderItems_Click);
-            // 
-            // lstFulfilledItems
-            // 
-            this.lstFulfilledItems.FormattingEnabled = true;
-            this.lstFulfilledItems.ItemHeight = 28;
-            this.lstFulfilledItems.Location = new System.Drawing.Point(679, 51);
-            this.lstFulfilledItems.Name = "lstFulfilledItems";
-            this.lstFulfilledItems.Size = new System.Drawing.Size(360, 396);
-            this.lstFulfilledItems.TabIndex = 81;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnOrderFulfilled);
-            this.groupBox1.Controls.Add(this.btnAddItem);
-            this.groupBox1.Controls.Add(this.btnRemoveItem);
-            this.groupBox1.Location = new System.Drawing.Point(503, 449);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(544, 117);
-            this.groupBox1.TabIndex = 81;
-            this.groupBox1.TabStop = false;
-            // 
-            // btnAddItem
-            // 
-            this.btnAddItem.Enabled = false;
-            this.btnAddItem.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddItem.Location = new System.Drawing.Point(19, 33);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(147, 63);
-            this.btnAddItem.TabIndex = 0;
-            this.btnAddItem.Text = "&Add Item";
-            this.btnAddItem.UseVisualStyleBackColor = true;
-            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
-            // 
-            // btnRemoveItem
-            // 
-            this.btnRemoveItem.Enabled = false;
-            this.btnRemoveItem.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.btnRemoveItem.Location = new System.Drawing.Point(201, 33);
-            this.btnRemoveItem.Name = "btnRemoveItem";
-            this.btnRemoveItem.Size = new System.Drawing.Size(147, 63);
-            this.btnRemoveItem.TabIndex = 1;
-            this.btnRemoveItem.Text = "&Remove Item";
-            this.btnRemoveItem.UseVisualStyleBackColor = true;
-            this.btnRemoveItem.Click += new System.EventHandler(this.btnRemoveItem_Click);
-            // 
-            // btnOrderFulfilled
-            // 
-            this.btnOrderFulfilled.Enabled = false;
-            this.btnOrderFulfilled.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
-            this.btnOrderFulfilled.Location = new System.Drawing.Point(381, 34);
-            this.btnOrderFulfilled.Name = "btnOrderFulfilled";
-            this.btnOrderFulfilled.Size = new System.Drawing.Size(147, 63);
-            this.btnOrderFulfilled.TabIndex = 2;
-            this.btnOrderFulfilled.Text = "&Order Fulfilled";
-            this.btnOrderFulfilled.UseVisualStyleBackColor = true;
-            this.btnOrderFulfilled.Click += new System.EventHandler(this.btnOrderFulfilled_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(674, 11);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(146, 28);
-            this.label5.TabIndex = 82;
-            this.label5.Text = "Fulfilled Items:";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnSelectOrder);
-            this.groupBox2.Location = new System.Drawing.Point(653, 449);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(388, 117);
-            this.groupBox2.TabIndex = 70;
-            this.groupBox2.TabStop = false;
-            // 
-            // btnSelectOrder
-            // 
-            this.btnSelectOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectOrder.Location = new System.Drawing.Point(17, 33);
-            this.btnSelectOrder.Name = "btnSelectOrder";
-            this.btnSelectOrder.Size = new System.Drawing.Size(353, 63);
-            this.btnSelectOrder.TabIndex = 0;
-            this.btnSelectOrder.Text = "&Select Order for Fulfillment";
-            this.btnSelectOrder.UseVisualStyleBackColor = true;
-            this.btnSelectOrder.Click += new System.EventHandler(this.btnSelectOrder_Click);
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1200000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FulfillOrders
             // 
@@ -708,24 +709,24 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabOrders.ResumeLayout(false);
             this.tabOrders.PerformLayout();
-            this.tabOrderItems.ResumeLayout(false);
-            this.tabOrderItems.PerformLayout();
-            this.grpBasic.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.grpOrders.ResumeLayout(false);
             this.grpOrders.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
+            this.grpBasic.ResumeLayout(false);
+            this.tabOrderItems.ResumeLayout(false);
+            this.tabOrderItems.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.grpMain2.ResumeLayout(false);
             this.grpOrderItems.ResumeLayout(false);
             this.grpOrderItems.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator2)).EndInit();
             this.bindingNavigator2.ResumeLayout(false);
             this.bindingNavigator2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderItems)).EndInit();
-            this.grpMain2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

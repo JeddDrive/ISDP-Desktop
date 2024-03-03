@@ -1,7 +1,9 @@
 ﻿using JeddoreISDPDesktop.DAO_Classes;
 using JeddoreISDPDesktop.Entity_Classes;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace JeddoreISDPDesktop
@@ -166,6 +168,31 @@ namespace JeddoreISDPDesktop
             //and enable the two textboxes for search
             txtSearchOrder.Enabled = true;
             txtSearchInventory.Enabled = true;
+
+            //call update row colour ftn
+            UpdateRowColour();
+        }
+
+        //ftn for updating the row colour in the inventory DGV
+        public void UpdateRowColour()
+        {
+            //get list of items in this txn
+            List<TxnItems> txnItemsList = TxnItemsAccessor.GetAllTxnItemsList(newOrder.txnID);
+
+            //loop thru the inventory dgv
+            foreach (DataGridViewRow row in dgvInventory.Rows)
+            {
+                //inner loop thru the txn items list
+                foreach (TxnItems txnItem in txnItemsList)
+                {
+                    //if itemID is a match then
+                    if (Convert.ToInt32(row.Cells[0].Value) == txnItem.itemID)
+                    {
+                        //add this color to the row
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+                }
+            }
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -178,7 +205,7 @@ namespace JeddoreISDPDesktop
 
                 if (numTxnItems > 5 || numTxnItems < 1)
                 {
-                    MessageBox.Show("Emerency Orders must contain between 1 and 5 items." +
+                    MessageBox.Show("Emergency Orders must contain between 1 and 5 items. " +
                         "You have " + numTxnItems.ToString() + " items. Please review your emergency order items.", "Emergency Order Not Submitted",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -215,7 +242,7 @@ namespace JeddoreISDPDesktop
 
                 if (numTxnItems < 1)
                 {
-                    MessageBox.Show("Store orders must contain at least one one item." +
+                    MessageBox.Show("Store orders must contain at least one one item. " +
                         "You have " + numTxnItems.ToString() + " items. Please review your store order items.", "Store Order Not Submitted",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -466,6 +493,9 @@ namespace JeddoreISDPDesktop
                             "Successful Item Removal");
 
                         dgvOrder.ClearSelection();
+
+                        //call update row colour ftn
+                        UpdateRowColour();
                     }
                 }
             }

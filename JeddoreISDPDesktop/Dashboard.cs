@@ -95,6 +95,81 @@ namespace JeddoreISDPDesktop
             {
                 btnFulfillOrder.Enabled = true;
             }
+
+            //if employee is a store manager
+            if (employee.positionID == 3)
+            {
+                //see if a new order exists for the employee's site
+                Txn newOrder = TxnAccessor.GetOneNewOrder(employee.siteID);
+
+                //if newOrder is not null - so a new order exists
+                if (newOrder != null)
+                {
+                    //get the count of items
+                    long numTxnItems = TxnItemsAccessor.GetCountOfItemsInTxn(newOrder.txnID);
+
+                    //order's ship date
+                    DateTime shipDate = newOrder.shipDate;
+
+                    //get the day 2 days before the ship date (or 48 hours)
+                    DateTime twoDaysBeforeShipDate = shipDate.AddDays(-2);
+
+                    //get the current date and time
+                    DateTime currentDateTime = DateTime.Now;
+
+                    //if current datetime now is after two days before the scheduled ship date, then submit the NEW order automatically
+                    if (currentDateTime > twoDaysBeforeShipDate)
+                    {
+                        //check if order is an emergency order and if it contains invalid number of items
+                        if (newOrder.txnType == "Emergency" && (numTxnItems > 5 || numTxnItems < 1))
+                        {
+                            //update the status property of this new order
+                            newOrder.status = "Rejected";
+
+                            //change the order's status from New to Submitted
+                            bool rejectedSuccess = TxnAccessor.UpdateTxnStatus(newOrder);
+
+                            //if success, display success message and close the form
+                            if (rejectedSuccess)
+                            {
+                                MessageBox.Show("Your emergency order with the status of 'New' has been rejected since it did not contain between 1 and 5 items.", "Emergency Order Rejected");
+                            }
+                        }
+
+                        //check if order is a store order and contains less than 1 item
+                        else if (newOrder.txnType == "Store Order" && numTxnItems < 1)
+                        {
+                            //update the status property of this new order
+                            newOrder.status = "Rejected";
+
+                            //change the order's status from New to Submitted
+                            bool rejectedSuccess = TxnAccessor.UpdateTxnStatus(newOrder);
+
+                            //if success, display success message and close the form
+                            if (rejectedSuccess)
+                            {
+                                MessageBox.Show("Your store order with the status of 'New' has been automatically rejected since it did not contain any items.", "Store Order Rejected");
+                            }
+                        }
+
+                        //else - order should be good for an automatic submission
+                        else
+                        {
+                            //update the status property of this new order
+                            newOrder.status = "Submitted";
+
+                            //change the order's status from New to Submitted
+                            bool success = TxnAccessor.UpdateTxnStatus(newOrder);
+
+                            //if success, display success message and close the form
+                            if (success)
+                            {
+                                MessageBox.Show("Your order with the status of 'New' has been automatically submitted to the warehouse since the ship date for the order is in less than 48 hours.", "Automatic Order Submission");
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -176,11 +251,15 @@ namespace JeddoreISDPDesktop
 
         private void btnCreateOrder_Click(object sender, EventArgs e)
         {
-            //checking the number of active/open orders for the manager's site
-            long numActiveOrders = TxnAccessor.GetCountOfActiveOrdersForSite(employee.siteID);
+            //checking the number of active/open NEW orders only for the manager's site
+            long numActiveNewOrders = TxnAccessor.GetCountOfActiveNewOrdersForSite(employee.siteID);
 
-            //if number of active orders is 0 then, take the user to the create new order form
-            if (numActiveOrders == 0)
+            Txn newOrder = TxnAccessor.GetOneNewOrder(employee.siteID);
+
+            Txn activeOrder = TxnAccessor.GetOneActiveOrder(employee.siteID);
+
+            //if number of active NEW orders is 0 then, take the user to the create new order form
+            if (numActiveNewOrders == 0)
             {
                 //want to send the employee obj to the create new order form
                 CreateNewOrder frmCreateOrder = new CreateNewOrder(employee);
@@ -189,8 +268,8 @@ namespace JeddoreISDPDesktop
                 frmCreateOrder.ShowDialog();
             }
 
-            //else - one active order likely already exists
-            else
+            //else if - one active NEW order likely already exists and newOrder is NOT null
+            else if (numActiveNewOrders > 0 && newOrder != null)
             {
                 //then display the edit order form for the manager/user
                 //sending in the employee obj
@@ -199,6 +278,14 @@ namespace JeddoreISDPDesktop
                 //open the edit order form (modal)
                 frmEditOrder.ShowDialog();
             }
+
+            /* else
+            {
+                //display msg that an active order is on it's way
+                MessageBox.Show("An active order exists that is on the way to your site and it is past the point where items and quantites can be edited for it." +
+                    "\n\nOrder Details: Order " + activeOrder.txnID + " for " + activeOrder.destinationSite + " is " + activeOrder.status + ".",
+                    "Active Order On The Way", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            } */
         }
 
         private void btnManageOrderItems_Click(object sender, EventArgs e)

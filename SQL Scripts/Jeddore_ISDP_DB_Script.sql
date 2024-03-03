@@ -203,7 +203,20 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'RECEIVESTOREORDER', 1),
 -- adding REJECTORDER for the admin and warehouse manager
 (1, 'REJECTORDER', 1),
-(1003, 'REJECTORDER', 1);
+(1003, 'REJECTORDER', 1),
+-- adding FULFILSTOREORDER for the warehouse manager an warehouse employees
+(1003, 'FULFILSTOREORDER', 1),
+(1012, 'FULFILSTOREORDER', 1),
+(1013, 'FULFILSTOREORDER', 1),
+(1014, 'FULFILSTOREORDER', 1),
+-- adding ACCEPTSTOREORDER for all store managers
+(1002, 'ACCEPTSTOREORDER', 1),
+(1005, 'ACCEPTSTOREORDER', 1),
+(1006, 'ACCEPTSTOREORDER', 1),
+(1007, 'ACCEPTSTOREORDER', 1),
+(1008, 'ACCEPTSTOREORDER', 1),
+(1009, 'ACCEPTSTOREORDER', 1),
+(1010, 'ACCEPTSTOREORDER', 1);
 
 -- for all records currently in the user_permission table, set hasPermission to 1
 -- since all admin records in this table right now are all permissions that the admin user should have
@@ -312,7 +325,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1002, 'EDITINVENTORY', 1),
 (1002, 'EDITITEM', 0),
 (1002, 'DELIVERY', 0),
-(1002, 'ACCEPTSTOREORDER', 0),
 (1002, 'MODIFYRECORD', 0),
 (1002, 'CREATELOSS', 0),
 (1002, 'PROCESSRETURN', 0),
@@ -326,7 +338,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'DELETEUSER', 0),
 (1003, 'SETPERMISSION', 0),
 (1003, 'MOVEINVENTORY', 0),
-(1003, 'FULFILSTOREORDER', 0),
 (1003, 'ADDITEMTOBACKORDER', 0),
 (1003, 'CREATEBACKORDER', 0),
 (1003, 'EDITSITE', 0),
@@ -385,7 +396,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1005, 'EDITINVENTORY', 1),
 (1005, 'EDITITEM', 0),
 (1005, 'DELIVERY', 0),
-(1005, 'ACCEPTSTOREORDER', 0),
 (1005, 'MODIFYRECORD', 0),
 (1005, 'CREATELOSS', 0),
 (1005, 'PROCESSRETURN', 0),
@@ -410,7 +420,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1006, 'EDITINVENTORY', 1),
 (1006, 'EDITITEM', 0),
 (1006, 'DELIVERY', 0),
-(1006, 'ACCEPTSTOREORDER', 0),
 (1006, 'MODIFYRECORD', 0),
 (1006, 'CREATELOSS', 0),
 (1006, 'PROCESSRETURN', 0),
@@ -435,7 +444,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1007, 'EDITINVENTORY', 1),
 (1007, 'EDITITEM', 0),
 (1007, 'DELIVERY', 0),
-(1007, 'ACCEPTSTOREORDER', 0),
 (1007, 'MODIFYRECORD', 0),
 (1007, 'CREATELOSS', 0),
 (1007, 'PROCESSRETURN', 0),
@@ -460,7 +468,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1008, 'EDITINVENTORY', 1),
 (1008, 'EDITITEM', 0),
 (1008, 'DELIVERY', 0),
-(1008, 'ACCEPTSTOREORDER', 0),
 (1008, 'MODIFYRECORD', 0),
 (1008, 'CREATELOSS', 0),
 (1008, 'PROCESSRETURN', 0),
@@ -485,7 +492,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1009, 'EDITINVENTORY', 1),
 (1009, 'EDITITEM', 0),
 (1009, 'DELIVERY', 0),
-(1009, 'ACCEPTSTOREORDER', 0),
 (1009, 'MODIFYRECORD', 0),
 (1009, 'CREATELOSS', 0),
 (1009, 'PROCESSRETURN', 0),
@@ -510,7 +516,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1010, 'EDITINVENTORY', 1),
 (1010, 'EDITITEM', 0),
 (1010, 'DELIVERY', 0),
-(1010, 'ACCEPTSTOREORDER', 0),
 (1010, 'MODIFYRECORD', 0),
 (1010, 'CREATELOSS', 0),
 (1010, 'PROCESSRETURN', 0),
@@ -527,7 +532,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1012, 'CREATESTOREORDER', 0),
 (1012, 'RECEIVESTOREORDER', 0),
 (1012, 'PREPARESTOREORDER', 0),
-(1012, 'FULFILSTOREORDER', 0),
 (1012, 'ADDITEMTOBACKORDER', 0),
 (1012, 'CREATEBACKORDER', 0),
 (1012, 'EDITSITE', 0),
@@ -554,7 +558,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1013, 'CREATESTOREORDER', 0),
 (1013, 'RECEIVESTOREORDER', 0),
 (1013, 'PREPARESTOREORDER', 0),
-(1013, 'FULFILSTOREORDER', 0),
 (1013, 'ADDITEMTOBACKORDER', 0),
 (1013, 'CREATEBACKORDER', 0),
 (1013, 'EDITSITE', 0),
@@ -581,7 +584,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1014, 'CREATESTOREORDER', 0),
 (1014, 'RECEIVESTOREORDER', 0),
 (1014, 'PREPARESTOREORDER', 0),
-(1014, 'FULFILSTOREORDER', 0),
 (1014, 'ADDITEMTOBACKORDER', 0),
 (1014, 'CREATEBACKORDER', 0),
 (1014, 'EDITSITE', 0),
@@ -601,7 +603,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1014, 'CREATEREPORT', 0),
 (1014, 'REJECTORDER', 0);
 
--- Trigger #1 - for transaction audit activity
+-- Trigger #1 - includes transaction audit activity
 -- after UPDATEs on the txn table
 DELIMITER $$
 
@@ -623,6 +625,25 @@ BEGIN
     ELSEIF OLD.status <> new.status and (new.status <> "Complete" or new.status <> "Delivered") THEN
         INSERT INTO txnaudit(txnID, txnType, status, txnDate, SiteID, deliveryID, notes)
         VALUES (new.txnID, new.txnType, new.status, NOW(), new.SiteIDFrom, new.deliveryID, new.notes);
+	END IF;
+	
+	-- The IFs below are for updating inventory quantities at sites based on an order's progression
+	-- if the old status (before the update) is delivered or in progress AND
+	-- if the new status is 'Complete', meaning a txn/order is already delivered to a site like a store
+	-- AND the txn is a store, emergency, or back order then
+	IF old.status IN ('Delivered', 'In progress') and new.status = 'Complete' and new.txnType IN ('Store Order', 'Emergency', 'Back Order') then
+	-- call the stored procedure from this trigger
+	CALL updateTruckToStoreInventory(new.txnID, new.siteIDTo);
+	
+	END IF;
+	
+	-- if the old status (before the update) is Assembled AND
+	-- if the new status is 'In Transit', meaning that an assembled txn/order has been loaded onto a truck now and is in transit to a site
+	-- AND the txn is a store, emergency, or back order then
+	IF old.status = 'Assembled' and new.status = 'In Transit' and new.txnType IN ('Store Order', 'Emergency', 'Back Order') then
+	-- call the stored procedure from this trigger
+	CALL updateOrderToTruckInventory(new.txnID);
+	
 	END IF;
 	
 END$$
@@ -687,7 +708,7 @@ VALUES (new.employeeID, 'ADDUSER', 0),
 (new.employeeID, 'CREATESUPPLIERORDER', 0),
 (new.employeeID, 'CREATEREPORT', 0), 
 (new.employeeID, 'VIEWSITE', 1),
-(new.employeeID, 'REJECTORDER', 1);
+(new.employeeID, 'REJECTORDER', 0);
 	
 END$$
 
@@ -830,7 +851,7 @@ IN inItemID int
 )
 BEGIN
 
--- NOTE: shouldn't need a cursor for this stored procedure
+-- shouldn't need a cursor for this stored procedure
 -- declare variables here before the select statement below
 -- need variables for each field in the SELECT statement below
 declare itemIDVar int;
@@ -863,7 +884,7 @@ IN inItemID int
 )
 BEGIN
 
--- NOTE: shouldn't need a cursor for this stored procedure
+-- shouldn't need a cursor for this stored procedure
 -- declare variables here before the select statement below
 -- need variables for each field in the SELECT statement below
 declare itemIDVar int;
@@ -907,7 +928,7 @@ IN inItemID int
 )
 BEGIN
 
--- NOTE: shouldn't need a cursor for this stored procedure
+-- shouldn't need a cursor for this stored procedure
 -- declare variables here before the select statement below
 -- need variables for each field in the SELECT statement below
 declare itemIDVar int;
@@ -943,6 +964,143 @@ set quantity = 0
 where siteID = 2 and itemID = inItemID;
 
 END IF;
+
+END $$
+
+DELIMITER ;
+
+-- stored procedure #5
+DELIMITER $$
+
+CREATE PROCEDURE updateTruckToStoreInventory(
+IN inTxnID int,
+IN inSiteIDTo int
+)
+BEGIN
+
+-- declare variables here before the select statement below
+-- need variables for each field in the SELECT statement below
+declare itemIDVar int;
+declare quantityVar int;
+declare truckQuantityVar int;
+declare storeQuantityVar int;
+
+-- need a flag variable, to let us know we're done with the cursor and can safely exit
+declare done int DEFAULT 0;
+
+-- declare the cursor
+declare txnItemsCursor cursor for
+select itemID, quantity
+from txnitems
+where txnID = inTxnID;
+
+-- need the handler for when at the end of the cursor
+declare continue handler for not found
+set done = 1;
+
+-- open the cursor
+open txnItemsCursor;
+
+-- loop thru the cursor
+mainLoop: loop
+
+-- fetch the cursor in the loop
+fetch txnItemsCursor into itemIDVar, quantityVar;
+
+-- if we hit the end of the cursor then leave the loop
+if done = 1 then
+leave mainLoop;
+end if;
+
+-- get the truck quantity for the item
+select quantity
+into truckQuantityVar
+from inventory
+where siteID = 1 and itemID = itemIDVar;
+
+-- get the store quantity for the item
+select quantity
+into storeQuantityVar
+from inventory
+where siteID = inSiteIDTo and itemID = itemIDVar;
+
+-- update (remove) the quantity for the item from the truck
+update inventory
+set quantity = truckQuantityVar - quantityVar
+where siteID = 1 and itemID = itemIDVar;
+
+-- update (add) the quantity for the item to the store from the truck
+update inventory
+set quantity = storeQuantityVar + quantityVar, itemLocation = 'STOREROOM'
+where siteID = inSiteIDTo and itemID = itemIDVar;
+
+-- end the main loop for the cursor
+end loop;
+
+-- close the cursor
+close txnItemsCursor;
+
+END $$
+
+DELIMITER ;
+
+-- stored procedure #6
+DELIMITER $$
+
+CREATE PROCEDURE updateOrderToTruckInventory(
+IN inTxnID int
+)
+BEGIN
+
+-- declare variables here before the select statement below
+-- need variables for each field in the SELECT statement below
+declare itemIDVar int;
+declare quantityVar int;
+declare truckQuantityVar int;
+
+-- need a flag variable, to let us know we're done with the cursor and can safely exit
+declare done int DEFAULT 0;
+
+-- declare the cursor
+declare txnItemsCursor cursor for
+select itemID, quantity
+from txnitems
+where txnID = inTxnID;
+
+-- need the handler for when at the end of the cursor
+declare continue handler for not found
+set done = 1;
+
+-- open the cursor
+open txnItemsCursor;
+
+-- loop thru the cursor
+mainLoop: loop
+
+-- fetch the cursor in the loop
+fetch txnItemsCursor into itemIDVar, quantityVar;
+
+-- if we hit the end of the cursor then leave the loop
+if done = 1 then
+leave mainLoop;
+end if;
+
+-- get the current truck quantity for the item
+select quantity
+into truckQuantityVar
+from inventory
+where siteID = 1 and itemID = itemIDVar;
+
+-- update (add) the quantity for the item in the order to the truck inventory
+update inventory
+set quantity = truckQuantityVar + quantityVar, itemLocation = CONCAT('', inTxnID)
+where siteID = 1 and itemID = itemIDVar;
+
+-- end the main loop for the cursor
+end loop;
+
+-- close the cursor
+close txnItemsCursor;
 
 END $$
 

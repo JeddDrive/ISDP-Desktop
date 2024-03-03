@@ -41,7 +41,7 @@ namespace JeddoreISDPDesktop
             ((Control)this.tabOrderItems).Enabled = false;
 
             //add first item to the listbox - for info purposes
-            lstFulfilledItems.Items.Add("Item ID      Name        Quantity");
+            lstFulfilledItems.Items.Add("Item ID                Name                        Quantity");
         }
 
         //timer to close this form after 20 mins
@@ -369,6 +369,21 @@ namespace JeddoreISDPDesktop
 
             //clear selection in the dgv
             dgvOrderItems.ClearSelection();
+
+            //loop thru the dgv
+            foreach (DataGridViewRow row in dgvOrderItems.Rows)
+            {
+                //inner loop thru the txn items list
+                foreach (TxnItems txnItem in txnItemsList)
+                {
+                    //if itemID is a match then
+                    if (Convert.ToInt32(row.Cells[1].Value) == txnItem.itemID)
+                    {
+                        //add this color to the row
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+                }
+            }
         }
 
         private void btnRemoveItem_Click(object sender, EventArgs e)
@@ -490,6 +505,44 @@ namespace JeddoreISDPDesktop
                 //display msg, clear the dgv, and exit the event
                 MessageBox.Show("Item " + txnItem.itemID + " - " + txnItem.name + " has been accounted for in fulfillment for this order.", "Item Added to Order For Fulfillment",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //clear selections in the dgv and listbox
+                dgvOrderItems.ClearSelection();
+                lstFulfilledItems.ClearSelected();
+
+                //get the real num of items in the order/txn
+                long numItemsInOrder = TxnItemsAccessor.GetCountOfItemsInTxn(selectedTxnID);
+
+                //if the real num of items in the order now equals the 
+                //count of the list of txnitems then
+                if (numItemsInOrder == txnItemsList.Count)
+                {
+                    DialogResult btnValueReturned = MessageBox.Show("All items in this order are accounted for now. Set order as being assembled now?",
+                        "All Items Now in Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    //if - user selects the yes btn
+                    if (btnValueReturned == DialogResult.Yes)
+                    {
+                        //get the selected transaction
+                        Txn selectedTxn = TxnAccessor.GetOneOrder(selectedTxnID);
+
+                        //update the txn's status property to Assembled
+                        selectedTxn.status = "Assembled";
+
+                        //send the txn obj to the accessor
+                        bool success = TxnAccessor.UpdateTxnStatus(selectedTxn);
+
+                        //if success
+                        if (success)
+                        {
+                            MessageBox.Show("Order for " + selectedTxn.destinationSite + " has been successfully fulfilled and is ready for delivery pickup. It's status has been updated to " + selectedTxn.status + ".",
+                                "Order Fulfilled");
+
+                            //and close the form
+                            this.Close();
+                        }
+                    }
+                }
             }
         }
 

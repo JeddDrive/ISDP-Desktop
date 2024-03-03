@@ -344,7 +344,7 @@ namespace JeddoreISDPDesktop
                 int txnID = int.Parse(dgvRow.Cells[0].Value.ToString());
 
                 //get the transaction
-                Txn theTxn = TxnAccessor.GetOneOrder(txnID);
+                Txn theTxn = TxnAccessor.GetOneTxn(txnID);
 
                 //if the status of the txn is NOT submitted then
                 if (theTxn.status != "Submitted")
@@ -399,7 +399,7 @@ namespace JeddoreISDPDesktop
                 int txnID = int.Parse(dgvRow.Cells[0].Value.ToString());
 
                 //get the transaction
-                Txn theTxn = TxnAccessor.GetOneOrder(txnID);
+                Txn theTxn = TxnAccessor.GetOneTxn(txnID);
 
                 //if the status of the txn is submitted, rejected, or cancelled then
                 if (theTxn.status == "Submitted" || theTxn.status == "Rejected" || theTxn.status == "Cancelled")
@@ -489,7 +489,7 @@ namespace JeddoreISDPDesktop
                 int txnID = int.Parse(dgvRow.Cells[0].Value.ToString());
 
                 //get the transaction
-                Txn theTxn = TxnAccessor.GetOneOrder(txnID);
+                Txn theTxn = TxnAccessor.GetOneTxn(txnID);
 
                 //if the status of the txn is delivered or In progress then
                 if (theTxn.status == "Delivered" || theTxn.status == "In progress")
