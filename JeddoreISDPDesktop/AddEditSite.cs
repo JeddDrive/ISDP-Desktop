@@ -119,7 +119,7 @@ namespace JeddoreISDPDesktop
         {
             MessageBox.Show("This is the page for adding or editing a site. " +
             "Please ensure to type in a valid location name, city, address, and postal code for a site if adding a new one." +
-            "Optionally, miscellaneous notes can also be added or edited for a site at the bottom of this page.", "Add/Edit Site Help"
+            " Optionally, miscellaneous notes can also be added or edited for a site at the bottom of this page.", "Add/Edit Site Help"
             , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -130,7 +130,7 @@ namespace JeddoreISDPDesktop
             {
                 MessageBox.Show("This is the page for adding or editing a site. " +
                 "Please ensure to type in a valid location name, city, address, and postal code for a site if adding a new one." +
-                "Optionally, miscellaneous notes can also be added or edited for a site at the bottom of this page.", "Add/Edit Site Help"
+                " Optionally, miscellaneous notes can also be added or edited for a site at the bottom of this page.", "Add/Edit Site Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -279,10 +279,10 @@ namespace JeddoreISDPDesktop
                 {
                     //create a site obj to be sent to the accessor class
                     Site siteNew = new Site(int.Parse(lblSiteID.Text), txtName.Text,
-                        cboProvinces.SelectedItem.ToString(), txtAddress.Text, null,
-                        txtCity.Text, cboCountries.SelectedItem.ToString(), txtPostalCode.Text,
-                        txtPhone.Text, cboDeliveryDays.SelectedItem.ToString(), (int)nudDistance.Value,
-                        notes, active);
+                        cboProvinces.Text, txtAddress.Text, null,
+                        txtCity.Text, cboCountries.Text, txtPostalCode.Text,
+                        txtPhone.Text, cboDeliveryDays.Text, (int)nudDistance.Value,
+                        notes, active); ;
 
                     //attempt to insert the site
                     bool goodInsert = SiteAccessor.InsertNewSite(siteNew);
@@ -311,9 +311,9 @@ namespace JeddoreISDPDesktop
                 {
                     //create a site obj to be sent to the accessor class
                     Site siteNew = new Site(int.Parse(lblSiteID.Text), txtName.Text,
-                        cboProvinces.SelectedItem.ToString(), txtAddress.Text, null,
-                        txtCity.Text, cboCountries.SelectedItem.ToString(), txtPostalCode.Text,
-                        txtPhone.Text, cboDeliveryDays.SelectedItem.ToString(), (int)nudDistance.Value,
+                        cboProvinces.Text, txtAddress.Text, siteEdit.address2,
+                        txtCity.Text, cboCountries.Text, txtPostalCode.Text,
+                        txtPhone.Text, cboDeliveryDays.Text, (int)nudDistance.Value,
                         notes, active);
 
                     //attempt to update the site

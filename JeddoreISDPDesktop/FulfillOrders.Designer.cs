@@ -552,7 +552,7 @@
             this.bindingNavigator2.MovePreviousItem = this.toolStripButton2;
             this.bindingNavigator2.Name = "bindingNavigator2";
             this.bindingNavigator2.PositionItem = this.toolStripTextBox1;
-            this.bindingNavigator2.Size = new System.Drawing.Size(657, 31);
+            this.bindingNavigator2.Size = new System.Drawing.Size(657, 27);
             this.bindingNavigator2.TabIndex = 34;
             this.bindingNavigator2.Text = "bindingNavigator";
             // 
@@ -674,6 +674,7 @@
             this.txtSearchOrderItems.Name = "txtSearchOrderItems";
             this.txtSearchOrderItems.Size = new System.Drawing.Size(331, 34);
             this.txtSearchOrderItems.TabIndex = 77;
+            this.txtSearchOrderItems.TextChanged += new System.EventHandler(this.txtSearchOrderItems_TextChanged_1);
             // 
             // timer1
             // 

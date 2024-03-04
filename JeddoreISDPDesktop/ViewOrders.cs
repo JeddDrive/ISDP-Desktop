@@ -74,7 +74,7 @@ namespace JeddoreISDPDesktop
 
         private void picHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is the page for viewing store and emergency orders. You can read orders from here, as well as filter by order type and search by fields such as status, created date, and ship date." +
+            MessageBox.Show("This is the page for viewing store and emergency orders. You can view orders from here, as well as filter by order type and search by fields such as status, created date, and ship date." +
             "\n\nClick on the 'refresh' button to load the orders data grid.", "View Orders Help"
             , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -84,7 +84,7 @@ namespace JeddoreISDPDesktop
             //if F1 key is pressed down
             if (e.KeyCode == Keys.F1)
             {
-                MessageBox.Show("This is the page for viewing store and emergency orders. You can read orders from here, as well as filter by order type and search by fields such as status, created date, and ship date." +
+                MessageBox.Show("This is the page for viewing store and emergency orders. You can view orders from here, as well as filter by order type and search by fields such as status, created date, and ship date." +
                 "\n\nClick on the 'refresh' button to load the orders data grid.", "View Orders Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -401,11 +401,11 @@ namespace JeddoreISDPDesktop
                 //get the transaction
                 Txn theTxn = TxnAccessor.GetOneTxn(txnID);
 
-                //if the status of the txn is submitted, rejected, or cancelled then
-                if (theTxn.status == "Submitted" || theTxn.status == "Rejected" || theTxn.status == "Cancelled")
+                //if the status of the txn is closed so complete, rejected, or cancelled then
+                if (theTxn.status == "Complete" || theTxn.status == "Rejected" || theTxn.status == "Cancelled")
                 {
                     MessageBox.Show("The status of your selected order is: " + theTxn.status + "." +
-                        "\n\nOnly active orders which are not already submitted, rejected, or cancelled can be rejected.",
+                        "\n\nOnly active orders which are not already complete, rejected, or cancelled can be rejected.",
                         "Unsuccessful Rejection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     dgvOrders.ClearSelection();
@@ -424,7 +424,7 @@ namespace JeddoreISDPDesktop
                     if (success)
                     {
                         MessageBox.Show("Order for " + theTxn.destinationSite + " has been successfully rejected.",
-                            "Order Recjected");
+                            "Order Rejected");
                     }
                 }
             }

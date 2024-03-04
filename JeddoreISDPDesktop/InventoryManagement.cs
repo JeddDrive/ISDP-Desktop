@@ -25,11 +25,26 @@ namespace JeddoreISDPDesktop
             //display the employee's username and location in this form
             lblUsername.Text = employee.username;
             lblLocation.Text = employee.siteName;
+
+            //get the employee's user permissions
+            UserPermission employeeUserPermissions = UserPermissionAccessor.GetOneEmployeeUserPermissions(employee.employeeID);
+
+            //check the list for EDITINVENTORY
+            if (employeeUserPermissions.permissionIDList.Contains("EDITINVENTORY"))
+            {
+                btnEdit.Enabled = true;
+            }
+
+            //check the list for MOVEINVENTORY
+            if (employeeUserPermissions.permissionIDList.Contains("MOVEINVENTORY"))
+            {
+                btnMove.Enabled = true;
+            }
         }
 
         private void picHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is the inventory management page. You can read and edit inventory items from here." +
+            MessageBox.Show("This is the inventory management page. You can read, edit, and move inventory items from here. Inventory items can be moved internally (ex. room to room), or externally to another site." +
             "\n\nClick on the 'refresh' button to load the inventory data grid for your site.", "Inventory Management Help"
             , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -45,9 +60,9 @@ namespace JeddoreISDPDesktop
             //if the F1 key is pressed down
             if (e.KeyCode == Keys.F1)
             {
-                MessageBox.Show("This is the inventory management page. You can read and edit inventory items from here." +
+                MessageBox.Show("This is the inventory management page. You can read, edit, and move inventory items from here. Inventory items can be moved internally (ex. room to room), or externally to another site." +
                 "\n\nClick on the 'refresh' button to load the inventory data grid for your site.", "Inventory Management Help"
-                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -88,6 +103,7 @@ namespace JeddoreISDPDesktop
             dgvInventory.Columns["name"].HeaderText = "Name";
             //dgvItems.Columns["description"].HeaderText = "Description";
             dgvInventory.Columns["siteID"].HeaderText = "Site ID";
+            dgvInventory.Columns["siteName"].HeaderText = "Site Name";
             dgvInventory.Columns["quantity"].HeaderText = "Quantity";
             dgvInventory.Columns["itemLocation"].HeaderText = "Item Location";
             dgvInventory.Columns["reorderThreshold"].HeaderText = "Reorder Threshold";
@@ -184,12 +200,74 @@ namespace JeddoreISDPDesktop
                 //can now get the item to edit with just the item ID (primary key)
                 Inventory selectedInventory = InventoryAccessor.GetOneInventoryItem(siteID, itemID);
 
-                //want to send the employee obj to the add user form - for the employee logged in
+                //want to send the employee obj to the edit form - for the employee logged in
                 //and send in the selected item
                 EditInventory frmEditInventory = new EditInventory(employee, selectedInventory);
 
-                //open the add/edit user form (modal)
+                //open the edit inventory form (modal)
                 frmEditInventory.ShowDialog();
+            }
+        }
+
+        private void btnMove_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = dgvInventory.SelectedRows.Count;
+
+            //if number of selected rows is not one
+            if (selectedRowsCount != 1)
+            {
+                MessageBox.Show("Must select one row from the data grid in order to move your selected inventory item to a new location.",
+                    "Move Inventory Item Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //clear all selected rows from the dgv
+                dgvInventory.ClearSelection();
+            }
+
+            //else - 1 item row is selected
+            else
+            {
+                //get the current row
+                DataGridViewRow dgvRow = dgvInventory.CurrentRow;
+
+                //get the cell with the selected inventory's itemID
+                int itemID = int.Parse(dgvRow.Cells[0].Value.ToString());
+
+                //also get the cell with the siteID
+                int siteID = int.Parse(dgvRow.Cells[3].Value.ToString());
+
+                //can now get the item to edit with just the item ID (primary key)
+                Inventory selectedInventory = InventoryAccessor.GetOneInventoryItem(siteID, itemID);
+
+                //if the quantity of the selected inventory item is less than 1
+                if (selectedInventory.quantity < 1)
+                {
+                    MessageBox.Show("Unable to move quantity for this inventory item since there is none available at site - " + selectedInventory.siteName + ".",
+                        "Unable to Move", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    return;
+                }
+
+                //getting an item obj for a case size check
+                Item theItem = ItemAccessor.GetOneItem(itemID);
+
+                //if the quantity available is less than 1 case size for the item
+                if (selectedInventory.quantity < theItem.caseSize)
+                {
+                    MessageBox.Show("Unable to move quantity for this inventory item since the amount available at site - " + selectedInventory.siteName
+                        + " is less than the full case size for the item. Can't move partial case sizes to another site." +
+                        "\n\nQuantity Available at Site: " + selectedInventory.quantity +
+                        "\n\nFull Case Size Amount: " + theItem.caseSize,
+                    "Unable to Move", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    return;
+                }
+
+                //want to send the employee obj to the move form - for the employee logged in
+                //and send in the selected inventory item
+                MoveInventory frmMoveInventory = new MoveInventory(employee, selectedInventory);
+
+                //open the move inventory form (modal)
+                frmMoveInventory.ShowDialog();
             }
         }
     }

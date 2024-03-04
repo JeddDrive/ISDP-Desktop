@@ -1,7 +1,7 @@
 -- Jeddore_ISDP_DB_Script - January 2024
 -- The purpose of this script is to update the default base DB as needed or for ease of work.
 -- version 1.0
--- January 10, 2024
+-- Created: January 10, 2024
 -- Nicholas Jeddore
 
 use bullseyedb2024;
@@ -139,11 +139,7 @@ add column active tinyint(1) NOT NULL Default 1;
 -- insert into the permission table these additional permissions:
 -- example: VIEWSITE
 INSERT INTO `permission` (`permissionID`) VALUES
-('VIEWSITE');
-
--- REJECTORDER
-INSERT INTO `permission` (`permissionID`) VALUES
-('REJECTORDER');
+('VIEWSITE'), ('REJECTORDER'), ('VIEWINVENTORY');
 
 -- alter user_permission table - so that all default users of the system have READUSER access
 -- the admin user (number 1) already has this but the others do not
@@ -179,6 +175,22 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1012, 'VIEWSITE', 1),
 (1013, 'VIEWSITE', 1),
 (1014, 'VIEWSITE', 1),
+(1, 'VIEWINVENTORY', 1),
+(2, 'VIEWINVENTORY', 1),
+(1000, 'VIEWINVENTORY', 1),
+(1001, 'VIEWINVENTORY', 1),
+(1002, 'VIEWINVENTORY', 1),
+(1003, 'VIEWINVENTORY', 1),
+(1004, 'VIEWINVENTORY', 1),
+(1005, 'VIEWINVENTORY', 1),
+(1006, 'VIEWINVENTORY', 1),
+(1007, 'VIEWINVENTORY', 1),
+(1008, 'VIEWINVENTORY', 1),
+(1009, 'VIEWINVENTORY', 1),
+(1010, 'VIEWINVENTORY', 1),
+(1012, 'VIEWINVENTORY', 1),
+(1013, 'VIEWINVENTORY', 1),
+(1014, 'VIEWINVENTORY', 1),
 (1003, 'EDITITEM', 1),
 -- adding VIEWORDERS for all store and warehouse manager(s)
 (1002, 'VIEWORDERS', 1),
@@ -232,7 +244,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (2, 'EDITUSER', 0),
 (2, 'DELETEUSER', 0),
 (2, 'SETPERMISSION', 0),
-(2, 'MOVEINVENTORY', 0),
+(2, 'MOVEINVENTORY', 1),
 (2, 'CREATESTOREORDER', 0),
 (2, 'RECEIVESTOREORDER', 0),
 (2, 'PREPARESTOREORDER', 0),
@@ -259,7 +271,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1000, 'EDITUSER', 0),
 (1000, 'DELETEUSER', 0),
 (1000, 'SETPERMISSION', 0),
-(1000, 'MOVEINVENTORY', 0),
+(1000, 'MOVEINVENTORY', 1),
 (1000, 'CREATESTOREORDER', 0),
 (1000, 'RECEIVESTOREORDER', 0),
 (1000, 'PREPARESTOREORDER', 0),
@@ -286,7 +298,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1001, 'EDITUSER', 0),
 (1001, 'DELETEUSER', 0),
 (1001, 'SETPERMISSION', 0),
-(1001, 'MOVEINVENTORY', 0),
+(1001, 'MOVEINVENTORY', 1),
 (1001, 'CREATESTOREORDER', 0),
 (1001, 'RECEIVESTOREORDER', 0),
 (1001, 'PREPARESTOREORDER', 0),
@@ -313,7 +325,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1002, 'EDITUSER', 0),
 (1002, 'DELETEUSER', 0),
 (1002, 'SETPERMISSION', 0),
-(1002, 'MOVEINVENTORY', 0),
+(1002, 'MOVEINVENTORY', 1),
 (1002, 'RECEIVESTOREORDER', 0),
 (1002, 'PREPARESTOREORDER', 0),
 (1002, 'FULFILSTOREORDER', 0),
@@ -337,7 +349,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'EDITUSER', 0),
 (1003, 'DELETEUSER', 0),
 (1003, 'SETPERMISSION', 0),
-(1003, 'MOVEINVENTORY', 0),
+(1003, 'MOVEINVENTORY', 1),
 (1003, 'ADDITEMTOBACKORDER', 0),
 (1003, 'CREATEBACKORDER', 0),
 (1003, 'EDITSITE', 0),
@@ -357,7 +369,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1004, 'EDITUSER', 0),
 (1004, 'DELETEUSER', 0),
 (1004, 'SETPERMISSION', 0),
-(1004, 'MOVEINVENTORY', 0),
+(1004, 'MOVEINVENTORY', 1),
 (1004, 'CREATESTOREORDER', 0),
 (1004, 'RECEIVESTOREORDER', 0),
 (1004, 'PREPARESTOREORDER', 0),
@@ -384,7 +396,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1005, 'EDITUSER', 0),
 (1005, 'DELETEUSER', 0),
 (1005, 'SETPERMISSION', 0),
-(1005, 'MOVEINVENTORY', 0),
+(1005, 'MOVEINVENTORY', 1),
 (1005, 'RECEIVESTOREORDER', 0),
 (1005, 'PREPARESTOREORDER', 0),
 (1005, 'FULFILSTOREORDER', 0),
@@ -408,7 +420,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1006, 'EDITUSER', 0),
 (1006, 'DELETEUSER', 0),
 (1006, 'SETPERMISSION', 0),
-(1006, 'MOVEINVENTORY', 0),
+(1006, 'MOVEINVENTORY', 1),
 (1006, 'RECEIVESTOREORDER', 0),
 (1006, 'PREPARESTOREORDER', 0),
 (1006, 'FULFILSTOREORDER', 0),
@@ -432,7 +444,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1007, 'EDITUSER', 0),
 (1007, 'DELETEUSER', 0),
 (1007, 'SETPERMISSION', 0),
-(1007, 'MOVEINVENTORY', 0),
+(1007, 'MOVEINVENTORY', 1),
 (1007, 'RECEIVESTOREORDER', 0),
 (1007, 'PREPARESTOREORDER', 0),
 (1007, 'FULFILSTOREORDER', 0),
@@ -456,7 +468,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1008, 'EDITUSER', 0),
 (1008, 'DELETEUSER', 0),
 (1008, 'SETPERMISSION', 0),
-(1008, 'MOVEINVENTORY', 0),
+(1008, 'MOVEINVENTORY', 1),
 (1008, 'RECEIVESTOREORDER', 0),
 (1008, 'PREPARESTOREORDER', 0),
 (1008, 'FULFILSTOREORDER', 0),
@@ -480,7 +492,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1009, 'EDITUSER', 0),
 (1009, 'DELETEUSER', 0),
 (1009, 'SETPERMISSION', 0),
-(1009, 'MOVEINVENTORY', 0),
+(1009, 'MOVEINVENTORY', 1),
 (1009, 'RECEIVESTOREORDER', 0),
 (1009, 'PREPARESTOREORDER', 0),
 (1009, 'FULFILSTOREORDER', 0),
@@ -504,7 +516,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1010, 'EDITUSER', 0),
 (1010, 'DELETEUSER', 0),
 (1010, 'SETPERMISSION', 0),
-(1010, 'MOVEINVENTORY', 0),
+(1010, 'MOVEINVENTORY', 1),
 (1010, 'RECEIVESTOREORDER', 0),
 (1010, 'PREPARESTOREORDER', 0),
 (1010, 'FULFILSTOREORDER', 0),
@@ -528,7 +540,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1012, 'EDITUSER', 0),
 (1012, 'DELETEUSER', 0),
 (1012, 'SETPERMISSION', 0),
-(1012, 'MOVEINVENTORY', 0),
+(1012, 'MOVEINVENTORY', 1),
 (1012, 'CREATESTOREORDER', 0),
 (1012, 'RECEIVESTOREORDER', 0),
 (1012, 'PREPARESTOREORDER', 0),
@@ -554,7 +566,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1013, 'EDITUSER', 0),
 (1013, 'DELETEUSER', 0),
 (1013, 'SETPERMISSION', 0),
-(1013, 'MOVEINVENTORY', 0),
+(1013, 'MOVEINVENTORY', 1),
 (1013, 'CREATESTOREORDER', 0),
 (1013, 'RECEIVESTOREORDER', 0),
 (1013, 'PREPARESTOREORDER', 0),
@@ -580,7 +592,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1014, 'EDITUSER', 0),
 (1014, 'DELETEUSER', 0),
 (1014, 'SETPERMISSION', 0),
-(1014, 'MOVEINVENTORY', 0),
+(1014, 'MOVEINVENTORY', 1),
 (1014, 'CREATESTOREORDER', 0),
 (1014, 'RECEIVESTOREORDER', 0),
 (1014, 'PREPARESTOREORDER', 0),
@@ -646,6 +658,16 @@ BEGIN
 	
 	END IF;
 	
+	-- if the old status (before the update) is New, Submitted, or Assembling AND
+	-- if the new status is Rejected or Cancelled, meaning that an order early on has been rejected/cancelled by the warehouse for example
+	-- AND the txn is a store or emergency order then
+	-- basically want to put the quantity for items in a rejected order back to the warehouse
+	IF old.status IN ('New', 'Submitted', 'Assembling') and new.status IN ('Rejected', 'Cancelled') and new.txnType IN ('Store Order', 'Emergency') then
+	-- call the stored procedure from this trigger
+	CALL updateOrderToWarehouseInventory(new.txnID);
+	
+	END IF;
+	
 END$$
 
 DELIMITER ;
@@ -678,14 +700,14 @@ BEGIN
 
 -- insert into the user_permission table
 -- new user(s) will automatically have the following permissions turned on:
--- READUSER, VIEWSITE
+-- READUSER, VIEWSITE, MOVEINVENTORY, VIEWINVENTORY
 INSERT INTO user_permission(employeeID, permissionID, hasPermission)
 VALUES (new.employeeID, 'ADDUSER', 0),
 (new.employeeID, 'EDITUSER', 0),
 (new.employeeID, 'DELETEUSER', 0),
 (new.employeeID, 'READUSER', 1),
 (new.employeeID, 'SETPERMISSION', 0),
-(new.employeeID, 'MOVEINVENTORY', 0),
+(new.employeeID, 'MOVEINVENTORY', 1),
 (new.employeeID, 'CREATESTOREORDER', 0),
 (new.employeeID, 'RECEIVESTOREORDER', 0),
 (new.employeeID, 'PREPARESTOREORDER', 0),
@@ -708,7 +730,8 @@ VALUES (new.employeeID, 'ADDUSER', 0),
 (new.employeeID, 'CREATESUPPLIERORDER', 0),
 (new.employeeID, 'CREATEREPORT', 0), 
 (new.employeeID, 'VIEWSITE', 1),
-(new.employeeID, 'REJECTORDER', 0);
+(new.employeeID, 'REJECTORDER', 0),
+(new.employeeID, 'VIEWINVENTORY', 1);
 	
 END$$
 
@@ -1095,6 +1118,68 @@ where siteID = 1 and itemID = itemIDVar;
 update inventory
 set quantity = truckQuantityVar + quantityVar, itemLocation = CONCAT('', inTxnID)
 where siteID = 1 and itemID = itemIDVar;
+
+-- end the main loop for the cursor
+end loop;
+
+-- close the cursor
+close txnItemsCursor;
+
+END $$
+
+DELIMITER ;
+
+-- stored procedure #7
+DELIMITER $$
+
+CREATE PROCEDURE updateOrderToWarehouseInventory(
+IN inTxnID int
+)
+BEGIN
+
+-- declare variables here before the select statement below
+-- need variables for each field in the SELECT statement below
+declare itemIDVar int;
+declare quantityVar int;
+declare warehouseQuantityVar int;
+
+-- need a flag variable, to let us know we're done with the cursor and can safely exit
+declare done int DEFAULT 0;
+
+-- declare the cursor
+declare txnItemsCursor cursor for
+select itemID, quantity
+from txnitems
+where txnID = inTxnID;
+
+-- need the handler for when at the end of the cursor
+declare continue handler for not found
+set done = 1;
+
+-- open the cursor
+open txnItemsCursor;
+
+-- loop thru the cursor
+mainLoop: loop
+
+-- fetch the cursor in the loop
+fetch txnItemsCursor into itemIDVar, quantityVar;
+
+-- if we hit the end of the cursor then leave the loop
+if done = 1 then
+leave mainLoop;
+end if;
+
+-- get the current warehouse quantity for the item
+select quantity
+into warehouseQuantityVar
+from inventory
+where siteID = 2 and itemID = itemIDVar;
+
+-- update (add) the quantity for the item in the order back to the warehouse inventory
+update inventory
+set quantity = warehouseQuantityVar + quantityVar
+where siteID = 2 and itemID = itemIDVar;
 
 -- end the main loop for the cursor
 end loop;

@@ -17,11 +17,13 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static MySqlConnection connection = new MySqlConnection(connString);
 
         //SQL statements for the Employee entity
-        private static string selectAllBySiteIDStatement = "select iv.itemID, it.name, it.description, iv.siteID, iv.quantity, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
-            " from inventory iv inner join item it on iv.itemID = it.itemID where iv.siteID = @siteID";
-        private static string selectOneStatement = "select iv.itemID, it.name, it.description, iv.siteID, iv.quantity, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
-            " from inventory iv inner join item it on iv.itemID = it.itemID where siteID = @siteID and iv.itemID = @itemID";
+        private static string selectAllBySiteIDStatement = "select iv.itemID, it.name, it.description, iv.siteID, s.name AS siteName, iv.quantity, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
+            " from inventory iv inner join item it on iv.itemID = it.itemID inner join site s on iv.siteID = s.siteID where iv.siteID = @siteID";
+        private static string selectOneStatement = "select iv.itemID, it.name, it.description, iv.siteID, s.name AS siteName, iv.quantity, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
+            " from inventory iv inner join item it on iv.itemID = it.itemID inner join site s on iv.siteID = s.siteID where iv.siteID = @siteID and iv.itemID = @itemID";
         private static string updateReorderThresholdStatement = "update inventory set reorderThreshold = @reorderThreshold, notes = @notes where itemID = @itemID and siteID = @siteID";
+        private static string updateInventoryAtNewLocationStatement = "update inventory set quantity = quantity + @quantity, itemLocation = @itemLocation where siteID = @siteID and itemID = @itemID";
+        private static string updateInventoryAtOldLocationStatement = "update inventory set quantity = quantity - @quantity where siteID = @siteID and itemID = @itemID";
 
         /**
         * Get all of the inventory by a specific site ID.
@@ -102,10 +104,11 @@ namespace JeddoreISDPDesktop.DAO_Classes
                     int reorderThreshold = reader.GetInt32("reorderThreshold");
                     int optimumThreshold = reader.GetInt32("optimumThreshold");
                     string notes = reader.GetString("notes");
+                    string siteName = reader.GetString("siteName");
 
                     //create an employee object
                     inv = new Inventory(itemID, siteID, quantity, itemLocation, reorderThreshold,
-                        optimumThreshold, notes, name, description);
+                        optimumThreshold, notes, name, description, siteName);
                 }
 
                 //close reader after if statement
@@ -121,15 +124,15 @@ namespace JeddoreISDPDesktop.DAO_Classes
                 connection.Close();
             }
 
-            //return the employee
+            //return the inventory obj
             return inv;
         }
 
         /**
-        * Updates an existing employee and most of it's fields.
+        * Updates an existing inventory item and most of it's fields.
         *
         * @param inventory object
-        * @return bool - if employee was updated or not
+        * @return bool - if inventory was updated or not
         */
         public static bool UpdateInventoryItem(Inventory inventory)
         {
@@ -161,6 +164,103 @@ namespace JeddoreISDPDesktop.DAO_Classes
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Updating Existing Inventory Item");
+
+                connection.Close();
+            }
+
+            //if rowCount is 1, then non query was good
+            if (rowCount == 1)
+            {
+                goodNonQuery = true;
+            }
+
+            return goodNonQuery;
+        }
+
+        /**
+        * Moves an inventory item and it's quantity from one old site to a new one.
+        *
+        * @param inventory object
+        * @return bool - if inventory was updated or not
+        */
+        public static bool UpdateInventoryToNewLocation(int quantity, string itemLocation, int siteID, int itemID)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(updateInventoryAtNewLocationStatement, connection);
+
+            //4 parameters for this update query
+            cmd.Parameters.AddWithValue("@quantity", quantity);
+            cmd.Parameters.AddWithValue("@itemLocation", itemLocation);
+            cmd.Parameters.AddWithValue("@siteID", siteID);
+            cmd.Parameters.AddWithValue("@itemID", itemID);
+
+            //variable for rowCount
+            int rowCount = 0;
+
+            //bool to be returned
+            bool goodNonQuery = false;
+
+            try
+            {
+                connection.Open();
+
+                //execute a non query
+                rowCount = cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Moving Inventory to New Location");
+
+                connection.Close();
+            }
+
+            //if rowCount is 1, then non query was good
+            if (rowCount == 1)
+            {
+                goodNonQuery = true;
+            }
+
+            return goodNonQuery;
+        }
+
+        /**
+        * Updates the inventory quantity for an item at it's old location.
+        *
+        * @param inventory object
+        * @return bool - if inventory was updated or not
+        */
+        public static bool UpdateInventoryFromOldLocation(int quantity, int siteID, int itemID)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(updateInventoryAtOldLocationStatement, connection);
+
+            //4 parameters for this update query
+            cmd.Parameters.AddWithValue("@quantity", quantity);
+            cmd.Parameters.AddWithValue("@siteID", siteID);
+            cmd.Parameters.AddWithValue("@itemID", itemID);
+
+            //variable for rowCount
+            int rowCount = 0;
+
+            //bool to be returned
+            bool goodNonQuery = false;
+
+            try
+            {
+                connection.Open();
+
+                //execute a non query
+                rowCount = cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Moving Inventory from Old Location");
 
                 connection.Close();
             }

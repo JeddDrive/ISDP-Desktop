@@ -23,8 +23,8 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string selectLastSiteStatement = "select siteID, name, provinceID, address, IFNULL(address2, '') as address2, city, country, postalCode, phone, IFNULL(dayOfWeek, '') as dayOfWeek, distanceFromWH, IFNULL(notes, '') as notes, active from site" +
             " order by siteID DESC LIMIT 1";
         private static string updateSiteStatement = "update site set name = @name, provinceID = @provinceID, address = @address, address2 = @address2, city = @city, country = @country, postalCode = @postalCode, phone = @phone, dayOfWeek = @dayOfWeek, distanceFromWH = @distanceFromWH, notes = @notes, active = @active where siteID = @siteID";
-        private static string insertSiteStatement = "insert into site (`siteID`, `name`, `provinceID`, `address`, `address2`, `city`, `country`, `postalCode`, `phone`, `dayOfWeek`, `distanceFromWH`, `notes`, `active`) VALUES "
-            + "(@siteID, @name, @provinceID, @address, @address2, @city, @country, @postalCode, @phone, @dayOfWeek, @distanceFromWH, @notes, @active)";
+        private static string insertSiteStatement = "insert into `site` (`name`, `provinceID`, `address`, `address2`, `city`, `country`, `postalCode`, `phone`, `dayOfWeek`, `distanceFromWH`, `notes`, `active`) VALUES "
+            + "(@name, @provinceID, @address, @address2, @city, @country, @postalCode, @phone, @dayOfWeek, @distanceFromWH, @notes, @active)";
 
         /**
         * Get all of the sites.
@@ -329,7 +329,6 @@ namespace JeddoreISDPDesktop.DAO_Classes
             MySqlCommand cmd = new MySqlCommand(insertSiteStatement, connection);
 
             //many parameters for this insert query
-            cmd.Parameters.AddWithValue("@siteID", site.siteID);
             cmd.Parameters.AddWithValue("@name", site.name);
             cmd.Parameters.AddWithValue("@provinceID", site.provinceID);
             cmd.Parameters.AddWithValue("@address", site.address);
@@ -341,6 +340,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             cmd.Parameters.AddWithValue("@dayOfWeek", site.dayOfWeek);
             cmd.Parameters.AddWithValue("@distanceFromWH", site.distanceFromWH);
             cmd.Parameters.AddWithValue("@notes", site.notes);
+            cmd.Parameters.AddWithValue("@active", site.active);
 
             //variable for rowCount
             int rowCount = 0;

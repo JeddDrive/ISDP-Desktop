@@ -107,7 +107,7 @@ namespace JeddoreISDPDesktop
         {
             MessageBox.Show("This is the page for adding or editing an order item." +
                 "\n\nItem quantity for an order is incremented or decremented by that item's full case size." +
-                "\n\nIf more quantity of an item needs to be ordered than what is currently available in the warehouse, then that excess quantity will be added to a backorder for your site.",
+                "\n\nIf more quantity of an item needs to be ordered than what is currently available in the warehouse, then that unavailable quantity will be added to a backorder for your site.",
                 "Add/Edit Order Item Help"
             , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -119,7 +119,7 @@ namespace JeddoreISDPDesktop
             {
                 MessageBox.Show("This is the page for adding or editing an order item." +
                 "\n\nItem quantity for an order is incremented or decremented by that item's full case size." +
-                "\n\nIf more quantity of an item is needed than what is currently available in the warehouse, then that excess quantity will be added to a backorder for your site.",
+                "\n\nIf more quantity of an item is needed than what is currently available in the warehouse, then that unavailable quantity will be added to a backorder for your site.",
                 "Add/Edit Order Item Help"
             , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -148,7 +148,7 @@ namespace JeddoreISDPDesktop
                     DialogResult btnValueReturned = MessageBox.Show("Quantity selected of this item to be added to your order exceeds the quantity available in the warehouse." +
                         "\n\nDo you wish to add the quantity requested but not currently available to your store's backorder?" +
                         "\n\nIf a backorder doesn't currently exist for your store, then a new one will be created.",
-                        "Quantity in Order More than Warehouse Quantity", MessageBoxButtons.YesNo,
+                        "Quantity in Order Requested More than Warehouse Quantity", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question);
 
                     //if - user selects the yes btn
@@ -220,7 +220,7 @@ namespace JeddoreISDPDesktop
                             int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
 
                             //if the quantity available in the warehouse for the store/emergency order is above 0 then
-                            if (int.Parse(lblWarehouseQuantity.Text) > 0 && nudOrderQuantity.Value <= int.Parse(lblCaseSize.Text))
+                            if (int.Parse(lblWarehouseQuantity.Text) > 0)
                             {
                                 //create txnitem object - to be added to the store/emergency order
                                 TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
@@ -278,7 +278,7 @@ namespace JeddoreISDPDesktop
                             int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
 
                             //if the quantity available in the warehouse for the store/emergency order is above 0 then
-                            if (int.Parse(lblWarehouseQuantity.Text) > 0 && nudOrderQuantity.Value <= int.Parse(lblCaseSize.Text))
+                            if (int.Parse(lblWarehouseQuantity.Text) > 0)
                             {
                                 //create txnitem object - to be added to the store/emergency order
                                 TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
@@ -377,7 +377,7 @@ namespace JeddoreISDPDesktop
                     DialogResult btnValueReturned = MessageBox.Show("Quantity selected of this item to be added to your order exceeds the quantity available in the warehouse." +
                     "\n\nDo you wish to add the quantity requested but not currently available to your store's backorder?" +
                     "\n\nIf a backorder doesn't currently exist for your store, then a new one will be created.",
-                    "Quantity in Order More than Warehouse Quantity", MessageBoxButtons.YesNo,
+                    "Quantity in Order Requested More than Warehouse Quantity", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
                     //if - user selects the yes btn
@@ -449,7 +449,7 @@ namespace JeddoreISDPDesktop
                             int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
 
                             //if the quantity available in the warehouse for the store/emergency order is above 0 then
-                            if (int.Parse(lblWarehouseQuantity.Text) > 0 && nudOrderQuantity.Value <= int.Parse(lblCaseSize.Text))
+                            if (int.Parse(lblWarehouseQuantity.Text) > 0)
                             {
                                 //create txnitem object - to be added to the store/emergency order
                                 TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,
@@ -504,7 +504,7 @@ namespace JeddoreISDPDesktop
                             int quantityAvailableForOrder = int.Parse(lblWarehouseQuantity.Text) - int.Parse(nudOrderQuantity.Value.ToString());
 
                             //if the quantity available in the warehouse for the store/emergency order is above 0 then
-                            if (int.Parse(lblWarehouseQuantity.Text) > 0 && nudOrderQuantity.Value <= int.Parse(lblCaseSize.Text))
+                            if (int.Parse(lblWarehouseQuantity.Text) > 0)
                             {
                                 //create txnitem object - to be added to the store/emergency order
                                 TxnItems txnItemForOrder = new TxnItems(newOrder.txnID, item.itemID,

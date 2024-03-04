@@ -47,7 +47,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string selectSiteNewBackOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status IN ('New', 'Submitted', 'Assembling') and txnType IN ('Back Order') and t.siteIDTo = @siteID";
         private static string selectCountActiveNewOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status = 'New' and txnType IN ('Store Order', 'Emergency')";
         private static string selectCountActiveBackOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Back Order')";
-        private static string insertTxnStatement = " insert into `txn` (`siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`) VALUES " +
+        private static string insertTxnStatement = "insert into `txn` (`siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`) VALUES " +
             "(@siteIDTo, @siteIDFrom, @status, @shipDate, @txnType, @barCode, @createdDate, @emergencyDelivery)";
         private static string updateTxnShipDateStatement = "update txn set shipDate = @shipDate where txnID = @txnID";
         private static string updateTxnStatusStatement = "update txn set status = @status where txnID = @txnID";

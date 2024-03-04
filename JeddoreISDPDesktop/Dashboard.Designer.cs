@@ -37,7 +37,7 @@
             this.btnCreateOrder = new System.Windows.Forms.Button();
             this.btnViewOrders = new System.Windows.Forms.Button();
             this.tabInventory = new System.Windows.Forms.TabPage();
-            this.btnEditInventory = new System.Windows.Forms.Button();
+            this.btnViewInventory = new System.Windows.Forms.Button();
             this.btnEditItem = new System.Windows.Forms.Button();
             this.tabLossReturn = new System.Windows.Forms.TabPage();
             this.tabReports = new System.Windows.Forms.TabPage();
@@ -140,7 +140,7 @@
             // tabInventory
             // 
             this.tabInventory.BackColor = System.Drawing.Color.AliceBlue;
-            this.tabInventory.Controls.Add(this.btnEditInventory);
+            this.tabInventory.Controls.Add(this.btnViewInventory);
             this.tabInventory.Controls.Add(this.btnEditItem);
             this.tabInventory.Location = new System.Drawing.Point(4, 37);
             this.tabInventory.Name = "tabInventory";
@@ -149,17 +149,17 @@
             this.tabInventory.TabIndex = 1;
             this.tabInventory.Text = "Inventory";
             // 
-            // btnEditInventory
+            // btnViewInventory
             // 
-            this.btnEditInventory.Enabled = false;
-            this.btnEditInventory.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditInventory.Location = new System.Drawing.Point(258, 237);
-            this.btnEditInventory.Name = "btnEditInventory";
-            this.btnEditInventory.Size = new System.Drawing.Size(456, 63);
-            this.btnEditInventory.TabIndex = 22;
-            this.btnEditInventory.Text = "&Edit Inventory";
-            this.btnEditInventory.UseVisualStyleBackColor = true;
-            this.btnEditInventory.Click += new System.EventHandler(this.btnEditInventory_Click);
+            this.btnViewInventory.Enabled = false;
+            this.btnViewInventory.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewInventory.Location = new System.Drawing.Point(258, 246);
+            this.btnViewInventory.Name = "btnViewInventory";
+            this.btnViewInventory.Size = new System.Drawing.Size(456, 63);
+            this.btnViewInventory.TabIndex = 22;
+            this.btnViewInventory.Text = "&Edit/Move Inventory";
+            this.btnViewInventory.UseVisualStyleBackColor = true;
+            this.btnViewInventory.Click += new System.EventHandler(this.btnEditInventory_Click);
             // 
             // btnEditItem
             // 
@@ -207,7 +207,7 @@
             // 
             this.btnViewSites.Enabled = false;
             this.btnViewSites.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewSites.Location = new System.Drawing.Point(253, 321);
+            this.btnViewSites.Location = new System.Drawing.Point(253, 333);
             this.btnViewSites.Name = "btnViewSites";
             this.btnViewSites.Size = new System.Drawing.Size(456, 63);
             this.btnViewSites.TabIndex = 25;
@@ -219,7 +219,7 @@
             // 
             this.btnSetUserPermissions.Enabled = false;
             this.btnSetUserPermissions.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSetUserPermissions.Location = new System.Drawing.Point(253, 170);
+            this.btnSetUserPermissions.Location = new System.Drawing.Point(253, 185);
             this.btnSetUserPermissions.Name = "btnSetUserPermissions";
             this.btnSetUserPermissions.Size = new System.Drawing.Size(456, 63);
             this.btnSetUserPermissions.TabIndex = 24;
@@ -231,7 +231,7 @@
             // 
             this.btnViewUsers.Enabled = false;
             this.btnViewUsers.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewUsers.Location = new System.Drawing.Point(253, 25);
+            this.btnViewUsers.Location = new System.Drawing.Point(253, 37);
             this.btnViewUsers.Name = "btnViewUsers";
             this.btnViewUsers.Size = new System.Drawing.Size(456, 63);
             this.btnViewUsers.TabIndex = 21;
@@ -367,7 +367,7 @@
         private System.Windows.Forms.ToolTip toolTipHelp;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnViewSites;
-        private System.Windows.Forms.Button btnEditInventory;
+        private System.Windows.Forms.Button btnViewInventory;
         private System.Windows.Forms.Button btnViewOrders;
         private System.Windows.Forms.Button btnCreateOrder;
         private System.Windows.Forms.Button btnManageOrderItems;

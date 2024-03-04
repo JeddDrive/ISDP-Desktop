@@ -49,7 +49,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lblQuantity = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.lblLocationID = new System.Windows.Forms.Label();
+            this.lblItemLocation = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -236,15 +236,15 @@
             this.label7.TabIndex = 98;
             this.label7.Text = "Quantity:";
             // 
-            // lblLocationID
+            // lblItemLocation
             // 
-            this.lblLocationID.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblLocationID.Enabled = false;
-            this.lblLocationID.Location = new System.Drawing.Point(543, 187);
-            this.lblLocationID.Name = "lblLocationID";
-            this.lblLocationID.Size = new System.Drawing.Size(133, 34);
-            this.lblLocationID.TabIndex = 101;
-            this.lblLocationID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblItemLocation.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblItemLocation.Enabled = false;
+            this.lblItemLocation.Location = new System.Drawing.Point(543, 187);
+            this.lblItemLocation.Name = "lblItemLocation";
+            this.lblItemLocation.Size = new System.Drawing.Size(133, 34);
+            this.lblItemLocation.TabIndex = 101;
+            this.lblItemLocation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label8
             // 
@@ -340,7 +340,7 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtDescription);
-            this.Controls.Add(this.lblLocationID);
+            this.Controls.Add(this.lblItemLocation);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.lblQuantity);
             this.Controls.Add(this.label7);
@@ -397,7 +397,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblQuantity;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label lblLocationID;
+        private System.Windows.Forms.Label lblItemLocation;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label6;

@@ -225,7 +225,7 @@
             this.bindingNavigator2.MovePreviousItem = this.toolStripButton8;
             this.bindingNavigator2.Name = "bindingNavigator2";
             this.bindingNavigator2.PositionItem = this.toolStripTextBox2;
-            this.bindingNavigator2.Size = new System.Drawing.Size(518, 27);
+            this.bindingNavigator2.Size = new System.Drawing.Size(518, 31);
             this.bindingNavigator2.TabIndex = 34;
             this.bindingNavigator2.Text = "bindingNavigator2";
             // 
@@ -242,7 +242,7 @@
             this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
             this.toolStripButton7.Name = "toolStripButton7";
             this.toolStripButton7.RightToLeftAutoMirrorImage = true;
-            this.toolStripButton7.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton7.Size = new System.Drawing.Size(29, 28);
             this.toolStripButton7.Text = "Move first";
             // 
             // toolStripButton8
@@ -367,7 +367,7 @@
             this.bindingNavigator1.MovePreviousItem = this.toolStripButton2;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.toolStripTextBox1;
-            this.bindingNavigator1.Size = new System.Drawing.Size(608, 27);
+            this.bindingNavigator1.Size = new System.Drawing.Size(608, 31);
             this.bindingNavigator1.TabIndex = 34;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -566,12 +566,13 @@
             // dtpShipDate
             // 
             this.dtpShipDate.CustomFormat = "MMMMdd,  yyyy";
+            this.dtpShipDate.Font = new System.Drawing.Font("Tahoma", 13F);
             this.dtpShipDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpShipDate.Location = new System.Drawing.Point(268, 624);
             this.dtpShipDate.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
             this.dtpShipDate.MinDate = new System.DateTime(2024, 1, 1, 0, 0, 0, 0);
             this.dtpShipDate.Name = "dtpShipDate";
-            this.dtpShipDate.Size = new System.Drawing.Size(329, 34);
+            this.dtpShipDate.Size = new System.Drawing.Size(271, 34);
             this.dtpShipDate.TabIndex = 82;
             this.dtpShipDate.Value = new System.DateTime(2024, 3, 2, 17, 27, 12, 0);
             // 
@@ -586,6 +587,8 @@
             // 
             // dtpShipDateTime
             // 
+            this.dtpShipDateTime.CustomFormat = "";
+            this.dtpShipDateTime.Font = new System.Drawing.Font("Tahoma", 13F);
             this.dtpShipDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtpShipDateTime.Location = new System.Drawing.Point(268, 675);
             this.dtpShipDateTime.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
@@ -593,7 +596,7 @@
             this.dtpShipDateTime.Name = "dtpShipDateTime";
             this.dtpShipDateTime.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpShipDateTime.ShowUpDown = true;
-            this.dtpShipDateTime.Size = new System.Drawing.Size(329, 34);
+            this.dtpShipDateTime.Size = new System.Drawing.Size(271, 34);
             this.dtpShipDateTime.TabIndex = 84;
             this.dtpShipDateTime.Value = new System.DateTime(2024, 2, 28, 9, 0, 0, 0);
             // 

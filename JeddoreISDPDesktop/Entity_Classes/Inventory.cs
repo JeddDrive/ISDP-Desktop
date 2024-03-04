@@ -15,13 +15,15 @@
         //extra properties that are needed
         public string name { get; set; }
         public string description { get; set; }
+        public string siteName { get; set; }
 
         //default constructor - does nothing
         public Inventory() { }
 
         //custom constructor - everything sent in
         public Inventory(int inItemID, int inSiteID, int inQuantity, string inItemLocation,
-            int inReorderThreshold, int inOptimumThreshold, string inNotes, string inName, string inDescription)
+            int inReorderThreshold, int inOptimumThreshold, string inNotes, string inName, string inDescription,
+            string inSiteName)
         {
             itemID = inItemID;
             siteID = inSiteID;
@@ -32,6 +34,7 @@
             notes = inNotes;
             name = inName;
             description = inDescription;
+            siteName = inSiteName;
         }
     }
 }

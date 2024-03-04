@@ -32,7 +32,7 @@ namespace JeddoreISDPDesktop
 
         private void picHelp_Click(object sender, System.EventArgs e)
         {
-            MessageBox.Show("This is the page for managing items and their quantities for active store and back orders. You can update and remove item quantities from a selected order here." +
+            MessageBox.Show("This is the page for managing items and their quantities for active store and back orders. You can update and remove item quantities from a selected order here. The ship date for orders can also be updated here." +
             "\n\nClick on the 'refresh' button to load both data grids.", "Order Items Management Help"
             , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -42,7 +42,7 @@ namespace JeddoreISDPDesktop
             //if the F1 key is pressed down
             if (e.KeyCode == Keys.F1)
             {
-                MessageBox.Show("This is the page for managing items and their quantities for active store and back orders. You can update and remove item quantities from a selected order here." +
+                MessageBox.Show("This is the page for managing items and their quantities for active store and back orders. You can update and remove item quantities from a selected order here. The ship date for orders can also be updated here." +
                 "\n\nClick on the 'refresh' button to load both data grids.", "Order Items Management Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

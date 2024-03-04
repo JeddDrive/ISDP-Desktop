@@ -65,10 +65,10 @@ namespace JeddoreISDPDesktop
                 btnViewSites.Enabled = true;
             }
 
-            //check the list for EDITINVENTORY
-            if (employeeUserPermissions.permissionIDList.Contains("EDITINVENTORY"))
+            //check the list for VIEWINVENTORY
+            if (employeeUserPermissions.permissionIDList.Contains("VIEWINVENTORY"))
             {
-                btnEditInventory.Enabled = true;
+                btnViewInventory.Enabled = true;
             }
 
             //check the list for VIEWORDERS

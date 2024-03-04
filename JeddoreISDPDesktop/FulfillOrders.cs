@@ -58,7 +58,7 @@ namespace JeddoreISDPDesktop
         private void picHelp_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This is the page for fulfilling an order that is in assembly. You can select an order here in the first tab, then click on order items to confirm their fulfillment in the second tab." +
-                "\n\nClick on the 'refresh' button to either data grid.", "Fulfill Orders Help"
+                "\n\nClick on the 'refresh' button in either tab to load the appropriate data grid.", "Fulfill Orders Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -68,7 +68,7 @@ namespace JeddoreISDPDesktop
             if (e.KeyCode == Keys.F1)
             {
                 MessageBox.Show("This is the page for fulfilling an order that is in assembly. You can select an order here in the first tab, then click on order items to confirm their fulfillment in the second tab." +
-                "\n\nClick on the 'refresh' button to either data grid.", "Fulfill Orders Help"
+                "\n\nClick on the 'refresh' button in either tab to load the appropriate data grid.", "Fulfill Orders Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -175,69 +175,6 @@ namespace JeddoreISDPDesktop
 
                     //else if - shipped date cell converted to lower case contains the txtbox text
                     else if (shippedDateCellValue != null && shippedDateCellValue.ToString().ToLower().Contains(theSearchText))
-                    {
-                        row.Visible = true;
-                    }
-
-                    //else - no text contains match in any of the above cells then
-                    else
-                    {
-                        //need to suspend and resume binding before and after row visibilty is false
-                        //or else will get an error
-                        currencyManager1.SuspendBinding();
-                        row.Visible = false;
-                        currencyManager1.ResumeBinding();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void txtSearchOrderItems_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                //want to clear DGV row selection to prevent DGV errors/program from crashing
-                //each time the text is changed and if the user clicks on a CRUD btn for example
-                //dgvOrders.ClearSelection();
-                dgvOrderItems.ClearSelection();
-
-                //converting the search text to all lower case
-                string theSearchText = txtSearchOrderItems.Text.ToLower();
-
-                CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvOrderItems.DataSource];
-
-                foreach (DataGridViewRow row in dgvOrderItems.Rows)
-                {
-                    //get the cell values for the following columns
-                    var nameCellValue = row.Cells["Name"].Value;
-                    var descriptionCellValue = row.Cells["description"].Value;
-                    var itemIDCellValue = row.Cells["itemID"].Value;
-
-                    //if txtbox is empty, then just show all the rows and continue
-                    if (txtSearchOrderItems.Text.Equals(""))
-                    {
-                        row.Visible = true;
-                        continue;
-                    }
-
-                    //if - first name cell converted to lower case contains the txtbox text
-                    if (nameCellValue != null && nameCellValue.ToString().ToLower().Contains(theSearchText))
-                    {
-                        row.Visible = true;
-                    }
-
-                    //else if - last name cell converted to lower case contains the txtbox text
-                    else if (descriptionCellValue != null && descriptionCellValue.ToString().ToLower().Contains(theSearchText))
-                    {
-                        row.Visible = true;
-                    }
-
-                    //else if - item ID cell contains the txtbox text
-                    else if (itemIDCellValue != null && itemIDCellValue.ToString().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
@@ -585,6 +522,69 @@ namespace JeddoreISDPDesktop
                     //and close the form
                     this.Close();
                 }
+            }
+        }
+
+        private void txtSearchOrderItems_TextChanged_1(object sender, EventArgs e)
+        {
+            try
+            {
+                //want to clear DGV row selection to prevent DGV errors/program from crashing
+                //each time the text is changed and if the user clicks on a CRUD btn for example
+                //dgvOrders.ClearSelection();
+                dgvOrderItems.ClearSelection();
+
+                //converting the search text to all lower case
+                string theSearchText = txtSearchOrderItems.Text.ToLower();
+
+                CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[dgvOrderItems.DataSource];
+
+                foreach (DataGridViewRow row in dgvOrderItems.Rows)
+                {
+                    //get the cell values for the following columns
+                    var nameCellValue = row.Cells["Name"].Value;
+                    var descriptionCellValue = row.Cells["description"].Value;
+                    var itemIDCellValue = row.Cells["itemID"].Value;
+
+                    //if txtbox is empty, then just show all the rows and continue
+                    if (txtSearchOrderItems.Text.Equals(""))
+                    {
+                        row.Visible = true;
+                        continue;
+                    }
+
+                    //if - first name cell converted to lower case contains the txtbox text
+                    if (nameCellValue != null && nameCellValue.ToString().ToLower().Contains(theSearchText))
+                    {
+                        row.Visible = true;
+                    }
+
+                    //else if - last name cell converted to lower case contains the txtbox text
+                    else if (descriptionCellValue != null && descriptionCellValue.ToString().ToLower().Contains(theSearchText))
+                    {
+                        row.Visible = true;
+                    }
+
+                    //else if - item ID cell contains the txtbox text
+                    else if (itemIDCellValue != null && itemIDCellValue.ToString().Contains(theSearchText))
+                    {
+                        row.Visible = true;
+                    }
+
+                    //else - no text contains match in any of the above cells then
+                    else
+                    {
+                        //need to suspend and resume binding before and after row visibilty is false
+                        //or else will get an error
+                        currencyManager1.SuspendBinding();
+                        row.Visible = false;
+                        currencyManager1.ResumeBinding();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

@@ -7,10 +7,9 @@ namespace JeddoreISDPDesktop
 {
     public partial class EditInventory : Form
     {
-        //class level/global variable for the employee object, and inventory object
+        //class level/global variables for the employee object, and inventory object
         Employee employee = null;
         Inventory inventoryItem = null;
-
 
         public EditInventory(Employee employeeLoggedIn, Inventory inventorySentIn)
         {
@@ -33,7 +32,7 @@ namespace JeddoreISDPDesktop
             lblSiteID.Text = inventoryItem.siteID.ToString();
             lblName.Text = inventoryItem.name;
             lblQuantity.Text = inventoryItem.quantity.ToString();
-            lblLocationID.Text = inventoryItem.itemLocation;
+            lblItemLocation.Text = inventoryItem.itemLocation;
             txtDescription.Text = inventoryItem.description;
             nudReorderThreshold.Value = inventoryItem.reorderThreshold;
             nudOptimumThreshold.Value = inventoryItem.optimumThreshold;
@@ -48,7 +47,7 @@ namespace JeddoreISDPDesktop
 
         private void picHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is the page for inventory item editing. " +
+            MessageBox.Show("This is the page for editing an inventory item. " +
                 "The reorder threshold and notes for an item in your inventory can be edited here.", "Edit Inventory Help"
             , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -58,7 +57,7 @@ namespace JeddoreISDPDesktop
             //if the F1 key is pressed down
             if (e.KeyCode == Keys.F1)
             {
-                MessageBox.Show("This is the page for inventory item editing. " +
+                MessageBox.Show("This is the page for editing an inventory item. " +
                 "The reorder threshold and notes for an item in your inventory can be edited here.", "Edit Inventory Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -107,7 +106,8 @@ namespace JeddoreISDPDesktop
                 //create an inventory obj to be sent to the accessor update method
                 Inventory inventoryEdited = new Inventory(inventoryItem.itemID, inventoryItem.siteID,
                     inventoryItem.quantity, inventoryItem.itemLocation, (int)nudReorderThreshold.Value,
-                    inventoryItem.optimumThreshold, notes, inventoryItem.name, inventoryItem.description);
+                    inventoryItem.optimumThreshold, notes, inventoryItem.name, inventoryItem.description,
+                    inventoryItem.siteName);
 
                 //attempt to update the inventory
                 bool goodUpdate = InventoryAccessor.UpdateInventoryItem(inventoryEdited);

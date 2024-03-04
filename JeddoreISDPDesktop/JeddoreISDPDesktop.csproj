@@ -193,6 +193,12 @@
     <Compile Include="ItemManagement.Designer.cs">
       <DependentUpon>ItemManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="MoveInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MoveInventory.Designer.cs">
+      <DependentUpon>MoveInventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="OrderItemsManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -281,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ItemManagement.resx">
       <DependentUpon>ItemManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoveInventory.resx">
+      <DependentUpon>MoveInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrderItemsManagement.resx">
       <DependentUpon>OrderItemsManagement.cs</DependentUpon>

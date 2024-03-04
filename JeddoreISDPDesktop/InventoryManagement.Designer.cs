@@ -52,6 +52,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.btnMove = new System.Windows.Forms.Button();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
@@ -133,15 +134,17 @@
             // 
             // grpBtnsTwo
             // 
+            this.grpBtnsTwo.Controls.Add(this.btnMove);
             this.grpBtnsTwo.Controls.Add(this.btnEdit);
-            this.grpBtnsTwo.Location = new System.Drawing.Point(764, 549);
+            this.grpBtnsTwo.Location = new System.Drawing.Point(764, 548);
             this.grpBtnsTwo.Name = "grpBtnsTwo";
-            this.grpBtnsTwo.Size = new System.Drawing.Size(200, 114);
+            this.grpBtnsTwo.Size = new System.Drawing.Size(200, 192);
             this.grpBtnsTwo.TabIndex = 67;
             this.grpBtnsTwo.TabStop = false;
             // 
             // btnEdit
             // 
+            this.btnEdit.Enabled = false;
             this.btnEdit.Font = new System.Drawing.Font("Segoe UI Semibold", 11.3F, System.Drawing.FontStyle.Bold);
             this.btnEdit.Location = new System.Drawing.Point(29, 33);
             this.btnEdit.Name = "btnEdit";
@@ -274,6 +277,18 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 1200000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // btnMove
+            // 
+            this.btnMove.Enabled = false;
+            this.btnMove.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold);
+            this.btnMove.Location = new System.Drawing.Point(29, 114);
+            this.btnMove.Name = "btnMove";
+            this.btnMove.Size = new System.Drawing.Size(147, 63);
+            this.btnMove.TabIndex = 1;
+            this.btnMove.Text = "&Move Inventory Item";
+            this.btnMove.UseVisualStyleBackColor = true;
+            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -427,5 +442,6 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolTip toolTipHelp;
+        private System.Windows.Forms.Button btnMove;
     }
 }
