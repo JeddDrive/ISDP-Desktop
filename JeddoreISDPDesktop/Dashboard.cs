@@ -90,10 +90,16 @@ namespace JeddoreISDPDesktop
             }
 
             //check the list for FULFILSTOREORDER
-            //check the list for PREPARESTOREORDER
             if (employeeUserPermissions.permissionIDList.Contains("FULFILSTOREORDER"))
             {
                 btnFulfillOrder.Enabled = true;
+            }
+
+            //check the list for ADDSUPPLIER or EDITSUPPLIER
+            if (employeeUserPermissions.permissionIDList.Contains("ADDSUPPLIER") ||
+                employeeUserPermissions.permissionIDList.Contains("EDITSUPPLIER"))
+            {
+                btnViewSuppliers.Enabled = true;
             }
 
             //if employee is a store manager
@@ -304,6 +310,15 @@ namespace JeddoreISDPDesktop
 
             //open the fulfill orders form (modal)
             frmFulfillOrders.ShowDialog();
+        }
+
+        private void btnViewSuppliers_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the supplier management form
+            SupplierManagement frmSupplierManagement = new SupplierManagement(employee);
+
+            //open the supplier management form (modal)
+            frmSupplierManagement.ShowDialog();
         }
     }
 }

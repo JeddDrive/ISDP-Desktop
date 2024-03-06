@@ -16,7 +16,7 @@ namespace JeddoreISDPDesktop.Entity_Classes
         public DateTime createdDate { get; set; }
         public int deliveryID { get; set; }
         public byte emergencyDelivery { get; set; }
-        public string notes { get; set; }
+        public string notes { get; set; } = null;
 
         //extra auto implemented properties
         public string originSite { get; set; }

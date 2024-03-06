@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace JeddoreISDPDesktop.DAO_Classes
 {
-    //DAO static class for Employee
+    //DAO public static class for Employee
     public static class EmployeeAccessor
     {
         //private static connection string

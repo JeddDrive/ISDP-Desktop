@@ -56,14 +56,14 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.nudDistance = new System.Windows.Forms.NumericUpDown();
-            this.txtNotes = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.grpBasic = new System.Windows.Forms.GroupBox();
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
             this.picBullseye = new System.Windows.Forms.PictureBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtNotes = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudDistance)).BeginInit();
             this.grpBasic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
@@ -290,23 +290,6 @@
             this.nudDistance.TabIndex = 8;
             this.nudDistance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtNotes
-            // 
-            this.txtNotes.Location = new System.Drawing.Point(166, 554);
-            this.txtNotes.Multiline = true;
-            this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(236, 162);
-            this.txtNotes.TabIndex = 9;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(59, 557);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(71, 28);
-            this.label13.TabIndex = 81;
-            this.label13.Text = "Notes:";
-            // 
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -372,6 +355,23 @@
             this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBullseye.TabIndex = 55;
             this.picBullseye.TabStop = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(59, 557);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(71, 28);
+            this.label13.TabIndex = 81;
+            this.label13.Text = "Notes:";
+            // 
+            // txtNotes
+            // 
+            this.txtNotes.Location = new System.Drawing.Point(166, 554);
+            this.txtNotes.Multiline = true;
+            this.txtNotes.Name = "txtNotes";
+            this.txtNotes.Size = new System.Drawing.Size(236, 162);
+            this.txtNotes.TabIndex = 9;
             // 
             // AddEditSite
             // 
@@ -458,11 +458,11 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.NumericUpDown nudDistance;
-        private System.Windows.Forms.TextBox txtNotes;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.GroupBox grpBasic;
         private System.Windows.Forms.CheckBox chkActive;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtNotes;
     }
 }

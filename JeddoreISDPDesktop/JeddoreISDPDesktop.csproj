@@ -111,6 +111,12 @@
     <Compile Include="AddEditSite.Designer.cs">
       <DependentUpon>AddEditSite.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddEditSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditSupplier.Designer.cs">
+      <DependentUpon>AddEditSupplier.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEditUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,7 @@
     <Compile Include="DAO_Classes\PosnAccessor.cs" />
     <Compile Include="DAO_Classes\ProvinceAccessor.cs" />
     <Compile Include="DAO_Classes\SiteAccessor.cs" />
+    <Compile Include="DAO_Classes\SupplierAccessor.cs" />
     <Compile Include="DAO_Classes\TxnAccessor.cs" />
     <Compile Include="DAO_Classes\TxnItemsAccessor.cs" />
     <Compile Include="DAO_Classes\TxnStatusAccessor.cs" />
@@ -211,6 +218,13 @@
     <Compile Include="SiteManagement.Designer.cs">
       <DependentUpon>SiteManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entity_Classes\Supplier.cs" />
+    <Compile Include="SupplierManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupplierManagement.Designer.cs">
+      <DependentUpon>SupplierManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -258,6 +272,9 @@
     <EmbeddedResource Include="AddEditSite.resx">
       <DependentUpon>AddEditSite.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddEditSupplier.resx">
+      <DependentUpon>AddEditSupplier.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddEditUser.resx">
       <DependentUpon>AddEditUser.cs</DependentUpon>
     </EmbeddedResource>
@@ -296,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SiteManagement.resx">
       <DependentUpon>SiteManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SupplierManagement.resx">
+      <DependentUpon>SupplierManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserManagement.resx">
       <DependentUpon>UserManagement.cs</DependentUpon>

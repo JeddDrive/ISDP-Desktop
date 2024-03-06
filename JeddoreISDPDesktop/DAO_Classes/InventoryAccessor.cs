@@ -21,7 +21,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             " from inventory iv inner join item it on iv.itemID = it.itemID inner join site s on iv.siteID = s.siteID where iv.siteID = @siteID";
         private static string selectOneStatement = "select iv.itemID, it.name, it.description, iv.siteID, s.name AS siteName, iv.quantity, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
             " from inventory iv inner join item it on iv.itemID = it.itemID inner join site s on iv.siteID = s.siteID where iv.siteID = @siteID and iv.itemID = @itemID";
-        private static string updateReorderThresholdStatement = "update inventory set reorderThreshold = @reorderThreshold, notes = @notes where itemID = @itemID and siteID = @siteID";
+        private static string updateReorderAndOptimumThresholdsStatement = "update inventory set reorderThreshold = @reorderThreshold, optimumThreshold = @optimumThreshold, notes = @notes where itemID = @itemID and siteID = @siteID";
         private static string updateInventoryAtNewLocationStatement = "update inventory set quantity = quantity + @quantity, itemLocation = @itemLocation where siteID = @siteID and itemID = @itemID";
         private static string updateInventoryAtOldLocationStatement = "update inventory set quantity = quantity - @quantity where siteID = @siteID and itemID = @itemID";
 
@@ -129,7 +129,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Updates an existing inventory item and most of it's fields.
+        * Updates an existing inventory item and some of it's fields.
         *
         * @param inventory object
         * @return bool - if inventory was updated or not
@@ -137,10 +137,11 @@ namespace JeddoreISDPDesktop.DAO_Classes
         public static bool UpdateInventoryItem(Inventory inventory)
         {
             //create a command
-            MySqlCommand cmd = new MySqlCommand(updateReorderThresholdStatement, connection);
+            MySqlCommand cmd = new MySqlCommand(updateReorderAndOptimumThresholdsStatement, connection);
 
-            //4 parameters for this update query
+            //5 parameters for this update query
             cmd.Parameters.AddWithValue("@reorderThreshold", inventory.reorderThreshold);
+            cmd.Parameters.AddWithValue("@optimumThreshold", inventory.optimumThreshold);
             cmd.Parameters.AddWithValue("@notes", inventory.notes);
             cmd.Parameters.AddWithValue("@itemID", inventory.itemID);
             cmd.Parameters.AddWithValue("@siteID", inventory.siteID);

@@ -54,6 +54,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
+            this.btnViewSuppliers = new System.Windows.Forms.Button();
             this.tabControlDashboard.SuspendLayout();
             this.tabOrders.SuspendLayout();
             this.tabInventory.SuspendLayout();
@@ -194,6 +195,7 @@
             // tabAdmin
             // 
             this.tabAdmin.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabAdmin.Controls.Add(this.btnViewSuppliers);
             this.tabAdmin.Controls.Add(this.btnViewSites);
             this.tabAdmin.Controls.Add(this.btnSetUserPermissions);
             this.tabAdmin.Controls.Add(this.btnViewUsers);
@@ -207,9 +209,9 @@
             // 
             this.btnViewSites.Enabled = false;
             this.btnViewSites.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewSites.Location = new System.Drawing.Point(253, 333);
+            this.btnViewSites.Location = new System.Drawing.Point(526, 72);
             this.btnViewSites.Name = "btnViewSites";
-            this.btnViewSites.Size = new System.Drawing.Size(456, 63);
+            this.btnViewSites.Size = new System.Drawing.Size(384, 63);
             this.btnViewSites.TabIndex = 25;
             this.btnViewSites.Text = "&View and Manage Sites";
             this.btnViewSites.UseVisualStyleBackColor = true;
@@ -219,9 +221,9 @@
             // 
             this.btnSetUserPermissions.Enabled = false;
             this.btnSetUserPermissions.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSetUserPermissions.Location = new System.Drawing.Point(253, 185);
+            this.btnSetUserPermissions.Location = new System.Drawing.Point(32, 234);
             this.btnSetUserPermissions.Name = "btnSetUserPermissions";
-            this.btnSetUserPermissions.Size = new System.Drawing.Size(456, 63);
+            this.btnSetUserPermissions.Size = new System.Drawing.Size(384, 63);
             this.btnSetUserPermissions.TabIndex = 24;
             this.btnSetUserPermissions.Text = "&Set User Permissions";
             this.btnSetUserPermissions.UseVisualStyleBackColor = true;
@@ -231,9 +233,9 @@
             // 
             this.btnViewUsers.Enabled = false;
             this.btnViewUsers.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewUsers.Location = new System.Drawing.Point(253, 37);
+            this.btnViewUsers.Location = new System.Drawing.Point(32, 72);
             this.btnViewUsers.Name = "btnViewUsers";
-            this.btnViewUsers.Size = new System.Drawing.Size(456, 63);
+            this.btnViewUsers.Size = new System.Drawing.Size(384, 63);
             this.btnViewUsers.TabIndex = 21;
             this.btnViewUsers.Text = "View and Manage &Users";
             this.btnViewUsers.UseVisualStyleBackColor = true;
@@ -312,6 +314,18 @@
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
+            // btnViewSuppliers
+            // 
+            this.btnViewSuppliers.Enabled = false;
+            this.btnViewSuppliers.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewSuppliers.Location = new System.Drawing.Point(526, 234);
+            this.btnViewSuppliers.Name = "btnViewSuppliers";
+            this.btnViewSuppliers.Size = new System.Drawing.Size(384, 63);
+            this.btnViewSuppliers.TabIndex = 26;
+            this.btnViewSuppliers.Text = "&View and Manage Suppliers";
+            this.btnViewSuppliers.UseVisualStyleBackColor = true;
+            this.btnViewSuppliers.Click += new System.EventHandler(this.btnViewSuppliers_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
@@ -372,5 +386,6 @@
         private System.Windows.Forms.Button btnCreateOrder;
         private System.Windows.Forms.Button btnManageOrderItems;
         private System.Windows.Forms.Button btnFulfillOrder;
+        private System.Windows.Forms.Button btnViewSuppliers;
     }
 }

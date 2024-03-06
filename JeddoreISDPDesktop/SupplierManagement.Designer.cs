@@ -1,6 +1,6 @@
 ﻿namespace JeddoreISDPDesktop
 {
-    partial class SiteManagement
+    partial class SupplierManagement
     {
         /// <summary>
         /// Required designer variable.
@@ -29,124 +29,134 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SiteManagement));
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtSearchSites = new System.Windows.Forms.TextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SupplierManagement));
             this.label3 = new System.Windows.Forms.Label();
             this.lblLocation = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.grpSites = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAddSupplier = new System.Windows.Forms.Button();
+            this.btnEditSupplier = new System.Windows.Forms.Button();
+            this.grpSuppliers = new System.Windows.Forms.GroupBox();
             this.bindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.dgvSites = new System.Windows.Forms.DataGridView();
+            this.dgvSuppliers = new System.Windows.Forms.DataGridView();
             this.grpBasic = new System.Windows.Forms.GroupBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnAddSite = new System.Windows.Forms.Button();
-            this.btnEditSite = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtSearchSuppliers = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
-            this.grpSites.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.grpSuppliers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSites)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).BeginInit();
             this.grpBasic.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
             this.SuspendLayout();
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 159);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 28);
-            this.label4.TabIndex = 58;
-            this.label4.Text = "Search:";
-            // 
-            // txtSearchSites
-            // 
-            this.txtSearchSites.Enabled = false;
-            this.txtSearchSites.Location = new System.Drawing.Point(84, 159);
-            this.txtSearchSites.Name = "txtSearchSites";
-            this.txtSearchSites.Size = new System.Drawing.Size(331, 34);
-            this.txtSearchSites.TabIndex = 0;
-            this.txtSearchSites.TextChanged += new System.EventHandler(this.txtSearchUsers_TextChanged);
-            // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(362, 106);
+            this.label3.Location = new System.Drawing.Point(326, 97);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(309, 50);
-            this.label3.TabIndex = 56;
-            this.label3.Text = "Site Management";
+            this.label3.Size = new System.Drawing.Size(373, 50);
+            this.label3.TabIndex = 63;
+            this.label3.Text = "Supplier Management";
             // 
             // lblLocation
             // 
             this.lblLocation.AutoSize = true;
-            this.lblLocation.Location = new System.Drawing.Point(263, 68);
+            this.lblLocation.Location = new System.Drawing.Point(263, 67);
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(0, 28);
-            this.lblLocation.TabIndex = 54;
+            this.lblLocation.TabIndex = 61;
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(263, 15);
+            this.lblUsername.Location = new System.Drawing.Point(263, 14);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(0, 28);
-            this.lblUsername.TabIndex = 53;
+            this.lblUsername.TabIndex = 60;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(183, 68);
+            this.label1.Location = new System.Drawing.Point(183, 67);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 28);
-            this.label1.TabIndex = 51;
+            this.label1.TabIndex = 58;
             this.label1.Text = "Location:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(213, 15);
+            this.label2.Location = new System.Drawing.Point(213, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 28);
-            this.label2.TabIndex = 50;
+            this.label2.TabIndex = 57;
             this.label2.Text = "User:";
             // 
-            // timer1
+            // groupBox1
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1200000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.groupBox1.Controls.Add(this.btnAddSupplier);
+            this.groupBox1.Controls.Add(this.btnEditSupplier);
+            this.groupBox1.Location = new System.Drawing.Point(775, 550);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 191);
+            this.groupBox1.TabIndex = 67;
+            this.groupBox1.TabStop = false;
             // 
-            // grpSites
+            // btnAddSupplier
             // 
-            this.grpSites.Controls.Add(this.bindingNavigator);
-            this.grpSites.Controls.Add(this.dgvSites);
-            this.grpSites.Location = new System.Drawing.Point(12, 199);
-            this.grpSites.Name = "grpSites";
-            this.grpSites.Size = new System.Drawing.Size(965, 351);
-            this.grpSites.TabIndex = 61;
-            this.grpSites.TabStop = false;
+            this.btnAddSupplier.Enabled = false;
+            this.btnAddSupplier.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnAddSupplier.Location = new System.Drawing.Point(29, 33);
+            this.btnAddSupplier.Name = "btnAddSupplier";
+            this.btnAddSupplier.Size = new System.Drawing.Size(147, 63);
+            this.btnAddSupplier.TabIndex = 0;
+            this.btnAddSupplier.Text = "&Add Supplier";
+            this.btnAddSupplier.UseVisualStyleBackColor = true;
+            this.btnAddSupplier.Click += new System.EventHandler(this.btnAddSupplier_Click);
+            // 
+            // btnEditSupplier
+            // 
+            this.btnEditSupplier.Enabled = false;
+            this.btnEditSupplier.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnEditSupplier.Location = new System.Drawing.Point(29, 113);
+            this.btnEditSupplier.Name = "btnEditSupplier";
+            this.btnEditSupplier.Size = new System.Drawing.Size(147, 63);
+            this.btnEditSupplier.TabIndex = 1;
+            this.btnEditSupplier.Text = "E&dit Supplier";
+            this.btnEditSupplier.UseVisualStyleBackColor = true;
+            this.btnEditSupplier.Click += new System.EventHandler(this.btnEditSupplier_Click);
+            // 
+            // grpSuppliers
+            // 
+            this.grpSuppliers.Controls.Add(this.bindingNavigator);
+            this.grpSuppliers.Controls.Add(this.dgvSuppliers);
+            this.grpSuppliers.Location = new System.Drawing.Point(10, 193);
+            this.grpSuppliers.Name = "grpSuppliers";
+            this.grpSuppliers.Size = new System.Drawing.Size(965, 351);
+            this.grpSuppliers.TabIndex = 68;
+            this.grpSuppliers.TabStop = false;
             // 
             // bindingNavigator
             // 
@@ -173,39 +183,21 @@
             this.bindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator.Name = "bindingNavigator";
             this.bindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator.Size = new System.Drawing.Size(959, 27);
+            this.bindingNavigator.Size = new System.Drawing.Size(959, 31);
             this.bindingNavigator.TabIndex = 34;
             this.bindingNavigator.Text = "bindingNavigator";
             // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 24);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 28);
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 27);
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 31);
             // 
             // bindingNavigatorPositionItem
             // 
@@ -220,73 +212,35 @@
             // bindingNavigatorSeparator1
             // 
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 27);
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorMoveNextItem.Text = "Move next";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorMoveLastItem.Text = "Move last";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // bindingNavigatorSeparator2
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 27);
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
-            // bindingNavigatorAddNewItem
+            // dgvSuppliers
             // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
-            this.bindingNavigatorAddNewItem.Visible = false;
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
-            this.bindingNavigatorDeleteItem.Visible = false;
-            // 
-            // dgvSites
-            // 
-            this.dgvSites.AllowUserToAddRows = false;
-            this.dgvSites.AllowUserToDeleteRows = false;
-            this.dgvSites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvSites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSites.Location = new System.Drawing.Point(4, 60);
-            this.dgvSites.Name = "dgvSites";
-            this.dgvSites.RowHeadersWidth = 51;
-            this.dgvSites.RowTemplate.Height = 24;
-            this.dgvSites.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSites.Size = new System.Drawing.Size(955, 278);
-            this.dgvSites.TabIndex = 33;
+            this.dgvSuppliers.AllowUserToAddRows = false;
+            this.dgvSuppliers.AllowUserToDeleteRows = false;
+            this.dgvSuppliers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvSuppliers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSuppliers.Location = new System.Drawing.Point(4, 60);
+            this.dgvSuppliers.Name = "dgvSuppliers";
+            this.dgvSuppliers.RowHeadersWidth = 51;
+            this.dgvSuppliers.RowTemplate.Height = 24;
+            this.dgvSuppliers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSuppliers.Size = new System.Drawing.Size(955, 278);
+            this.dgvSuppliers.TabIndex = 33;
             // 
             // grpBasic
             // 
             this.grpBasic.Controls.Add(this.btnRefresh);
             this.grpBasic.Controls.Add(this.btnExit);
-            this.grpBasic.Location = new System.Drawing.Point(12, 556);
+            this.grpBasic.Location = new System.Drawing.Point(10, 550);
             this.grpBasic.Name = "grpBasic";
             this.grpBasic.Size = new System.Drawing.Size(200, 191);
-            this.grpBasic.TabIndex = 59;
+            this.grpBasic.TabIndex = 66;
             this.grpBasic.TabStop = false;
             // 
             // btnRefresh
@@ -312,62 +266,108 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // groupBox1
+            // label4
             // 
-            this.groupBox1.Controls.Add(this.btnAddSite);
-            this.groupBox1.Controls.Add(this.btnEditSite);
-            this.groupBox1.Location = new System.Drawing.Point(770, 556);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 191);
-            this.groupBox1.TabIndex = 60;
-            this.groupBox1.TabStop = false;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 159);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 28);
+            this.label4.TabIndex = 65;
+            this.label4.Text = "Search:";
             // 
-            // btnAddSite
+            // txtSearchSuppliers
             // 
-            this.btnAddSite.Enabled = false;
-            this.btnAddSite.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddSite.Location = new System.Drawing.Point(29, 33);
-            this.btnAddSite.Name = "btnAddSite";
-            this.btnAddSite.Size = new System.Drawing.Size(147, 63);
-            this.btnAddSite.TabIndex = 0;
-            this.btnAddSite.Text = "&Add Site";
-            this.btnAddSite.UseVisualStyleBackColor = true;
-            this.btnAddSite.Click += new System.EventHandler(this.btnAddSite_Click);
+            this.txtSearchSuppliers.Enabled = false;
+            this.txtSearchSuppliers.Location = new System.Drawing.Point(81, 159);
+            this.txtSearchSuppliers.Name = "txtSearchSuppliers";
+            this.txtSearchSuppliers.Size = new System.Drawing.Size(331, 34);
+            this.txtSearchSuppliers.TabIndex = 64;
+            this.txtSearchSuppliers.TextChanged += new System.EventHandler(this.txtSearchSuppliers_TextChanged);
             // 
-            // btnEditSite
+            // timer1
             // 
-            this.btnEditSite.Enabled = false;
-            this.btnEditSite.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditSite.Location = new System.Drawing.Point(29, 113);
-            this.btnEditSite.Name = "btnEditSite";
-            this.btnEditSite.Size = new System.Drawing.Size(147, 63);
-            this.btnEditSite.TabIndex = 1;
-            this.btnEditSite.Text = "E&dit Site";
-            this.btnEditSite.UseVisualStyleBackColor = true;
-            this.btnEditSite.Click += new System.EventHandler(this.btnEditSite_Click);
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1200000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveNextItem.Text = "Move next";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorMoveLastItem.Text = "Move last";
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
+            this.bindingNavigatorAddNewItem.Visible = false;
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.bindingNavigatorDeleteItem.Visible = false;
             // 
             // picBullseye
             // 
             this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
-            this.picBullseye.Location = new System.Drawing.Point(0, -1);
+            this.picBullseye.Location = new System.Drawing.Point(0, -2);
             this.picBullseye.Name = "picBullseye";
             this.picBullseye.Size = new System.Drawing.Size(140, 110);
             this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBullseye.TabIndex = 55;
+            this.picBullseye.TabIndex = 62;
             this.picBullseye.TabStop = false;
             // 
             // picHelp
             // 
             this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
-            this.picHelp.Location = new System.Drawing.Point(932, 12);
+            this.picHelp.Location = new System.Drawing.Point(925, 14);
             this.picHelp.Name = "picHelp";
             this.picHelp.Size = new System.Drawing.Size(45, 40);
             this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picHelp.TabIndex = 52;
+            this.picHelp.TabIndex = 59;
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
-            // SiteManagement
+            // SupplierManagement
             // 
             this.AcceptButton = this.btnRefresh;
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
@@ -375,10 +375,10 @@
             this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(982, 753);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.grpSites);
+            this.Controls.Add(this.grpSuppliers);
             this.Controls.Add(this.grpBasic);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtSearchSites);
+            this.Controls.Add(this.txtSearchSuppliers);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.picBullseye);
             this.Controls.Add(this.lblLocation);
@@ -390,19 +390,19 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "SiteManagement";
+            this.Name = "SupplierManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Bullseye Inventory Management System - Site Management";
-            this.Load += new System.EventHandler(this.SiteManagement_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SiteManagement_KeyDown);
-            this.grpSites.ResumeLayout(false);
-            this.grpSites.PerformLayout();
+            this.Text = "Bullseye Inventory Management System - Supplier Management";
+            this.Load += new System.EventHandler(this.SupplierManagement_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SupplierManagement_KeyDown);
+            this.groupBox1.ResumeLayout(false);
+            this.grpSuppliers.ResumeLayout(false);
+            this.grpSuppliers.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).EndInit();
             this.bindingNavigator.ResumeLayout(false);
             this.bindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSites)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).EndInit();
             this.grpBasic.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             this.ResumeLayout(false);
@@ -412,8 +412,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtSearchSites;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox picBullseye;
         private System.Windows.Forms.Label lblLocation;
@@ -421,9 +419,10 @@
         private System.Windows.Forms.PictureBox picHelp;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.ToolTip toolTipHelp;
-        private System.Windows.Forms.GroupBox grpSites;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnAddSupplier;
+        private System.Windows.Forms.Button btnEditSupplier;
+        private System.Windows.Forms.GroupBox grpSuppliers;
         private System.Windows.Forms.BindingNavigator bindingNavigator;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
@@ -436,12 +435,13 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
-        private System.Windows.Forms.DataGridView dgvSites;
+        private System.Windows.Forms.DataGridView dgvSuppliers;
         private System.Windows.Forms.GroupBox grpBasic;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnAddSite;
-        private System.Windows.Forms.Button btnEditSite;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtSearchSuppliers;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolTip toolTipHelp;
     }
 }

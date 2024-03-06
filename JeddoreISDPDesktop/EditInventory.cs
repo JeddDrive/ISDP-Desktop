@@ -80,10 +80,18 @@ namespace JeddoreISDPDesktop
             }
 
             //if reorder threshold nud is below zero
-            if (nudReorderThreshold.Value < 0 || nudReorderThreshold.Value > 100)
+            if (nudReorderThreshold.Value < 0 || nudReorderThreshold.Value > 300)
             {
-                MessageBox.Show("Reorder Threshold can't be below 0 or above 100.", "Reorder Threshold Error");
+                MessageBox.Show("Reorder Threshold can't be below 0 or above 300.", "Reorder Threshold Error");
                 nudReorderThreshold.Focus();
+                return;
+            }
+
+            //if reorder threshold nud is below zero
+            if (nudOptimumThreshold.Value < 0 || nudOptimumThreshold.Value > 300 || nudOptimumThreshold.Value <= nudReorderThreshold.Value)
+            {
+                MessageBox.Show("Optimum Threshold can't be below 0, above 300, or equal to or below the reorder threshold.", "Optimum Threshold Error");
+                nudOptimumThreshold.Focus();
                 return;
             }
 
@@ -95,9 +103,9 @@ namespace JeddoreISDPDesktop
                 return;
             }
 
-            DialogResult btnValueReturned = MessageBox.Show("Edited Inventory Item's Reorder Threshold: " +
-                nudReorderThreshold.Value + "\n\nEdited Inventory Item's Notes: " +
-                txtNotes.Text, "Confirm Inventory Item Edit",
+            DialogResult btnValueReturned = MessageBox.Show("Edited Inventory Item's Reorder Threshold: " + nudReorderThreshold.Value +
+                "\n\nEdited Inventory Item's Optimum Threshold: " + nudOptimumThreshold.Value +
+                "\n\nEdited Inventory Item's Notes: " + txtNotes.Text, "Confirm Inventory Item Edit",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             //if - user selects the yes btn
@@ -106,7 +114,7 @@ namespace JeddoreISDPDesktop
                 //create an inventory obj to be sent to the accessor update method
                 Inventory inventoryEdited = new Inventory(inventoryItem.itemID, inventoryItem.siteID,
                     inventoryItem.quantity, inventoryItem.itemLocation, (int)nudReorderThreshold.Value,
-                    inventoryItem.optimumThreshold, notes, inventoryItem.name, inventoryItem.description,
+                    (int)nudOptimumThreshold.Value, notes, inventoryItem.name, inventoryItem.description,
                     inventoryItem.siteName);
 
                 //attempt to update the inventory

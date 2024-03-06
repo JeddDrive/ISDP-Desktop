@@ -292,7 +292,6 @@
             // 
             // nudOptimumThreshold
             // 
-            this.nudOptimumThreshold.Enabled = false;
             this.nudOptimumThreshold.Location = new System.Drawing.Point(579, 418);
             this.nudOptimumThreshold.Name = "nudOptimumThreshold";
             this.nudOptimumThreshold.Size = new System.Drawing.Size(98, 34);
