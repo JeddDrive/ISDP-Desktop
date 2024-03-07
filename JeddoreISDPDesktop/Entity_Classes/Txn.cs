@@ -76,5 +76,21 @@ namespace JeddoreISDPDesktop.Entity_Classes
             barCode = inBarCode;
             createdDate = inCreatedDate;
         }
+
+        //custom constructor #4
+        //can be used for txn updates
+        public Txn(int inTxnID, int inSiteIDTo, int inSiteIDFrom, string inStatus, DateTime inShipDate, string inTxnType,
+            string inBarCode, int inDeliveryID, byte inEmergencyDelivery)
+        {
+            txnID = inTxnID;
+            siteIDTo = inSiteIDTo;
+            siteIDFrom = inSiteIDFrom;
+            status = inStatus;
+            shipDate = inShipDate;
+            txnType = inTxnType;
+            barCode = inBarCode;
+            deliveryID = inDeliveryID;
+            emergencyDelivery = inEmergencyDelivery;
+        }
     }
 }

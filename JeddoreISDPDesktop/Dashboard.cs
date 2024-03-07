@@ -102,6 +102,12 @@ namespace JeddoreISDPDesktop
                 btnViewSuppliers.Enabled = true;
             }
 
+            //check the list for FULFILSTOREORDER
+            if (employeeUserPermissions.permissionIDList.Contains("MODIFYRECORD"))
+            {
+                btnModifyTxnRecords.Enabled = true;
+            }
+
             //if employee is a store manager
             if (employee.positionID == 3)
             {
@@ -319,6 +325,15 @@ namespace JeddoreISDPDesktop
 
             //open the supplier management form (modal)
             frmSupplierManagement.ShowDialog();
+        }
+
+        private void btnModifyTxnRecords_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the modify txn records form
+            TransactionManagement frmModifyTxnRecords = new TransactionManagement(employee);
+
+            //open the modify txn records form (modal)
+            frmModifyTxnRecords.ShowDialog();
         }
     }
 }

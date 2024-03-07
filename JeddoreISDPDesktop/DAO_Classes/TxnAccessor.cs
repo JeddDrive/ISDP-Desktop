@@ -30,6 +30,10 @@ namespace JeddoreISDPDesktop.DAO_Classes
     "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and txnType IN ('Store Order', 'Emergency', 'Back Order') and (t.siteIDTo = @destinationSite or t.siteIDFrom = @originSite)";
         private static string selectAllOrdersByStatusAndSiteFromOnlyStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
 "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status and txnType IN ('Store Order', 'Emergency', 'Back Order') and t.siteIDFrom = @originSite";
+        private static string selectAllOpenTxnsStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
+            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.Status NOT IN ('Complete', 'Cancelled', 'Rejected')";
+        private static string selectAllTxnsByStatusStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
+            "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.status = @status";
         //getting the last/most recent txn record, mostly for the barcode
         private static string selectLastTxnStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t " +
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID order by t.txnID DESC LIMIT 1";
@@ -51,9 +55,10 @@ namespace JeddoreISDPDesktop.DAO_Classes
             "(@siteIDTo, @siteIDFrom, @status, @shipDate, @txnType, @barCode, @createdDate, @emergencyDelivery)";
         private static string updateTxnShipDateStatement = "update txn set shipDate = @shipDate where txnID = @txnID";
         private static string updateTxnStatusStatement = "update txn set status = @status where txnID = @txnID";
+        private static string updateModifyRecordStatement = "update txn set siteIDTo = @siteIDTo, siteIDFrom = @siteIDFrom, status = @status, shipDate = @shipDate, txnType = @txnType, barCode = @barCode, deliveryID = @deliveryID, emergencyDelivery = @emergencyDelivery where txnID = @txnID";
 
         /**
-        * Get all of the orders (except for ones that are closed/cancelled/rejected/etc.).
+        * Get all of the store, emergency, and back orders (except for ones that are closed/cancelled/rejected/etc.).
         *
         * @return a DataTable, possibly empty, of Txns.
         */
@@ -78,7 +83,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Getting All Open Transactions");
+                MessageBox.Show(ex.Message, "Error Getting All Open Orders");
 
                 connection.Close();
             }
@@ -305,6 +310,79 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
             //return the employee
             return txnsList;
+        }
+
+        /**
+        * Get all of the open transactions (excluding ones that are closed/cancelled/rejected/etc.).
+        *
+        * @return a DataTable, possibly empty, of Txns.
+        */
+        public static DataTable GetAllOpenTxnsDataTable()
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectAllOpenTxnsStatement, connection);
+
+            //create datatable
+            DataTable dt = new DataTable();
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //execute the SQL statement against the DB
+                //load into the DataTable object
+                dt.Load(cmd.ExecuteReader());
+
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting All Open Transactions");
+
+                connection.Close();
+            }
+
+            //return the datatable
+            return dt;
+        }
+
+        /**
+        * Get all of the txns for a particular txn status.
+        *
+        * @return a DataTable, possibly empty, of Txns.
+        */
+        public static DataTable GetAllTxnsByStatusDataTable(string status)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectAllTxnsByStatusStatement, connection);
+
+            //create datatable
+            DataTable dt = new DataTable();
+
+            //one parameter for the query - int txnID
+            cmd.Parameters.AddWithValue("@status", status);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //execute the SQL statement against the DB
+                //load into the DataTable object
+                dt.Load(cmd.ExecuteReader());
+
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting Transactions by Status");
+
+                connection.Close();
+            }
+
+            //return the datatable
+            return dt;
         }
 
         /**
@@ -1026,6 +1104,70 @@ namespace JeddoreISDPDesktop.DAO_Classes
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Updating Transaction Status");
+
+                connection.Close();
+            }
+
+            //if rowCount is 1, then non query was good
+            if (rowCount == 1)
+            {
+                goodNonQuery = true;
+            }
+
+            return goodNonQuery;
+        }
+
+        /**
+        * Updates most fields of a txn.
+        *
+        * @param Txn object
+        * @return bool - if the txn was updated or not
+        */
+        public static bool UpdateModifyRecord(Txn txn)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(updateModifyRecordStatement, connection);
+
+            //several parameters for this update query
+            cmd.Parameters.AddWithValue("@siteIDTo", txn.siteIDTo);
+            cmd.Parameters.AddWithValue("@siteIDFrom", txn.siteIDFrom);
+            cmd.Parameters.AddWithValue("@status", txn.status);
+            cmd.Parameters.AddWithValue("@shipDate", txn.shipDate);
+            cmd.Parameters.AddWithValue("@txnType", txn.txnType);
+            cmd.Parameters.AddWithValue("@barCode", txn.barCode);
+
+            if (txn.deliveryID != 0)
+            {
+                cmd.Parameters.AddWithValue("@deliveryID", txn.deliveryID);
+            }
+
+            else
+            {
+                cmd.Parameters.AddWithValue("@deliveryID", null);
+            }
+
+            cmd.Parameters.AddWithValue("@emergencyDelivery", txn.emergencyDelivery);
+            cmd.Parameters.AddWithValue("@txnID", txn.txnID);
+
+            //variable for rowCount
+            int rowCount = 0;
+
+            //bool to be returned
+            bool goodNonQuery = false;
+
+            try
+            {
+                connection.Open();
+
+                //execute a non query
+                rowCount = cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Modifying Transaction Record");
 
                 connection.Close();
             }

@@ -42,6 +42,7 @@
             this.tabLossReturn = new System.Windows.Forms.TabPage();
             this.tabReports = new System.Windows.Forms.TabPage();
             this.tabAdmin = new System.Windows.Forms.TabPage();
+            this.btnViewSuppliers = new System.Windows.Forms.Button();
             this.btnViewSites = new System.Windows.Forms.Button();
             this.btnSetUserPermissions = new System.Windows.Forms.Button();
             this.btnViewUsers = new System.Windows.Forms.Button();
@@ -54,7 +55,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
-            this.btnViewSuppliers = new System.Windows.Forms.Button();
+            this.btnModifyTxnRecords = new System.Windows.Forms.Button();
             this.tabControlDashboard.SuspendLayout();
             this.tabOrders.SuspendLayout();
             this.tabInventory.SuspendLayout();
@@ -195,6 +196,7 @@
             // tabAdmin
             // 
             this.tabAdmin.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabAdmin.Controls.Add(this.btnModifyTxnRecords);
             this.tabAdmin.Controls.Add(this.btnViewSuppliers);
             this.tabAdmin.Controls.Add(this.btnViewSites);
             this.tabAdmin.Controls.Add(this.btnSetUserPermissions);
@@ -205,11 +207,23 @@
             this.tabAdmin.TabIndex = 4;
             this.tabAdmin.Text = "Admin";
             // 
+            // btnViewSuppliers
+            // 
+            this.btnViewSuppliers.Enabled = false;
+            this.btnViewSuppliers.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewSuppliers.Location = new System.Drawing.Point(526, 190);
+            this.btnViewSuppliers.Name = "btnViewSuppliers";
+            this.btnViewSuppliers.Size = new System.Drawing.Size(384, 63);
+            this.btnViewSuppliers.TabIndex = 26;
+            this.btnViewSuppliers.Text = "&View and Manage Suppliers";
+            this.btnViewSuppliers.UseVisualStyleBackColor = true;
+            this.btnViewSuppliers.Click += new System.EventHandler(this.btnViewSuppliers_Click);
+            // 
             // btnViewSites
             // 
             this.btnViewSites.Enabled = false;
             this.btnViewSites.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewSites.Location = new System.Drawing.Point(526, 72);
+            this.btnViewSites.Location = new System.Drawing.Point(526, 40);
             this.btnViewSites.Name = "btnViewSites";
             this.btnViewSites.Size = new System.Drawing.Size(384, 63);
             this.btnViewSites.TabIndex = 25;
@@ -221,7 +235,7 @@
             // 
             this.btnSetUserPermissions.Enabled = false;
             this.btnSetUserPermissions.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSetUserPermissions.Location = new System.Drawing.Point(32, 234);
+            this.btnSetUserPermissions.Location = new System.Drawing.Point(32, 190);
             this.btnSetUserPermissions.Name = "btnSetUserPermissions";
             this.btnSetUserPermissions.Size = new System.Drawing.Size(384, 63);
             this.btnSetUserPermissions.TabIndex = 24;
@@ -233,7 +247,7 @@
             // 
             this.btnViewUsers.Enabled = false;
             this.btnViewUsers.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewUsers.Location = new System.Drawing.Point(32, 72);
+            this.btnViewUsers.Location = new System.Drawing.Point(32, 40);
             this.btnViewUsers.Name = "btnViewUsers";
             this.btnViewUsers.Size = new System.Drawing.Size(384, 63);
             this.btnViewUsers.TabIndex = 21;
@@ -314,17 +328,17 @@
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
-            // btnViewSuppliers
+            // btnModifyTxnRecords
             // 
-            this.btnViewSuppliers.Enabled = false;
-            this.btnViewSuppliers.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewSuppliers.Location = new System.Drawing.Point(526, 234);
-            this.btnViewSuppliers.Name = "btnViewSuppliers";
-            this.btnViewSuppliers.Size = new System.Drawing.Size(384, 63);
-            this.btnViewSuppliers.TabIndex = 26;
-            this.btnViewSuppliers.Text = "&View and Manage Suppliers";
-            this.btnViewSuppliers.UseVisualStyleBackColor = true;
-            this.btnViewSuppliers.Click += new System.EventHandler(this.btnViewSuppliers_Click);
+            this.btnModifyTxnRecords.Enabled = false;
+            this.btnModifyTxnRecords.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModifyTxnRecords.Location = new System.Drawing.Point(32, 340);
+            this.btnModifyTxnRecords.Name = "btnModifyTxnRecords";
+            this.btnModifyTxnRecords.Size = new System.Drawing.Size(384, 63);
+            this.btnModifyTxnRecords.TabIndex = 27;
+            this.btnModifyTxnRecords.Text = "&Modify Transaction Records";
+            this.btnModifyTxnRecords.UseVisualStyleBackColor = true;
+            this.btnModifyTxnRecords.Click += new System.EventHandler(this.btnModifyTxnRecords_Click);
             // 
             // Dashboard
             // 
@@ -387,5 +401,6 @@
         private System.Windows.Forms.Button btnManageOrderItems;
         private System.Windows.Forms.Button btnFulfillOrder;
         private System.Windows.Forms.Button btnViewSuppliers;
+        private System.Windows.Forms.Button btnModifyTxnRecords;
     }
 }

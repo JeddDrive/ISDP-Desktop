@@ -74,7 +74,7 @@ namespace JeddoreISDPDesktop
 
         private void picHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is the page for viewing store and emergency orders. You can view orders from here, as well as filter by order type and search by fields such as status, created date, and ship date." +
+            MessageBox.Show("This is the form for viewing store and emergency orders. You can view orders from here, as well as filter by order type and search by fields such as status, created date, and ship date." +
             "\n\nClick on the 'refresh' button to load the orders data grid.", "View Orders Help"
             , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -84,7 +84,7 @@ namespace JeddoreISDPDesktop
             //if F1 key is pressed down
             if (e.KeyCode == Keys.F1)
             {
-                MessageBox.Show("This is the page for viewing store and emergency orders. You can view orders from here, as well as filter by order type and search by fields such as status, created date, and ship date." +
+                MessageBox.Show("This is the form for viewing store and emergency orders. You can view orders from here, as well as filter by order type and search by fields such as status, created date, and ship date." +
                 "\n\nClick on the 'refresh' button to load the orders data grid.", "View Orders Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -437,8 +437,8 @@ namespace JeddoreISDPDesktop
             //if number of selected rows is not one
             if (selectedRowsCount != 1)
             {
-                MessageBox.Show("Must select one row from the data grid in order to reject that specific order.",
-                    "Order Rejection Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must select one row from the data grid in order to view the items for that order.",
+                    "View Items Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //clear all selected rows from the dgv
                 dgvOrders.ClearSelection();
@@ -456,12 +456,11 @@ namespace JeddoreISDPDesktop
                 //get the transaction
                 Txn theTxn = TxnAccessor.GetOneOrder(txnID);
 
-                //ope the view order items form, sending in the employee and txn objects
+                //creating form object, sending in the employee and txn objects
                 ViewOrderItems frmViewOrderItems = new ViewOrderItems(employee, txnID);
 
                 //open the view order items form (modal)
                 frmViewOrderItems.ShowDialog();
-
             }
         }
 

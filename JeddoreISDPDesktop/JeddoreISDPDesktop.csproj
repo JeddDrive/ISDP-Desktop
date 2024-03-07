@@ -129,6 +129,7 @@
     <Compile Include="CreateNewOrder.Designer.cs">
       <DependentUpon>CreateNewOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAO_Classes\DeliveryAccessor.cs" />
     <Compile Include="DAO_Classes\EmployeeAccessor.cs" />
     <Compile Include="DAO_Classes\InventoryAccessor.cs" />
     <Compile Include="DAO_Classes\ItemAccessor.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="DAO_Classes\TxnAccessor.cs" />
     <Compile Include="DAO_Classes\TxnItemsAccessor.cs" />
     <Compile Include="DAO_Classes\TxnStatusAccessor.cs" />
+    <Compile Include="DAO_Classes\TxnTypeAccessor.cs" />
     <Compile Include="DAO_Classes\UserPermissionAccessor.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
@@ -171,6 +173,7 @@
     <Compile Include="EditOrder.Designer.cs">
       <DependentUpon>EditOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entity_Classes\Delivery.cs" />
     <Compile Include="Entity_Classes\Employee.cs" />
     <Compile Include="Entity_Classes\Inventory.cs" />
     <Compile Include="Entity_Classes\Item.cs" />
@@ -181,6 +184,7 @@
     <Compile Include="Entity_Classes\Txn.cs" />
     <Compile Include="Entity_Classes\TxnItems.cs" />
     <Compile Include="Entity_Classes\TxnStatus.cs" />
+    <Compile Include="Entity_Classes\TxnType.cs" />
     <Compile Include="FulfillOrders.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +204,12 @@
     <Compile Include="ItemManagement.Designer.cs">
       <DependentUpon>ItemManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModifyTransactionRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifyTransactionRecord.Designer.cs">
+      <DependentUpon>ModifyTransactionRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="MoveInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +221,12 @@
     </Compile>
     <Compile Include="OrderItemsManagement.Designer.cs">
       <DependentUpon>OrderItemsManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TransactionManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TransactionManagement.Designer.cs">
+      <DependentUpon>TransactionManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="SiteManagement.cs">
       <SubType>Form</SubType>
@@ -305,11 +321,17 @@
     <EmbeddedResource Include="ItemManagement.resx">
       <DependentUpon>ItemManagement.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModifyTransactionRecord.resx">
+      <DependentUpon>ModifyTransactionRecord.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MoveInventory.resx">
       <DependentUpon>MoveInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrderItemsManagement.resx">
       <DependentUpon>OrderItemsManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TransactionManagement.resx">
+      <DependentUpon>TransactionManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SiteManagement.resx">
       <DependentUpon>SiteManagement.cs</DependentUpon>

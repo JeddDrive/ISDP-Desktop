@@ -197,7 +197,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Getting the one Employee");
+                MessageBox.Show(ex.Message, "Error Getting the One Employee");
 
                 connection.Close();
             }
