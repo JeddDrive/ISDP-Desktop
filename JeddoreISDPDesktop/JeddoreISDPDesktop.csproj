@@ -143,6 +143,7 @@
     <Compile Include="DAO_Classes\TxnStatusAccessor.cs" />
     <Compile Include="DAO_Classes\TxnTypeAccessor.cs" />
     <Compile Include="DAO_Classes\UserPermissionAccessor.cs" />
+    <Compile Include="DAO_Classes\VehicleAccessor.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +186,7 @@
     <Compile Include="Entity_Classes\TxnItems.cs" />
     <Compile Include="Entity_Classes\TxnStatus.cs" />
     <Compile Include="Entity_Classes\TxnType.cs" />
+    <Compile Include="Entity_Classes\Vehicle.cs" />
     <Compile Include="FulfillOrders.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +194,7 @@
       <DependentUpon>FulfillOrders.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper_Classes\DayOfWeekCalculator.cs" />
+    <Compile Include="Helper_Classes\DeliveryCalculator.cs" />
     <Compile Include="InventoryManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +224,12 @@
     </Compile>
     <Compile Include="OrderItemsManagement.Designer.cs">
       <DependentUpon>OrderItemsManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PickupAndDeliverOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PickupAndDeliverOrders.Designer.cs">
+      <DependentUpon>PickupAndDeliverOrders.cs</DependentUpon>
     </Compile>
     <Compile Include="TransactionManagement.cs">
       <SubType>Form</SubType>
@@ -329,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OrderItemsManagement.resx">
       <DependentUpon>OrderItemsManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PickupAndDeliverOrders.resx">
+      <DependentUpon>PickupAndDeliverOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TransactionManagement.resx">
       <DependentUpon>TransactionManagement.cs</DependentUpon>

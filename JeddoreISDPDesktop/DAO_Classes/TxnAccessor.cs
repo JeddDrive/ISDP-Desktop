@@ -43,6 +43,8 @@ namespace JeddoreISDPDesktop.DAO_Classes
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnID = @txnID and txnType = 'Back Order'";
         private static string selectOneTxnStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t " +
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnID = @txnID";
+        //not including emergency orders in the statement below since their mode of transportation is via courier
+        private static string selectAllStoreOrdersOnShipDateStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.shipDate = @shipDate and txnType = 'Store Order'";
         //despite the name, these next 2 statements will get a site's new, submitted, or assembling store/back order
         //NOTE: may change this later
         private static string selectSiteNewOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status = 'New' and txnType IN ('Store Order', 'Emergency') and t.siteIDTo = @siteID";
@@ -56,6 +58,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string updateTxnShipDateStatement = "update txn set shipDate = @shipDate where txnID = @txnID";
         private static string updateTxnStatusStatement = "update txn set status = @status where txnID = @txnID";
         private static string updateModifyRecordStatement = "update txn set siteIDTo = @siteIDTo, siteIDFrom = @siteIDFrom, status = @status, shipDate = @shipDate, txnType = @txnType, barCode = @barCode, deliveryID = @deliveryID, emergencyDelivery = @emergencyDelivery where txnID = @txnID";
+        private static string updateDeliveryIDStatement = "update txn set deliveryID = @deliveryID where txnID = @txnID";
 
         /**
         * Get all of the store, emergency, and back orders (except for ones that are closed/cancelled/rejected/etc.).
@@ -636,6 +639,121 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
+        * Gets all store orders for a particular day. Not including emergency orders since they're via courier.
+        *
+        * @return a DataTable of Txn objects, possibly null.
+        */
+        public static DataTable GetAllOrdersForShipDate(DateTime inShipDate)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectAllStoreOrdersOnShipDateStatement, connection);
+
+            //create datatable
+            DataTable dt = new DataTable();
+
+            //want to get just the date in string form from the datetime object
+            //don't want or need the time from the datetime object
+            //string shipDateOnly = inShipDate.ToShortDateString();
+            string dateFormatForMySql = inShipDate.ToString("yyyy-MM-dd");
+
+            //one parameter for the query - ship date
+            cmd.Parameters.AddWithValue("@shipDate", dateFormatForMySql);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //execute the SQL statement against the DB
+                //load into the DataTable object
+                dt.Load(cmd.ExecuteReader());
+
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting All Transactions For That Ship Date");
+
+                connection.Close();
+            }
+
+            //return the datatable
+            return dt;
+        }
+
+        /**
+        * Gets all store orders for a particular day. Not including emergency orders since they're via courier.
+        *
+        * @return a list of Txn objects, possibly null.
+        */
+        public static List<Txn> GetAllOrdersListForShipDate(DateTime inShipDate)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectAllStoreOrdersOnShipDateStatement, connection);
+
+            //list of txns to be returned
+            List<Txn> txnsList = new List<Txn>();
+
+            //want to get just the date in string form from the datetime object
+            //don't want or need the time from the datetime object
+            //string shipDateOnly = inShipDate.ToShortDateString();
+            string dateFormatForMySql = inShipDate.ToString("yyyy-MM-dd");
+
+            //one parameter for the query - ship date
+            cmd.Parameters.AddWithValue("@shipDate", dateFormatForMySql);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                //if - there is a record to read
+                while (reader.Read())
+                {
+                    //get the values from the columns
+                    int txnID = reader.GetInt32("txnID");
+                    string originSite = reader.GetString("originSite");
+                    string destinationSite = reader.GetString("destinationSite");
+                    int siteIDTo = reader.GetInt32("siteIDTo");
+                    int siteIDFrom = reader.GetInt32("siteIDFrom");
+                    string status = reader.GetString("status");
+                    DateTime shipDate = reader.GetDateTime("shipDate");
+                    string txnType = reader.GetString("txnType");
+                    string barCode = reader.GetString("barCode");
+                    DateTime createdDate = reader.GetDateTime("createdDate");
+                    int deliveryID = reader.GetInt32("deliveryID");
+                    byte emergencyDelivery = reader.GetByte("emergencyDelivery");
+                    string notes = reader.GetString("notes");
+
+                    //create a txn object
+                    Txn txn = new Txn(txnID, originSite, destinationSite, siteIDTo, siteIDFrom, status,
+                        shipDate, txnType, barCode, createdDate, deliveryID, emergencyDelivery, notes);
+
+                    //add object to the list
+                    txnsList.Add(txn);
+                }
+
+                //close reader after if statement
+                reader.Close();
+
+                //close the connection
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting All Transactions For That Ship Date");
+
+                connection.Close();
+            }
+
+            //return the employee
+            return txnsList;
+        }
+
+        /**
         * Gets one store OR emergency order with the status of 'New', based on the siteID. (The current store or emergency order for a store)
         *
         * @param int siteID
@@ -1168,6 +1286,53 @@ namespace JeddoreISDPDesktop.DAO_Classes
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Modifying Transaction Record");
+
+                connection.Close();
+            }
+
+            //if rowCount is 1, then non query was good
+            if (rowCount == 1)
+            {
+                goodNonQuery = true;
+            }
+
+            return goodNonQuery;
+        }
+
+        /**
+        * Updates a Txn's delivery ID.
+        *
+        * @param Txn object
+        * @return bool - if the txn was updated or not
+        */
+        public static bool UpdateDeliveryID(Txn txn)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(updateDeliveryIDStatement, connection);
+
+            //2 parameters for this update query
+            cmd.Parameters.AddWithValue("@deliveryID", txn.deliveryID);
+            cmd.Parameters.AddWithValue("@txnID", txn.txnID);
+
+            //variable for rowCount
+            int rowCount = 0;
+
+            //bool to be returned
+            bool goodNonQuery = false;
+
+            try
+            {
+                connection.Open();
+
+                //execute a non query
+                rowCount = cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Updating Transaction's Delivery ID");
 
                 connection.Close();
             }

@@ -22,6 +22,8 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string selectOneByTxnIDAndItemIDStatement = "select ti.txnID, ti.itemID, i.name, IFNULL(i.description, '') as description, ti.quantity, i.caseSize, i.weight, IFNULL(ti.notes, '') as notes from txnitems ti inner join item i on ti.itemID = i.itemID where ti.txnID = @txnID and ti.itemID = @itemID";
         private static string selectCountItemsInTxnStatement = "select count(*) from txnitems where txnID = @txnID";
         private static string selectCountSpecificIteminTxnStatement = "select count(*) from txnitems where txnID = @txnID and itemID = @itemID";
+        private static string selectTxnWeightForTxnStatement = "select ti.txnID, sum(i.weight * ti.quantity) as txnWeight from txnitems ti inner join item i on ti.itemID = i.itemID where txnID = @txnID group by ti.txnID";
+        private static string selectDeliveryWeightForStoreOrdersOnShipDateStatement = "select t.shipDate, sum(i.weight * ti.quantity) as txnWeight from txnitems ti inner join item i on ti.itemID = i.itemID inner join txn t on ti.txnID = t.txnID where t.txnType = 'Store Order' and t.shipDate = @shipDate group by t.shipDate";
         private static string updateTxnItemQuantityAndNotesStatement = "update txnitems set quantity = @quantity, notes = @notes where txnID = @txnID and itemID = @itemID";
         private static string insertTxnItemStatement = " insert into `txnitems` (`txnID`, `itemID`, `quantity`, `notes`) VALUES " +
             "(@txnID, @itemID, @quantity, @notes)";
@@ -272,6 +274,109 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
             //return the rowCount (long)
             return rowCount;
+        }
+
+        /**
+        * Gets the txn weight for a particular txn.
+        *
+        * @param DateTime inShipDate
+        * @return a decimal (weight).
+        */
+        public static Decimal GetTxnWeightForTxn(int inTxnID)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectTxnWeightForTxnStatement, connection);
+
+            //decimal var (weight) to be returned
+            decimal weight = 0.0m;
+
+            //one parameters for this query - txnID
+            cmd.Parameters.AddWithValue("@txnID", inTxnID);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                //if - there is a record to read
+                if (reader.Read())
+                {
+                    //get the txnWeight value from the column(s)
+                    weight = reader.GetDecimal("txnWeight");
+                }
+
+                //close reader after if statement
+                reader.Close();
+
+                //close the connection
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting the Transaction Weight");
+
+                connection.Close();
+            }
+
+            //return the employee
+            return weight;
+        }
+
+        /**
+        * Gets the txn weight for all store orders on a ship date.
+        *
+        * @param DateTime inShipDate
+        * @return a decimal (weight).
+        */
+        public static Decimal GetTxnWeightForShipDate(DateTime inShipDate)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectDeliveryWeightForStoreOrdersOnShipDateStatement, connection);
+
+            //decimal var (weight) to be returned
+            decimal weight = 0.0m;
+
+            //want to get just the date in string form from the datetime object
+            //don't want or need the time from the datetime object
+            //string shipDateOnly = inShipDate.ToShortDateString();
+            string dateFormatForMySql = inShipDate.ToString("yyyy-MM-dd");
+
+            //one parameter for the query - ship date
+            cmd.Parameters.AddWithValue("@shipDate", dateFormatForMySql);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                //if - there is a record to read
+                if (reader.Read())
+                {
+                    //get the txnWeight value from the column(s)
+                    weight = reader.GetDecimal("txnWeight");
+                }
+
+                //close reader after if statement
+                reader.Close();
+
+                //close the connection
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting the Transaction Weight");
+
+                connection.Close();
+            }
+
+            //return the employee
+            return weight;
         }
 
         /**

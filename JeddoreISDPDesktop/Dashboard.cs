@@ -102,10 +102,17 @@ namespace JeddoreISDPDesktop
                 btnViewSuppliers.Enabled = true;
             }
 
-            //check the list for FULFILSTOREORDER
+            //check the list for MODIFYRECORD
             if (employeeUserPermissions.permissionIDList.Contains("MODIFYRECORD"))
             {
                 btnModifyTxnRecords.Enabled = true;
+            }
+
+            //check the list for PICKUPSTOREORDER or DELIVERSTOREORDER
+            if (employeeUserPermissions.permissionIDList.Contains("PICKUPSTOREORDER") ||
+                employeeUserPermissions.permissionIDList.Contains("DELIVERSTOREORDER"))
+            {
+                btnPickupAndDeliverOrders.Enabled = true;
             }
 
             //if employee is a store manager
@@ -334,6 +341,15 @@ namespace JeddoreISDPDesktop
 
             //open the modify txn records form (modal)
             frmModifyTxnRecords.ShowDialog();
+        }
+
+        private void btnPickupAndDeliverOrders_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the pickup and deliver store orders form
+            PickupAndDeliverOrders frmPickupDeliverOrders = new PickupAndDeliverOrders(employee);
+
+            //open the form (modal)
+            frmPickupDeliverOrders.ShowDialog();
         }
     }
 }

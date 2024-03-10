@@ -20,6 +20,10 @@ namespace JeddoreISDPDesktop.DAO_Classes
         //SQL statements for the Employee entity
         private static string selectAllStatement = "select deliveryID, distanceCost, vehicleType, IFNULL(notes, '') AS notes from delivery";
         private static string selectOneStatement = "select deliveryID, distanceCost, vehicleType, IFNULL(notes, '') AS notes from delivery where deliveryID = @deliveryID";
+        private static string selectLastDeliveryStatement = "select deliveryID, distanceCost, vehicleType, IFNULL(notes, '') AS notes from delivery" +
+            " order by deliveryID DESC LIMIT 1";
+        private static string insertDeliveryStatement = "insert into `delivery` (`distanceCost`, `vehicleType`, `notes`) VALUES (@distanceCost, @vehicleType, @notes)";
+        private static string updateDistanceCostStatement = "update delivery set distanceCost = @distanceCost where deliveryID = @deliveryID";
 
         /**
         * Get all of the deliveries.
@@ -47,7 +51,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Getting All Deliveries");
+                MessageBox.Show(ex.Message, "Error Getting All Deliveries (DataTable)");
 
                 connection.Close();
             }
@@ -106,7 +110,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
                 connection.Close();
             }
 
-            //return the employees list
+            //return the list
             return deliveriesList;
         }
 
@@ -162,8 +166,156 @@ namespace JeddoreISDPDesktop.DAO_Classes
                 connection.Close();
             }
 
-            //return the employee
+            //return the object
             return delivery;
+        }
+
+        /**
+        * Gets one delivery (the last/latest one).
+        *
+        * @param int deliveryID
+        * @return a Delivery object.
+        */
+        public static Delivery GetLastDelivery()
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectLastDeliveryStatement, connection);
+
+            //delivery to be returned
+            Delivery delivery = null;
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                //if - there is a record to read
+                //NOTE: if this doesn't work, try a loop here instead
+                if (reader.Read())
+                {
+                    //get the values from the columns
+                    int deliveryID = reader.GetInt32("deliveryID");
+                    decimal distanceCost = reader.GetDecimal("distanceCost");
+                    string vehicleType = reader.GetString("vehicleType");
+                    string notes = reader.GetString("notes");
+
+                    //assign to the delivery object
+                    delivery = new Delivery(deliveryID, distanceCost, vehicleType, notes);
+                }
+
+                //close reader after if statement
+                reader.Close();
+
+                //close the connection
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting the Last Delivery");
+
+                connection.Close();
+            }
+
+            //return the object
+            return delivery;
+        }
+
+        /**
+        * Updates an existing delivery's distance cost (Ex. when it's delivered).
+        *
+        * @param delivery object
+        * @return bool - if delivery was updated or not
+        */
+        public static bool UpdateDistanceCost(Delivery delivery)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(updateDistanceCostStatement, connection);
+
+            //two parameters for this update query
+            cmd.Parameters.AddWithValue("@distanceCost", delivery.distanceCost);
+            cmd.Parameters.AddWithValue("@deliveryID", delivery.deliveryID);
+
+            //variable for rowCount
+            int rowCount = 0;
+
+            //bool to be returned
+            bool goodNonQuery = false;
+
+            try
+            {
+                connection.Open();
+
+                //execute a non query
+                rowCount = cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Updating Delivery's Distance Cost");
+
+                connection.Close();
+            }
+
+            //if rowCount is 1, then non query was good
+            if (rowCount == 1)
+            {
+                goodNonQuery = true;
+            }
+
+            return goodNonQuery;
+        }
+
+        /**
+        * Inserts a new delivery.
+        *
+        * @param delivery object
+        * @return bool - if delivery was inserted or not
+        */
+        public static bool InsertNewDelivery(Delivery delivery)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(insertDeliveryStatement, connection);
+
+            //three parameters for this query
+            cmd.Parameters.AddWithValue("@distanceCost", delivery.distanceCost);
+            cmd.Parameters.AddWithValue("@vehicleType", delivery.vehicleType);
+            cmd.Parameters.AddWithValue("@notes", delivery.notes);
+
+            //variable for rowCount
+            int rowCount = 0;
+
+            //bool to be returned
+            bool goodNonQuery = false;
+
+            try
+            {
+                connection.Open();
+
+                //execute a non query
+                rowCount = cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Inserting Delivery");
+
+                connection.Close();
+            }
+
+            //if rowCount is 1, then non query was good
+            if (rowCount == 1)
+            {
+                goodNonQuery = true;
+            }
+
+            return goodNonQuery;
         }
     }
 }

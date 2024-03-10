@@ -149,7 +149,8 @@ add column active tinyint(1) NOT NULL Default 1;
 -- insert into the permission table these additional permissions:
 -- example: VIEWSITE
 INSERT INTO `permission` (`permissionID`) VALUES
-('VIEWSITE'), ('REJECTORDER'), ('VIEWINVENTORY'), ('EDITSUPPLIER');
+('VIEWSITE'), ('REJECTORDER'), ('VIEWINVENTORY'), ('EDITSUPPLIER'), 
+('PICKUPSTOREORDER'), ('DELIVERSTOREORDER');
 
 -- alter user_permission table - so that all default users of the system have READUSER access
 -- the admin user (number 1) already has this but the others do not
@@ -226,7 +227,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 -- adding REJECTORDER for the admin and warehouse manager
 (1, 'REJECTORDER', 1),
 (1003, 'REJECTORDER', 1),
--- adding FULFILSTOREORDER for the warehouse manager an warehouse employees
+-- adding FULFILSTOREORDER for the warehouse manager and warehouse employees
 (1003, 'FULFILSTOREORDER', 1),
 (1012, 'FULFILSTOREORDER', 1),
 (1013, 'FULFILSTOREORDER', 1),
@@ -244,7 +245,23 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'ADDSUPPLIER', 1),
 -- adding EDITSUPPLIER for the admin and warehouse manager
 (1, 'EDITSUPPLIER', 1),
-(1003, 'EDITSUPPLIER', 1);
+(1003, 'EDITSUPPLIER', 1),
+-- adding PICKUPSTOREORDER for the admin, delivery driver and warehouse workers
+(1, 'PICKUPSTOREORDER', 1),
+(1004, 'PICKUPSTOREORDER', 1),
+(1012, 'PICKUPSTOREORDER', 1),
+(1013, 'PICKUPSTOREORDER', 1),
+(1014, 'PICKUPSTOREORDER', 1),
+-- adding DELIVERSTOREORDER for the admin, delivery driver, and all store managers
+(1, 'DELIVERSTOREORDER', 1),
+(1004, 'DELIVERSTOREORDER', 1),
+(1002, 'DELIVERSTOREORDER', 1),
+(1005, 'DELIVERSTOREORDER', 1),
+(1006, 'DELIVERSTOREORDER', 1),
+(1007, 'DELIVERSTOREORDER', 1),
+(1008, 'DELIVERSTOREORDER', 1),
+(1009, 'DELIVERSTOREORDER', 1),
+(1010, 'DELIVERSTOREORDER', 1);
 
 -- for all records currently in the user_permission table, set hasPermission to 1
 -- since all admin records in this table right now are all permissions that the admin user should have
@@ -285,6 +302,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (2, 'REJECTORDER', 0),
 (2, 'ADDSUPPLIER', 0),
 (2, 'EDITSUPPLIER', 0),
+(2, 'PICKUPSTOREORDER', 0),
+(2, 'DELIVERSTOREORDER', 0),
 (1000, 'ADDUSER', 0),
 (1000, 'EDITUSER', 0),
 (1000, 'DELETEUSER', 0),
@@ -314,6 +333,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1000, 'REJECTORDER', 0),
 (1000, 'ADDSUPPLIER', 0),
 (1000, 'EDITSUPPLIER', 0),
+(1000, 'PICKUPSTOREORDER', 0),
+(1000, 'DELIVERSTOREORDER', 0),
 (1001, 'ADDUSER', 0),
 (1001, 'EDITUSER', 0),
 (1001, 'DELETEUSER', 0),
@@ -343,6 +364,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1001, 'REJECTORDER', 0),
 (1001, 'ADDSUPPLIER', 0),
 (1001, 'EDITSUPPLIER', 0),
+(1001, 'PICKUPSTOREORDER', 0),
+(1001, 'DELIVERSTOREORDER', 0),
 (1002, 'ADDUSER', 0),
 (1002, 'EDITUSER', 0),
 (1002, 'DELETEUSER', 0),
@@ -369,6 +392,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1002, 'REJECTORDER', 0),
 (1002, 'ADDSUPPLIER', 0),
 (1002, 'EDITSUPPLIER', 0),
+(1002, 'PICKUPSTOREORDER', 0),
 (1003, 'ADDUSER', 0),
 (1003, 'EDITUSER', 0),
 (1003, 'DELETEUSER', 0),
@@ -389,6 +413,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'EDITPRODUCT', 0),
 (1003, 'CREATESUPPLIERORDER', 0),
 (1003, 'CREATEREPORT', 0),
+(1003, 'PICKUPSTOREORDER', 0),
+(1003, 'DELIVERSTOREORDER', 0),
 (1004, 'ADDUSER', 0),
 (1004, 'EDITUSER', 0),
 (1004, 'DELETEUSER', 0),
@@ -444,6 +470,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1005, 'REJECTORDER', 0),
 (1005, 'ADDSUPPLIER', 0),
 (1005, 'EDITSUPPLIER', 0),
+(1005, 'PICKUPSTOREORDER', 0),
 (1006, 'ADDUSER', 0),
 (1006, 'EDITUSER', 0),
 (1006, 'DELETEUSER', 0),
@@ -470,6 +497,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1006, 'REJECTORDER', 0),
 (1006, 'ADDSUPPLIER', 0),
 (1006, 'EDITSUPPLIER', 0),
+(1006, 'PICKUPSTOREORDER', 0),
 (1007, 'ADDUSER', 0),
 (1007, 'EDITUSER', 0),
 (1007, 'DELETEUSER', 0),
@@ -496,6 +524,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1007, 'REJECTORDER', 0),
 (1007, 'ADDSUPPLIER', 0),
 (1007, 'EDITSUPPLIER', 0),
+(1007, 'PICKUPSTOREORDER', 0),
 (1008, 'ADDUSER', 0),
 (1008, 'EDITUSER', 0),
 (1008, 'DELETEUSER', 0),
@@ -522,6 +551,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1008, 'REJECTORDER', 0),
 (1008, 'ADDSUPPLIER', 0),
 (1008, 'EDITSUPPLIER', 0),
+(1008, 'PICKUPSTOREORDER', 0),
 (1009, 'ADDUSER', 0),
 (1009, 'EDITUSER', 0),
 (1009, 'DELETEUSER', 0),
@@ -548,6 +578,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1009, 'REJECTORDER', 0),
 (1009, 'ADDSUPPLIER', 0),
 (1009, 'EDITSUPPLIER', 0),
+(1009, 'PICKUPSTOREORDER', 0),
 (1010, 'ADDUSER', 0),
 (1010, 'EDITUSER', 0),
 (1010, 'DELETEUSER', 0),
@@ -574,6 +605,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1010, 'REJECTORDER', 0),
 (1010, 'ADDSUPPLIER', 0),
 (1010, 'EDITSUPPLIER', 0),
+(1010, 'PICKUPSTOREORDER', 0),
 (1012, 'ADDUSER', 0),
 (1012, 'EDITUSER', 0),
 (1012, 'DELETEUSER', 0),
@@ -602,6 +634,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1012, 'REJECTORDER', 0),
 (1012, 'ADDSUPPLIER', 0),
 (1012, 'EDITSUPPLIER', 0),
+(1012, 'DELIVERSTOREORDER', 0),
 (1013, 'ADDUSER', 0),
 (1013, 'EDITUSER', 0),
 (1013, 'DELETEUSER', 0),
@@ -630,6 +663,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1013, 'ADDSUPPLIER', 0),
 (1013, 'EDITSUPPLIER', 0),
 (1013, 'REJECTORDER', 0),
+(1013, 'DELIVERSTOREORDER', 0),
 (1014, 'ADDUSER', 0),
 (1014, 'EDITUSER', 0),
 (1014, 'DELETEUSER', 0),
@@ -657,7 +691,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1014, 'CREATEREPORT', 0),
 (1014, 'REJECTORDER', 0),
 (1014, 'EDITSUPPLIER', 0),
-(1014, 'ADDSUPPLIER', 0);
+(1014, 'ADDSUPPLIER', 0),
+(1014, 'DELIVERSTOREORDER', 0);
 
 -- Trigger #1 - includes transaction audit activity
 -- after UPDATEs on the txn table
@@ -699,6 +734,11 @@ BEGIN
 	IF old.status = 'Assembled' and new.status = 'In Transit' and new.txnType IN ('Store Order', 'Emergency', 'Back Order') then
 	-- call the stored procedure from this trigger
 	CALL updateOrderToTruckInventory(new.txnID);
+	
+	-- also, update the siteIDFrom for the txn automatically to the truck site
+	update txn
+	set siteIDFrom = 1
+	where txnID = new.txnID;
 	
 	END IF;
 	
@@ -786,7 +826,9 @@ VALUES (new.employeeID, 'ADDUSER', 0),
 (new.employeeID, 'REJECTORDER', 0),
 (new.employeeID, 'VIEWINVENTORY', 1),
 (new.employeeID, 'ADDSUPPLIER', 0),
-(new.employeeID, 'EDITSUPPLIER', 0);
+(new.employeeID, 'EDITSUPPLIER', 0),
+(new.employeeID, 'PICKUPSTOREORDER', 0),
+(new.employeeID, 'DELIVERSTOREORDER', 0);
 
 END$$
 
@@ -1178,7 +1220,7 @@ where siteID = 11 and itemID = itemIDVar;
 
 -- update (add) the quantity for the item in the order to the truck inventory
 update inventory
-set quantity = truckQuantityVar + quantityVar, itemLocation = CONCAT('', inTxnID)
+set quantity = truckQuantityVar + quantityVar, itemLocation = 'ON TRUCK'
 where siteID = 1 and itemID = itemIDVar;
 
 -- also update (subtract) the quantity for the item in the order from the warehouse bay inventory

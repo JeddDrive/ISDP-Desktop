@@ -42,6 +42,7 @@
             this.tabLossReturn = new System.Windows.Forms.TabPage();
             this.tabReports = new System.Windows.Forms.TabPage();
             this.tabAdmin = new System.Windows.Forms.TabPage();
+            this.btnModifyTxnRecords = new System.Windows.Forms.Button();
             this.btnViewSuppliers = new System.Windows.Forms.Button();
             this.btnViewSites = new System.Windows.Forms.Button();
             this.btnSetUserPermissions = new System.Windows.Forms.Button();
@@ -55,7 +56,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
-            this.btnModifyTxnRecords = new System.Windows.Forms.Button();
+            this.btnPickupAndDeliverOrders = new System.Windows.Forms.Button();
             this.tabControlDashboard.SuspendLayout();
             this.tabOrders.SuspendLayout();
             this.tabInventory.SuspendLayout();
@@ -80,6 +81,7 @@
             // tabOrders
             // 
             this.tabOrders.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabOrders.Controls.Add(this.btnPickupAndDeliverOrders);
             this.tabOrders.Controls.Add(this.btnFulfillOrder);
             this.tabOrders.Controls.Add(this.btnManageOrderItems);
             this.tabOrders.Controls.Add(this.btnCreateOrder);
@@ -95,7 +97,7 @@
             // 
             this.btnFulfillOrder.Enabled = false;
             this.btnFulfillOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFulfillOrder.Location = new System.Drawing.Point(525, 245);
+            this.btnFulfillOrder.Location = new System.Drawing.Point(525, 191);
             this.btnFulfillOrder.Name = "btnFulfillOrder";
             this.btnFulfillOrder.Size = new System.Drawing.Size(384, 63);
             this.btnFulfillOrder.TabIndex = 25;
@@ -107,7 +109,7 @@
             // 
             this.btnManageOrderItems.Enabled = false;
             this.btnManageOrderItems.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManageOrderItems.Location = new System.Drawing.Point(525, 67);
+            this.btnManageOrderItems.Location = new System.Drawing.Point(525, 36);
             this.btnManageOrderItems.Name = "btnManageOrderItems";
             this.btnManageOrderItems.Size = new System.Drawing.Size(384, 63);
             this.btnManageOrderItems.TabIndex = 24;
@@ -119,7 +121,7 @@
             // 
             this.btnCreateOrder.Enabled = false;
             this.btnCreateOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateOrder.Location = new System.Drawing.Point(40, 67);
+            this.btnCreateOrder.Location = new System.Drawing.Point(40, 36);
             this.btnCreateOrder.Name = "btnCreateOrder";
             this.btnCreateOrder.Size = new System.Drawing.Size(384, 63);
             this.btnCreateOrder.TabIndex = 23;
@@ -131,7 +133,7 @@
             // 
             this.btnViewOrders.Enabled = false;
             this.btnViewOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewOrders.Location = new System.Drawing.Point(40, 245);
+            this.btnViewOrders.Location = new System.Drawing.Point(40, 191);
             this.btnViewOrders.Name = "btnViewOrders";
             this.btnViewOrders.Size = new System.Drawing.Size(384, 63);
             this.btnViewOrders.TabIndex = 22;
@@ -206,6 +208,18 @@
             this.tabAdmin.Size = new System.Drawing.Size(950, 437);
             this.tabAdmin.TabIndex = 4;
             this.tabAdmin.Text = "Admin";
+            // 
+            // btnModifyTxnRecords
+            // 
+            this.btnModifyTxnRecords.Enabled = false;
+            this.btnModifyTxnRecords.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModifyTxnRecords.Location = new System.Drawing.Point(32, 340);
+            this.btnModifyTxnRecords.Name = "btnModifyTxnRecords";
+            this.btnModifyTxnRecords.Size = new System.Drawing.Size(384, 63);
+            this.btnModifyTxnRecords.TabIndex = 27;
+            this.btnModifyTxnRecords.Text = "&Modify Transaction Records";
+            this.btnModifyTxnRecords.UseVisualStyleBackColor = true;
+            this.btnModifyTxnRecords.Click += new System.EventHandler(this.btnModifyTxnRecords_Click);
             // 
             // btnViewSuppliers
             // 
@@ -328,17 +342,17 @@
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
-            // btnModifyTxnRecords
+            // btnPickupAndDeliverOrders
             // 
-            this.btnModifyTxnRecords.Enabled = false;
-            this.btnModifyTxnRecords.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModifyTxnRecords.Location = new System.Drawing.Point(32, 340);
-            this.btnModifyTxnRecords.Name = "btnModifyTxnRecords";
-            this.btnModifyTxnRecords.Size = new System.Drawing.Size(384, 63);
-            this.btnModifyTxnRecords.TabIndex = 27;
-            this.btnModifyTxnRecords.Text = "&Modify Transaction Records";
-            this.btnModifyTxnRecords.UseVisualStyleBackColor = true;
-            this.btnModifyTxnRecords.Click += new System.EventHandler(this.btnModifyTxnRecords_Click);
+            this.btnPickupAndDeliverOrders.Enabled = false;
+            this.btnPickupAndDeliverOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPickupAndDeliverOrders.Location = new System.Drawing.Point(40, 346);
+            this.btnPickupAndDeliverOrders.Name = "btnPickupAndDeliverOrders";
+            this.btnPickupAndDeliverOrders.Size = new System.Drawing.Size(384, 63);
+            this.btnPickupAndDeliverOrders.TabIndex = 26;
+            this.btnPickupAndDeliverOrders.Text = "&Pickup and Deliver Store Orders";
+            this.btnPickupAndDeliverOrders.UseVisualStyleBackColor = true;
+            this.btnPickupAndDeliverOrders.Click += new System.EventHandler(this.btnPickupAndDeliverOrders_Click);
             // 
             // Dashboard
             // 
@@ -402,5 +416,6 @@
         private System.Windows.Forms.Button btnFulfillOrder;
         private System.Windows.Forms.Button btnViewSuppliers;
         private System.Windows.Forms.Button btnModifyTxnRecords;
+        private System.Windows.Forms.Button btnPickupAndDeliverOrders;
     }
 }
