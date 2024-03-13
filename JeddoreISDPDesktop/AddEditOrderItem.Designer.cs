@@ -258,10 +258,10 @@
             // 
             // txtNotes
             // 
-            this.txtNotes.Location = new System.Drawing.Point(163, 429);
+            this.txtNotes.Location = new System.Drawing.Point(140, 429);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(236, 162);
+            this.txtNotes.Size = new System.Drawing.Size(259, 162);
             this.txtNotes.TabIndex = 1;
             // 
             // label13

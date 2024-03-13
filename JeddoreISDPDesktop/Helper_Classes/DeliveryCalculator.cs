@@ -96,11 +96,32 @@ namespace JeddoreISDPDesktop.Helper_Classes
             //if weight is zero, then return none needed
             if (weight == 0.0m)
             {
-                return vehicleType = "None Needed";
+                vehicleType = "None Needed";
+            }
+
+            else if (weight > 0.0m && weight <= 1000.0m)
+            {
+                vehicleType = "Van";
+            }
+
+            else if (weight > 1000.0m && weight <= 5000.0m)
+            {
+                vehicleType = "Small";
+            }
+
+            else if (weight > 5000.0m && weight <= 10000.0m)
+            {
+                vehicleType = "Medium";
+            }
+
+            //else - heavy vehicle
+            else
+            {
+                vehicleType = "Heavy";
             }
 
             //foreach loop 
-            foreach (Vehicle vehicle in vehiclesList)
+            /* foreach (Vehicle vehicle in vehiclesList)
             {
                 if (vehicle.maxWeight <= weight && vehicle == null)
                 {
@@ -113,8 +134,7 @@ namespace JeddoreISDPDesktop.Helper_Classes
                 }
 
                 previousVehicle = vehicle;
-
-            }
+            } */
 
             //return the string
             return vehicleType;

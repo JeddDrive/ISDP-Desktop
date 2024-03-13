@@ -23,7 +23,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string selectLastDeliveryStatement = "select deliveryID, distanceCost, vehicleType, IFNULL(notes, '') AS notes from delivery" +
             " order by deliveryID DESC LIMIT 1";
         private static string insertDeliveryStatement = "insert into `delivery` (`distanceCost`, `vehicleType`, `notes`) VALUES (@distanceCost, @vehicleType, @notes)";
-        private static string updateDistanceCostStatement = "update delivery set distanceCost = @distanceCost where deliveryID = @deliveryID";
+        private static string updateDistanceCostAndNotesStatement = "update delivery set distanceCost = @distanceCost, notes = CONCAT(notes, @notes) where deliveryID = @deliveryID";
 
         /**
         * Get all of the deliveries.
@@ -224,18 +224,19 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Updates an existing delivery's distance cost (Ex. when it's delivered).
+        * Updates an existing delivery's distance cost and notes fields (Ex. when it's delivered).
         *
         * @param delivery object
         * @return bool - if delivery was updated or not
         */
-        public static bool UpdateDistanceCost(Delivery delivery)
+        public static bool UpdateDistanceCostAndNotes(Delivery delivery)
         {
             //create a command
-            MySqlCommand cmd = new MySqlCommand(updateDistanceCostStatement, connection);
+            MySqlCommand cmd = new MySqlCommand(updateDistanceCostAndNotesStatement, connection);
 
-            //two parameters for this update query
+            //three parameters for this update query
             cmd.Parameters.AddWithValue("@distanceCost", delivery.distanceCost);
+            cmd.Parameters.AddWithValue("@notes", delivery.notes);
             cmd.Parameters.AddWithValue("@deliveryID", delivery.deliveryID);
 
             //variable for rowCount
@@ -256,7 +257,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Updating Delivery's Distance Cost");
+                MessageBox.Show(ex.Message, "Error Updating Delivery's Distance Cost and Notes");
 
                 connection.Close();
             }

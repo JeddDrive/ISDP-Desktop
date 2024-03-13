@@ -733,12 +733,7 @@ BEGIN
 	-- AND the txn is a store, emergency, or back order then
 	IF old.status = 'Assembled' and new.status = 'In Transit' and new.txnType IN ('Store Order', 'Emergency', 'Back Order') then
 	-- call the stored procedure from this trigger
-	CALL updateOrderToTruckInventory(new.txnID);
-	
-	-- also, update the siteIDFrom for the txn automatically to the truck site
-	update txn
-	set siteIDFrom = 1
-	where txnID = new.txnID;
+	CALL updateBayToTruckInventory(new.txnID);
 	
 	END IF;
 	
@@ -1167,7 +1162,7 @@ DELIMITER ;
 -- stored procedure #6
 DELIMITER $$
 
-CREATE PROCEDURE updateOrderToTruckInventory(
+CREATE PROCEDURE updateBayToTruckInventory(
 IN inTxnID int
 )
 BEGIN
