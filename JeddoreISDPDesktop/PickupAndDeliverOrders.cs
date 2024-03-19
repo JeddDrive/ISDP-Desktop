@@ -110,45 +110,6 @@ namespace JeddoreISDPDesktop
             }
         }
 
-        private void dtpShipDate_ValueChanged(object sender, EventArgs e)
-        {
-            /* DateTime selectedShipDate = dtpShipDate.Value;
-
-            //get list of txns (store orders) with a ship date of the value of the DTP
-            List<Txn> listOrdersOnShipDate = TxnAccessor.GetAllOrdersListForShipDate(selectedShipDate);
-
-            //get the weight of all the store orders on the ship date
-            decimal weightOnShipDate = TxnItemsAccessor.GetTxnWeightForShipDate(selectedShipDate);
-
-            //clear the listbox and store orders list
-            lstPickedUpOrders.Items.Clear();
-            storeOrdersList.Clear();
-
-            //adding back the first item in the listbox is this - like a header
-            lstPickedUpOrders.Items.Add("Txn ID         Destination Site                Ship Date               Status");
-
-            //update the vehicle type label in the second tab to this
-            lblVehicleType1.Text = "Needed Vehicle for Delivery on " + selectedShipDate.ToShortDateString() + ":";
-
-            //update this label as well
-            lblNumOrdersScheduled1.Text = "Number of Orders Scheduled for Pick Up on " + selectedShipDate.ToShortDateString() + ":";
-
-            lblNumOrdersScheduled2.Text = listOrdersOnShipDate.Count.ToString();
-
-            lblNumOrdersPickedUp.Text = storeOrdersList.Count.ToString();
-
-            lblEstimatedDeliveryWeight.Text = weightOnShipDate.ToString();
-
-            //get the recommended/needed vehicle type based on the weight on the ship date
-            string vehicleType = DeliveryCalculator.GetRecommendedVehicleType(weightOnShipDate);
-
-            //put the vehicle type in it's label as well
-            lblVehicleType2.Text = vehicleType;
-
-            //clear out the signature textbox
-            txtSignature.ResetText(); */
-        }
-
         private void btnRefreshOrders_Click(object sender, EventArgs e)
         {
             //create a new bindingsource

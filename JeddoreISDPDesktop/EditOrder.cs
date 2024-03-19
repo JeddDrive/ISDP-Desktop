@@ -44,7 +44,7 @@ namespace JeddoreISDPDesktop
             //else if - is an emergency orer
             else if (newOrder.txnType == "Emergency")
             {
-                lblMain.Text += " Emergency Order";
+                lblMain.Text += "Emergency Order";
             }
         }
 

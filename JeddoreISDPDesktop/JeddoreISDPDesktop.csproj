@@ -123,6 +123,12 @@
     <Compile Include="AddEditUser.Designer.cs">
       <DependentUpon>AddEditUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="CheckDeliveries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckDeliveries.Designer.cs">
+      <DependentUpon>CheckDeliveries.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfirmOrderDelivery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -308,6 +314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditUser.resx">
       <DependentUpon>AddEditUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckDeliveries.resx">
+      <DependentUpon>CheckDeliveries.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ConfirmOrderDelivery.resx">
       <DependentUpon>ConfirmOrderDelivery.cs</DependentUpon>

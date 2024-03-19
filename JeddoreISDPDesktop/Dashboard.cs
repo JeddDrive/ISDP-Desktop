@@ -115,6 +115,12 @@ namespace JeddoreISDPDesktop
                 btnPickupAndDeliverOrders.Enabled = true;
             }
 
+            //check the list for DELIVERY
+            if (employeeUserPermissions.permissionIDList.Contains("DELIVERY"))
+            {
+                btnCheckDeliveries.Enabled = true;
+            }
+
             //if employee is a store manager
             if (employee.positionID == 3)
             {
@@ -350,6 +356,15 @@ namespace JeddoreISDPDesktop
 
             //open the form (modal)
             frmPickupDeliverOrders.ShowDialog();
+        }
+
+        private void btnCheckDeliveries_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the check deliveries form
+            CheckDeliveries frmCheckDeliveries = new CheckDeliveries(employee);
+
+            //open the form (modal)
+            frmCheckDeliveries.ShowDialog();
         }
     }
 }
