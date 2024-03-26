@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.tabControlDashboard = new System.Windows.Forms.TabControl();
             this.tabOrders = new System.Windows.Forms.TabPage();
+            this.btnCheckDeliveries = new System.Windows.Forms.Button();
             this.btnPickupAndDeliverOrders = new System.Windows.Forms.Button();
             this.btnFulfillOrder = new System.Windows.Forms.Button();
             this.btnManageOrderItems = new System.Windows.Forms.Button();
@@ -57,7 +58,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
-            this.btnCheckDeliveries = new System.Windows.Forms.Button();
+            this.btnPrepareOnlineOrder = new System.Windows.Forms.Button();
             this.tabControlDashboard.SuspendLayout();
             this.tabOrders.SuspendLayout();
             this.tabInventory.SuspendLayout();
@@ -82,6 +83,7 @@
             // tabOrders
             // 
             this.tabOrders.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabOrders.Controls.Add(this.btnPrepareOnlineOrder);
             this.tabOrders.Controls.Add(this.btnCheckDeliveries);
             this.tabOrders.Controls.Add(this.btnPickupAndDeliverOrders);
             this.tabOrders.Controls.Add(this.btnFulfillOrder);
@@ -95,11 +97,23 @@
             this.tabOrders.TabIndex = 0;
             this.tabOrders.Text = "Orders";
             // 
+            // btnCheckDeliveries
+            // 
+            this.btnCheckDeliveries.Enabled = false;
+            this.btnCheckDeliveries.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCheckDeliveries.Location = new System.Drawing.Point(524, 245);
+            this.btnCheckDeliveries.Name = "btnCheckDeliveries";
+            this.btnCheckDeliveries.Size = new System.Drawing.Size(384, 63);
+            this.btnCheckDeliveries.TabIndex = 27;
+            this.btnCheckDeliveries.Text = "C&heck Deliveries";
+            this.btnCheckDeliveries.UseVisualStyleBackColor = true;
+            this.btnCheckDeliveries.Click += new System.EventHandler(this.btnCheckDeliveries_Click);
+            // 
             // btnPickupAndDeliverOrders
             // 
             this.btnPickupAndDeliverOrders.Enabled = false;
             this.btnPickupAndDeliverOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPickupAndDeliverOrders.Location = new System.Drawing.Point(40, 346);
+            this.btnPickupAndDeliverOrders.Location = new System.Drawing.Point(39, 245);
             this.btnPickupAndDeliverOrders.Name = "btnPickupAndDeliverOrders";
             this.btnPickupAndDeliverOrders.Size = new System.Drawing.Size(384, 63);
             this.btnPickupAndDeliverOrders.TabIndex = 26;
@@ -111,7 +125,7 @@
             // 
             this.btnFulfillOrder.Enabled = false;
             this.btnFulfillOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFulfillOrder.Location = new System.Drawing.Point(525, 191);
+            this.btnFulfillOrder.Location = new System.Drawing.Point(524, 138);
             this.btnFulfillOrder.Name = "btnFulfillOrder";
             this.btnFulfillOrder.Size = new System.Drawing.Size(384, 63);
             this.btnFulfillOrder.TabIndex = 25;
@@ -123,7 +137,7 @@
             // 
             this.btnManageOrderItems.Enabled = false;
             this.btnManageOrderItems.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManageOrderItems.Location = new System.Drawing.Point(525, 36);
+            this.btnManageOrderItems.Location = new System.Drawing.Point(524, 31);
             this.btnManageOrderItems.Name = "btnManageOrderItems";
             this.btnManageOrderItems.Size = new System.Drawing.Size(384, 63);
             this.btnManageOrderItems.TabIndex = 24;
@@ -135,7 +149,7 @@
             // 
             this.btnCreateOrder.Enabled = false;
             this.btnCreateOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateOrder.Location = new System.Drawing.Point(40, 36);
+            this.btnCreateOrder.Location = new System.Drawing.Point(39, 31);
             this.btnCreateOrder.Name = "btnCreateOrder";
             this.btnCreateOrder.Size = new System.Drawing.Size(384, 63);
             this.btnCreateOrder.TabIndex = 23;
@@ -147,7 +161,7 @@
             // 
             this.btnViewOrders.Enabled = false;
             this.btnViewOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewOrders.Location = new System.Drawing.Point(40, 191);
+            this.btnViewOrders.Location = new System.Drawing.Point(39, 138);
             this.btnViewOrders.Name = "btnViewOrders";
             this.btnViewOrders.Size = new System.Drawing.Size(384, 63);
             this.btnViewOrders.TabIndex = 22;
@@ -356,17 +370,17 @@
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
-            // btnCheckDeliveries
+            // btnPrepareOnlineOrder
             // 
-            this.btnCheckDeliveries.Enabled = false;
-            this.btnCheckDeliveries.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCheckDeliveries.Location = new System.Drawing.Point(525, 346);
-            this.btnCheckDeliveries.Name = "btnCheckDeliveries";
-            this.btnCheckDeliveries.Size = new System.Drawing.Size(384, 63);
-            this.btnCheckDeliveries.TabIndex = 27;
-            this.btnCheckDeliveries.Text = "C&heck Deliveries";
-            this.btnCheckDeliveries.UseVisualStyleBackColor = true;
-            this.btnCheckDeliveries.Click += new System.EventHandler(this.btnCheckDeliveries_Click);
+            this.btnPrepareOnlineOrder.Enabled = false;
+            this.btnPrepareOnlineOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrepareOnlineOrder.Location = new System.Drawing.Point(39, 352);
+            this.btnPrepareOnlineOrder.Name = "btnPrepareOnlineOrder";
+            this.btnPrepareOnlineOrder.Size = new System.Drawing.Size(384, 63);
+            this.btnPrepareOnlineOrder.TabIndex = 28;
+            this.btnPrepareOnlineOrder.Text = "&Prepare and Receive Online Orders";
+            this.btnPrepareOnlineOrder.UseVisualStyleBackColor = true;
+            this.btnPrepareOnlineOrder.Click += new System.EventHandler(this.btnPrepareOnlineOrder_Click);
             // 
             // Dashboard
             // 
@@ -432,5 +446,6 @@
         private System.Windows.Forms.Button btnModifyTxnRecords;
         private System.Windows.Forms.Button btnPickupAndDeliverOrders;
         private System.Windows.Forms.Button btnCheckDeliveries;
+        private System.Windows.Forms.Button btnPrepareOnlineOrder;
     }
 }

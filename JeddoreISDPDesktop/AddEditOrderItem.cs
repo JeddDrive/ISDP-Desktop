@@ -98,6 +98,7 @@ namespace JeddoreISDPDesktop
             if (quantity != 0)
             {
                 //put the current item quantity from the order into the nud as it's value
+                nudOrderQuantity.Minimum = quantity;
                 nudOrderQuantity.Value = quantity;
                 lblWarehouseQuantity.Text = (inventoryItem.quantity + quantity).ToString();
             }

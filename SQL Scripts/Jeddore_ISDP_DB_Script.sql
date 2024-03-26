@@ -145,11 +145,15 @@ add column active tinyint(1) NOT NULL Default 1;
 alter table `supplier`
 add column active tinyint(1) NOT NULL Default 1;
 
+-- insert into the txntype table - new type for online orders
+INSERT INTO `txntype` (`txnType`) VALUES
+('Online Order');
+
 -- insert into the permission table these additional permissions:
 -- example: VIEWSITE
 INSERT INTO `permission` (`permissionID`) VALUES
 ('VIEWSITE'), ('REJECTORDER'), ('VIEWINVENTORY'), ('EDITSUPPLIER'), 
-('PICKUPSTOREORDER'), ('DELIVERSTOREORDER');
+('PICKUPSTOREORDER'), ('DELIVERSTOREORDER'), ('PREPAREONLINEORDER');
 
 -- alter user_permission table - so that all default users of the system have READUSER access
 -- the admin user (number 1) already has this but the others do not
@@ -260,7 +264,15 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1007, 'DELIVERSTOREORDER', 1),
 (1008, 'DELIVERSTOREORDER', 1),
 (1009, 'DELIVERSTOREORDER', 1),
-(1010, 'DELIVERSTOREORDER', 1);
+(1010, 'DELIVERSTOREORDER', 1),
+-- adding PREPAREONLINEORDER for all store managers
+(1002, 'PREPAREONLINEORDER', 1),
+(1005, 'PREPAREONLINEORDER', 1),
+(1006, 'PREPAREONLINEORDER', 1),
+(1007, 'PREPAREONLINEORDER', 1),
+(1008, 'PREPAREONLINEORDER', 1),
+(1009, 'PREPAREONLINEORDER', 1),
+(1010, 'PREPAREONLINEORDER', 1);
 
 -- for all records currently in the user_permission table, set hasPermission to 1
 -- since all admin records in this table right now are all permissions that the admin user should have
@@ -272,6 +284,7 @@ where hasPermission = 0;
 -- NOTE: don't need READUSER since it's already been done above
 INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) VALUES
 (1, 'VIEWSITE', 1),
+(1, 'PREPAREONLINEORDER', 1),
 (2, 'ADDUSER', 0),
 (2, 'EDITUSER', 0),
 (2, 'DELETEUSER', 0),
@@ -303,6 +316,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (2, 'EDITSUPPLIER', 0),
 (2, 'PICKUPSTOREORDER', 0),
 (2, 'DELIVERSTOREORDER', 0),
+(2, 'PREPAREONLINEORDER', 0),
 (1000, 'ADDUSER', 0),
 (1000, 'EDITUSER', 0),
 (1000, 'DELETEUSER', 0),
@@ -334,6 +348,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1000, 'EDITSUPPLIER', 0),
 (1000, 'PICKUPSTOREORDER', 0),
 (1000, 'DELIVERSTOREORDER', 0),
+(1000, 'PREPAREONLINEORDER', 0),
 (1001, 'ADDUSER', 0),
 (1001, 'EDITUSER', 0),
 (1001, 'DELETEUSER', 0),
@@ -365,6 +380,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1001, 'EDITSUPPLIER', 0),
 (1001, 'PICKUPSTOREORDER', 0),
 (1001, 'DELIVERSTOREORDER', 0),
+(1001, 'PREPAREONLINEORDER', 0),
 (1002, 'ADDUSER', 0),
 (1002, 'EDITUSER', 0),
 (1002, 'DELETEUSER', 0),
@@ -414,6 +430,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'CREATEREPORT', 0),
 (1003, 'PICKUPSTOREORDER', 0),
 (1003, 'DELIVERSTOREORDER', 0),
+(1003, 'PREPAREONLINEORDER', 0),
 (1004, 'ADDUSER', 0),
 (1004, 'EDITUSER', 0),
 (1004, 'DELETEUSER', 0),
@@ -443,6 +460,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1004, 'REJECTORDER', 0),
 (1004, 'ADDSUPPLIER', 0),
 (1004, 'EDITSUPPLIER', 0),
+(1004, 'PREPAREONLINEORDER', 0),
 (1005, 'ADDUSER', 0),
 (1005, 'EDITUSER', 0),
 (1005, 'DELETEUSER', 0),
@@ -634,6 +652,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1012, 'ADDSUPPLIER', 0),
 (1012, 'EDITSUPPLIER', 0),
 (1012, 'DELIVERSTOREORDER', 0),
+(1012, 'PREPAREONLINEORDER', 0),
 (1013, 'ADDUSER', 0),
 (1013, 'EDITUSER', 0),
 (1013, 'DELETEUSER', 0),
@@ -663,6 +682,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1013, 'EDITSUPPLIER', 0),
 (1013, 'REJECTORDER', 0),
 (1013, 'DELIVERSTOREORDER', 0),
+(1013, 'PREPAREONLINEORDER', 0),
 (1014, 'ADDUSER', 0),
 (1014, 'EDITUSER', 0),
 (1014, 'DELETEUSER', 0),
@@ -691,7 +711,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1014, 'REJECTORDER', 0),
 (1014, 'EDITSUPPLIER', 0),
 (1014, 'ADDSUPPLIER', 0),
-(1014, 'DELIVERSTOREORDER', 0);
+(1014, 'DELIVERSTOREORDER', 0),
+(1014, 'PREPAREONLINEORDER', 0);
 
 -- Trigger #1 - includes transaction audit activity
 -- after UPDATEs on the txn table
@@ -822,7 +843,8 @@ VALUES (new.employeeID, 'ADDUSER', 0),
 (new.employeeID, 'ADDSUPPLIER', 0),
 (new.employeeID, 'EDITSUPPLIER', 0),
 (new.employeeID, 'PICKUPSTOREORDER', 0),
-(new.employeeID, 'DELIVERSTOREORDER', 0);
+(new.employeeID, 'DELIVERSTOREORDER', 0),
+(new.employeeID, 'PREPAREONLINEORDER', 0);
 
 END$$
 
@@ -1357,6 +1379,57 @@ END $$
 
 DELIMITER ;
 
+-- stored procedure #9
+DELIMITER $$
+
+CREATE PROCEDURE removeInventoryFromStore(
+IN inQuantity int,
+IN inItemID int,
+IN inSiteIDFrom int
+)
+BEGIN
+
+-- shouldn't need a cursor for this stored procedure
+-- declare variables here before the select statement below
+-- need variables for each field in the SELECT statement below
+declare itemIDVar int;
+declare quantityVar int;
+declare quantityVar2 int;
+
+-- getting the current quantity of the item in the store
+-- based on the siteID sent into this procedure
+select itemID, quantity
+into itemIDVar, quantityVar
+from inventory
+where siteID = inSiteIDFrom and itemID = inItemID;
+
+-- update the inventory table - for the one specific item at the site ID sent in
+update inventory
+set quantity = quantityVar - inQuantity
+where siteID = inSiteIDFrom and itemID = inItemID;
+
+-- getting the current quantity of the item in the store (again)
+-- based on the site ID sent into this procedure
+select itemID, quantity
+into itemIDVar, quantityVar2
+from inventory
+where siteID = inSiteIDFrom and itemID = inItemID;
+
+-- if the updated quantity is less than 0, then set it to 0
+-- NOTE: may try and find an alternative fix for this later
+IF quantityVar2 < 0 THEN
+
+-- then update the quantity for the item in the warehouse to be 0
+update inventory
+set quantity = 0
+where siteID = inSiteIDFrom and itemID = inItemID;
+
+END IF;
+
+END $$
+
+DELIMITER ;
+
 -- Trigger #5 - for automatically adding quantity for an item back to the warehouse inventory
 -- after DELETEs on the txnitems table
 DELIMITER $$
@@ -1421,9 +1494,10 @@ ON txnitems FOR EACH ROW
 BEGIN
 
 declare txnTypeVar varchar(20);
+declare siteIDFromVar int;
 
-select txnType
-into txnTypeVar
+select txnType, siteIDFrom
+into txnTypeVar, siteIDFromVar
 from txn
 where txnID = new.txnID;
 
@@ -1431,6 +1505,12 @@ IF txnTypeVar IN ('Store Order', 'Emergency') THEN
 -- call the stored procedure from this trigger
 -- are removing the item quantity now in this txn from the warehouse inventory
 CALL removeInventoryFromWarehouse(new.quantity, new.itemID);
+
+ELSEIF txnTypeVar = 'Online Order' then
+
+-- call stored procedure from this trigger 
+-- are removing the item quantity now in this txn (online order) from the store inventory
+CALL removeInventoryFromStore(new.quantity, new.itemID, siteIDFromVar);
 
 END IF;
 

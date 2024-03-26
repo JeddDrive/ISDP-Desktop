@@ -286,10 +286,10 @@ namespace JeddoreISDPDesktop
                     }
 
                     //else if - txn type cell converted to lower case contains the txtbox text
-                    /* else if (txnTypeCellValue != null && txnTypeCellValue.ToString().ToLower().Contains(txtSearchOrders.Text))
+                    else if (txnTypeCellValue != null && txnTypeCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
-                    } */
+                    }
 
                     //else if - created date cell converted to lower case contains the txtbox text
                     else if (createdDateCellValue != null && createdDateCellValue.ToString().ToLower().Contains(theSearchText))

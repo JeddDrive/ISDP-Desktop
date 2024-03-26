@@ -121,6 +121,12 @@ namespace JeddoreISDPDesktop
                 btnCheckDeliveries.Enabled = true;
             }
 
+            //check the list for PREPAREONLINEORDER
+            if (employeeUserPermissions.permissionIDList.Contains("PREPAREONLINEORDER"))
+            {
+                btnPrepareOnlineOrder.Enabled = true;
+            }
+
             //if employee is a store manager
             if (employee.positionID == 3)
             {
@@ -365,6 +371,15 @@ namespace JeddoreISDPDesktop
 
             //open the form (modal)
             frmCheckDeliveries.ShowDialog();
+        }
+
+        private void btnPrepareOnlineOrder_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the prepare and receive online form
+            PrepareOnlineOrders frmPrepareOnlineOrders = new PrepareOnlineOrders(employee);
+
+            //open the form (modal)
+            frmPrepareOnlineOrders.ShowDialog();
         }
     }
 }

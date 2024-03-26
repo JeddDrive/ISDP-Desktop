@@ -39,14 +39,14 @@ namespace JeddoreISDPDesktop.DAO_Classes
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID order by t.txnID DESC LIMIT 1";
         private static string selectOneOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t " +
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnID = @txnID and txnType IN ('Store Order', 'Emergency')";
-        private static string selectOneOrder2Statement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, t.deliveryID, t.emergencyDelivery, t.notes from txn t " +
+        private static string selectOneOrder2Statement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, 0) as deliveryID, t.emergencyDelivery, IFNULL(t.notes, '') as notes from txn t " +
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnID = @txnID and txnType IN ('Store Order', 'Emergency')";
         private static string selectOneBackOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t " +
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnID = @txnID and txnType = 'Back Order'";
-        private static string selectOneTxnStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t " +
+        private static string selectOneTxnStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.notes, '') as notes from txn t " +
             "inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnID = @txnID";
         //not including emergency orders in the statement below since their mode of transportation is via courier
-        private static string selectAllStoreOrdersOnShipDateStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where DATE(t.shipDate) = @shipDate and txnType = 'Store Order'";
+        private static string selectAllStoreAndEmergencyOrdersOnShipDateStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where DATE(t.shipDate) = @shipDate and txnType IN ('Store Order', 'Emergency')";
         //despite the name, these next 2 statements will get a site's new, submitted, or assembling store/back order
         //NOTE: may change this later
         private static string selectSiteNewOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status = 'New' and txnType IN ('Store Order', 'Emergency') and t.siteIDTo = @siteID";
@@ -55,6 +55,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string selectSiteNewBackOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status IN ('New', 'Submitted', 'Assembling') and txnType IN ('Back Order') and t.siteIDTo = @siteID";
         private static string selectCountActiveNewOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status = 'New' and txnType IN ('Store Order', 'Emergency')";
         private static string selectCountActiveBackOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Back Order')";
+        private static string selectAllOpenOnlineOrdersBySiteStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnType = 'Online Order' and t.status IN ('New', 'Assembling', 'Assembled') and t.siteIDTo = @siteID";
         private static string insertTxnStatement = "insert into `txn` (`siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`) VALUES " +
             "(@siteIDTo, @siteIDFrom, @status, @shipDate, @txnType, @barCode, @createdDate, @emergencyDelivery)";
         private static string updateTxnShipDateStatement = "update txn set shipDate = @shipDate where txnID = @txnID";
@@ -684,10 +685,11 @@ namespace JeddoreISDPDesktop.DAO_Classes
                     string txnType = reader.GetString("txnType");
                     string barCode = reader.GetString("barCode");
                     DateTime createdDate = reader.GetDateTime("createdDate");
+                    string notes = reader.GetString("notes");
 
                     //create a txn object
                     txn = new Txn(txnID, originSite, destinationSite, siteIDTo, siteIDFrom, status,
-                        shipDate, txnType, barCode, createdDate);
+                        shipDate, txnType, barCode, createdDate, notes);
                 }
 
                 //close reader after if statement
@@ -708,14 +710,14 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Gets all store orders for a particular day. Not including emergency orders since they're via courier.
+        * Gets all store AND emergency orders for a particular day.
         *
         * @return a DataTable of Txn objects, possibly null.
         */
         public static DataTable GetAllOrdersForShipDate(DateTime inShipDate)
         {
             //create a command
-            MySqlCommand cmd = new MySqlCommand(selectAllStoreOrdersOnShipDateStatement, connection);
+            MySqlCommand cmd = new MySqlCommand(selectAllStoreAndEmergencyOrdersOnShipDateStatement, connection);
 
             //create datatable
             DataTable dt = new DataTable();
@@ -753,14 +755,14 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Gets all store orders for a particular day. Not including emergency orders since they're via courier.
+        * Gets all store and emergency orders for a particular day.
         *
         * @return a list of Txn objects, possibly null.
         */
         public static List<Txn> GetAllOrdersListForShipDate(DateTime inShipDate)
         {
             //create a command
-            MySqlCommand cmd = new MySqlCommand(selectAllStoreOrdersOnShipDateStatement, connection);
+            MySqlCommand cmd = new MySqlCommand(selectAllStoreAndEmergencyOrdersOnShipDateStatement, connection);
 
             //list of txns to be returned
             List<Txn> txnsList = new List<Txn>();
@@ -1157,6 +1159,44 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
             //return the rowCount (long)
             return rowCount;
+        }
+
+        /**
+        * Get all of the open online orders for a particular site. Doesn't include complete online orders.
+        *
+        * @return a DataTable, possibly empty, of Txns.
+        */
+        public static DataTable GetAllOnlineOrdersBySite(int inSiteID)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectAllOpenOnlineOrdersBySiteStatement, connection);
+
+            //create datatable
+            DataTable dt = new DataTable();
+
+            //one parameter for the query - siteID
+            cmd.Parameters.AddWithValue("@siteID", inSiteID);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //execute the SQL statement against the DB
+                //load into the DataTable object
+                dt.Load(cmd.ExecuteReader());
+
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting All Online Orders by Site");
+
+                connection.Close();
+            }
+
+            //return the datatable
+            return dt;
         }
 
         /**

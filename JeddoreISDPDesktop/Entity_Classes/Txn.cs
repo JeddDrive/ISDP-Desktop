@@ -92,5 +92,22 @@ namespace JeddoreISDPDesktop.Entity_Classes
             deliveryID = inDeliveryID;
             emergencyDelivery = inEmergencyDelivery;
         }
+
+        //custom constructor #5 - used for getting one txn
+        public Txn(int inTxnID, string inOriginSite, string inDestinationSite, int inSiteIDTo, int inSiteIDFrom, string inStatus, DateTime inShipDate,
+            string inTxnType, string inBarCode, DateTime inCreatedDate, string inNotes)
+        {
+            txnID = inTxnID;
+            originSite = inOriginSite;
+            destinationSite = inDestinationSite;
+            siteIDTo = inSiteIDTo;
+            siteIDFrom = inSiteIDFrom;
+            status = inStatus;
+            shipDate = inShipDate;
+            txnType = inTxnType;
+            barCode = inBarCode;
+            createdDate = inCreatedDate;
+            notes = inNotes;
+        }
     }
 }

@@ -23,9 +23,9 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string selectCountItemsInTxnStatement = "select count(*) from txnitems where txnID = @txnID";
         private static string selectCountSpecificIteminTxnStatement = "select count(*) from txnitems where txnID = @txnID and itemID = @itemID";
         private static string selectTxnWeightForTxnStatement = "select ti.txnID, sum(i.weight * ti.quantity) as txnWeight from txnitems ti inner join item i on ti.itemID = i.itemID where txnID = @txnID group by ti.txnID";
-        private static string selectDeliveryWeightForStoreOrdersOnShipDateStatement = "select t.shipDate, sum(i.weight * ti.quantity) as txnWeight from txnitems ti inner join item i on ti.itemID = i.itemID inner join txn t on ti.txnID = t.txnID where t.txnType = 'Store Order' and t.shipDate = @shipDate group by t.shipDate";
+        private static string selectDeliveryWeightForStoreOrdersOnShipDateStatement = "select t.shipDate, sum(i.weight * ti.quantity) as txnWeight from txnitems ti inner join item i on ti.itemID = i.itemID inner join txn t on ti.txnID = t.txnID where t.txnType IN ('Store Order', 'Emergency') and t.shipDate = @shipDate group by t.shipDate";
         private static string updateTxnItemQuantityAndNotesStatement = "update txnitems set quantity = @quantity, notes = @notes where txnID = @txnID and itemID = @itemID";
-        private static string insertTxnItemStatement = " insert into `txnitems` (`txnID`, `itemID`, `quantity`, `notes`) VALUES " +
+        private static string insertTxnItemStatement = "insert into `txnitems` (`txnID`, `itemID`, `quantity`, `notes`) VALUES " +
             "(@txnID, @itemID, @quantity, @notes)";
         private static string deleteTxnItemStatement = "delete from txnitems where txnID = @txnID and itemID  = @itemID";
 

@@ -70,7 +70,7 @@ namespace JeddoreISDPDesktop
         private void picHelp_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This is the form for confirming the delivery of an order that was in transit. Please enter an accurate number for the delivery time here, as well as a valid signature." +
-            "\n\nClick on the 'confirm' button when you're ready to confirm the order's delivery.", "Confirm Order Delivery Help"
+            "\n\nClick on the 'Confirm' button when you're ready to confirm the order's delivery.", "Confirm Order Delivery Help"
             , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -81,7 +81,7 @@ namespace JeddoreISDPDesktop
             if (e.KeyCode == Keys.F1)
             {
                 MessageBox.Show("This is the form for confirming the delivery of an order that was in transit. Please enter an accurate number for the delivery time here, as well as a valid signature." +
-                "\n\nClick on the 'confirm' button when you're ready to confirm the order's delivery.", "Confirm Order Delivery Help"
+                "\n\nClick on the 'Confirm' button when you're ready to confirm the order's delivery.", "Confirm Order Delivery Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }

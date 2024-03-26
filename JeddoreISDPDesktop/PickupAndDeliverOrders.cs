@@ -73,7 +73,7 @@ namespace JeddoreISDPDesktop
             cboVehicles.SelectedIndex = cboVehicles.Items.Count - 1;
 
             //first item in the listbox is this - like a header
-            lstPickedUpOrders.Items.Add("Txn ID     Destination Site                Ship Date               Status");
+            lstPickedUpOrders.Items.Add("Txn ID     Destination Site                Ship Date                 Status");
         }
 
         private void btnExitOrders_Click(object sender, EventArgs e)
@@ -94,8 +94,8 @@ namespace JeddoreISDPDesktop
 
         private void picHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is the form for confirming orders that are picked up or delivered. You can select a store order here in the first tab, then confirm them for pickup in the second tab on this form. Confirming an order's delivery will take you to a new form." +
-            "\n\nClick on the 'refresh' button in the first tab to load the store orders data grid.", "Pickup and Deliver Orders Help"
+            MessageBox.Show("This is the form for confirming orders that are picked up or delivered. You can select a store or emergency order here in the first tab, then confirm it for pickup in the second tab on this form. Confirming an order's delivery will take you to a new form." +
+            "\n\nClick on the 'refresh' button in the first tab to load the orders data grid.", "Pickup and Deliver Orders Help"
             , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -104,8 +104,8 @@ namespace JeddoreISDPDesktop
             //if the F1 key is pressed down
             if (e.KeyCode == Keys.F1)
             {
-                MessageBox.Show("This is the form for confirming orders that are picked up or delivered. You can select a store order here in the first tab, then confirm them for pickup in the second tab on this form. Confirming an order's delivery will take you to a new form." +
-                "\n\nClick on the 'refresh' button in the first tab to load the store orders data grid.", "Pickup and Deliver Orders Help"
+                MessageBox.Show("This is the form for confirming orders that are picked up or delivered. You can select a store or emergency order here in the first tab, then confirm it for pickup in the second tab on this form. Confirming an order's delivery will take you to a new form." +
+                "\n\nClick on the 'refresh' button in the first tab to load the orders data grid.", "Pickup and Deliver Orders Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -338,7 +338,7 @@ namespace JeddoreISDPDesktop
                 {
                     if (txn.txnID == txnID)
                     {
-                        MessageBox.Show("Store order " + txnID + " for " + txn.destinationSite + " has already been selected for pick up in this delivery.",
+                        MessageBox.Show("Order " + txnID + " for " + txn.destinationSite + " has already been selected for pick up in this delivery.",
                             "Order Already Selected for Pick Up", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         dgvOrders.ClearSelection();
@@ -350,7 +350,7 @@ namespace JeddoreISDPDesktop
                 //checking the status of the txn/store order
                 if (selectedTxn.status != "Assembled")
                 {
-                    MessageBox.Show("Status of selected store order is: " + selectedTxn.status +
+                    MessageBox.Show("Status of selected order is: " + selectedTxn.status +
                         "\n\nCannot move an order onto a truck for delivery until it's status is Assembled in the warehouse bay.",
                         "Selected Order Not Assembled", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -375,13 +375,13 @@ namespace JeddoreISDPDesktop
                     cboVehicles.Enabled = true;
 
                     //add txn details to the listbox
-                    lstPickedUpOrders.Items.Add(selectedTxn.txnID + "         " + selectedTxn.destinationSite + "                             " + selectedTxn.shipDate.ToShortDateString() +
-                        "                     " + selectedTxn.status);
+                    lstPickedUpOrders.Items.Add(selectedTxn.txnID + "         " + selectedTxn.destinationSite + "                  " + selectedTxn.shipDate.ToShortDateString() +
+                        "                  " + selectedTxn.status);
 
                     //update this label
                     lblNumOrdersPickedUp.Text = storeOrdersList.Count.ToString();
 
-                    MessageBox.Show("Store order " + selectedTxn.txnID.ToString() + " for " +
+                    MessageBox.Show("Order " + selectedTxn.txnID.ToString() + " for " +
                     selectedTxn.destinationSite + " has been selected for delivery pickup. You can confirm pickup for this store order " +
                     "in the next tab as well as add any further orders for " + dtpShipDate.Value.ToShortDateString() + " if needed from here.", "Store Order Selected for Pickup",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -406,7 +406,7 @@ namespace JeddoreISDPDesktop
             //if - no item selected in the listbox
             if (lstPickedUpOrders.SelectedIndex == -1 || lstPickedUpOrders.SelectedItems.Count != 1)
             {
-                MessageBox.Show("Must select one store order in the listbox in order to remove it from being picked up in the delivery.", "Store Order Removal Error",
+                MessageBox.Show("Must select one store or emergency order in the listbox in order to remove it from being picked up in the delivery.", "Store Order Removal Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //clear selected listbox items
@@ -491,7 +491,7 @@ namespace JeddoreISDPDesktop
             //if no orders selected (so store orders list amount is 0) then
             if (storeOrdersList.Count < 1)
             {
-                MessageBox.Show("Must have at least one order selected for delivery pickup in order to confirm it and update it's status to In Transit.",
+                MessageBox.Show("Must have at least one store or emergency order selected for delivery pickup in order to confirm it and update it's status to In Transit.",
                     "No Order(s) Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //clear any selections in the listbox and dgv
@@ -520,7 +520,7 @@ namespace JeddoreISDPDesktop
             //if count of orders scheduled for shipping on the date doesn't match the count of the list, then display msg
             if (ordersCountOnShipDate != storeOrdersList.Count)
             {
-                DialogResult btnValueReturned = MessageBox.Show("Number of assembled store orders selected for pickup does not " +
+                DialogResult btnValueReturned = MessageBox.Show("Number of assembled orders selected for pickup does not " +
                     "match the number of orders scheduled for pickup on " + selectedShipDate.ToShortDateString() + "." +
                     "\n\nConfirm order(s) pickup for delivery anyway?" +
                     "\n\nNumber of Orders Scheduled: " + lblNumOrdersScheduled2.Text +
@@ -559,7 +559,7 @@ namespace JeddoreISDPDesktop
                             //if success
                             if (success)
                             {
-                                MessageBox.Show("Delivery pickup for store order " + txn.txnID + " for " + txn.destinationSite + " has been successfully confirmed. It's status is now In Transit.",
+                                MessageBox.Show("Delivery pickup for order " + txn.txnID + " for " + txn.destinationSite + " has been successfully confirmed. It's status is now In Transit.",
                                     "Order Pickup Confirmed");
                             }
                         }
@@ -573,7 +573,7 @@ namespace JeddoreISDPDesktop
             //else - count of orders is a match, can display a different message then
             else
             {
-                DialogResult btnValueReturned = MessageBox.Show("Number of assembled store orders selected for pickup matches " +
+                DialogResult btnValueReturned = MessageBox.Show("Number of assembled orders selected for pickup matches " +
                 "the exact number of orders scheduled for pickup on " + selectedShipDate.ToShortDateString() + "." +
                 "\n\nConfirm order(s) pickup for delivery?", "Confirm Order Pickup", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -611,7 +611,7 @@ namespace JeddoreISDPDesktop
                             //if success
                             if (success)
                             {
-                                MessageBox.Show("Delivery pickup for store order " + txn.txnID + " for " + txn.destinationSite + " has been successfully confirmed. It's status is now In Transit.",
+                                MessageBox.Show("Delivery pickup for order " + txn.txnID + " for " + txn.destinationSite + " has been successfully confirmed. It's status is now In Transit.",
                                     "Order Pickup Confirmed");
                             }
                         }
@@ -630,7 +630,7 @@ namespace JeddoreISDPDesktop
             //if number of selected rows is not one
             if (selectedRowsCount != 1)
             {
-                MessageBox.Show("Must select one row from the orders data grid in order to confirm delivery of a store order.",
+                MessageBox.Show("Must select one row from the orders data grid in order to confirm delivery of an order.",
                     "Order Delivery Confirmation Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //clear all selected rows from the dgv
@@ -652,39 +652,43 @@ namespace JeddoreISDPDesktop
                 //getting a site object too
                 Site employeeSite = SiteAccessor.GetOneSite(employee.siteID);
 
-                //checking the siteIDTo of the txn to the employee's siteID
-                if (selectedTxn.siteIDTo != employee.siteID && employee.siteID != 1 &&
-                    employee.siteID != 3)
+                if (selectedTxn != null)
                 {
-                    MessageBox.Show("Destination site for this store order is " + selectedTxn.destinationSite +
-                        "." + " You cannot confirm delivery of orders for any sites other than your own - " + employeeSite.name + ".",
-                        "Invalid Site Order Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //checking the siteIDTo of the txn to the employee's siteID
+                    if (selectedTxn.siteIDTo != employee.siteID && employee.siteID != 1 &&
+                        employee.siteID != 3)
+                    {
+                        MessageBox.Show("Destination site for this order is " + selectedTxn.destinationSite +
+                            "." + " You cannot confirm delivery of orders for any sites other than your own - " + employeeSite.name + ".",
+                            "Invalid Site Order Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    //clear all selected rows from dgv
-                    dgvOrders.ClearSelection();
+                        //clear all selected rows from dgv
+                        dgvOrders.ClearSelection();
 
-                    return;
-                }
+                        return;
+                    }
 
-                //checking the status of the txn/store order
-                if (selectedTxn.status != "In Transit")
-                {
-                    MessageBox.Show("Status of selected store order is: " + selectedTxn.status +
-                        "\n\nCannot confirm delivery of an order that is currently not in transit.",
-                        "Selected Order Not In Transit", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    //clear all selected rows from the dgv
-                    dgvOrders.ClearSelection();
-                }
+                    //checking the status of the txn/store order
+                    if (selectedTxn.status != "In Transit")
+                    {
+                        MessageBox.Show("Status of selected order is: " + selectedTxn.status +
+                            "\n\nCannot confirm delivery of an order that is currently not in transit.",
+                            "Selected Order Not In Transit", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                //else - the order's status is In Transit
-                else
-                {
-                    //want to send the employee and txn objects to the confirm order delivery form
-                    ConfirmOrderDelivery frmCondirmOrderDelivery = new ConfirmOrderDelivery(employee, selectedTxn);
+                        //clear all selected rows from the dgv
+                        dgvOrders.ClearSelection();
+                    }
 
-                    //open the form (modal)
-                    frmCondirmOrderDelivery.ShowDialog();
+                    //else - the order's status is In Transit
+                    else
+                    {
+                        //want to send the employee and txn objects to the confirm order delivery form
+                        ConfirmOrderDelivery frmCondirmOrderDelivery = new ConfirmOrderDelivery(employee, selectedTxn);
+
+                        //open the form (modal)
+                        frmCondirmOrderDelivery.ShowDialog();
+                    }
                 }
             }
         }
