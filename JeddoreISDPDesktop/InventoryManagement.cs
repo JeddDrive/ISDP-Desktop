@@ -108,6 +108,8 @@ namespace JeddoreISDPDesktop
             dgvInventory.Columns["itemLocation"].HeaderText = "Item Location";
             dgvInventory.Columns["reorderThreshold"].HeaderText = "Reorder Threshold";
             dgvInventory.Columns["optimumThreshold"].HeaderText = "Optimum Threshold";
+            dgvInventory.Columns["category"].HeaderText = "Category";
+            dgvInventory.Columns["retailPrice"].HeaderText = "Retail Price";
             //dgvInventory.Columns["notes"].HeaderText = "Notes";
 
             dgvInventory.Refresh();
@@ -133,6 +135,7 @@ namespace JeddoreISDPDesktop
                 {
                     //get the cell values for the following columns
                     var nameCellValue = row.Cells["name"].Value;
+                    var categoryCellValue = row.Cells["category"].Value;
                     var itemIDCellValue = row.Cells["itemID"].Value;
 
                     //if txtbox is empty, then just show all the rows and continue
@@ -144,6 +147,12 @@ namespace JeddoreISDPDesktop
 
                     //if - name cell converted to lower case contains the txtbox text
                     if (nameCellValue != null && nameCellValue.ToString().ToLower().Contains(theSearchText))
+                    {
+                        row.Visible = true;
+                    }
+
+                    //else if - category cell converted to lower case contains the txtbox text
+                    else if (categoryCellValue != null && categoryCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }
@@ -195,7 +204,7 @@ namespace JeddoreISDPDesktop
                 int itemID = int.Parse(dgvRow.Cells[0].Value.ToString());
 
                 //also get the cell with the siteID
-                int siteID = int.Parse(dgvRow.Cells[3].Value.ToString());
+                int siteID = int.Parse(dgvRow.Cells[4].Value.ToString());
 
                 //can now get the item to edit with just the item ID (primary key)
                 Inventory selectedInventory = InventoryAccessor.GetOneInventoryItem(siteID, itemID);
@@ -233,7 +242,7 @@ namespace JeddoreISDPDesktop
                 int itemID = int.Parse(dgvRow.Cells[0].Value.ToString());
 
                 //also get the cell with the siteID
-                int siteID = int.Parse(dgvRow.Cells[3].Value.ToString());
+                int siteID = int.Parse(dgvRow.Cells[4].Value.ToString());
 
                 //can now get the item to edit with just the item ID (primary key)
                 Inventory selectedInventory = InventoryAccessor.GetOneInventoryItem(siteID, itemID);

@@ -112,3 +112,4 @@ C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProj
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\bin\Debug\System.Configuration.ConfigurationManager.xml
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.PrepareOnlineOrders.resources
 C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.ReceiveOnlineOrder.resources
+C:\Users\nickj\Documents\1 - NBCC Files (IT-PA 2022)\Term 5\ISDP\JeddoreISDPProject\JeddoreISDPDesktop\JeddoreISDPDesktop\obj\Debug\JeddoreISDPDesktop.CreateLossReturn.resources

@@ -127,6 +127,13 @@ namespace JeddoreISDPDesktop
                 btnPrepareOnlineOrder.Enabled = true;
             }
 
+            //check the list for CREATELOSS or PROCESSRETURN
+            if (employeeUserPermissions.permissionIDList.Contains("CREATELOSS") ||
+                employeeUserPermissions.permissionIDList.Contains("PROCESSRETURN"))
+            {
+                btnCreateLossReturn.Enabled = true;
+            }
+
             //if employee is a store manager
             if (employee.positionID == 3)
             {
@@ -380,6 +387,15 @@ namespace JeddoreISDPDesktop
 
             //open the form (modal)
             frmPrepareOnlineOrders.ShowDialog();
+        }
+
+        private void btnProcessLossReturn_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the create loss/return form
+            CreateLossReturn frmCreateLossReturn = new CreateLossReturn(employee);
+
+            //open the form (modal)
+            frmCreateLossReturn.ShowDialog();
         }
     }
 }

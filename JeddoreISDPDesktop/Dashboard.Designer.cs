@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.tabControlDashboard = new System.Windows.Forms.TabControl();
             this.tabOrders = new System.Windows.Forms.TabPage();
+            this.btnPrepareOnlineOrder = new System.Windows.Forms.Button();
             this.btnCheckDeliveries = new System.Windows.Forms.Button();
             this.btnPickupAndDeliverOrders = new System.Windows.Forms.Button();
             this.btnFulfillOrder = new System.Windows.Forms.Button();
@@ -42,6 +43,7 @@
             this.btnViewInventory = new System.Windows.Forms.Button();
             this.btnEditItem = new System.Windows.Forms.Button();
             this.tabLossReturn = new System.Windows.Forms.TabPage();
+            this.btnCreateLossReturn = new System.Windows.Forms.Button();
             this.tabReports = new System.Windows.Forms.TabPage();
             this.tabAdmin = new System.Windows.Forms.TabPage();
             this.btnModifyTxnRecords = new System.Windows.Forms.Button();
@@ -58,10 +60,10 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
-            this.btnPrepareOnlineOrder = new System.Windows.Forms.Button();
             this.tabControlDashboard.SuspendLayout();
             this.tabOrders.SuspendLayout();
             this.tabInventory.SuspendLayout();
+            this.tabLossReturn.SuspendLayout();
             this.tabAdmin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
@@ -96,6 +98,18 @@
             this.tabOrders.Size = new System.Drawing.Size(950, 437);
             this.tabOrders.TabIndex = 0;
             this.tabOrders.Text = "Orders";
+            // 
+            // btnPrepareOnlineOrder
+            // 
+            this.btnPrepareOnlineOrder.Enabled = false;
+            this.btnPrepareOnlineOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrepareOnlineOrder.Location = new System.Drawing.Point(39, 352);
+            this.btnPrepareOnlineOrder.Name = "btnPrepareOnlineOrder";
+            this.btnPrepareOnlineOrder.Size = new System.Drawing.Size(384, 63);
+            this.btnPrepareOnlineOrder.TabIndex = 28;
+            this.btnPrepareOnlineOrder.Text = "&Prepare and Receive Online Orders";
+            this.btnPrepareOnlineOrder.UseVisualStyleBackColor = true;
+            this.btnPrepareOnlineOrder.Click += new System.EventHandler(this.btnPrepareOnlineOrder_Click);
             // 
             // btnCheckDeliveries
             // 
@@ -185,7 +199,7 @@
             // 
             this.btnViewInventory.Enabled = false;
             this.btnViewInventory.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewInventory.Location = new System.Drawing.Point(258, 246);
+            this.btnViewInventory.Location = new System.Drawing.Point(254, 246);
             this.btnViewInventory.Name = "btnViewInventory";
             this.btnViewInventory.Size = new System.Drawing.Size(456, 63);
             this.btnViewInventory.TabIndex = 22;
@@ -197,7 +211,7 @@
             // 
             this.btnEditItem.Enabled = false;
             this.btnEditItem.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditItem.Location = new System.Drawing.Point(258, 81);
+            this.btnEditItem.Location = new System.Drawing.Point(254, 81);
             this.btnEditItem.Name = "btnEditItem";
             this.btnEditItem.Size = new System.Drawing.Size(456, 63);
             this.btnEditItem.TabIndex = 21;
@@ -208,11 +222,24 @@
             // tabLossReturn
             // 
             this.tabLossReturn.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabLossReturn.Controls.Add(this.btnCreateLossReturn);
             this.tabLossReturn.Location = new System.Drawing.Point(4, 37);
             this.tabLossReturn.Name = "tabLossReturn";
             this.tabLossReturn.Size = new System.Drawing.Size(950, 437);
             this.tabLossReturn.TabIndex = 2;
             this.tabLossReturn.Text = "Loss/Return";
+            // 
+            // btnCreateLossReturn
+            // 
+            this.btnCreateLossReturn.Enabled = false;
+            this.btnCreateLossReturn.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateLossReturn.Location = new System.Drawing.Point(253, 85);
+            this.btnCreateLossReturn.Name = "btnCreateLossReturn";
+            this.btnCreateLossReturn.Size = new System.Drawing.Size(456, 63);
+            this.btnCreateLossReturn.TabIndex = 22;
+            this.btnCreateLossReturn.Text = "&Create Loss or Return";
+            this.btnCreateLossReturn.UseVisualStyleBackColor = true;
+            this.btnCreateLossReturn.Click += new System.EventHandler(this.btnProcessLossReturn_Click);
             // 
             // tabReports
             // 
@@ -370,18 +397,6 @@
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
-            // btnPrepareOnlineOrder
-            // 
-            this.btnPrepareOnlineOrder.Enabled = false;
-            this.btnPrepareOnlineOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrepareOnlineOrder.Location = new System.Drawing.Point(39, 352);
-            this.btnPrepareOnlineOrder.Name = "btnPrepareOnlineOrder";
-            this.btnPrepareOnlineOrder.Size = new System.Drawing.Size(384, 63);
-            this.btnPrepareOnlineOrder.TabIndex = 28;
-            this.btnPrepareOnlineOrder.Text = "&Prepare and Receive Online Orders";
-            this.btnPrepareOnlineOrder.UseVisualStyleBackColor = true;
-            this.btnPrepareOnlineOrder.Click += new System.EventHandler(this.btnPrepareOnlineOrder_Click);
-            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
@@ -408,6 +423,7 @@
             this.tabControlDashboard.ResumeLayout(false);
             this.tabOrders.ResumeLayout(false);
             this.tabInventory.ResumeLayout(false);
+            this.tabLossReturn.ResumeLayout(false);
             this.tabAdmin.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
@@ -447,5 +463,6 @@
         private System.Windows.Forms.Button btnPickupAndDeliverOrders;
         private System.Windows.Forms.Button btnCheckDeliveries;
         private System.Windows.Forms.Button btnPrepareOnlineOrder;
+        private System.Windows.Forms.Button btnCreateLossReturn;
     }
 }

@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.grpBtnsTwo = new System.Windows.Forms.GroupBox();
+            this.btnMove = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.grpInventory = new System.Windows.Forms.GroupBox();
             this.bindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
@@ -52,7 +53,6 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.btnMove = new System.Windows.Forms.Button();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
@@ -141,6 +141,18 @@
             this.grpBtnsTwo.Size = new System.Drawing.Size(200, 192);
             this.grpBtnsTwo.TabIndex = 67;
             this.grpBtnsTwo.TabStop = false;
+            // 
+            // btnMove
+            // 
+            this.btnMove.Enabled = false;
+            this.btnMove.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold);
+            this.btnMove.Location = new System.Drawing.Point(29, 114);
+            this.btnMove.Name = "btnMove";
+            this.btnMove.Size = new System.Drawing.Size(147, 63);
+            this.btnMove.TabIndex = 1;
+            this.btnMove.Text = "&Move Inventory Item";
+            this.btnMove.UseVisualStyleBackColor = true;
+            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
             // 
             // btnEdit
             // 
@@ -277,18 +289,6 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 1200000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnMove
-            // 
-            this.btnMove.Enabled = false;
-            this.btnMove.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold);
-            this.btnMove.Location = new System.Drawing.Point(29, 114);
-            this.btnMove.Name = "btnMove";
-            this.btnMove.Size = new System.Drawing.Size(147, 63);
-            this.btnMove.TabIndex = 1;
-            this.btnMove.Text = "&Move Inventory Item";
-            this.btnMove.UseVisualStyleBackColor = true;
-            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
             // 
             // bindingNavigatorMoveFirstItem
             // 

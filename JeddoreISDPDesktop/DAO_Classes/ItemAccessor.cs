@@ -20,6 +20,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         //SQL statements for the Item entity
         private static string selectAllStatement = "select itemID, name, sku, IFNULL(description, '') AS description, category, weight, caseSize, costPrice, retailPrice, supplierID, active, IFNULL(notes, '') AS notes, IFNULL(imageFileLocation, '') AS imageFileLocation from item order by itemID";
         private static string selectOneStatement = "select itemID, name, sku, IFNULL(description, '') AS description, category, weight, caseSize, costPrice, retailPrice, supplierID, active, IFNULL(notes, '') AS notes, IFNULL(imageFileLocation, '') AS imageFileLocation from item where itemID = @itemID";
+        private static string selectDistinctCategoriesStatement = "select DISTINCT category from item";
         private static string updateItemStatement = "update item set active = @active, description = @description, notes = @notes, imageFileLocation = @imageFileLocation where itemID = @itemID";
 
         /**
@@ -187,6 +188,55 @@ namespace JeddoreISDPDesktop.DAO_Classes
 
             //return the employee
             return item;
+        }
+
+        /**
+        * Get distinct categories from the Item table.
+        *
+        * @return a List, possibly empty, of strings
+        */
+        public static List<string> GetAllCategoriesList()
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectDistinctCategoriesStatement, connection);
+
+            //list to be returned
+            List<string> categoriesList = new List<string>();
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                //run loop thru datareader
+                //while - there is another record to read
+                while (reader.Read())
+                {
+                    //just need the category field
+                    string category = reader.GetString("category");
+
+                    //add to the list
+                    categoriesList.Add(category);
+
+                }
+
+                //close reader after while loop
+                reader.Close();
+
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting All Distinct Item Categories");
+
+                connection.Close();
+            }
+
+            //return the employees list
+            return categoriesList;
         }
 
         /**

@@ -17,9 +17,11 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static MySqlConnection connection = new MySqlConnection(connString);
 
         //SQL statements for the Employee entity
-        private static string selectAllBySiteIDStatement = "select iv.itemID, it.name, it.description, iv.siteID, s.name AS siteName, iv.quantity, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
+        private static string selectAllBySiteIDStatement = "select iv.itemID, it.name, it.description, it.category, iv.siteID, s.name AS siteName, iv.quantity, it.retailPrice, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
             " from inventory iv inner join item it on iv.itemID = it.itemID inner join site s on iv.siteID = s.siteID where iv.siteID = @siteID";
-        private static string selectOneStatement = "select iv.itemID, it.name, it.description, iv.siteID, s.name AS siteName, iv.quantity, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
+        private static string selectAllBySiteIDAndCategoryStatement = "select iv.itemID, it.name, it.description, it.category, iv.siteID, s.name AS siteName, iv.quantity, it.retailPrice, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
+            " from inventory iv inner join item it on iv.itemID = it.itemID inner join site s on iv.siteID = s.siteID where iv.siteID = @siteID and it.category = @category";
+        private static string selectOneStatement = "select iv.itemID, it.name, it.description, it.category, iv.siteID, s.name AS siteName, iv.quantity, it.retailPrice, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
             " from inventory iv inner join item it on iv.itemID = it.itemID inner join site s on iv.siteID = s.siteID where iv.siteID = @siteID and iv.itemID = @itemID";
         private static string updateReorderAndOptimumThresholdsStatement = "update inventory set reorderThreshold = @reorderThreshold, optimumThreshold = @optimumThreshold, notes = @notes where itemID = @itemID and siteID = @siteID";
         private static string updateInventoryAtNewLocationStatement = "update inventory set quantity = quantity + @quantity, itemLocation = @itemLocation where siteID = @siteID and itemID = @itemID";
@@ -56,6 +58,46 @@ namespace JeddoreISDPDesktop.DAO_Classes
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Getting All Inventory by Site ID");
+
+                connection.Close();
+            }
+
+            //return the datatable
+            return dt;
+        }
+
+        /**
+        * Get all of the inventory by a specific site ID AND category.
+        *
+        * @param int siteID
+        * @return a DataTable, possibly empty, of Inventory.
+        */
+        public static DataTable GetAllInventoryBySiteAndCategoryDataTable(int siteID, string category)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectAllBySiteIDAndCategoryStatement, connection);
+
+            //create datatable
+            DataTable dt = new DataTable();
+
+            //two parameters for the query - int siteID and string category
+            cmd.Parameters.AddWithValue("@siteID", siteID);
+            cmd.Parameters.AddWithValue("@category", category);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //execute the SQL statement against the DB
+                //load into the DataTable object
+                dt.Load(cmd.ExecuteReader());
+
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting All Inventory by Site ID and Category");
 
                 connection.Close();
             }
@@ -105,10 +147,13 @@ namespace JeddoreISDPDesktop.DAO_Classes
                     int optimumThreshold = reader.GetInt32("optimumThreshold");
                     string notes = reader.GetString("notes");
                     string siteName = reader.GetString("siteName");
+                    string category = reader.GetString("category");
+                    decimal retailPrice = reader.GetDecimal("retailPrice");
 
                     //create an employee object
                     inv = new Inventory(itemID, siteID, quantity, itemLocation, reorderThreshold,
-                        optimumThreshold, notes, name, description, siteName);
+                        optimumThreshold, notes, name, description, siteName,
+                        category, retailPrice);
                 }
 
                 //close reader after if statement

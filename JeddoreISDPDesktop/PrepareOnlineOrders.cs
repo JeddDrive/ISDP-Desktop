@@ -143,11 +143,13 @@ namespace JeddoreISDPDesktop
                 foreach (DataGridViewRow row in dgvOrders.Rows)
                 {
                     //get the cell values for the following columns
+                    var txnIDCellValue = row.Cells["txnID"].Value;
                     var originSiteCellValue = row.Cells["originSite"].Value;
                     var destinationSiteCellValue = row.Cells["destinationSite"].Value;
                     var txnTypeCellValue = row.Cells["txnType"].Value;
                     var createdDateCellValue = row.Cells["createdDate"].Value;
                     var shippedDateCellValue = row.Cells["shipDate"].Value;
+                    var statusCellValue = row.Cells["status"].Value;
                     var notesCellValue = row.Cells["notes"].Value;
 
                     //if txtbox is empty, then just show all the rows and continue
@@ -155,6 +157,12 @@ namespace JeddoreISDPDesktop
                     {
                         row.Visible = true;
                         continue;
+                    }
+
+                    //else if - txn ID cell converted to string contains the txtbox text
+                    else if (txnIDCellValue != null && txnIDCellValue.ToString().Contains(theSearchText))
+                    {
+                        row.Visible = true;
                     }
 
                     //else if - origin site cell converted to string contains the txtbox text
@@ -177,6 +185,12 @@ namespace JeddoreISDPDesktop
 
                     //else if - shipped date cell converted to lower case contains the txtbox text
                     else if (shippedDateCellValue != null && shippedDateCellValue.ToString().ToLower().Contains(theSearchText))
+                    {
+                        row.Visible = true;
+                    }
+
+                    //else if - status cell converted to lower case contains the txtbox text
+                    else if (statusCellValue != null && statusCellValue.ToString().ToLower().Contains(theSearchText))
                     {
                         row.Visible = true;
                     }

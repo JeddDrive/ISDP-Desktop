@@ -135,6 +135,12 @@
     <Compile Include="ConfirmOrderDelivery.Designer.cs">
       <DependentUpon>ConfirmOrderDelivery.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateLossReturn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateLossReturn.Designer.cs">
+      <DependentUpon>CreateLossReturn.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreateNewOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConfirmOrderDelivery.resx">
       <DependentUpon>ConfirmOrderDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateLossReturn.resx">
+      <DependentUpon>CreateLossReturn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateNewOrder.resx">
       <DependentUpon>CreateNewOrder.cs</DependentUpon>
