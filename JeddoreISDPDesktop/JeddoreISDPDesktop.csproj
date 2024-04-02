@@ -129,11 +129,23 @@
     <Compile Include="CheckDeliveries.Designer.cs">
       <DependentUpon>CheckDeliveries.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConfirmLoss.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfirmLoss.Designer.cs">
+      <DependentUpon>ConfirmLoss.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfirmOrderDelivery.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ConfirmOrderDelivery.Designer.cs">
       <DependentUpon>ConfirmOrderDelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfirmReturn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfirmReturn.Designer.cs">
+      <DependentUpon>ConfirmReturn.cs</DependentUpon>
     </Compile>
     <Compile Include="CreateLossReturn.cs">
       <SubType>Form</SubType>
@@ -336,8 +348,14 @@
     <EmbeddedResource Include="CheckDeliveries.resx">
       <DependentUpon>CheckDeliveries.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ConfirmLoss.resx">
+      <DependentUpon>ConfirmLoss.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConfirmOrderDelivery.resx">
       <DependentUpon>ConfirmOrderDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfirmReturn.resx">
+      <DependentUpon>ConfirmReturn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateLossReturn.resx">
       <DependentUpon>CreateLossReturn.cs</DependentUpon>

@@ -31,10 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateLossReturn));
             this.label3 = new System.Windows.Forms.Label();
-            this.picBullseye = new System.Windows.Forms.PictureBox();
             this.lblLocation = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
-            this.picHelp = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.grpBtnsTwo = new System.Windows.Forms.GroupBox();
@@ -43,16 +41,10 @@
             this.grpInventory = new System.Windows.Forms.GroupBox();
             this.bindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.dgvInventory = new System.Windows.Forms.DataGridView();
             this.grpBasic = new System.Windows.Forms.GroupBox();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -66,14 +58,21 @@
             this.nudQuantity = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.grpList = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.radReturn = new System.Windows.Forms.RadioButton();
+            this.radLoss = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
             this.cboItems = new System.Windows.Forms.ComboBox();
             this.btnAddToList = new System.Windows.Forms.Button();
-            this.radLoss = new System.Windows.Forms.RadioButton();
-            this.radReturn = new System.Windows.Forms.RadioButton();
-            this.label8 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.picBullseye = new System.Windows.Forms.PictureBox();
+            this.picHelp = new System.Windows.Forms.PictureBox();
+            this.btnClearList = new System.Windows.Forms.Button();
             this.grpBtnsTwo.SuspendLayout();
             this.grpInventory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
@@ -82,6 +81,8 @@
             this.grpBasic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantity)).BeginInit();
             this.grpList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -92,16 +93,6 @@
             this.label3.Size = new System.Drawing.Size(354, 50);
             this.label3.TabIndex = 69;
             this.label3.Text = "Create Loss or Return";
-            // 
-            // picBullseye
-            // 
-            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
-            this.picBullseye.Location = new System.Drawing.Point(0, 0);
-            this.picBullseye.Name = "picBullseye";
-            this.picBullseye.Size = new System.Drawing.Size(140, 110);
-            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBullseye.TabIndex = 68;
-            this.picBullseye.TabStop = false;
             // 
             // lblLocation
             // 
@@ -118,17 +109,6 @@
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(0, 28);
             this.lblUsername.TabIndex = 66;
-            // 
-            // picHelp
-            // 
-            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
-            this.picHelp.Location = new System.Drawing.Point(1025, 16);
-            this.picHelp.Name = "picHelp";
-            this.picHelp.Size = new System.Drawing.Size(45, 40);
-            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picHelp.TabIndex = 65;
-            this.picHelp.TabStop = false;
-            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
             // label1
             // 
@@ -228,24 +208,6 @@
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
-            // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
@@ -266,48 +228,10 @@
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorMoveNextItem.Text = "Move next";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorMoveLastItem.Text = "Move last";
-            // 
             // bindingNavigatorSeparator2
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 27);
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
-            this.bindingNavigatorAddNewItem.Visible = false;
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
-            this.bindingNavigatorDeleteItem.Visible = false;
             // 
             // dgvInventory
             // 
@@ -427,6 +351,7 @@
             // 
             // grpList
             // 
+            this.grpList.Controls.Add(this.btnClearList);
             this.grpList.Controls.Add(this.label8);
             this.grpList.Controls.Add(this.radReturn);
             this.grpList.Controls.Add(this.radLoss);
@@ -440,6 +365,42 @@
             this.grpList.Size = new System.Drawing.Size(613, 217);
             this.grpList.TabIndex = 100;
             this.grpList.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
+            this.label8.Location = new System.Drawing.Point(6, 30);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(253, 25);
+            this.label8.TabIndex = 105;
+            this.label8.Text = "Please Select Loss or Return:";
+            // 
+            // radReturn
+            // 
+            this.radReturn.AutoSize = true;
+            this.radReturn.Enabled = false;
+            this.radReturn.Location = new System.Drawing.Point(320, 25);
+            this.radReturn.Name = "radReturn";
+            this.radReturn.Size = new System.Drawing.Size(93, 32);
+            this.radReturn.TabIndex = 104;
+            this.radReturn.TabStop = true;
+            this.radReturn.Text = "Return";
+            this.radReturn.UseVisualStyleBackColor = true;
+            this.radReturn.CheckedChanged += new System.EventHandler(this.radReturn_CheckedChanged);
+            // 
+            // radLoss
+            // 
+            this.radLoss.AutoSize = true;
+            this.radLoss.Enabled = false;
+            this.radLoss.Location = new System.Drawing.Point(223, 25);
+            this.radLoss.Name = "radLoss";
+            this.radLoss.Size = new System.Drawing.Size(73, 32);
+            this.radLoss.TabIndex = 103;
+            this.radLoss.TabStop = true;
+            this.radLoss.Text = "Loss";
+            this.radLoss.UseVisualStyleBackColor = true;
+            this.radLoss.CheckedChanged += new System.EventHandler(this.radLoss_CheckedChanged);
             // 
             // label7
             // 
@@ -466,7 +427,7 @@
             // 
             this.btnAddToList.Enabled = false;
             this.btnAddToList.Font = new System.Drawing.Font("Segoe UI Semibold", 12.5F, System.Drawing.FontStyle.Bold);
-            this.btnAddToList.Location = new System.Drawing.Point(444, 138);
+            this.btnAddToList.Location = new System.Drawing.Point(444, 39);
             this.btnAddToList.Name = "btnAddToList";
             this.btnAddToList.Size = new System.Drawing.Size(147, 63);
             this.btnAddToList.TabIndex = 2;
@@ -474,41 +435,94 @@
             this.btnAddToList.UseVisualStyleBackColor = true;
             this.btnAddToList.Click += new System.EventHandler(this.btnAddToList_Click);
             // 
-            // radLoss
+            // bindingNavigatorMoveFirstItem
             // 
-            this.radLoss.AutoSize = true;
-            this.radLoss.Enabled = false;
-            this.radLoss.Location = new System.Drawing.Point(223, 25);
-            this.radLoss.Name = "radLoss";
-            this.radLoss.Size = new System.Drawing.Size(73, 32);
-            this.radLoss.TabIndex = 103;
-            this.radLoss.TabStop = true;
-            this.radLoss.Text = "Loss";
-            this.radLoss.UseVisualStyleBackColor = true;
-            this.radLoss.CheckedChanged += new System.EventHandler(this.radLoss_CheckedChanged);
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
             // 
-            // radReturn
+            // bindingNavigatorMovePreviousItem
             // 
-            this.radReturn.AutoSize = true;
-            this.radReturn.Enabled = false;
-            this.radReturn.Location = new System.Drawing.Point(320, 25);
-            this.radReturn.Name = "radReturn";
-            this.radReturn.Size = new System.Drawing.Size(93, 32);
-            this.radReturn.TabIndex = 104;
-            this.radReturn.TabStop = true;
-            this.radReturn.Text = "Return";
-            this.radReturn.UseVisualStyleBackColor = true;
-            this.radReturn.CheckedChanged += new System.EventHandler(this.radReturn_CheckedChanged);
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
-            // label8
+            // bindingNavigatorMoveNextItem
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
-            this.label8.Location = new System.Drawing.Point(6, 30);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(253, 25);
-            this.label8.TabIndex = 105;
-            this.label8.Text = "Please Select Loss or Return:";
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMoveNextItem.Text = "Move next";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMoveLastItem.Text = "Move last";
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
+            this.bindingNavigatorAddNewItem.Visible = false;
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.bindingNavigatorDeleteItem.Visible = false;
+            // 
+            // picBullseye
+            // 
+            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
+            this.picBullseye.Location = new System.Drawing.Point(0, 0);
+            this.picBullseye.Name = "picBullseye";
+            this.picBullseye.Size = new System.Drawing.Size(140, 110);
+            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBullseye.TabIndex = 68;
+            this.picBullseye.TabStop = false;
+            // 
+            // picHelp
+            // 
+            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
+            this.picHelp.Location = new System.Drawing.Point(1025, 16);
+            this.picHelp.Name = "picHelp";
+            this.picHelp.Size = new System.Drawing.Size(45, 40);
+            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picHelp.TabIndex = 65;
+            this.picHelp.TabStop = false;
+            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
+            // 
+            // btnClearList
+            // 
+            this.btnClearList.Enabled = false;
+            this.btnClearList.Font = new System.Drawing.Font("Segoe UI Semibold", 12.5F, System.Drawing.FontStyle.Bold);
+            this.btnClearList.Location = new System.Drawing.Point(444, 138);
+            this.btnClearList.Name = "btnClearList";
+            this.btnClearList.Size = new System.Drawing.Size(147, 63);
+            this.btnClearList.TabIndex = 106;
+            this.btnClearList.Text = "&Clear List";
+            this.btnClearList.UseVisualStyleBackColor = true;
+            this.btnClearList.Click += new System.EventHandler(this.btnClearList_Click);
             // 
             // CreateLossReturn
             // 
@@ -541,8 +555,6 @@
             this.Text = "Bullseye Inventory Management System - Create Loss/Return";
             this.Load += new System.EventHandler(this.CreateLossReturn_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CreateLossReturn_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             this.grpBtnsTwo.ResumeLayout(false);
             this.grpInventory.ResumeLayout(false);
             this.grpInventory.PerformLayout();
@@ -554,6 +566,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantity)).EndInit();
             this.grpList.ResumeLayout(false);
             this.grpList.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -603,5 +617,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.RadioButton radReturn;
         private System.Windows.Forms.RadioButton radLoss;
+        private System.Windows.Forms.Button btnClearList;
     }
 }

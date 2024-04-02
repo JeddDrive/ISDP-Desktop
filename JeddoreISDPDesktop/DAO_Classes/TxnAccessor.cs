@@ -58,6 +58,8 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string selectAllOpenOnlineOrdersBySiteStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnType = 'Online Order' and t.status IN ('New', 'Assembling', 'Assembled') and t.siteIDTo = @siteID";
         private static string insertTxnStatement = "insert into `txn` (`siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`) VALUES " +
             "(@siteIDTo, @siteIDFrom, @status, @shipDate, @txnType, @barCode, @createdDate, @emergencyDelivery)";
+        private static string insertLossOrReturnStatement = "insert into `txn` (`siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `notes`) VALUES " +
+            "(@siteIDTo, @siteIDFrom, @status, @shipDate, @txnType, @barCode, @createdDate, @notes)";
         private static string updateTxnShipDateStatement = "update txn set shipDate = @shipDate where txnID = @txnID";
         private static string updateTxnStatusStatement = "update txn set status = @status where txnID = @txnID";
         private static string updateTxnStatusAndDeliveryIDAndSiteIDFromStatement = "update txn set status = @status, deliveryID = @deliveryID, siteIDFrom = @siteIDFrom where txnID = @txnID";
@@ -1241,6 +1243,59 @@ namespace JeddoreISDPDesktop.DAO_Classes
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Inserting Transaction");
+
+                connection.Close();
+            }
+
+            //if rowCount is 1, then non query was good
+            if (rowCount == 1)
+            {
+                goodNonQuery = true;
+            }
+
+            return goodNonQuery;
+        }
+
+        /**
+        * Inserts a new txn - should work for a loss, damage, or return.
+        *
+        * @param txn object
+        * @return bool - if txn was inserted or not
+        */
+        public static bool InsertNewLossOrReturn(Txn txn)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(insertLossOrReturnStatement, connection);
+
+            //many parameters for this insert query
+            cmd.Parameters.AddWithValue("@siteIDTo", txn.siteIDTo);
+            cmd.Parameters.AddWithValue("@siteIDFrom", txn.siteIDFrom);
+            cmd.Parameters.AddWithValue("@status", txn.status);
+            cmd.Parameters.AddWithValue("@shipDate", txn.shipDate);
+            cmd.Parameters.AddWithValue("@txnType", txn.txnType);
+            cmd.Parameters.AddWithValue("@barCode", txn.barCode);
+            cmd.Parameters.AddWithValue("@createdDate", txn.createdDate);
+            cmd.Parameters.AddWithValue("@notes", txn.notes);
+
+            //variable for rowCount
+            int rowCount = 0;
+
+            //bool to be returned
+            bool goodNonQuery = false;
+
+            try
+            {
+                connection.Open();
+
+                //execute a non query
+                rowCount = cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Inserting Loss/Return Transaction");
 
                 connection.Close();
             }

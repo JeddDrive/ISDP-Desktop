@@ -118,6 +118,9 @@ namespace JeddoreISDPDesktop
             //enable the add to list btn
             btnAddToList.Enabled = true;
 
+            //enable the clear list btn
+            btnClearList.Enabled = true;
+
             //enable both radiobuttons
             radLoss.Enabled = true;
             radReturn.Enabled = true;
@@ -258,8 +261,6 @@ namespace JeddoreISDPDesktop
 
         private void btnCreateLoss_Click(object sender, EventArgs e)
         {
-            int selectedRowsCount = dgvInventory.SelectedRows.Count;
-
             //if the wrong radiobutton is checked
             if (!radLoss.Checked)
             {
@@ -275,7 +276,7 @@ namespace JeddoreISDPDesktop
             //if the list doesn't contain any items
             if (listItems.Count < 1)
             {
-                MessageBox.Show("The list of items must contain at least one inventory item to create a loss transaction for.",
+                MessageBox.Show("The list of items for a loss must contain at least one inventory item in order for a loss to be properly created.",
                 "Create Loss Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //clear all selected rows from the dgv
@@ -284,38 +285,12 @@ namespace JeddoreISDPDesktop
                 return;
             }
 
-            //if number of selected rows is not one
-            if (selectedRowsCount != 1)
-            {
-                MessageBox.Show("Must select one row from the data grid in order to create a loss for that inventory item.",
-                    "Create Loss Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //want to send the employee obj to the create loss form - for the employee logged in
+            //and send in the inventory item list
+            ConfirmLoss frmConfirmLoss = new ConfirmLoss(employee, listItems);
 
-                //clear all selected rows from the dgv
-                dgvInventory.ClearSelection();
-            }
-
-            //else - 1 item row is selected
-            else
-            {
-                //get the current row
-                DataGridViewRow dgvRow = dgvInventory.CurrentRow;
-
-                //get the cell with the selected inventory's itemID
-                int itemID = int.Parse(dgvRow.Cells[0].Value.ToString());
-
-                //also get the cell with the siteID
-                int siteID = int.Parse(dgvRow.Cells[4].Value.ToString());
-
-                //can now get the item to edit with just the item ID (primary key)
-                Inventory selectedInventory = InventoryAccessor.GetOneInventoryItem(siteID, itemID);
-
-                //want to send the employee obj to the create loss form - for the employee logged in
-                //and send in the selected item
-                //EditInventory frmEditInventory = new EditInventory(employee, selectedInventory);
-
-                //open the form (modal)
-                //frmEditInventory.ShowDialog();
-            }
+            //open the form (modal)
+            frmConfirmLoss.ShowDialog();
         }
 
         private void dgvInventory_SelectionChanged(object sender, EventArgs e)
@@ -383,6 +358,23 @@ namespace JeddoreISDPDesktop
 
                     selectedInventory.quantity = (int)nudQuantity.Value;
 
+                    //if at least 1 inventory item in the list
+                    if (listItems.Count > 0)
+                    {
+
+                        //foreach loop
+                        foreach (Inventory inventoryItem in listItems)
+                        {
+                            if (inventoryItem.itemID == selectedInventory.itemID)
+                            {
+                                MessageBox.Show("Item has already been added to the loss/return list. Cannot add item again.",
+                                    "Unable to Add Item Twice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                return;
+                            }
+                        }
+                    }
+
                     //add the inventory item to the global list
                     listItems.Add(selectedInventory);
 
@@ -405,6 +397,23 @@ namespace JeddoreISDPDesktop
                     Inventory selectedInventory = InventoryAccessor.GetOneInventoryItem(siteID, itemID);
 
                     selectedInventory.quantity = (int)nudQuantity.Value;
+
+                    //if at least 1 inventory item in the list
+                    if (listItems.Count > 0)
+                    {
+
+                        //foreach loop
+                        foreach (Inventory inventoryItem in listItems)
+                        {
+                            if (inventoryItem.itemID == selectedInventory.itemID)
+                            {
+                                MessageBox.Show("Item has already been added to the loss/return list. Cannot add item again.",
+                                    "Unable to Add Item Twice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                return;
+                            }
+                        }
+                    }
 
                     //add the inventory item to the global list
                     listItems.Add(selectedInventory);
@@ -468,7 +477,55 @@ namespace JeddoreISDPDesktop
 
         private void btnProcessReturn_Click(object sender, EventArgs e)
         {
+            //if the wrong radiobutton is checked
+            if (!radReturn.Checked)
+            {
+                MessageBox.Show("Must select the Return radiobutton towards the bottom of this form when creating and processing a return.",
+                "Process Return Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                //clear all selected rows from the dgv
+                dgvInventory.ClearSelection();
+
+                return;
+            }
+
+            //if the list doesn't contain any items
+            if (listItems.Count < 1)
+            {
+                MessageBox.Show("The list of items for a return must contain at least one inventory item in order for a return to be properly created and processed.",
+                "Process Return Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //clear all selected rows from the dgv
+                dgvInventory.ClearSelection();
+
+                return;
+            }
+
+            //want to send the employee obj to the process return form - for the employee logged in
+            //and send in the inventory item list
+            ConfirmReturn frmConfirmReturn = new ConfirmReturn(employee, listItems);
+
+            //open the form (modal)
+            frmConfirmReturn.ShowDialog();
+        }
+
+        private void btnClearList_Click(object sender, EventArgs e)
+        {
+            //if at least one item has been added to the list
+            if (listItems.Count > 0)
+            {
+                //clear the items list and combobox
+                listItems.Clear();
+                cboItems.Items.Clear();
+
+                MessageBox.Show("The list of inventory items has been successfully cleared.", "List Cleared");
+            }
+
+            else
+            {
+                MessageBox.Show("Unable to clear the list of inventory items since it currently has zero items.", "List Not Cleared",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

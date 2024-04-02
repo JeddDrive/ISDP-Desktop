@@ -398,8 +398,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1002, 'EDITITEM', 0),
 (1002, 'DELIVERY', 0),
 (1002, 'MODIFYRECORD', 0),
-(1002, 'CREATELOSS', 0),
-(1002, 'PROCESSRETURN', 0),
+(1002, 'CREATELOSS', 1),
+(1002, 'PROCESSRETURN', 1),
 (1002, 'ADDNEWPRODUCT', 0),
 (1002, 'EDITPRODUCT', 0),
 (1002, 'CREATESUPPLIERORDER', 0),
@@ -422,8 +422,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'DELIVERY', 0),
 (1003, 'ACCEPTSTOREORDER', 0),
 (1003, 'MODIFYRECORD', 0),
-(1003, 'CREATELOSS', 0),
-(1003, 'PROCESSRETURN', 0),
+(1003, 'CREATELOSS', 1),
+(1003, 'PROCESSRETURN', 1),
 (1003, 'ADDNEWPRODUCT', 0),
 (1003, 'EDITPRODUCT', 0),
 (1003, 'CREATESUPPLIERORDER', 0),
@@ -478,8 +478,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1005, 'EDITITEM', 0),
 (1005, 'DELIVERY', 0),
 (1005, 'MODIFYRECORD', 0),
-(1005, 'CREATELOSS', 0),
-(1005, 'PROCESSRETURN', 0),
+(1005, 'CREATELOSS', 1),
+(1005, 'PROCESSRETURN', 1),
 (1005, 'ADDNEWPRODUCT', 0),
 (1005, 'EDITPRODUCT', 0),
 (1005, 'CREATESUPPLIERORDER', 0),
@@ -505,8 +505,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1006, 'EDITITEM', 0),
 (1006, 'DELIVERY', 0),
 (1006, 'MODIFYRECORD', 0),
-(1006, 'CREATELOSS', 0),
-(1006, 'PROCESSRETURN', 0),
+(1006, 'CREATELOSS', 1),
+(1006, 'PROCESSRETURN', 1),
 (1006, 'ADDNEWPRODUCT', 0),
 (1006, 'EDITPRODUCT', 0),
 (1006, 'CREATESUPPLIERORDER', 0),
@@ -532,8 +532,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1007, 'EDITITEM', 0),
 (1007, 'DELIVERY', 0),
 (1007, 'MODIFYRECORD', 0),
-(1007, 'CREATELOSS', 0),
-(1007, 'PROCESSRETURN', 0),
+(1007, 'CREATELOSS', 1),
+(1007, 'PROCESSRETURN', 1),
 (1007, 'ADDNEWPRODUCT', 0),
 (1007, 'EDITPRODUCT', 0),
 (1007, 'CREATESUPPLIERORDER', 0),
@@ -559,8 +559,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1008, 'EDITITEM', 0),
 (1008, 'DELIVERY', 0),
 (1008, 'MODIFYRECORD', 0),
-(1008, 'CREATELOSS', 0),
-(1008, 'PROCESSRETURN', 0),
+(1008, 'CREATELOSS', 1),
+(1008, 'PROCESSRETURN', 1),
 (1008, 'ADDNEWPRODUCT', 0),
 (1008, 'EDITPRODUCT', 0),
 (1008, 'CREATESUPPLIERORDER', 0),
@@ -586,8 +586,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1009, 'EDITITEM', 0),
 (1009, 'DELIVERY', 0),
 (1009, 'MODIFYRECORD', 0),
-(1009, 'CREATELOSS', 0),
-(1009, 'PROCESSRETURN', 0),
+(1009, 'CREATELOSS', 1),
+(1009, 'PROCESSRETURN', 1),
 (1009, 'ADDNEWPRODUCT', 0),
 (1009, 'EDITPRODUCT', 0),
 (1009, 'CREATESUPPLIERORDER', 0),
@@ -613,8 +613,8 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1010, 'EDITITEM', 0),
 (1010, 'DELIVERY', 0),
 (1010, 'MODIFYRECORD', 0),
-(1010, 'CREATELOSS', 0),
-(1010, 'PROCESSRETURN', 0),
+(1010, 'CREATELOSS', 1),
+(1010, 'PROCESSRETURN', 1),
 (1010, 'ADDNEWPRODUCT', 0),
 (1010, 'EDITPRODUCT', 0),
 (1010, 'CREATESUPPLIERORDER', 0),
@@ -1419,12 +1419,44 @@ where siteID = inSiteIDFrom and itemID = inItemID;
 -- NOTE: may try and find an alternative fix for this later
 IF quantityVar2 < 0 THEN
 
--- then update the quantity for the item in the warehouse to be 0
+-- then update the quantity for the item in the store to be 0
 update inventory
 set quantity = 0
 where siteID = inSiteIDFrom and itemID = inItemID;
 
 END IF;
+
+END $$
+
+DELIMITER ;
+
+-- stored procedure #10
+DELIMITER $$
+
+CREATE PROCEDURE addInventoryToStore(
+IN inQuantity int,
+IN inItemID int,
+IN inSiteIDFrom int
+)
+BEGIN
+
+-- shouldn't need a cursor for this stored procedure
+-- declare variables here before the select statement below
+-- need variables for each field in the SELECT statement below
+declare itemIDVar int;
+declare quantityVar int;
+
+-- getting the current quantity of the item in the store
+-- based on the siteID sent into this procedure
+select itemID, quantity
+into itemIDVar, quantityVar
+from inventory
+where siteID = inSiteIDFrom and itemID = inItemID;
+
+-- update the inventory table - for the one specific item at the site ID sent in
+update inventory
+set quantity = quantityVar + inQuantity
+where siteID = inSiteIDFrom and itemID = inItemID;
 
 END $$
 
@@ -1484,7 +1516,7 @@ END$$
 
 DELIMITER ;
 
--- Trigger #7 - for automatically removing quantity for an item back from the warehouse inventory
+-- Trigger #7 - for automatically removing OR adding quantity for txn items into a site's inventory
 -- after INSERTs on the txnitems table
 DELIMITER $$
 
@@ -1495,22 +1527,40 @@ BEGIN
 
 declare txnTypeVar varchar(20);
 declare siteIDFromVar int;
+declare notesVar varchar(255);
+declare notesVar2 varchar(255);
 
-select txnType, siteIDFrom
-into txnTypeVar, siteIDFromVar
+select txnType, siteIDFrom, notes
+into txnTypeVar, siteIDFromVar, notesVar
 from txn
 where txnID = new.txnID;
+
+select notes
+into notesVar2
+from txnitems
+where txnID = new.txnID and itemID = new.itemID;
 
 IF txnTypeVar IN ('Store Order', 'Emergency') THEN
 -- call the stored procedure from this trigger
 -- are removing the item quantity now in this txn from the warehouse inventory
 CALL removeInventoryFromWarehouse(new.quantity, new.itemID);
 
-ELSEIF txnTypeVar = 'Online Order' then
+-- else if - the txn type is an online order, loss, OR damage
+-- and the notes field does not contain Bad Condition
+ELSEIF txnTypeVar IN ('Online Order', 'Loss', 'Damage') then
 
 -- call stored procedure from this trigger 
 -- are removing the item quantity now in this txn (online order) from the store inventory
 CALL removeInventoryFromStore(new.quantity, new.itemID, siteIDFromVar);
+
+-- else if - the txn type is a return
+-- and the notes field contains Good Condition, then can add the item(s) back to the store inventory
+ELSEIF txnTypeVar = 'Return' and notesVar2 LIKE '%Good Condition Item Return:%' then
+-- ELSEIF txnTypeVar = 'Return' and notes LIKE '%Good Condition%' then
+
+-- call stored procedure from this trigger 
+-- are removing the item quantity now in this txn (online order) from the store inventory
+CALL addInventoryToStore(new.quantity, new.itemID, siteIDFromVar);
 
 END IF;
 

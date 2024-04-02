@@ -3,36 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\createlossreturn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\createlossreturn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\edititem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\edititem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\createlossreturn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\createlossreturn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\entity_classes\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\entity_classes\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\dao_classes\\inventoryaccessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\dao_classes\\inventoryaccessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\inventorymanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\inventorymanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\modifytransactionrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\modifytransactionrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\modifytransactionrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\modifytransactionrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\inventorymanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\inventorymanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\editinventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\editinventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -45,60 +21,6 @@
           "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "InventoryManagement.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\InventoryManagement.cs",
-              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\InventoryManagement.cs",
-              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\InventoryManagement.cs [Design]",
-              "RelativeToolTip": "JeddoreISDPDesktop\\InventoryManagement.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-27T13:25:59.472Z",
-              "IsPinned": true,
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "InventoryManagement.cs",
-              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\InventoryManagement.cs",
-              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\InventoryManagement.cs",
-              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\InventoryManagement.cs",
-              "RelativeToolTip": "JeddoreISDPDesktop\\InventoryManagement.cs",
-              "ViewState": "AQIAANoAAAAAAAAAAAAvwOoAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-27T13:59:24.88Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CreateLossReturn.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\CreateLossReturn.cs",
-              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\CreateLossReturn.cs",
-              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\CreateLossReturn.cs [Design]",
-              "RelativeToolTip": "JeddoreISDPDesktop\\CreateLossReturn.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-27T13:25:37.488Z",
-              "IsPinned": true,
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CreateLossReturn.cs",
-              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\CreateLossReturn.cs",
-              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\CreateLossReturn.cs",
-              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\CreateLossReturn.cs",
-              "RelativeToolTip": "JeddoreISDPDesktop\\CreateLossReturn.cs",
-              "ViewState": "AQIAAGMBAAAAAAAAAAAiwNYBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-27T13:59:47.872Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
@@ -108,54 +30,27 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ModifyTransactionRecord.cs",
-              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\ModifyTransactionRecord.cs",
-              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\ModifyTransactionRecord.cs",
-              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\ModifyTransactionRecord.cs",
-              "RelativeToolTip": "JeddoreISDPDesktop\\ModifyTransactionRecord.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAAADEAAABCAAAA",
+              "DocumentIndex": 0,
+              "Title": "EditItem.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\EditItem.cs",
+              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\EditItem.cs",
+              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\EditItem.cs [Design]",
+              "RelativeToolTip": "JeddoreISDPDesktop\\EditItem.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-27T14:59:31.031Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ModifyTransactionRecord.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\ModifyTransactionRecord.cs",
-              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\ModifyTransactionRecord.cs",
-              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\ModifyTransactionRecord.cs [Design]",
-              "RelativeToolTip": "JeddoreISDPDesktop\\ModifyTransactionRecord.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-27T14:58:43.209Z",
+              "WhenOpened": "2024-04-02T20:36:40.218Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Inventory.cs",
-              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\Entity_Classes\\Inventory.cs",
-              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\Entity_Classes\\Inventory.cs",
-              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\Entity_Classes\\Inventory.cs",
-              "RelativeToolTip": "JeddoreISDPDesktop\\Entity_Classes\\Inventory.cs",
-              "ViewState": "AQIAACYAAAAAAAAAAADwvzkAAAAiAAAA",
+              "DocumentIndex": 1,
+              "Title": "EditInventory.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\EditInventory.cs",
+              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\EditInventory.cs",
+              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\EditInventory.cs [Design]",
+              "RelativeToolTip": "JeddoreISDPDesktop\\EditInventory.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-27T14:25:08.454Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "InventoryAccessor.cs",
-              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\DAO_Classes\\InventoryAccessor.cs",
-              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\DAO_Classes\\InventoryAccessor.cs",
-              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\DAO_Classes\\InventoryAccessor.cs",
-              "RelativeToolTip": "JeddoreISDPDesktop\\DAO_Classes\\InventoryAccessor.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAAAFMAAAA7AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-27T14:24:17.777Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-02T20:39:05.282Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }

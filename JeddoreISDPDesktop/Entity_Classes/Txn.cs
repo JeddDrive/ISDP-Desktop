@@ -109,5 +109,21 @@ namespace JeddoreISDPDesktop.Entity_Classes
             createdDate = inCreatedDate;
             notes = inNotes;
         }
+
+        //custom constructor #6
+        //can be used for txn inserts (ex. Loss/Damage)
+        public Txn(int inTxnID, int inSiteIDTo, int inSiteIDFrom, string inStatus, DateTime inShipDate, DateTime inCreatedDate, string inTxnType,
+            string inBarCode, string inNotes)
+        {
+            txnID = inTxnID;
+            siteIDTo = inSiteIDTo;
+            siteIDFrom = inSiteIDFrom;
+            status = inStatus;
+            shipDate = inShipDate;
+            createdDate = inCreatedDate;
+            txnType = inTxnType;
+            barCode = inBarCode;
+            notes = inNotes;
+        }
     }
 }
