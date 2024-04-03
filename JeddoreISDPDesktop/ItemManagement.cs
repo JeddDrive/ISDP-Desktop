@@ -37,6 +37,22 @@ namespace JeddoreISDPDesktop
             //display the employee's username and location in this form
             lblUsername.Text = employee.username;
             lblLocation.Text = employee.siteName;
+
+            //get the employee's user permissions
+            UserPermission employeeUserPermissions = UserPermissionAccessor.GetOneEmployeeUserPermissions(employee.employeeID);
+
+            //check the list for EDITITEM or EDITPRODUCT
+            if (employeeUserPermissions.permissionIDList.Contains("EDITITEM") ||
+                employeeUserPermissions.permissionIDList.Contains("EDITPRODUCT"))
+            {
+                btnEdit.Enabled = true;
+            }
+
+            //check the list for ADDNEWPRODUCT
+            if (employeeUserPermissions.permissionIDList.Contains("ADDNEWPRODUCT"))
+            {
+                btnAdd.Enabled = true;
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -175,9 +191,11 @@ namespace JeddoreISDPDesktop
                 //can now get the item to edit with just the item ID (primary key)
                 Item selectedItem = ItemAccessor.GetOneItem(itemID);
 
-                //want to send the employee obj to the add user form - for the employee logged in
+                //want to send the employee obj to the add/edit item form - for the employee logged in
                 //and send in the selected item
                 EditItem frmEditItem = new EditItem(employee, selectedItem);
+
+                frmEditItem.Text += "Edit Product Item";
 
                 //open the add/edit user form (modal)
                 frmEditItem.ShowDialog();
@@ -199,6 +217,18 @@ namespace JeddoreISDPDesktop
                 "\n\nClick on the 'refresh' button to load the items data grid.", "Item Management Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            //want to send the employee obj to the add/edit item form - for the employee logged in
+            //NOT sending in any product item since this is for an add
+            EditItem frmAddItem = new EditItem(employee);
+
+            frmAddItem.Text += "Add Product Item";
+
+            //open the add/edit user form (modal)
+            frmAddItem.ShowDialog();
         }
     }
 }

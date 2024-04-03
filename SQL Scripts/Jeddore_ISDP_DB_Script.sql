@@ -272,7 +272,11 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1007, 'PREPAREONLINEORDER', 1),
 (1008, 'PREPAREONLINEORDER', 1),
 (1009, 'PREPAREONLINEORDER', 1),
-(1010, 'PREPAREONLINEORDER', 1);
+(1010, 'PREPAREONLINEORDER', 1),
+-- adding EDITPRODUCT for the admin and warehouse manager
+(1003, 'EDITPRODUCT', 1),
+-- adding ADDNEWPRODUCT for the admin and warehouse manager
+(1003, 'ADDNEWPRODUCT', 1);
 
 -- for all records currently in the user_permission table, set hasPermission to 1
 -- since all admin records in this table right now are all permissions that the admin user should have
@@ -424,8 +428,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'MODIFYRECORD', 0),
 (1003, 'CREATELOSS', 1),
 (1003, 'PROCESSRETURN', 1),
-(1003, 'ADDNEWPRODUCT', 0),
-(1003, 'EDITPRODUCT', 0),
 (1003, 'CREATESUPPLIERORDER', 0),
 (1003, 'CREATEREPORT', 0),
 (1003, 'PICKUPSTOREORDER', 0),

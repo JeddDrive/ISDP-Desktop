@@ -50,15 +50,8 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblSKU = new System.Windows.Forms.Label();
-            this.lblName = new System.Windows.Forms.Label();
-            this.lblCaseSize = new System.Windows.Forms.Label();
-            this.lblWeight = new System.Windows.Forms.Label();
-            this.lblCategory = new System.Windows.Forms.Label();
-            this.lblCostPrice = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.lblRetailPrice = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.lblSupplierID = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -68,10 +61,21 @@
             this.txtImageFileLocation = new System.Windows.Forms.TextBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.nudWeight = new System.Windows.Forms.NumericUpDown();
+            this.nudCaseSize = new System.Windows.Forms.NumericUpDown();
+            this.cboCategories = new System.Windows.Forms.ComboBox();
+            this.cboSuppliers = new System.Windows.Forms.ComboBox();
+            this.nudCostPrice = new System.Windows.Forms.NumericUpDown();
+            this.nudRetailPrice = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             this.grpBasic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picItemImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudWeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCaseSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCostPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRetailPrice)).BeginInit();
             this.SuspendLayout();
             // 
             // picBullseye
@@ -123,7 +127,7 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(591, 184);
+            this.chkActive.Location = new System.Drawing.Point(569, 183);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(137, 32);
             this.chkActive.TabIndex = 2;
@@ -132,10 +136,10 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(159, 302);
+            this.txtDescription.Location = new System.Drawing.Point(156, 302);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(392, 34);
-            this.txtDescription.TabIndex = 0;
+            this.txtDescription.TabIndex = 1;
             // 
             // lblItemID
             // 
@@ -215,7 +219,7 @@
             this.grpBasic.Controls.Add(this.btnAddImage);
             this.grpBasic.Controls.Add(this.btnSave);
             this.grpBasic.Controls.Add(this.btnCancel);
-            this.grpBasic.Location = new System.Drawing.Point(451, 575);
+            this.grpBasic.Location = new System.Drawing.Point(551, 575);
             this.grpBasic.Name = "grpBasic";
             this.grpBasic.Size = new System.Drawing.Size(319, 191);
             this.grpBasic.TabIndex = 53;
@@ -227,7 +231,7 @@
             this.btnAddImage.Location = new System.Drawing.Point(166, 33);
             this.btnAddImage.Name = "btnAddImage";
             this.btnAddImage.Size = new System.Drawing.Size(147, 63);
-            this.btnAddImage.TabIndex = 1;
+            this.btnAddImage.TabIndex = 2;
             this.btnAddImage.Text = "&Add Item Image";
             this.btnAddImage.UseVisualStyleBackColor = true;
             this.btnAddImage.Click += new System.EventHandler(this.btnAddImageLink_Click);
@@ -250,7 +254,7 @@
             this.btnCancel.Location = new System.Drawing.Point(6, 121);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(147, 63);
-            this.btnCancel.TabIndex = 2;
+            this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -265,56 +269,6 @@
             this.lblSKU.TabIndex = 67;
             this.lblSKU.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblName
-            // 
-            this.lblName.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblName.Enabled = false;
-            this.lblName.Location = new System.Drawing.Point(159, 184);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(392, 34);
-            this.lblName.TabIndex = 68;
-            this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblCaseSize
-            // 
-            this.lblCaseSize.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblCaseSize.Enabled = false;
-            this.lblCaseSize.Location = new System.Drawing.Point(159, 479);
-            this.lblCaseSize.Name = "lblCaseSize";
-            this.lblCaseSize.Size = new System.Drawing.Size(86, 34);
-            this.lblCaseSize.TabIndex = 69;
-            this.lblCaseSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblWeight
-            // 
-            this.lblWeight.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblWeight.Enabled = false;
-            this.lblWeight.Location = new System.Drawing.Point(159, 420);
-            this.lblWeight.Name = "lblWeight";
-            this.lblWeight.Size = new System.Drawing.Size(86, 34);
-            this.lblWeight.TabIndex = 70;
-            this.lblWeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblCategory
-            // 
-            this.lblCategory.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblCategory.Enabled = false;
-            this.lblCategory.Location = new System.Drawing.Point(159, 361);
-            this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(274, 34);
-            this.lblCategory.TabIndex = 71;
-            this.lblCategory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblCostPrice
-            // 
-            this.lblCostPrice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblCostPrice.Enabled = false;
-            this.lblCostPrice.Location = new System.Drawing.Point(159, 538);
-            this.lblCostPrice.Name = "lblCostPrice";
-            this.lblCostPrice.Size = new System.Drawing.Size(133, 34);
-            this.lblCostPrice.TabIndex = 73;
-            this.lblCostPrice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -324,16 +278,6 @@
             this.label11.TabIndex = 72;
             this.label11.Text = "Cost Price:";
             // 
-            // lblRetailPrice
-            // 
-            this.lblRetailPrice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblRetailPrice.Enabled = false;
-            this.lblRetailPrice.Location = new System.Drawing.Point(159, 597);
-            this.lblRetailPrice.Name = "lblRetailPrice";
-            this.lblRetailPrice.Size = new System.Drawing.Size(133, 34);
-            this.lblRetailPrice.TabIndex = 75;
-            this.lblRetailPrice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -342,16 +286,6 @@
             this.label12.Size = new System.Drawing.Size(116, 28);
             this.label12.TabIndex = 74;
             this.label12.Text = "Retail Price:";
-            // 
-            // lblSupplierID
-            // 
-            this.lblSupplierID.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblSupplierID.Enabled = false;
-            this.lblSupplierID.Location = new System.Drawing.Point(159, 656);
-            this.lblSupplierID.Name = "lblSupplierID";
-            this.lblSupplierID.Size = new System.Drawing.Size(133, 34);
-            this.lblSupplierID.TabIndex = 77;
-            this.lblSupplierID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label14
             // 
@@ -367,8 +301,8 @@
             this.txtNotes.Location = new System.Drawing.Point(159, 715);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(274, 51);
-            this.txtNotes.TabIndex = 1;
+            this.txtNotes.Size = new System.Drawing.Size(386, 51);
+            this.txtNotes.TabIndex = 6;
             // 
             // label13
             // 
@@ -388,7 +322,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(357, 423);
+            this.label10.Location = new System.Drawing.Point(460, 434);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(194, 28);
             this.label10.TabIndex = 80;
@@ -399,7 +333,7 @@
             this.picItemImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picItemImage.Location = new System.Drawing.Point(569, 233);
             this.picItemImage.Name = "picItemImage";
-            this.picItemImage.Size = new System.Drawing.Size(195, 198);
+            this.picItemImage.Size = new System.Drawing.Size(295, 198);
             this.picItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picItemImage.TabIndex = 82;
             this.picItemImage.TabStop = false;
@@ -407,7 +341,7 @@
             // txtImageFileLocation
             // 
             this.txtImageFileLocation.Enabled = false;
-            this.txtImageFileLocation.Location = new System.Drawing.Point(362, 462);
+            this.txtImageFileLocation.Location = new System.Drawing.Point(465, 473);
             this.txtImageFileLocation.Multiline = true;
             this.txtImageFileLocation.Name = "txtImageFileLocation";
             this.txtImageFileLocation.Size = new System.Drawing.Size(402, 93);
@@ -416,7 +350,7 @@
             // picHelp
             // 
             this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
-            this.picHelp.Location = new System.Drawing.Point(725, 16);
+            this.picHelp.Location = new System.Drawing.Point(825, 12);
             this.picHelp.Name = "picHelp";
             this.picHelp.Size = new System.Drawing.Size(45, 40);
             this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -424,29 +358,151 @@
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(159, 178);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(392, 34);
+            this.txtName.TabIndex = 0;
+            // 
+            // nudWeight
+            // 
+            this.nudWeight.DecimalPlaces = 2;
+            this.nudWeight.Increment = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            this.nudWeight.Location = new System.Drawing.Point(159, 414);
+            this.nudWeight.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.nudWeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nudWeight.Name = "nudWeight";
+            this.nudWeight.Size = new System.Drawing.Size(92, 34);
+            this.nudWeight.TabIndex = 3;
+            this.nudWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudWeight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            // 
+            // nudCaseSize
+            // 
+            this.nudCaseSize.Location = new System.Drawing.Point(159, 477);
+            this.nudCaseSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudCaseSize.Name = "nudCaseSize";
+            this.nudCaseSize.Size = new System.Drawing.Size(92, 34);
+            this.nudCaseSize.TabIndex = 4;
+            this.nudCaseSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudCaseSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // cboCategories
+            // 
+            this.cboCategories.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCategories.FormattingEnabled = true;
+            this.cboCategories.Location = new System.Drawing.Point(159, 353);
+            this.cboCategories.Name = "cboCategories";
+            this.cboCategories.Size = new System.Drawing.Size(304, 36);
+            this.cboCategories.TabIndex = 2;
+            // 
+            // cboSuppliers
+            // 
+            this.cboSuppliers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSuppliers.FormattingEnabled = true;
+            this.cboSuppliers.Location = new System.Drawing.Point(159, 653);
+            this.cboSuppliers.Name = "cboSuppliers";
+            this.cboSuppliers.Size = new System.Drawing.Size(304, 36);
+            this.cboSuppliers.TabIndex = 5;
+            // 
+            // nudCostPrice
+            // 
+            this.nudCostPrice.DecimalPlaces = 2;
+            this.nudCostPrice.Enabled = false;
+            this.nudCostPrice.Location = new System.Drawing.Point(159, 532);
+            this.nudCostPrice.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            131072});
+            this.nudCostPrice.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nudCostPrice.Name = "nudCostPrice";
+            this.nudCostPrice.Size = new System.Drawing.Size(133, 34);
+            this.nudCostPrice.TabIndex = 85;
+            this.nudCostPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudCostPrice.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            // 
+            // nudRetailPrice
+            // 
+            this.nudRetailPrice.DecimalPlaces = 2;
+            this.nudRetailPrice.Enabled = false;
+            this.nudRetailPrice.Location = new System.Drawing.Point(159, 595);
+            this.nudRetailPrice.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            131072});
+            this.nudRetailPrice.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nudRetailPrice.Name = "nudRetailPrice";
+            this.nudRetailPrice.Size = new System.Drawing.Size(133, 34);
+            this.nudRetailPrice.TabIndex = 86;
+            this.nudRetailPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudRetailPrice.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            // 
             // EditItem
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(782, 778);
+            this.ClientSize = new System.Drawing.Size(882, 778);
+            this.Controls.Add(this.nudRetailPrice);
+            this.Controls.Add(this.nudCostPrice);
+            this.Controls.Add(this.cboSuppliers);
+            this.Controls.Add(this.cboCategories);
+            this.Controls.Add(this.nudCaseSize);
+            this.Controls.Add(this.nudWeight);
+            this.Controls.Add(this.txtName);
             this.Controls.Add(this.picHelp);
             this.Controls.Add(this.txtImageFileLocation);
             this.Controls.Add(this.picItemImage);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtNotes);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.lblSupplierID);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.lblRetailPrice);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.lblCostPrice);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.lblCategory);
-            this.Controls.Add(this.lblWeight);
-            this.Controls.Add(this.lblCaseSize);
-            this.Controls.Add(this.lblName);
             this.Controls.Add(this.lblSKU);
             this.Controls.Add(this.chkActive);
             this.Controls.Add(this.txtDescription);
@@ -471,13 +527,17 @@
             this.Name = "EditItem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "";
-            this.Text = "Bullseye Inventory Management System - Edit Item";
+            this.Text = "Bullseye Inventory Management System - ";
             this.Load += new System.EventHandler(this.EditItem_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditItem_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             this.grpBasic.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picItemImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudWeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCaseSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCostPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRetailPrice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -504,15 +564,8 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblSKU;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblCaseSize;
-        private System.Windows.Forms.Label lblWeight;
-        private System.Windows.Forms.Label lblCategory;
-        private System.Windows.Forms.Label lblCostPrice;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label lblRetailPrice;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label lblSupplierID;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.Label label13;
@@ -523,5 +576,12 @@
         private System.Windows.Forms.TextBox txtImageFileLocation;
         private System.Windows.Forms.PictureBox picHelp;
         private System.Windows.Forms.ToolTip toolTipHelp;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.NumericUpDown nudWeight;
+        private System.Windows.Forms.NumericUpDown nudCaseSize;
+        private System.Windows.Forms.ComboBox cboCategories;
+        private System.Windows.Forms.ComboBox cboSuppliers;
+        private System.Windows.Forms.NumericUpDown nudCostPrice;
+        private System.Windows.Forms.NumericUpDown nudRetailPrice;
     }
 }

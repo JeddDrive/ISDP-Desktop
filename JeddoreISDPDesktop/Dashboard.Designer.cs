@@ -215,7 +215,7 @@
             this.btnEditItem.Name = "btnEditItem";
             this.btnEditItem.Size = new System.Drawing.Size(456, 63);
             this.btnEditItem.TabIndex = 21;
-            this.btnEditItem.Text = "&Edit Item";
+            this.btnEditItem.Text = "&Edit/Add Product Items";
             this.btnEditItem.UseVisualStyleBackColor = true;
             this.btnEditItem.Click += new System.EventHandler(this.btnEditItem_Click);
             // 

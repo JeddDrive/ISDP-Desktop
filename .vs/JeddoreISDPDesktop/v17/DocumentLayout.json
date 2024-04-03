@@ -7,7 +7,23 @@
       "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\edititem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\editinventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\edititem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\edititem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\itemmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\itemmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\itemmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\itemmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|c:\\users\\nickj\\documents\\1 - nbcc files (it-pa 2022)\\term 5\\isdp\\jeddoreisdpproject\\jeddoreisdpdesktop\\jeddoreisdpdesktop\\dao_classes\\itemaccessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\dao_classes\\itemaccessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\jeddoreisdpdesktop\\editinventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{4A239FFB-A3B9-4D5B-B8DB-D6ADBB1940B5}|JeddoreISDPDesktop\\JeddoreISDPDesktop.csproj|solutionrelative:jeddoreisdpdesktop\\editinventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -21,12 +37,31 @@
           "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ItemManagement.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\ItemManagement.cs",
+              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\ItemManagement.cs",
+              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\ItemManagement.cs [Design]",
+              "RelativeToolTip": "JeddoreISDPDesktop\\ItemManagement.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T13:12:03.656Z",
+              "IsPinned": true,
+              "EditorCaption": " [Design]"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ItemManagement.cs",
+              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\ItemManagement.cs",
+              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\ItemManagement.cs",
+              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\ItemManagement.cs",
+              "RelativeToolTip": "JeddoreISDPDesktop\\ItemManagement.cs",
+              "ViewState": "AQIAALsAAAAAAAAAAAAiwMgAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T13:45:55.84Z",
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -38,11 +73,48 @@
               "RelativeToolTip": "JeddoreISDPDesktop\\EditItem.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-02T20:36:40.218Z",
+              "IsPinned": true,
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "EditItem.cs",
+              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\EditItem.cs",
+              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\EditItem.cs",
+              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\EditItem.cs",
+              "RelativeToolTip": "JeddoreISDPDesktop\\EditItem.cs",
+              "ViewState": "AQIAAHsAAAAAAAAAAAAiwIkAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T13:16:26.63Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ItemAccessor.cs",
+              "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\DAO_Classes\\ItemAccessor.cs",
+              "RelativeDocumentMoniker": "JeddoreISDPDesktop\\DAO_Classes\\ItemAccessor.cs",
+              "ToolTip": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\DAO_Classes\\ItemAccessor.cs",
+              "RelativeToolTip": "JeddoreISDPDesktop\\DAO_Classes\\ItemAccessor.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAALIBAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T13:03:05.002Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "EditInventory.cs [Design]",
               "DocumentMoniker": "C:\\Users\\nickj\\Documents\\1 - NBCC Files (IT-PA 2022)\\Term 5\\ISDP\\JeddoreISDPProject\\JeddoreISDPDesktop\\JeddoreISDPDesktop\\EditInventory.cs",
               "RelativeDocumentMoniker": "JeddoreISDPDesktop\\EditInventory.cs",

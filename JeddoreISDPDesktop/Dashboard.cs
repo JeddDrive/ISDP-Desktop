@@ -53,8 +53,10 @@ namespace JeddoreISDPDesktop
                 btnSetUserPermissions.Enabled = true;
             }
 
-            //check the list for EDITITEM
-            if (employeeUserPermissions.permissionIDList.Contains("EDITITEM"))
+            //check the list for EDITITEM, EDITPRODUCT, or ADDNEWPRODUCT
+            if (employeeUserPermissions.permissionIDList.Contains("EDITITEM") ||
+                employeeUserPermissions.permissionIDList.Contains("EDITPRODUCT") ||
+                employeeUserPermissions.permissionIDList.Contains("ADDNEWPRODUCT"))
             {
                 btnEditItem.Enabled = true;
             }
