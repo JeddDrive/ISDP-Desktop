@@ -2,6 +2,7 @@
 using JeddoreISDPDesktop.Entity_Classes;
 using System;
 using System.Windows.Forms;
+using Site = JeddoreISDPDesktop.Entity_Classes.Site;
 
 namespace JeddoreISDPDesktop
 {
@@ -127,6 +128,12 @@ namespace JeddoreISDPDesktop
             if (employeeUserPermissions.permissionIDList.Contains("PREPAREONLINEORDER"))
             {
                 btnPrepareOnlineOrder.Enabled = true;
+            }
+
+            //check the list for CREATESUPPLIERORDER
+            if (employeeUserPermissions.permissionIDList.Contains("CREATESUPPLIERORDER"))
+            {
+                btnCreateSupplierOrder.Enabled = true;
             }
 
             //check the list for CREATELOSS or PROCESSRETURN
@@ -296,8 +303,6 @@ namespace JeddoreISDPDesktop
 
             Txn newOrder = TxnAccessor.GetOneNewOrder(employee.siteID);
 
-            Txn activeOrder = TxnAccessor.GetOneActiveOrder(employee.siteID);
-
             //if number of active NEW orders is 0 then, take the user to the create new order form
             if (numActiveNewOrders == 0)
             {
@@ -318,14 +323,6 @@ namespace JeddoreISDPDesktop
                 //open the edit order form (modal)
                 frmEditOrder.ShowDialog();
             }
-
-            /* else
-            {
-                //display msg that an active order is on it's way
-                MessageBox.Show("An active order exists that is on the way to your site and it is past the point where items and quantites can be edited for it." +
-                    "\n\nOrder Details: Order " + activeOrder.txnID + " for " + activeOrder.destinationSite + " is " + activeOrder.status + ".",
-                    "Active Order On The Way", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            } */
         }
 
         private void btnManageOrderItems_Click(object sender, EventArgs e)
@@ -398,6 +395,65 @@ namespace JeddoreISDPDesktop
 
             //open the form (modal)
             frmCreateLossReturn.ShowDialog();
+        }
+
+        private void btnCreateSupplierOrder_Click(object sender, EventArgs e)
+        {
+            //checking the number of active/open NEW orders only for the manager's site
+            long numActiveNewSupplierOrders = TxnAccessor.GetCountOfActiveNewSupplierOrdersForSite(employee.siteID);
+
+            Txn newOrder = TxnAccessor.GetOneNewOrder(employee.siteID);
+
+            //if number of active NEW supplier orders is 0 then, create a supplier order for the user's site
+            if (numActiveNewSupplierOrders == 0)
+            {
+                //txn object - for the most recent txn (mostly just want the last barcode)
+                Txn mostRecentTxn = TxnAccessor.GetLastTxn();
+
+                //get the employee's site
+                Site site = SiteAccessor.GetOneSite(employee.siteID);
+
+                //converting the barcode to an int
+                long mostRecentBarcode = long.Parse(mostRecentTxn.barCode);
+
+                //new barcode will be most recent barcode plus 1
+                string newBarcode = (mostRecentBarcode + 1).ToString();
+
+                //ship date will be 7 days from the created/current date
+                DateTime shipDate = DateTime.Now.AddDays(7);
+
+                //byte var for emergency delivery
+                byte emergencyDelivery = 0;
+
+                //create new txn object
+                Txn newTxn = new Txn(mostRecentTxn.txnID + 1, employee.siteID, 1, "New",
+                    shipDate, "Supplier Order", newBarcode, DateTime.Now, emergencyDelivery);
+
+                //insert the store order txn
+                bool success = TxnAccessor.InsertNewTxn(newTxn);
+
+                //if success
+                if (success)
+                {
+                    MessageBox.Show("Supplier Order for site - " + site.name + " successfully created." +
+                        "\n\nEstimated Shipping Date: " + shipDate, "Supplier Order Created");
+
+                    //open the edit supplier order form
+                    // sending in the employee obj and newTxn object
+
+                }
+            }
+
+            //else if - one active NEW order likely already exists and newOrder is NOT null
+            else if (numActiveNewSupplierOrders > 0 && newOrder != null)
+            {
+                //then open and display the edit supplier order form for the manager/user
+                //sending in the employee obj and newOrder object
+                EditSupplierOrder frmEditSupplierOrder = new EditSupplierOrder(employee, newOrder);
+
+                //open the edit supplier order form (modal)
+                frmEditSupplierOrder.ShowDialog();
+            }
         }
     }
 }

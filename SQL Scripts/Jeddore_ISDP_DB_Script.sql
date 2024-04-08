@@ -273,10 +273,12 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1008, 'PREPAREONLINEORDER', 1),
 (1009, 'PREPAREONLINEORDER', 1),
 (1010, 'PREPAREONLINEORDER', 1),
--- adding EDITPRODUCT for the admin and warehouse manager
+-- adding EDITPRODUCT for the warehouse manager
 (1003, 'EDITPRODUCT', 1),
--- adding ADDNEWPRODUCT for the admin and warehouse manager
-(1003, 'ADDNEWPRODUCT', 1);
+-- adding ADDNEWPRODUCT for the warehouse manager
+(1003, 'ADDNEWPRODUCT', 1),
+-- adding CREATESUPPLIERORDER for the warehouse manager
+(1003, 'CREATESUPPLIERORDER', 1);
 
 -- for all records currently in the user_permission table, set hasPermission to 1
 -- since all admin records in this table right now are all permissions that the admin user should have
@@ -428,7 +430,6 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'MODIFYRECORD', 0),
 (1003, 'CREATELOSS', 1),
 (1003, 'PROCESSRETURN', 1),
-(1003, 'CREATESUPPLIERORDER', 0),
 (1003, 'CREATEREPORT', 0),
 (1003, 'PICKUPSTOREORDER', 0),
 (1003, 'DELIVERSTOREORDER', 0),
@@ -956,6 +957,79 @@ END $$
 
 DELIMITER ;
 
+-- stored procedure #2
+DELIMITER $$
+
+CREATE PROCEDURE insertLowInventoryIntoSupplierOrder(
+IN inSiteID int,
+IN inTxnID int
+)
+BEGIN
+
+-- declare variables here before the cursor
+-- need variables for each field in the SELECT statement below
+declare itemIDVar int;
+declare caseSizeVar int;
+declare quantityVar int;
+declare reorderThresholdVar int;
+declare optimumThresholdVar int;
+declare quantityNeededVar int DEFAULT 0;
+declare neededCasesVar int DEFAULT 0;
+
+-- need a flag variable, to let us know we're done with the cursor and can safely exit
+declare done int DEFAULT 0;
+
+-- declare the CURSOR
+declare inventoryCursor cursor for
+select iv.itemID, i.caseSize, iv.quantity, iv.reorderThreshold, iv.optimumThreshold
+from inventory iv
+inner join item i on iv.itemID = i.itemID
+where iv.siteID = inSiteID and iv.quantity <= iv.reorderThreshold;
+
+-- need the handler for when at the end of the cursor
+declare continue handler for not found
+set done = 1;
+
+-- open the cursor
+open inventoryCursor;
+
+-- loop thru the cursor
+mainLoop: loop
+
+-- fetch the cursor in the loop
+fetch inventoryCursor into itemIDVar, caseSizeVar, quantityVar, reorderThresholdVar, optimumThresholdVar;
+
+-- if we hit the end of the cursor then leave the loop
+if done = 1 then
+leave mainLoop;
+end if;
+
+-- reset value of neededCasesVar to 0 at start of loop
+set neededCasesVar = 0;
+
+-- calculate the amount/quantity that is needed
+set quantityNeededVar = optimumThresholdVar - quantityVar;
+
+-- inner while loop
+-- while the needed amount of cases is under the optimum threshold
+WHILE neededCasesVar < quantityNeededVar DO
+set neededCasesVar = neededCasesVar + caseSizeVar;
+END WHILE;
+
+-- insert needed item record into the txnitems table
+INSERT INTO `txnitems` (`txnID`, `ItemID`, `quantity`,`notes`) 
+VALUES (inTxnID, itemIDVar, neededCasesVar, '');
+
+-- end the main loop for the cursor
+end loop;
+
+-- close the cursor
+close inventoryCursor;
+
+END $$
+
+DELIMITER ;
+
 -- Trigger #4 - for automatically inserting items into a transaction
 -- after INSERTs on the txn table
 DELIMITER $$
@@ -969,6 +1043,11 @@ BEGIN
 IF new.txnType = 'Store Order' THEN
 -- call the stored procedure from this trigger
 CALL insertLowInventoryIntoStoreOrder(new.siteIDTo, new.txnID);
+
+-- else if - the transaction type is a supplier order then
+ELSEIF new.txnType = 'Supplier Order' THEN
+-- call the stored procedure from this trigger
+CALL insertLowInventoryIntoSupplierOrder(new.siteIDTo, new.txnID);
 
 END IF;
 	
@@ -1558,7 +1637,6 @@ CALL removeInventoryFromStore(new.quantity, new.itemID, siteIDFromVar);
 -- else if - the txn type is a return
 -- and the notes field contains Good Condition, then can add the item(s) back to the store inventory
 ELSEIF txnTypeVar = 'Return' and notesVar2 LIKE '%Good Condition Item Return:%' then
--- ELSEIF txnTypeVar = 'Return' and notes LIKE '%Good Condition%' then
 
 -- call stored procedure from this trigger 
 -- are removing the item quantity now in this txn (online order) from the store inventory

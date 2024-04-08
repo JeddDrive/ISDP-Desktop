@@ -240,7 +240,8 @@ namespace JeddoreISDPDesktop
                 string activeStatus = active == 1 ? "Active" : "Inactive";
                 string strHasImage = hasImage == true ? "Yes" : "No";
 
-                DialogResult btnValueReturned = MessageBox.Show("Edited Item's Description: " +
+                DialogResult btnValueReturned = MessageBox.Show("Edited Item's Name: " +
+                    name + "\n\nEdited Item's Description: " +
                     description + "\n\nEdited Item's Notes: " + notes +
                     "\n\nEdited Item's Status: " + activeStatus + "\n\nItem Has Image: " + strHasImage +
                     "\n\nConfirm Item Edit?", "Confirm Item Edit",
@@ -281,11 +282,32 @@ namespace JeddoreISDPDesktop
                 string activeStatus = active == 1 ? "Active" : "Inactive";
                 string strHasImage = hasImage == true ? "Yes" : "No";
 
-                DialogResult btnValueReturned = MessageBox.Show("New Item's Description: " +
+                DialogResult btnValueReturned = MessageBox.Show("New Item's Name: " +
+                    name + "\n\nNew Item's Description: " +
                     description + "\n\nNew Item's Notes: " + notes +
                     "\n\nNew Item's Status: " + activeStatus + "\n\nItem Has Image: " + strHasImage +
                     "\n\nConfirm New Item Addition?", "Confirm Item Addition",
                             MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                //if - invalid cost price
+                if (nudCostPrice.Value < 0.01m || nudCostPrice.Value > 9999.99m)
+                {
+                    MessageBox.Show("Cost price must be between $0.01 and $9999.99.", "Invalid Cost Price");
+
+                    nudCostPrice.Focus();
+
+                    return;
+                }
+
+                //if - invalid retial price
+                if (nudRetailPrice.Value < 0.01m || nudRetailPrice.Value > 9999.99m)
+                {
+                    MessageBox.Show("Retail price must be between $0.01 and $9999.99.", "Invalid Retail Price");
+
+                    nudRetailPrice.Focus();
+
+                    return;
+                }
 
                 //if - user selects the yes btn
                 if (btnValueReturned == DialogResult.Yes)

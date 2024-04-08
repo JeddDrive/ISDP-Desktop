@@ -541,5 +541,10 @@ namespace JeddoreISDPDesktop
                 frmAddEditOrderItem.ShowDialog();
             }
         }
+
+        private void lblMain_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

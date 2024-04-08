@@ -117,7 +117,7 @@ namespace JeddoreISDPDesktop
                 //if success
                 if (success)
                 {
-                    MessageBox.Show("Store Order for site " + site.name + " successfully created." +
+                    MessageBox.Show("Store Order for site - " + site.name + " successfully created." +
                         "\n\nEstimated Shipping Date: " + shipDate, "Store Order Created");
 
                     //close this form
@@ -142,7 +142,7 @@ namespace JeddoreISDPDesktop
                 //if success
                 if (success)
                 {
-                    MessageBox.Show("Emergency Order for site " + site.name + " successfully created." +
+                    MessageBox.Show("Emergency Order for site - " + site.name + " successfully created." +
                         "\n\nEstimated Shipping Date: " + shipDate, "Emergency Order Created");
 
                     //close this form

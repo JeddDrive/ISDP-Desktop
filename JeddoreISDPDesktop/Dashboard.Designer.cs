@@ -60,6 +60,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
+            this.btnCreateSupplierOrder = new System.Windows.Forms.Button();
             this.tabControlDashboard.SuspendLayout();
             this.tabOrders.SuspendLayout();
             this.tabInventory.SuspendLayout();
@@ -85,6 +86,7 @@
             // tabOrders
             // 
             this.tabOrders.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabOrders.Controls.Add(this.btnCreateSupplierOrder);
             this.tabOrders.Controls.Add(this.btnPrepareOnlineOrder);
             this.tabOrders.Controls.Add(this.btnCheckDeliveries);
             this.tabOrders.Controls.Add(this.btnPickupAndDeliverOrders);
@@ -397,6 +399,18 @@
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
+            // btnCreateSupplierOrder
+            // 
+            this.btnCreateSupplierOrder.Enabled = false;
+            this.btnCreateSupplierOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateSupplierOrder.Location = new System.Drawing.Point(524, 352);
+            this.btnCreateSupplierOrder.Name = "btnCreateSupplierOrder";
+            this.btnCreateSupplierOrder.Size = new System.Drawing.Size(384, 63);
+            this.btnCreateSupplierOrder.TabIndex = 29;
+            this.btnCreateSupplierOrder.Text = "&Create/Edit New Supplier Order";
+            this.btnCreateSupplierOrder.UseVisualStyleBackColor = true;
+            this.btnCreateSupplierOrder.Click += new System.EventHandler(this.btnCreateSupplierOrder_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
@@ -464,5 +478,6 @@
         private System.Windows.Forms.Button btnCheckDeliveries;
         private System.Windows.Forms.Button btnPrepareOnlineOrder;
         private System.Windows.Forms.Button btnCreateLossReturn;
+        private System.Windows.Forms.Button btnCreateSupplierOrder;
     }
 }

@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditItem));
-            this.picBullseye = new System.Windows.Forms.PictureBox();
             this.lblLocation = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,9 +56,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label10 = new System.Windows.Forms.Label();
-            this.picItemImage = new System.Windows.Forms.PictureBox();
             this.txtImageFileLocation = new System.Windows.Forms.TextBox();
-            this.picHelp = new System.Windows.Forms.PictureBox();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.txtName = new System.Windows.Forms.TextBox();
             this.nudWeight = new System.Windows.Forms.NumericUpDown();
@@ -68,25 +65,18 @@
             this.cboSuppliers = new System.Windows.Forms.ComboBox();
             this.nudCostPrice = new System.Windows.Forms.NumericUpDown();
             this.nudRetailPrice = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
+            this.picHelp = new System.Windows.Forms.PictureBox();
+            this.picItemImage = new System.Windows.Forms.PictureBox();
+            this.picBullseye = new System.Windows.Forms.PictureBox();
             this.grpBasic.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picItemImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCaseSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCostPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRetailPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picItemImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             this.SuspendLayout();
-            // 
-            // picBullseye
-            // 
-            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
-            this.picBullseye.Location = new System.Drawing.Point(1, 0);
-            this.picBullseye.Name = "picBullseye";
-            this.picBullseye.Size = new System.Drawing.Size(140, 110);
-            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBullseye.TabIndex = 36;
-            this.picBullseye.TabStop = false;
             // 
             // lblLocation
             // 
@@ -322,41 +312,20 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(460, 434);
+            this.label10.Location = new System.Drawing.Point(460, 445);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(194, 28);
             this.label10.TabIndex = 80;
             this.label10.Text = "Image File Location:";
             // 
-            // picItemImage
-            // 
-            this.picItemImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picItemImage.Location = new System.Drawing.Point(569, 233);
-            this.picItemImage.Name = "picItemImage";
-            this.picItemImage.Size = new System.Drawing.Size(295, 198);
-            this.picItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picItemImage.TabIndex = 82;
-            this.picItemImage.TabStop = false;
-            // 
             // txtImageFileLocation
             // 
             this.txtImageFileLocation.Enabled = false;
-            this.txtImageFileLocation.Location = new System.Drawing.Point(465, 473);
+            this.txtImageFileLocation.Location = new System.Drawing.Point(465, 484);
             this.txtImageFileLocation.Multiline = true;
             this.txtImageFileLocation.Name = "txtImageFileLocation";
             this.txtImageFileLocation.Size = new System.Drawing.Size(402, 93);
             this.txtImageFileLocation.TabIndex = 83;
-            // 
-            // picHelp
-            // 
-            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
-            this.picHelp.Location = new System.Drawing.Point(825, 12);
-            this.picHelp.Name = "picHelp";
-            this.picHelp.Size = new System.Drawing.Size(45, 40);
-            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picHelp.TabIndex = 84;
-            this.picHelp.TabStop = false;
-            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
             // txtName
             // 
@@ -480,6 +449,37 @@
             0,
             131072});
             // 
+            // picHelp
+            // 
+            this.picHelp.Image = global::JeddoreISDPDesktop.Properties.Resources.help;
+            this.picHelp.Location = new System.Drawing.Point(825, 12);
+            this.picHelp.Name = "picHelp";
+            this.picHelp.Size = new System.Drawing.Size(45, 40);
+            this.picHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picHelp.TabIndex = 84;
+            this.picHelp.TabStop = false;
+            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
+            // 
+            // picItemImage
+            // 
+            this.picItemImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.picItemImage.Location = new System.Drawing.Point(569, 233);
+            this.picItemImage.Name = "picItemImage";
+            this.picItemImage.Size = new System.Drawing.Size(295, 198);
+            this.picItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picItemImage.TabIndex = 82;
+            this.picItemImage.TabStop = false;
+            // 
+            // picBullseye
+            // 
+            this.picBullseye.Image = global::JeddoreISDPDesktop.Properties.Resources.bullseye_nobackground;
+            this.picBullseye.Location = new System.Drawing.Point(1, 0);
+            this.picBullseye.Name = "picBullseye";
+            this.picBullseye.Size = new System.Drawing.Size(140, 110);
+            this.picBullseye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBullseye.TabIndex = 36;
+            this.picBullseye.TabStop = false;
+            // 
             // EditItem
             // 
             this.AcceptButton = this.btnSave;
@@ -530,14 +530,14 @@
             this.Text = "Bullseye Inventory Management System - ";
             this.Load += new System.EventHandler(this.EditItem_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditItem_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             this.grpBasic.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picItemImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCaseSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCostPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRetailPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picItemImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -21,6 +21,8 @@ namespace JeddoreISDPDesktop.DAO_Classes
             " from inventory iv inner join item it on iv.itemID = it.itemID inner join site s on iv.siteID = s.siteID where iv.siteID = @siteID";
         private static string selectAllBySiteIDAndCategoryStatement = "select iv.itemID, it.name, it.description, it.category, iv.siteID, s.name AS siteName, iv.quantity, it.retailPrice, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
             " from inventory iv inner join item it on iv.itemID = it.itemID inner join site s on iv.siteID = s.siteID where iv.siteID = @siteID and it.category = @category";
+        private static string selectAllBySiteIDAndSupplierStatement = "select iv.itemID, it.name, it.description, it.category, it.supplierID, iv.siteID, s.name AS siteName, iv.quantity, it.retailPrice, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
+            " from inventory iv inner join item it on iv.itemID = it.itemID inner join site s on iv.siteID = s.siteID where iv.siteID = @siteID and it.supplierID = @supplierID";
         private static string selectOneStatement = "select iv.itemID, it.name, it.description, it.category, iv.siteID, s.name AS siteName, iv.quantity, it.retailPrice, iv.itemLocation, IFNULL(iv.reorderThreshold, '') as reorderThreshold, iv.optimumThreshold, IFNULL(iv.notes, '') as notes" +
             " from inventory iv inner join item it on iv.itemID = it.itemID inner join site s on iv.siteID = s.siteID where iv.siteID = @siteID and iv.itemID = @itemID";
         private static string updateReorderAndOptimumThresholdsStatement = "update inventory set reorderThreshold = @reorderThreshold, optimumThreshold = @optimumThreshold, notes = @notes where itemID = @itemID and siteID = @siteID";
@@ -98,6 +100,46 @@ namespace JeddoreISDPDesktop.DAO_Classes
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Getting All Inventory by Site ID and Category");
+
+                connection.Close();
+            }
+
+            //return the datatable
+            return dt;
+        }
+
+        /**
+        * Get all of the inventory by a specific site ID and supplier ID.
+        *
+        * @param int siteID, int supplierID
+        * @return a DataTable, possibly empty, of Inventory.
+        */
+        public static DataTable GetAllInventoryBySiteAndSupplierDataTable(int siteID, int supplierID)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectAllBySiteIDAndSupplierStatement, connection);
+
+            //create datatable
+            DataTable dt = new DataTable();
+
+            //two parameters for the query - int siteID and int supplierID
+            cmd.Parameters.AddWithValue("@siteID", siteID);
+            cmd.Parameters.AddWithValue("@supplierID", supplierID);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //execute the SQL statement against the DB
+                //load into the DataTable object
+                dt.Load(cmd.ExecuteReader());
+
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting All Inventory by Site ID and Supplier ID");
 
                 connection.Close();
             }

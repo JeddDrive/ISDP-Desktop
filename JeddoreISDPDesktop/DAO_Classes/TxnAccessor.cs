@@ -49,11 +49,12 @@ namespace JeddoreISDPDesktop.DAO_Classes
         private static string selectAllStoreAndEmergencyOrdersOnShipDateStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where DATE(t.shipDate) = @shipDate and txnType IN ('Store Order', 'Emergency')";
         //despite the name, these next 2 statements will get a site's new, submitted, or assembling store/back order
         //NOTE: may change this later
-        private static string selectSiteNewOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status = 'New' and txnType IN ('Store Order', 'Emergency') and t.siteIDTo = @siteID";
+        private static string selectSiteNewOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status = 'New' and txnType IN ('Store Order', 'Emergency', 'Supplier Order') and t.siteIDTo = @siteID";
         private static string selectSiteNewOrSubmittedOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status IN ('New', 'Submitted', 'Assembling') and txnType IN ('Store Order', 'Emergency') and t.siteIDTo = @siteID";
         private static string selectSiteActiveOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Store Order', 'Emergency') and t.siteIDTo = @siteID";
         private static string selectSiteNewBackOrderStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where status IN ('New', 'Submitted', 'Assembling') and txnType IN ('Back Order') and t.siteIDTo = @siteID";
         private static string selectCountActiveNewOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status = 'New' and txnType IN ('Store Order', 'Emergency')";
+        private static string selectCountActiveNewSupplierOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status = 'New' and txnType = 'Supplier Order'";
         private static string selectCountActiveBackOrdersForSiteStatement = "select count(*) from txn where siteIDTo = @siteIDTo and status NOT IN ('Complete', 'Cancelled', 'Rejected') and txnType IN ('Back Order')";
         private static string selectAllOpenOnlineOrdersBySiteStatement = "select t.txnID, s2.name as originSite, s.name as destinationSite, t.siteIDTo, t.siteIDFrom, t.status, t.shipDate, t.txnType, t.barCode, t.createdDate, IFNULL(t.deliveryID, '') as deliveryID, IFNULL(t.emergencyDelivery, '') as emergencyDelivery, IFNULL(t.notes, '') as notes from txn t inner join site s on t.siteIDTo = s.siteID inner join site s2 on t.siteIDFrom = s2.siteID where t.txnType = 'Online Order' and t.status IN ('New', 'Assembling', 'Assembled') and t.siteIDTo = @siteID";
         private static string insertTxnStatement = "insert into `txn` (`siteIDTo`, `siteIDFrom`, `status`, `shipDate`, `txnType`, `barCode`, `createdDate`, `emergencyDelivery`) VALUES " +
@@ -831,7 +832,7 @@ namespace JeddoreISDPDesktop.DAO_Classes
         }
 
         /**
-        * Gets one store OR emergency order with the status of 'New', based on the siteID. (The current store or emergency order for a store)
+        * Gets one store, emergency OR supplier order with the status of 'New', based on the siteID. (The current store, emergency order, or supplier order for a site)
         *
         * @param int siteID
         * @return a Txn object, possibly null if none found based on the siteID.
@@ -1113,6 +1114,47 @@ namespace JeddoreISDPDesktop.DAO_Classes
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Getting the Count of Active Orders for that Site");
+
+                connection.Close();
+
+            }
+
+            //return the rowCount (long)
+            return rowCount;
+        }
+
+        /**
+        * Gets the count (number) of active NEW supplier orders for a particular site (ex. warehouse).
+        *
+        * @return a long, possibly 0 if none found based on siteIDTo.
+        */
+        public static long GetCountOfActiveNewSupplierOrdersForSite(int siteIDTo)
+        {
+            //create a command
+            MySqlCommand cmd = new MySqlCommand(selectCountActiveNewSupplierOrdersForSiteStatement, connection);
+
+            //int to be returned
+            long rowCount = 0;
+
+            //one parameter for the query - string username
+            cmd.Parameters.AddWithValue("@siteIDTo", siteIDTo);
+
+            //create a datareader and execute
+            try
+            {
+                connection.Open();
+
+                //create a datareader and execute the SQL statement against the DB
+                //casting to a long here to prevent exception(s)
+                rowCount = (long)cmd.ExecuteScalar();
+
+                //close the connection
+                connection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Getting the Count of New Supplier Orders for your Site");
 
                 connection.Close();
 

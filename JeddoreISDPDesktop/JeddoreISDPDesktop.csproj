@@ -204,6 +204,12 @@
     <Compile Include="EditOrder.Designer.cs">
       <DependentUpon>EditOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditSupplierOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditSupplierOrder.Designer.cs">
+      <DependentUpon>EditSupplierOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entity_Classes\Delivery.cs" />
     <Compile Include="Entity_Classes\Employee.cs" />
     <Compile Include="Entity_Classes\Inventory.cs" />
@@ -321,6 +327,12 @@
     <Compile Include="UserPermissions.Designer.cs">
       <DependentUpon>UserPermissions.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewItem.Designer.cs">
+      <DependentUpon>ViewItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewOrderItems.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -377,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditOrder.resx">
       <DependentUpon>EditOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditSupplierOrder.resx">
+      <DependentUpon>EditSupplierOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FulfillOrders.resx">
       <DependentUpon>FulfillOrders.cs</DependentUpon>
@@ -435,6 +450,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserPermissions.resx">
       <DependentUpon>UserPermissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewItem.resx">
+      <DependentUpon>ViewItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewOrderItems.resx">
       <DependentUpon>ViewOrderItems.cs</DependentUpon>
