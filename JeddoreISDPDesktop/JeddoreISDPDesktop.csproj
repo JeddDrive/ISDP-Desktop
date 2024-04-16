@@ -117,6 +117,12 @@
     <Compile Include="AddEditSupplier.Designer.cs">
       <DependentUpon>AddEditSupplier.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddEditSupplierOrderItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditSupplierOrderItem.Designer.cs">
+      <DependentUpon>AddEditSupplierOrderItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEditUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -353,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditSupplier.resx">
       <DependentUpon>AddEditSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddEditSupplierOrderItem.resx">
+      <DependentUpon>AddEditSupplierOrderItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditUser.resx">
       <DependentUpon>AddEditUser.cs</DependentUpon>

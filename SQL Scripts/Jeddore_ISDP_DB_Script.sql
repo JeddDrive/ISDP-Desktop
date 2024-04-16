@@ -145,6 +145,28 @@ add column active tinyint(1) NOT NULL Default 1;
 alter table `supplier`
 add column active tinyint(1) NOT NULL Default 1;
 
+-- can comment out these lines below for the submission of this SQL script
+-- adding images for the first five items (all are skates) in the DB
+update item
+set imageFileLocation = 'C:\\JeddoreISDP\\ItemImages\\JetspeedFT1Skates.png'
+where itemID = 10000;
+
+update item
+set imageFileLocation = 'C:\\JeddoreISDP\\ItemImages\\SuperTacksAS1Skates.png'
+where itemID = 10001;
+
+update item
+set imageFileLocation = 'C:\\JeddoreISDP\\ItemImages\\Supreme2SSkates.jpg'
+where itemID = 10002;
+
+update item
+set imageFileLocation = 'C:\\JeddoreISDP\\ItemImages\\Nexus2NSkates.jpg'
+where itemID = 10003;
+
+update item
+set imageFileLocation = 'C:\\JeddoreISDP\\ItemImages\\JetspeedFT390Skates.png'
+where itemID = 10004;
+
 -- insert into the txntype table - new type for online orders
 INSERT INTO `txntype` (`txnType`) VALUES
 ('Online Order');
@@ -348,7 +370,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1000, 'ADDNEWPRODUCT', 0),
 (1000, 'EDITPRODUCT', 0),
 (1000, 'CREATESUPPLIERORDER', 0),
-(1000, 'CREATEREPORT', 0),
+(1000, 'CREATEREPORT', 1),
 (1000, 'REJECTORDER', 0),
 (1000, 'ADDSUPPLIER', 0),
 (1000, 'EDITSUPPLIER', 0),
@@ -380,7 +402,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1001, 'ADDNEWPRODUCT', 0),
 (1001, 'EDITPRODUCT', 0),
 (1001, 'CREATESUPPLIERORDER', 0),
-(1001, 'CREATEREPORT', 0),
+(1001, 'CREATEREPORT', 1),
 (1001, 'REJECTORDER', 0),
 (1001, 'ADDSUPPLIER', 0),
 (1001, 'EDITSUPPLIER', 0),
@@ -409,7 +431,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1002, 'ADDNEWPRODUCT', 0),
 (1002, 'EDITPRODUCT', 0),
 (1002, 'CREATESUPPLIERORDER', 0),
-(1002, 'CREATEREPORT', 0),
+(1002, 'CREATEREPORT', 1),
 (1002, 'REJECTORDER', 0),
 (1002, 'ADDSUPPLIER', 0),
 (1002, 'EDITSUPPLIER', 0),
@@ -430,7 +452,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1003, 'MODIFYRECORD', 0),
 (1003, 'CREATELOSS', 1),
 (1003, 'PROCESSRETURN', 1),
-(1003, 'CREATEREPORT', 0),
+(1003, 'CREATEREPORT', 1),
 (1003, 'PICKUPSTOREORDER', 0),
 (1003, 'DELIVERSTOREORDER', 0),
 (1003, 'PREPAREONLINEORDER', 0),
@@ -486,7 +508,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1005, 'ADDNEWPRODUCT', 0),
 (1005, 'EDITPRODUCT', 0),
 (1005, 'CREATESUPPLIERORDER', 0),
-(1005, 'CREATEREPORT', 0),
+(1005, 'CREATEREPORT', 1),
 (1005, 'REJECTORDER', 0),
 (1005, 'ADDSUPPLIER', 0),
 (1005, 'EDITSUPPLIER', 0),
@@ -513,7 +535,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1006, 'ADDNEWPRODUCT', 0),
 (1006, 'EDITPRODUCT', 0),
 (1006, 'CREATESUPPLIERORDER', 0),
-(1006, 'CREATEREPORT', 0),
+(1006, 'CREATEREPORT', 1),
 (1006, 'REJECTORDER', 0),
 (1006, 'ADDSUPPLIER', 0),
 (1006, 'EDITSUPPLIER', 0),
@@ -540,7 +562,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1007, 'ADDNEWPRODUCT', 0),
 (1007, 'EDITPRODUCT', 0),
 (1007, 'CREATESUPPLIERORDER', 0),
-(1007, 'CREATEREPORT', 0),
+(1007, 'CREATEREPORT', 1),
 (1007, 'REJECTORDER', 0),
 (1007, 'ADDSUPPLIER', 0),
 (1007, 'EDITSUPPLIER', 0),
@@ -567,7 +589,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1008, 'ADDNEWPRODUCT', 0),
 (1008, 'EDITPRODUCT', 0),
 (1008, 'CREATESUPPLIERORDER', 0),
-(1008, 'CREATEREPORT', 0),
+(1008, 'CREATEREPORT', 1),
 (1008, 'REJECTORDER', 0),
 (1008, 'ADDSUPPLIER', 0),
 (1008, 'EDITSUPPLIER', 0),
@@ -594,7 +616,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1009, 'ADDNEWPRODUCT', 0),
 (1009, 'EDITPRODUCT', 0),
 (1009, 'CREATESUPPLIERORDER', 0),
-(1009, 'CREATEREPORT', 0),
+(1009, 'CREATEREPORT', 1),
 (1009, 'REJECTORDER', 0),
 (1009, 'ADDSUPPLIER', 0),
 (1009, 'EDITSUPPLIER', 0),
@@ -621,7 +643,7 @@ INSERT INTO `user_permission` (`employeeID`, `permissionID`,  `hasPermission`) V
 (1010, 'ADDNEWPRODUCT', 0),
 (1010, 'EDITPRODUCT', 0),
 (1010, 'CREATESUPPLIERORDER', 0),
-(1010, 'CREATEREPORT', 0),
+(1010, 'CREATEREPORT', 1),
 (1010, 'REJECTORDER', 0),
 (1010, 'ADDSUPPLIER', 0),
 (1010, 'EDITSUPPLIER', 0),

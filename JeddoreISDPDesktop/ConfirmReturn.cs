@@ -162,6 +162,18 @@ namespace JeddoreISDPDesktop
                 return;
             }
 
+            int siteID = 0;
+
+            if (employee.siteID == 3)
+            {
+                siteID = 2;
+            }
+
+            else
+            {
+                siteID = employee.siteID;
+            }
+
             //txn object - for the most recent txn (mostly just want the last barcode)
             Txn mostRecentTxn = TxnAccessor.GetLastTxn();
 
@@ -172,14 +184,14 @@ namespace JeddoreISDPDesktop
             string newBarcode = (mostRecentBarcode + 1).ToString();
 
             //create new txn object
-            Txn newTxn = new Txn(mostRecentTxn.txnID + 1, employee.siteID, employee.siteID, "Complete",
+            Txn newTxn = new Txn(mostRecentTxn.txnID + 1, siteID, siteID, "Complete",
                 DateTime.Now, DateTime.Now, "Return", newBarcode, txtNotes.Text);
 
             //insert the store order txn
             bool successTxnInsert = TxnAccessor.InsertNewLossOrReturn(newTxn);
 
             //get the employee's site
-            Site site = SiteAccessor.GetOneSite(employee.siteID);
+            Site site = SiteAccessor.GetOneSite(siteID);
 
             bool goodInsertTxnItems = false;
 

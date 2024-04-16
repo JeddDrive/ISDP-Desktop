@@ -56,6 +56,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtSearchOrder = new System.Windows.Forms.TextBox();
             this.grpBtnsTwo = new System.Windows.Forms.GroupBox();
+            this.btnViewItem = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
@@ -65,7 +66,8 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.btnViewItem = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cboSuppliers = new System.Windows.Forms.ComboBox();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
@@ -80,8 +82,6 @@
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cboSuppliers = new System.Windows.Forms.ComboBox();
             this.grpInventory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator2)).BeginInit();
             this.bindingNavigator2.SuspendLayout();
@@ -343,7 +343,7 @@
             this.txtSearchOrder.Location = new System.Drawing.Point(86, 155);
             this.txtSearchOrder.Name = "txtSearchOrder";
             this.txtSearchOrder.Size = new System.Drawing.Size(331, 34);
-            this.txtSearchOrder.TabIndex = 75;
+            this.txtSearchOrder.TabIndex = 0;
             this.txtSearchOrder.TextChanged += new System.EventHandler(this.txtSearchOrder_TextChanged);
             // 
             // grpBtnsTwo
@@ -359,15 +359,27 @@
             this.grpBtnsTwo.TabIndex = 81;
             this.grpBtnsTwo.TabStop = false;
             // 
+            // btnViewItem
+            // 
+            this.btnViewItem.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
+            this.btnViewItem.Location = new System.Drawing.Point(368, 32);
+            this.btnViewItem.Name = "btnViewItem";
+            this.btnViewItem.Size = new System.Drawing.Size(147, 63);
+            this.btnViewItem.TabIndex = 4;
+            this.btnViewItem.Text = "&View Item Info";
+            this.btnViewItem.UseVisualStyleBackColor = true;
+            this.btnViewItem.Click += new System.EventHandler(this.btnViewItem_Click);
+            // 
             // btnUpdate
             // 
             this.btnUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
             this.btnUpdate.Location = new System.Drawing.Point(12, 112);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(147, 63);
-            this.btnUpdate.TabIndex = 2;
+            this.btnUpdate.TabIndex = 1;
             this.btnUpdate.Text = "&Update Quantity";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnSubmit
             // 
@@ -386,7 +398,7 @@
             this.btnRemove.Location = new System.Drawing.Point(190, 33);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(147, 63);
-            this.btnRemove.TabIndex = 1;
+            this.btnRemove.TabIndex = 2;
             this.btnRemove.Text = "&Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
@@ -400,6 +412,7 @@
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "&Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // grpBasic
             // 
@@ -440,16 +453,25 @@
             this.timer1.Interval = 1200000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnViewItem
+            // label5
             // 
-            this.btnViewItem.Font = new System.Drawing.Font("Segoe UI Semibold", 11.4F, System.Drawing.FontStyle.Bold);
-            this.btnViewItem.Location = new System.Drawing.Point(368, 32);
-            this.btnViewItem.Name = "btnViewItem";
-            this.btnViewItem.Size = new System.Drawing.Size(147, 63);
-            this.btnViewItem.TabIndex = 4;
-            this.btnViewItem.Text = "&View Item Info";
-            this.btnViewItem.UseVisualStyleBackColor = true;
-            this.btnViewItem.Click += new System.EventHandler(this.btnViewItem_Click);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(658, 155);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(266, 28);
+            this.label5.TabIndex = 84;
+            this.label5.Text = "Filter Inventory by Supplier:";
+            // 
+            // cboSuppliers
+            // 
+            this.cboSuppliers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSuppliers.Enabled = false;
+            this.cboSuppliers.FormattingEnabled = true;
+            this.cboSuppliers.Location = new System.Drawing.Point(894, 153);
+            this.cboSuppliers.Name = "cboSuppliers";
+            this.cboSuppliers.Size = new System.Drawing.Size(236, 36);
+            this.cboSuppliers.TabIndex = 1;
+            this.cboSuppliers.SelectedIndexChanged += new System.EventHandler(this.cboSuppliers_SelectedIndexChanged);
             // 
             // toolStripButton7
             // 
@@ -583,26 +605,6 @@
             this.picHelp.TabIndex = 68;
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(658, 155);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(266, 28);
-            this.label5.TabIndex = 84;
-            this.label5.Text = "Filter Inventory by Supplier:";
-            // 
-            // cboSuppliers
-            // 
-            this.cboSuppliers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSuppliers.Enabled = false;
-            this.cboSuppliers.FormattingEnabled = true;
-            this.cboSuppliers.Location = new System.Drawing.Point(894, 153);
-            this.cboSuppliers.Name = "cboSuppliers";
-            this.cboSuppliers.Size = new System.Drawing.Size(236, 36);
-            this.cboSuppliers.TabIndex = 83;
-            this.cboSuppliers.SelectedIndexChanged += new System.EventHandler(this.cboSuppliers_SelectedIndexChanged);
             // 
             // EditSupplierOrder
             // 

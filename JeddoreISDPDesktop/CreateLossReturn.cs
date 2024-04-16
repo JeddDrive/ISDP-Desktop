@@ -67,8 +67,20 @@ namespace JeddoreISDPDesktop
             //create a new bindingsource
             BindingSource bindingSource = new BindingSource();
 
+            int siteID = 0;
+
+            if (employee.siteID == 3)
+            {
+                siteID = 2;
+            }
+
+            else
+            {
+                siteID = employee.siteID;
+            }
+
             //create datatable - getting all inventory for a site, returned as a datatable
-            DataTable dt = InventoryAccessor.GetAllInventoryBySiteDataTable(employee.siteID);
+            DataTable dt = InventoryAccessor.GetAllInventoryBySiteDataTable(siteID);
 
             //set the binding source's datasource to the datatable
             bindingSource.DataSource = dt;
@@ -142,6 +154,9 @@ namespace JeddoreISDPDesktop
             {
                 btnProcessReturn.Enabled = true;
             }
+
+            //adding all items option to the categories combo box
+            cboCategories.Items.Add("All Items");
 
             //getting a list of all distinct categories
             List<string> categoriesList = ItemAccessor.GetAllCategoriesList();
@@ -217,46 +232,108 @@ namespace JeddoreISDPDesktop
 
         private void cboCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //create a new bindingsource
-            BindingSource bindingSource = new BindingSource();
+            int siteID = 0;
 
-            //create datatable - getting all inventory for a site, returned as a datatable
-            DataTable dt = InventoryAccessor.GetAllInventoryBySiteAndCategoryDataTable(employee.siteID, cboCategories.Text);
+            if (employee.siteID == 3)
+            {
+                siteID = 2;
+            }
 
-            //set the binding source's datasource to the datatable
-            bindingSource.DataSource = dt;
+            else
+            {
+                siteID = employee.siteID;
+            }
 
-            //set the dgv's datasource to the bindingSource
-            dgvInventory.DataSource = bindingSource;
+            //if the first option is selected - display all items regardless of category
+            if (cboCategories.SelectedIndex == 0)
+            {
+                //create a new bindingsource
+                BindingSource bindingSource = new BindingSource();
 
-            //autoresize dgv columns
-            dgvInventory.AutoResizeColumns();
+                //create datatable - getting all inventory for a site, returned as a datatable
+                DataTable dt = InventoryAccessor.GetAllInventoryBySiteDataTable(siteID);
 
-            //display the binding nav
-            bindingNavigator.Visible = true;
+                //set the binding source's datasource to the datatable
+                bindingSource.DataSource = dt;
 
-            //set the binding source of the binding nav to the binding source created
-            bindingNavigator.BindingSource = bindingSource;
+                //set the dgv's datasource to the bindingSource
+                dgvInventory.DataSource = bindingSource;
 
-            //hiding the description and notes columns - for performance
-            dgvInventory.Columns["description"].Visible = false;
-            dgvInventory.Columns["notes"].Visible = false;
+                //autoresize dgv columns
+                dgvInventory.AutoResizeColumns();
 
-            //change the header text of these columns
-            dgvInventory.Columns["itemID"].HeaderText = "Item ID";
-            dgvInventory.Columns["name"].HeaderText = "Name";
-            //dgvItems.Columns["description"].HeaderText = "Description";
-            dgvInventory.Columns["siteID"].HeaderText = "Site ID";
-            dgvInventory.Columns["siteName"].HeaderText = "Site Name";
-            dgvInventory.Columns["quantity"].HeaderText = "Quantity";
-            dgvInventory.Columns["itemLocation"].HeaderText = "Item Location";
-            dgvInventory.Columns["reorderThreshold"].HeaderText = "Reorder Threshold";
-            dgvInventory.Columns["optimumThreshold"].HeaderText = "Optimum Threshold";
-            dgvInventory.Columns["category"].HeaderText = "Category";
-            dgvInventory.Columns["retailPrice"].HeaderText = "Retail Price";
-            //dgvInventory.Columns["notes"].HeaderText = "Notes";
+                //display the binding nav
+                bindingNavigator.Visible = true;
 
-            dgvInventory.Refresh();
+                //set the binding source of the binding nav to the binding source created
+                bindingNavigator.BindingSource = bindingSource;
+
+                //hiding the description and notes columns - for performance
+                dgvInventory.Columns["description"].Visible = false;
+                dgvInventory.Columns["notes"].Visible = false;
+
+                //change the header text of these columns
+                dgvInventory.Columns["itemID"].HeaderText = "Item ID";
+                dgvInventory.Columns["name"].HeaderText = "Name";
+                //dgvItems.Columns["description"].HeaderText = "Description";
+                dgvInventory.Columns["siteID"].HeaderText = "Site ID";
+                dgvInventory.Columns["siteName"].HeaderText = "Site Name";
+                dgvInventory.Columns["quantity"].HeaderText = "Quantity";
+                dgvInventory.Columns["itemLocation"].HeaderText = "Item Location";
+                dgvInventory.Columns["reorderThreshold"].HeaderText = "Reorder Threshold";
+                dgvInventory.Columns["optimumThreshold"].HeaderText = "Optimum Threshold";
+                dgvInventory.Columns["category"].HeaderText = "Category";
+                dgvInventory.Columns["retailPrice"].HeaderText = "Retail Price";
+                //dgvInventory.Columns["notes"].HeaderText = "Notes";
+
+                dgvInventory.Refresh();
+            }
+
+            //else if - a specific category is chosen
+            else if (cboCategories.SelectedIndex > 0)
+            {
+                //create a new bindingsource
+                BindingSource bindingSource = new BindingSource();
+
+                //create datatable - getting all inventory for a site, returned as a datatable
+                DataTable dt = InventoryAccessor.GetAllInventoryBySiteAndCategoryDataTable(siteID, cboCategories.Text);
+
+                //set the binding source's datasource to the datatable
+                bindingSource.DataSource = dt;
+
+                //set the dgv's datasource to the bindingSource
+                dgvInventory.DataSource = bindingSource;
+
+                //autoresize dgv columns
+                dgvInventory.AutoResizeColumns();
+
+                //display the binding nav
+                bindingNavigator.Visible = true;
+
+                //set the binding source of the binding nav to the binding source created
+                bindingNavigator.BindingSource = bindingSource;
+
+                //hiding the description and notes columns - for performance
+                dgvInventory.Columns["description"].Visible = false;
+                dgvInventory.Columns["notes"].Visible = false;
+
+                //change the header text of these columns
+                dgvInventory.Columns["itemID"].HeaderText = "Item ID";
+                dgvInventory.Columns["name"].HeaderText = "Name";
+                //dgvItems.Columns["description"].HeaderText = "Description";
+                dgvInventory.Columns["siteID"].HeaderText = "Site ID";
+                dgvInventory.Columns["siteName"].HeaderText = "Site Name";
+                dgvInventory.Columns["quantity"].HeaderText = "Quantity";
+                dgvInventory.Columns["itemLocation"].HeaderText = "Item Location";
+                dgvInventory.Columns["reorderThreshold"].HeaderText = "Reorder Threshold";
+                dgvInventory.Columns["optimumThreshold"].HeaderText = "Optimum Threshold";
+                dgvInventory.Columns["category"].HeaderText = "Category";
+                dgvInventory.Columns["retailPrice"].HeaderText = "Retail Price";
+                //dgvInventory.Columns["notes"].HeaderText = "Notes";
+
+                dgvInventory.Refresh();
+
+            }
         }
 
         private void btnCreateLoss_Click(object sender, EventArgs e)

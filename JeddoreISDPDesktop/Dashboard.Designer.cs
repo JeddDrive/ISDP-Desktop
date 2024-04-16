@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.tabControlDashboard = new System.Windows.Forms.TabControl();
             this.tabOrders = new System.Windows.Forms.TabPage();
+            this.btnCreateSupplierOrder = new System.Windows.Forms.Button();
             this.btnPrepareOnlineOrder = new System.Windows.Forms.Button();
             this.btnCheckDeliveries = new System.Windows.Forms.Button();
             this.btnPickupAndDeliverOrders = new System.Windows.Forms.Button();
@@ -60,11 +61,12 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.picBullseye = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
-            this.btnCreateSupplierOrder = new System.Windows.Forms.Button();
+            this.btnGenerateReports = new System.Windows.Forms.Button();
             this.tabControlDashboard.SuspendLayout();
             this.tabOrders.SuspendLayout();
             this.tabInventory.SuspendLayout();
             this.tabLossReturn.SuspendLayout();
+            this.tabReports.SuspendLayout();
             this.tabAdmin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
@@ -100,6 +102,18 @@
             this.tabOrders.Size = new System.Drawing.Size(950, 437);
             this.tabOrders.TabIndex = 0;
             this.tabOrders.Text = "Orders";
+            // 
+            // btnCreateSupplierOrder
+            // 
+            this.btnCreateSupplierOrder.Enabled = false;
+            this.btnCreateSupplierOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateSupplierOrder.Location = new System.Drawing.Point(524, 352);
+            this.btnCreateSupplierOrder.Name = "btnCreateSupplierOrder";
+            this.btnCreateSupplierOrder.Size = new System.Drawing.Size(384, 63);
+            this.btnCreateSupplierOrder.TabIndex = 29;
+            this.btnCreateSupplierOrder.Text = "&Create/Edit New Supplier Order";
+            this.btnCreateSupplierOrder.UseVisualStyleBackColor = true;
+            this.btnCreateSupplierOrder.Click += new System.EventHandler(this.btnCreateSupplierOrder_Click);
             // 
             // btnPrepareOnlineOrder
             // 
@@ -246,6 +260,7 @@
             // tabReports
             // 
             this.tabReports.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabReports.Controls.Add(this.btnGenerateReports);
             this.tabReports.Location = new System.Drawing.Point(4, 37);
             this.tabReports.Name = "tabReports";
             this.tabReports.Size = new System.Drawing.Size(950, 437);
@@ -399,17 +414,17 @@
             this.picHelp.TabStop = false;
             this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
-            // btnCreateSupplierOrder
+            // btnGenerateReports
             // 
-            this.btnCreateSupplierOrder.Enabled = false;
-            this.btnCreateSupplierOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateSupplierOrder.Location = new System.Drawing.Point(524, 352);
-            this.btnCreateSupplierOrder.Name = "btnCreateSupplierOrder";
-            this.btnCreateSupplierOrder.Size = new System.Drawing.Size(384, 63);
-            this.btnCreateSupplierOrder.TabIndex = 29;
-            this.btnCreateSupplierOrder.Text = "&Create/Edit New Supplier Order";
-            this.btnCreateSupplierOrder.UseVisualStyleBackColor = true;
-            this.btnCreateSupplierOrder.Click += new System.EventHandler(this.btnCreateSupplierOrder_Click);
+            this.btnGenerateReports.Enabled = false;
+            this.btnGenerateReports.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerateReports.Location = new System.Drawing.Point(247, 86);
+            this.btnGenerateReports.Name = "btnGenerateReports";
+            this.btnGenerateReports.Size = new System.Drawing.Size(456, 63);
+            this.btnGenerateReports.TabIndex = 23;
+            this.btnGenerateReports.Text = "&Generate Reports";
+            this.btnGenerateReports.UseVisualStyleBackColor = true;
+            this.btnGenerateReports.Click += new System.EventHandler(this.btnGenerateReports_Click);
             // 
             // Dashboard
             // 
@@ -438,6 +453,7 @@
             this.tabOrders.ResumeLayout(false);
             this.tabInventory.ResumeLayout(false);
             this.tabLossReturn.ResumeLayout(false);
+            this.tabReports.ResumeLayout(false);
             this.tabAdmin.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBullseye)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
@@ -479,5 +495,6 @@
         private System.Windows.Forms.Button btnPrepareOnlineOrder;
         private System.Windows.Forms.Button btnCreateLossReturn;
         private System.Windows.Forms.Button btnCreateSupplierOrder;
+        private System.Windows.Forms.Button btnGenerateReports;
     }
 }

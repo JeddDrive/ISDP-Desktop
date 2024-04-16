@@ -143,8 +143,14 @@ namespace JeddoreISDPDesktop
                 btnCreateLossReturn.Enabled = true;
             }
 
-            //if employee is a store manager
-            if (employee.positionID == 3)
+            //check the list for CREATEREPORT
+            if (employeeUserPermissions.permissionIDList.Contains("CREATEREPORT"))
+            {
+                btnGenerateReports.Enabled = true;
+            }
+
+            //if employee is a store manager OR warehouse manager
+            if (employee.positionID == 3 || employee.positionID == 4)
             {
                 //see if a new order exists for the employee's site
                 Txn newOrder = TxnAccessor.GetOneNewOrder(employee.siteID);
@@ -199,6 +205,22 @@ namespace JeddoreISDPDesktop
                             }
                         }
 
+                        //check if order is a supplier order and contains less than 1 item
+                        else if (newOrder.txnType == "Supplier Order" && numTxnItems < 1)
+                        {
+                            //update the status property of this new order
+                            newOrder.status = "Rejected";
+
+                            //change the order's status from New to Submitted
+                            bool rejectedSuccess = TxnAccessor.UpdateTxnStatus(newOrder);
+
+                            //if success, display success message and close the form
+                            if (rejectedSuccess)
+                            {
+                                MessageBox.Show("Your supplier order with the status of 'New' has been automatically rejected since it did not contain any items.", "Supplier Order Rejected");
+                            }
+                        }
+
                         //else - order should be good for an automatic submission
                         else
                         {
@@ -211,7 +233,7 @@ namespace JeddoreISDPDesktop
                             //if success, display success message and close the form
                             if (success)
                             {
-                                MessageBox.Show("Your order with the status of 'New' has been automatically submitted to the warehouse since the ship date for the order is in less than 48 hours.", "Automatic Order Submission");
+                                MessageBox.Show("Your order with the status of 'New' has been automatically submitted since the ship date for the order is in less than 48 hours.", "Automatic Order Submission");
                             }
                         }
                     }
@@ -454,6 +476,12 @@ namespace JeddoreISDPDesktop
                 //open the edit supplier order form (modal)
                 frmEditSupplierOrder.ShowDialog();
             }
+        }
+
+        private void btnGenerateReports_Click(object sender, EventArgs e)
+        {
+            //opening the MicroStrategy Workstation .exe on my local C drive
+            System.Diagnostics.Process.Start(@"C:\Program Files\MicroStrategy\Workstation\Workstation.exe");
         }
     }
 }

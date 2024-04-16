@@ -62,8 +62,8 @@ namespace JeddoreISDPDesktop
         private void picHelp_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This is the page for editing your current supplier order. You can add and remove items to and from your order here." +
-            "\n\nClick on the 'refresh' button to load both data grids." +
-            "\n\nClick on the 'submit' button to submit your supplier order.", "Edit Supplier Order Help"
+            "\n\nClick on the 'Refresh' button to load both data grids." +
+            "\n\nClick on the 'Submit' button to submit your supplier order.", "Edit Supplier Order Help"
             , MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -73,8 +73,8 @@ namespace JeddoreISDPDesktop
             if (e.KeyCode == Keys.F1)
             {
                 MessageBox.Show("This is the page for editing your current supplier order. You can add and remove items to and from your order here." +
-                "\n\nClick on the 'refresh' button to load both data grids." +
-                "\n\nClick on the 'submit' button to submit your supplier order.", "Edit Supplier Order Help"
+                "\n\nClick on the 'Refresh' button to load both data grids." +
+                "\n\nClick on the 'Submit' button to submit your supplier order.", "Edit Supplier Order Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -404,6 +404,9 @@ namespace JeddoreISDPDesktop
             //clear selections in both DGVs
             dgvOrder.ClearSelection();
             dgvInventory.ClearSelection();
+
+            //call the update row colour ftn
+            UpdateRowColour();
         }
 
         //Show Items by Supplier - to display inventory items from just one specific supplier
@@ -460,6 +463,106 @@ namespace JeddoreISDPDesktop
             //clear selections in both DGVs
             dgvOrder.ClearSelection();
             dgvInventory.ClearSelection();
+
+            //call the update row colour ftn
+            UpdateRowColour();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = dgvInventory.SelectedRows.Count;
+
+            //if number of selected rows is not one
+            if (selectedRowsCount != 1)
+            {
+                MessageBox.Show("Must select one row from the warehouse inventory data grid in order to add that inventory item to your supplier order.",
+                    "Inventory Item Addition Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                //clear all selected rows from the dgv
+                dgvInventory.ClearSelection();
+            }
+
+            //else - 1 inventory item row is selected
+            else
+            {
+                //get the current row
+                DataGridViewRow dgvRow = dgvInventory.CurrentRow;
+
+                //get the cell with the selected item's itemID in the order DGV
+                int itemID = int.Parse(dgvRow.Cells[0].Value.ToString());
+
+                //get an item object based on the itemID
+                Item selectedItem = ItemAccessor.GetOneItem(itemID);
+
+                //get an inventory object based on the itemID and site ID for the warehouse (2)
+                Inventory warehouseInventoryItem = InventoryAccessor.GetOneInventoryItem(2, itemID);
+
+                //see if the item already exists in the order with this method
+                //should be 1 or 0
+                long numItemInOrder = TxnItemsAccessor.GetCountOfSpecificItemInTxn(newOrder.txnID, itemID);
+
+                //if item is NOT in the order then
+                if (numItemInOrder == 0)
+                {
+                    //want to send the 3 objs to the add/edit order item form
+                    AddEditSupplierOrderItem frmAddEditSupplierOrderItem = new AddEditSupplierOrderItem(employee, selectedItem,
+                        warehouseInventoryItem);
+
+                    //open the add/edit user form (modal)
+                    frmAddEditSupplierOrderItem.ShowDialog();
+                }
+
+                //else - item is already in the order
+                else
+                {
+                    MessageBox.Show("Item is already in your supplier order. If you wish to update the selected item's quantity in your order, please click on the 'update' button while that item is selected in the order data grid instead.",
+                    "Item Already in Supplier Order", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    //clear all selected rows from the dgv
+                    dgvInventory.ClearSelection();
+                }
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = dgvOrder.SelectedRows.Count;
+
+            //if number of selected rows is not one
+            if (selectedRowsCount != 1)
+            {
+                MessageBox.Show("Must select one row from the supplier order items data grid in order to update that's item's quantity in the order.",
+                    "Item Quantity Update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                //clear all selected rows from the dgv
+                dgvOrder.ClearSelection();
+            }
+
+            //else - 1 order item row is selected
+            else
+            {
+                //get the current row
+                DataGridViewRow dgvRow = dgvOrder.CurrentRow;
+
+                //get the cell with the selected item's itemID in the order DGV
+                int itemID = int.Parse(dgvRow.Cells[1].Value.ToString());
+
+                //also get the cell with the selected item's current quantity in the order DGV
+                int quantity = int.Parse(dgvRow.Cells[4].Value.ToString());
+
+                //get an item object based on the itemID
+                Item selectedItem = ItemAccessor.GetOneItem(itemID);
+
+                //get an inventory object based on the itemID and site ID for the warehouse (2)
+                Inventory warehouseInventoryItem = InventoryAccessor.GetOneInventoryItem(2, itemID);
+
+                //want to send the 3 objs to the add/edit order item form
+                AddEditSupplierOrderItem frmAddEditSupplierOrderItem = new AddEditSupplierOrderItem(employee, selectedItem,
+                    warehouseInventoryItem, quantity);
+
+                //open the add/edit user form (modal)
+                frmAddEditSupplierOrderItem.ShowDialog();
+            }
         }
     }
 }
